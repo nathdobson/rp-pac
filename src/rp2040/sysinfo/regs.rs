@@ -3,31 +3,34 @@
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChipId(pub u32);
 impl ChipId {
+    #[must_use]
     #[inline(always)]
     pub const fn manufacturer(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x0fff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_manufacturer(&mut self, val: u16) {
+    pub const fn set_manufacturer(&mut self, val: u16) {
         self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn part(&self) -> u16 {
         let val = (self.0 >> 12usize) & 0xffff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_part(&mut self, val: u16) {
+    pub const fn set_part(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 12usize)) | (((val as u32) & 0xffff) << 12usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn revision(&self) -> u8 {
         let val = (self.0 >> 28usize) & 0x0f;
         val as u8
     }
     #[inline(always)]
-    pub fn set_revision(&mut self, val: u8) {
+    pub const fn set_revision(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 28usize)) | (((val as u32) & 0x0f) << 28usize);
     }
 }
@@ -49,18 +52,13 @@ impl core::fmt::Debug for ChipId {
 #[cfg(feature = "defmt")]
 impl defmt::Format for ChipId {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct ChipId {
-            manufacturer: u16,
-            part: u16,
-            revision: u8,
-        }
-        let proxy = ChipId {
-            manufacturer: self.manufacturer(),
-            part: self.part(),
-            revision: self.revision(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "ChipId {{ manufacturer: {=u16:?}, part: {=u16:?}, revision: {=u8:?} }}",
+            self.manufacturer(),
+            self.part(),
+            self.revision()
+        )
     }
 }
 #[doc = "Platform register. Allows software to know what environment it is running in."]
@@ -68,22 +66,24 @@ impl defmt::Format for ChipId {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Platform(pub u32);
 impl Platform {
+    #[must_use]
     #[inline(always)]
     pub const fn fpga(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_fpga(&mut self, val: bool) {
+    pub const fn set_fpga(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn asic(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_asic(&mut self, val: bool) {
+    pub const fn set_asic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
@@ -104,15 +104,11 @@ impl core::fmt::Debug for Platform {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Platform {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Platform {
-            fpga: bool,
-            asic: bool,
-        }
-        let proxy = Platform {
-            fpga: self.fpga(),
-            asic: self.asic(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Platform {{ fpga: {=bool:?}, asic: {=bool:?} }}",
+            self.fpga(),
+            self.asic()
+        )
     }
 }

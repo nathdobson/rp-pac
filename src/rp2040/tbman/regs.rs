@@ -4,6 +4,7 @@
 pub struct Platform(pub u32);
 impl Platform {
     #[doc = "Indicates the platform is an ASIC"]
+    #[must_use]
     #[inline(always)]
     pub const fn asic(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -11,10 +12,11 @@ impl Platform {
     }
     #[doc = "Indicates the platform is an ASIC"]
     #[inline(always)]
-    pub fn set_asic(&mut self, val: bool) {
+    pub const fn set_asic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Indicates the platform is an FPGA"]
+    #[must_use]
     #[inline(always)]
     pub const fn fpga(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -22,7 +24,7 @@ impl Platform {
     }
     #[doc = "Indicates the platform is an FPGA"]
     #[inline(always)]
-    pub fn set_fpga(&mut self, val: bool) {
+    pub const fn set_fpga(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
@@ -43,15 +45,11 @@ impl core::fmt::Debug for Platform {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Platform {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Platform {
-            asic: bool,
-            fpga: bool,
-        }
-        let proxy = Platform {
-            asic: self.asic(),
-            fpga: self.fpga(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Platform {{ asic: {=bool:?}, fpga: {=bool:?} }}",
+            self.asic(),
+            self.fpga()
+        )
     }
 }

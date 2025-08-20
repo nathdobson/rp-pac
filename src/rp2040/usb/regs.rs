@@ -4,6 +4,7 @@
 pub struct AddrEndp(pub u32);
 impl AddrEndp {
     #[doc = "In device mode, the address that the device should respond to. Set in response to a SET_ADDR setup packet from the host. In host mode set to the address of the device to communicate with."]
+    #[must_use]
     #[inline(always)]
     pub const fn address(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x7f;
@@ -11,10 +12,11 @@ impl AddrEndp {
     }
     #[doc = "In device mode, the address that the device should respond to. Set in response to a SET_ADDR setup packet from the host. In host mode set to the address of the device to communicate with."]
     #[inline(always)]
-    pub fn set_address(&mut self, val: u8) {
+    pub const fn set_address(&mut self, val: u8) {
         self.0 = (self.0 & !(0x7f << 0usize)) | (((val as u32) & 0x7f) << 0usize);
     }
     #[doc = "Device endpoint to send data to. Only valid for HOST mode."]
+    #[must_use]
     #[inline(always)]
     pub const fn endpoint(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x0f;
@@ -22,7 +24,7 @@ impl AddrEndp {
     }
     #[doc = "Device endpoint to send data to. Only valid for HOST mode."]
     #[inline(always)]
-    pub fn set_endpoint(&mut self, val: u8) {
+    pub const fn set_endpoint(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
     }
 }
@@ -43,16 +45,12 @@ impl core::fmt::Debug for AddrEndp {
 #[cfg(feature = "defmt")]
 impl defmt::Format for AddrEndp {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct AddrEndp {
-            address: u8,
-            endpoint: u8,
-        }
-        let proxy = AddrEndp {
-            address: self.address(),
-            endpoint: self.endpoint(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "AddrEndp {{ address: {=u8:?}, endpoint: {=u8:?} }}",
+            self.address(),
+            self.endpoint()
+        )
     }
 }
 #[doc = "Interrupt endpoint 1. Only valid for HOST mode."]
@@ -61,6 +59,7 @@ impl defmt::Format for AddrEndp {
 pub struct AddrEndpX(pub u32);
 impl AddrEndpX {
     #[doc = "Device address"]
+    #[must_use]
     #[inline(always)]
     pub const fn address(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x7f;
@@ -68,10 +67,11 @@ impl AddrEndpX {
     }
     #[doc = "Device address"]
     #[inline(always)]
-    pub fn set_address(&mut self, val: u8) {
+    pub const fn set_address(&mut self, val: u8) {
         self.0 = (self.0 & !(0x7f << 0usize)) | (((val as u32) & 0x7f) << 0usize);
     }
     #[doc = "Endpoint number of the interrupt endpoint"]
+    #[must_use]
     #[inline(always)]
     pub const fn endpoint(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x0f;
@@ -79,10 +79,11 @@ impl AddrEndpX {
     }
     #[doc = "Endpoint number of the interrupt endpoint"]
     #[inline(always)]
-    pub fn set_endpoint(&mut self, val: u8) {
+    pub const fn set_endpoint(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
     }
     #[doc = "Direction of the interrupt endpoint. In=0, Out=1"]
+    #[must_use]
     #[inline(always)]
     pub const fn intep_dir(&self) -> bool {
         let val = (self.0 >> 25usize) & 0x01;
@@ -90,10 +91,11 @@ impl AddrEndpX {
     }
     #[doc = "Direction of the interrupt endpoint. In=0, Out=1"]
     #[inline(always)]
-    pub fn set_intep_dir(&mut self, val: bool) {
+    pub const fn set_intep_dir(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
     }
     #[doc = "Interrupt EP requires preamble (is a low speed device on a full speed hub)"]
+    #[must_use]
     #[inline(always)]
     pub const fn intep_preamble(&self) -> bool {
         let val = (self.0 >> 26usize) & 0x01;
@@ -101,7 +103,7 @@ impl AddrEndpX {
     }
     #[doc = "Interrupt EP requires preamble (is a low speed device on a full speed hub)"]
     #[inline(always)]
-    pub fn set_intep_preamble(&mut self, val: bool) {
+    pub const fn set_intep_preamble(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
     }
 }
@@ -124,20 +126,7 @@ impl core::fmt::Debug for AddrEndpX {
 #[cfg(feature = "defmt")]
 impl defmt::Format for AddrEndpX {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct AddrEndpX {
-            address: u8,
-            endpoint: u8,
-            intep_dir: bool,
-            intep_preamble: bool,
-        }
-        let proxy = AddrEndpX {
-            address: self.address(),
-            endpoint: self.endpoint(),
-            intep_dir: self.intep_dir(),
-            intep_preamble: self.intep_preamble(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "AddrEndpX {{ address: {=u8:?}, endpoint: {=u8:?}, intep_dir: {=bool:?}, intep_preamble: {=bool:?} }}" , self . address () , self . endpoint () , self . intep_dir () , self . intep_preamble ())
     }
 }
 #[doc = "Which of the double buffers should be handled. Only valid if using an interrupt per buffer (i.e. not per 2 buffers). Not valid for host interrupt endpoint polling because they are only single buffered."]
@@ -145,6 +134,7 @@ impl defmt::Format for AddrEndpX {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct BuffCpuShouldHandle(pub u32);
 impl BuffCpuShouldHandle {
+    #[must_use]
     #[inline(always)]
     pub const fn ep_in(&self, n: usize) -> bool {
         assert!(n < 16usize);
@@ -153,11 +143,12 @@ impl BuffCpuShouldHandle {
         val != 0
     }
     #[inline(always)]
-    pub fn set_ep_in(&mut self, n: usize, val: bool) {
+    pub const fn set_ep_in(&mut self, n: usize, val: bool) {
         assert!(n < 16usize);
         let offs = 0usize + n * 2usize;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ep_out(&self, n: usize) -> bool {
         assert!(n < 16usize);
@@ -166,7 +157,7 @@ impl BuffCpuShouldHandle {
         val != 0
     }
     #[inline(always)]
-    pub fn set_ep_out(&mut self, n: usize, val: bool) {
+    pub const fn set_ep_out(&mut self, n: usize, val: bool) {
         assert!(n < 16usize);
         let offs = 1usize + n * 2usize;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -181,98 +172,45 @@ impl Default for BuffCpuShouldHandle {
 impl core::fmt::Debug for BuffCpuShouldHandle {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         f.debug_struct("BuffCpuShouldHandle")
-            .field(
-                "ep_in",
-                &[
-                    self.ep_in(0usize),
-                    self.ep_in(1usize),
-                    self.ep_in(2usize),
-                    self.ep_in(3usize),
-                    self.ep_in(4usize),
-                    self.ep_in(5usize),
-                    self.ep_in(6usize),
-                    self.ep_in(7usize),
-                    self.ep_in(8usize),
-                    self.ep_in(9usize),
-                    self.ep_in(10usize),
-                    self.ep_in(11usize),
-                    self.ep_in(12usize),
-                    self.ep_in(13usize),
-                    self.ep_in(14usize),
-                    self.ep_in(15usize),
-                ],
-            )
-            .field(
-                "ep_out",
-                &[
-                    self.ep_out(0usize),
-                    self.ep_out(1usize),
-                    self.ep_out(2usize),
-                    self.ep_out(3usize),
-                    self.ep_out(4usize),
-                    self.ep_out(5usize),
-                    self.ep_out(6usize),
-                    self.ep_out(7usize),
-                    self.ep_out(8usize),
-                    self.ep_out(9usize),
-                    self.ep_out(10usize),
-                    self.ep_out(11usize),
-                    self.ep_out(12usize),
-                    self.ep_out(13usize),
-                    self.ep_out(14usize),
-                    self.ep_out(15usize),
-                ],
-            )
+            .field("ep_in[0]", &self.ep_in(0usize))
+            .field("ep_in[1]", &self.ep_in(1usize))
+            .field("ep_in[2]", &self.ep_in(2usize))
+            .field("ep_in[3]", &self.ep_in(3usize))
+            .field("ep_in[4]", &self.ep_in(4usize))
+            .field("ep_in[5]", &self.ep_in(5usize))
+            .field("ep_in[6]", &self.ep_in(6usize))
+            .field("ep_in[7]", &self.ep_in(7usize))
+            .field("ep_in[8]", &self.ep_in(8usize))
+            .field("ep_in[9]", &self.ep_in(9usize))
+            .field("ep_in[10]", &self.ep_in(10usize))
+            .field("ep_in[11]", &self.ep_in(11usize))
+            .field("ep_in[12]", &self.ep_in(12usize))
+            .field("ep_in[13]", &self.ep_in(13usize))
+            .field("ep_in[14]", &self.ep_in(14usize))
+            .field("ep_in[15]", &self.ep_in(15usize))
+            .field("ep_out[0]", &self.ep_out(0usize))
+            .field("ep_out[1]", &self.ep_out(1usize))
+            .field("ep_out[2]", &self.ep_out(2usize))
+            .field("ep_out[3]", &self.ep_out(3usize))
+            .field("ep_out[4]", &self.ep_out(4usize))
+            .field("ep_out[5]", &self.ep_out(5usize))
+            .field("ep_out[6]", &self.ep_out(6usize))
+            .field("ep_out[7]", &self.ep_out(7usize))
+            .field("ep_out[8]", &self.ep_out(8usize))
+            .field("ep_out[9]", &self.ep_out(9usize))
+            .field("ep_out[10]", &self.ep_out(10usize))
+            .field("ep_out[11]", &self.ep_out(11usize))
+            .field("ep_out[12]", &self.ep_out(12usize))
+            .field("ep_out[13]", &self.ep_out(13usize))
+            .field("ep_out[14]", &self.ep_out(14usize))
+            .field("ep_out[15]", &self.ep_out(15usize))
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
 impl defmt::Format for BuffCpuShouldHandle {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct BuffCpuShouldHandle {
-            ep_in: [bool; 16usize],
-            ep_out: [bool; 16usize],
-        }
-        let proxy = BuffCpuShouldHandle {
-            ep_in: [
-                self.ep_in(0usize),
-                self.ep_in(1usize),
-                self.ep_in(2usize),
-                self.ep_in(3usize),
-                self.ep_in(4usize),
-                self.ep_in(5usize),
-                self.ep_in(6usize),
-                self.ep_in(7usize),
-                self.ep_in(8usize),
-                self.ep_in(9usize),
-                self.ep_in(10usize),
-                self.ep_in(11usize),
-                self.ep_in(12usize),
-                self.ep_in(13usize),
-                self.ep_in(14usize),
-                self.ep_in(15usize),
-            ],
-            ep_out: [
-                self.ep_out(0usize),
-                self.ep_out(1usize),
-                self.ep_out(2usize),
-                self.ep_out(3usize),
-                self.ep_out(4usize),
-                self.ep_out(5usize),
-                self.ep_out(6usize),
-                self.ep_out(7usize),
-                self.ep_out(8usize),
-                self.ep_out(9usize),
-                self.ep_out(10usize),
-                self.ep_out(11usize),
-                self.ep_out(12usize),
-                self.ep_out(13usize),
-                self.ep_out(14usize),
-                self.ep_out(15usize),
-            ],
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "BuffCpuShouldHandle {{ ep_in[0]: {=bool:?}, ep_in[1]: {=bool:?}, ep_in[2]: {=bool:?}, ep_in[3]: {=bool:?}, ep_in[4]: {=bool:?}, ep_in[5]: {=bool:?}, ep_in[6]: {=bool:?}, ep_in[7]: {=bool:?}, ep_in[8]: {=bool:?}, ep_in[9]: {=bool:?}, ep_in[10]: {=bool:?}, ep_in[11]: {=bool:?}, ep_in[12]: {=bool:?}, ep_in[13]: {=bool:?}, ep_in[14]: {=bool:?}, ep_in[15]: {=bool:?}, ep_out[0]: {=bool:?}, ep_out[1]: {=bool:?}, ep_out[2]: {=bool:?}, ep_out[3]: {=bool:?}, ep_out[4]: {=bool:?}, ep_out[5]: {=bool:?}, ep_out[6]: {=bool:?}, ep_out[7]: {=bool:?}, ep_out[8]: {=bool:?}, ep_out[9]: {=bool:?}, ep_out[10]: {=bool:?}, ep_out[11]: {=bool:?}, ep_out[12]: {=bool:?}, ep_out[13]: {=bool:?}, ep_out[14]: {=bool:?}, ep_out[15]: {=bool:?} }}" , self . ep_in (0usize) , self . ep_in (1usize) , self . ep_in (2usize) , self . ep_in (3usize) , self . ep_in (4usize) , self . ep_in (5usize) , self . ep_in (6usize) , self . ep_in (7usize) , self . ep_in (8usize) , self . ep_in (9usize) , self . ep_in (10usize) , self . ep_in (11usize) , self . ep_in (12usize) , self . ep_in (13usize) , self . ep_in (14usize) , self . ep_in (15usize) , self . ep_out (0usize) , self . ep_out (1usize) , self . ep_out (2usize) , self . ep_out (3usize) , self . ep_out (4usize) , self . ep_out (5usize) , self . ep_out (6usize) , self . ep_out (7usize) , self . ep_out (8usize) , self . ep_out (9usize) , self . ep_out (10usize) , self . ep_out (11usize) , self . ep_out (12usize) , self . ep_out (13usize) , self . ep_out (14usize) , self . ep_out (15usize))
     }
 }
 #[doc = "Buffer status register. A bit set here indicates that a buffer has completed on the endpoint (if the buffer interrupt is enabled). It is possible for 2 buffers to be completed, so clearing the buffer status bit may instantly re set it on the next clock cycle."]
@@ -280,6 +218,7 @@ impl defmt::Format for BuffCpuShouldHandle {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct BuffStatus(pub u32);
 impl BuffStatus {
+    #[must_use]
     #[inline(always)]
     pub const fn ep_in(&self, n: usize) -> bool {
         assert!(n < 16usize);
@@ -288,11 +227,12 @@ impl BuffStatus {
         val != 0
     }
     #[inline(always)]
-    pub fn set_ep_in(&mut self, n: usize, val: bool) {
+    pub const fn set_ep_in(&mut self, n: usize, val: bool) {
         assert!(n < 16usize);
         let offs = 0usize + n * 2usize;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ep_out(&self, n: usize) -> bool {
         assert!(n < 16usize);
@@ -301,7 +241,7 @@ impl BuffStatus {
         val != 0
     }
     #[inline(always)]
-    pub fn set_ep_out(&mut self, n: usize, val: bool) {
+    pub const fn set_ep_out(&mut self, n: usize, val: bool) {
         assert!(n < 16usize);
         let offs = 1usize + n * 2usize;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -316,98 +256,45 @@ impl Default for BuffStatus {
 impl core::fmt::Debug for BuffStatus {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         f.debug_struct("BuffStatus")
-            .field(
-                "ep_in",
-                &[
-                    self.ep_in(0usize),
-                    self.ep_in(1usize),
-                    self.ep_in(2usize),
-                    self.ep_in(3usize),
-                    self.ep_in(4usize),
-                    self.ep_in(5usize),
-                    self.ep_in(6usize),
-                    self.ep_in(7usize),
-                    self.ep_in(8usize),
-                    self.ep_in(9usize),
-                    self.ep_in(10usize),
-                    self.ep_in(11usize),
-                    self.ep_in(12usize),
-                    self.ep_in(13usize),
-                    self.ep_in(14usize),
-                    self.ep_in(15usize),
-                ],
-            )
-            .field(
-                "ep_out",
-                &[
-                    self.ep_out(0usize),
-                    self.ep_out(1usize),
-                    self.ep_out(2usize),
-                    self.ep_out(3usize),
-                    self.ep_out(4usize),
-                    self.ep_out(5usize),
-                    self.ep_out(6usize),
-                    self.ep_out(7usize),
-                    self.ep_out(8usize),
-                    self.ep_out(9usize),
-                    self.ep_out(10usize),
-                    self.ep_out(11usize),
-                    self.ep_out(12usize),
-                    self.ep_out(13usize),
-                    self.ep_out(14usize),
-                    self.ep_out(15usize),
-                ],
-            )
+            .field("ep_in[0]", &self.ep_in(0usize))
+            .field("ep_in[1]", &self.ep_in(1usize))
+            .field("ep_in[2]", &self.ep_in(2usize))
+            .field("ep_in[3]", &self.ep_in(3usize))
+            .field("ep_in[4]", &self.ep_in(4usize))
+            .field("ep_in[5]", &self.ep_in(5usize))
+            .field("ep_in[6]", &self.ep_in(6usize))
+            .field("ep_in[7]", &self.ep_in(7usize))
+            .field("ep_in[8]", &self.ep_in(8usize))
+            .field("ep_in[9]", &self.ep_in(9usize))
+            .field("ep_in[10]", &self.ep_in(10usize))
+            .field("ep_in[11]", &self.ep_in(11usize))
+            .field("ep_in[12]", &self.ep_in(12usize))
+            .field("ep_in[13]", &self.ep_in(13usize))
+            .field("ep_in[14]", &self.ep_in(14usize))
+            .field("ep_in[15]", &self.ep_in(15usize))
+            .field("ep_out[0]", &self.ep_out(0usize))
+            .field("ep_out[1]", &self.ep_out(1usize))
+            .field("ep_out[2]", &self.ep_out(2usize))
+            .field("ep_out[3]", &self.ep_out(3usize))
+            .field("ep_out[4]", &self.ep_out(4usize))
+            .field("ep_out[5]", &self.ep_out(5usize))
+            .field("ep_out[6]", &self.ep_out(6usize))
+            .field("ep_out[7]", &self.ep_out(7usize))
+            .field("ep_out[8]", &self.ep_out(8usize))
+            .field("ep_out[9]", &self.ep_out(9usize))
+            .field("ep_out[10]", &self.ep_out(10usize))
+            .field("ep_out[11]", &self.ep_out(11usize))
+            .field("ep_out[12]", &self.ep_out(12usize))
+            .field("ep_out[13]", &self.ep_out(13usize))
+            .field("ep_out[14]", &self.ep_out(14usize))
+            .field("ep_out[15]", &self.ep_out(15usize))
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
 impl defmt::Format for BuffStatus {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct BuffStatus {
-            ep_in: [bool; 16usize],
-            ep_out: [bool; 16usize],
-        }
-        let proxy = BuffStatus {
-            ep_in: [
-                self.ep_in(0usize),
-                self.ep_in(1usize),
-                self.ep_in(2usize),
-                self.ep_in(3usize),
-                self.ep_in(4usize),
-                self.ep_in(5usize),
-                self.ep_in(6usize),
-                self.ep_in(7usize),
-                self.ep_in(8usize),
-                self.ep_in(9usize),
-                self.ep_in(10usize),
-                self.ep_in(11usize),
-                self.ep_in(12usize),
-                self.ep_in(13usize),
-                self.ep_in(14usize),
-                self.ep_in(15usize),
-            ],
-            ep_out: [
-                self.ep_out(0usize),
-                self.ep_out(1usize),
-                self.ep_out(2usize),
-                self.ep_out(3usize),
-                self.ep_out(4usize),
-                self.ep_out(5usize),
-                self.ep_out(6usize),
-                self.ep_out(7usize),
-                self.ep_out(8usize),
-                self.ep_out(9usize),
-                self.ep_out(10usize),
-                self.ep_out(11usize),
-                self.ep_out(12usize),
-                self.ep_out(13usize),
-                self.ep_out(14usize),
-                self.ep_out(15usize),
-            ],
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "BuffStatus {{ ep_in[0]: {=bool:?}, ep_in[1]: {=bool:?}, ep_in[2]: {=bool:?}, ep_in[3]: {=bool:?}, ep_in[4]: {=bool:?}, ep_in[5]: {=bool:?}, ep_in[6]: {=bool:?}, ep_in[7]: {=bool:?}, ep_in[8]: {=bool:?}, ep_in[9]: {=bool:?}, ep_in[10]: {=bool:?}, ep_in[11]: {=bool:?}, ep_in[12]: {=bool:?}, ep_in[13]: {=bool:?}, ep_in[14]: {=bool:?}, ep_in[15]: {=bool:?}, ep_out[0]: {=bool:?}, ep_out[1]: {=bool:?}, ep_out[2]: {=bool:?}, ep_out[3]: {=bool:?}, ep_out[4]: {=bool:?}, ep_out[5]: {=bool:?}, ep_out[6]: {=bool:?}, ep_out[7]: {=bool:?}, ep_out[8]: {=bool:?}, ep_out[9]: {=bool:?}, ep_out[10]: {=bool:?}, ep_out[11]: {=bool:?}, ep_out[12]: {=bool:?}, ep_out[13]: {=bool:?}, ep_out[14]: {=bool:?}, ep_out[15]: {=bool:?} }}" , self . ep_in (0usize) , self . ep_in (1usize) , self . ep_in (2usize) , self . ep_in (3usize) , self . ep_in (4usize) , self . ep_in (5usize) , self . ep_in (6usize) , self . ep_in (7usize) , self . ep_in (8usize) , self . ep_in (9usize) , self . ep_in (10usize) , self . ep_in (11usize) , self . ep_in (12usize) , self . ep_in (13usize) , self . ep_in (14usize) , self . ep_in (15usize) , self . ep_out (0usize) , self . ep_out (1usize) , self . ep_out (2usize) , self . ep_out (3usize) , self . ep_out (4usize) , self . ep_out (5usize) , self . ep_out (6usize) , self . ep_out (7usize) , self . ep_out (8usize) , self . ep_out (9usize) , self . ep_out (10usize) , self . ep_out (11usize) , self . ep_out (12usize) , self . ep_out (13usize) , self . ep_out (14usize) , self . ep_out (15usize))
     }
 }
 #[doc = "Device only: Can be set to ignore the buffer control register for this endpoint in case you would like to revoke a buffer. A NAK will be sent for every access to the endpoint until this bit is cleared. A corresponding bit in `EP_ABORT_DONE` is set when it is safe to modify the buffer control register."]
@@ -415,6 +302,7 @@ impl defmt::Format for BuffStatus {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct EpAbort(pub u32);
 impl EpAbort {
+    #[must_use]
     #[inline(always)]
     pub const fn ep_in(&self, n: usize) -> bool {
         assert!(n < 16usize);
@@ -423,11 +311,12 @@ impl EpAbort {
         val != 0
     }
     #[inline(always)]
-    pub fn set_ep_in(&mut self, n: usize, val: bool) {
+    pub const fn set_ep_in(&mut self, n: usize, val: bool) {
         assert!(n < 16usize);
         let offs = 0usize + n * 2usize;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ep_out(&self, n: usize) -> bool {
         assert!(n < 16usize);
@@ -436,7 +325,7 @@ impl EpAbort {
         val != 0
     }
     #[inline(always)]
-    pub fn set_ep_out(&mut self, n: usize, val: bool) {
+    pub const fn set_ep_out(&mut self, n: usize, val: bool) {
         assert!(n < 16usize);
         let offs = 1usize + n * 2usize;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -451,98 +340,45 @@ impl Default for EpAbort {
 impl core::fmt::Debug for EpAbort {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         f.debug_struct("EpAbort")
-            .field(
-                "ep_in",
-                &[
-                    self.ep_in(0usize),
-                    self.ep_in(1usize),
-                    self.ep_in(2usize),
-                    self.ep_in(3usize),
-                    self.ep_in(4usize),
-                    self.ep_in(5usize),
-                    self.ep_in(6usize),
-                    self.ep_in(7usize),
-                    self.ep_in(8usize),
-                    self.ep_in(9usize),
-                    self.ep_in(10usize),
-                    self.ep_in(11usize),
-                    self.ep_in(12usize),
-                    self.ep_in(13usize),
-                    self.ep_in(14usize),
-                    self.ep_in(15usize),
-                ],
-            )
-            .field(
-                "ep_out",
-                &[
-                    self.ep_out(0usize),
-                    self.ep_out(1usize),
-                    self.ep_out(2usize),
-                    self.ep_out(3usize),
-                    self.ep_out(4usize),
-                    self.ep_out(5usize),
-                    self.ep_out(6usize),
-                    self.ep_out(7usize),
-                    self.ep_out(8usize),
-                    self.ep_out(9usize),
-                    self.ep_out(10usize),
-                    self.ep_out(11usize),
-                    self.ep_out(12usize),
-                    self.ep_out(13usize),
-                    self.ep_out(14usize),
-                    self.ep_out(15usize),
-                ],
-            )
+            .field("ep_in[0]", &self.ep_in(0usize))
+            .field("ep_in[1]", &self.ep_in(1usize))
+            .field("ep_in[2]", &self.ep_in(2usize))
+            .field("ep_in[3]", &self.ep_in(3usize))
+            .field("ep_in[4]", &self.ep_in(4usize))
+            .field("ep_in[5]", &self.ep_in(5usize))
+            .field("ep_in[6]", &self.ep_in(6usize))
+            .field("ep_in[7]", &self.ep_in(7usize))
+            .field("ep_in[8]", &self.ep_in(8usize))
+            .field("ep_in[9]", &self.ep_in(9usize))
+            .field("ep_in[10]", &self.ep_in(10usize))
+            .field("ep_in[11]", &self.ep_in(11usize))
+            .field("ep_in[12]", &self.ep_in(12usize))
+            .field("ep_in[13]", &self.ep_in(13usize))
+            .field("ep_in[14]", &self.ep_in(14usize))
+            .field("ep_in[15]", &self.ep_in(15usize))
+            .field("ep_out[0]", &self.ep_out(0usize))
+            .field("ep_out[1]", &self.ep_out(1usize))
+            .field("ep_out[2]", &self.ep_out(2usize))
+            .field("ep_out[3]", &self.ep_out(3usize))
+            .field("ep_out[4]", &self.ep_out(4usize))
+            .field("ep_out[5]", &self.ep_out(5usize))
+            .field("ep_out[6]", &self.ep_out(6usize))
+            .field("ep_out[7]", &self.ep_out(7usize))
+            .field("ep_out[8]", &self.ep_out(8usize))
+            .field("ep_out[9]", &self.ep_out(9usize))
+            .field("ep_out[10]", &self.ep_out(10usize))
+            .field("ep_out[11]", &self.ep_out(11usize))
+            .field("ep_out[12]", &self.ep_out(12usize))
+            .field("ep_out[13]", &self.ep_out(13usize))
+            .field("ep_out[14]", &self.ep_out(14usize))
+            .field("ep_out[15]", &self.ep_out(15usize))
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
 impl defmt::Format for EpAbort {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct EpAbort {
-            ep_in: [bool; 16usize],
-            ep_out: [bool; 16usize],
-        }
-        let proxy = EpAbort {
-            ep_in: [
-                self.ep_in(0usize),
-                self.ep_in(1usize),
-                self.ep_in(2usize),
-                self.ep_in(3usize),
-                self.ep_in(4usize),
-                self.ep_in(5usize),
-                self.ep_in(6usize),
-                self.ep_in(7usize),
-                self.ep_in(8usize),
-                self.ep_in(9usize),
-                self.ep_in(10usize),
-                self.ep_in(11usize),
-                self.ep_in(12usize),
-                self.ep_in(13usize),
-                self.ep_in(14usize),
-                self.ep_in(15usize),
-            ],
-            ep_out: [
-                self.ep_out(0usize),
-                self.ep_out(1usize),
-                self.ep_out(2usize),
-                self.ep_out(3usize),
-                self.ep_out(4usize),
-                self.ep_out(5usize),
-                self.ep_out(6usize),
-                self.ep_out(7usize),
-                self.ep_out(8usize),
-                self.ep_out(9usize),
-                self.ep_out(10usize),
-                self.ep_out(11usize),
-                self.ep_out(12usize),
-                self.ep_out(13usize),
-                self.ep_out(14usize),
-                self.ep_out(15usize),
-            ],
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "EpAbort {{ ep_in[0]: {=bool:?}, ep_in[1]: {=bool:?}, ep_in[2]: {=bool:?}, ep_in[3]: {=bool:?}, ep_in[4]: {=bool:?}, ep_in[5]: {=bool:?}, ep_in[6]: {=bool:?}, ep_in[7]: {=bool:?}, ep_in[8]: {=bool:?}, ep_in[9]: {=bool:?}, ep_in[10]: {=bool:?}, ep_in[11]: {=bool:?}, ep_in[12]: {=bool:?}, ep_in[13]: {=bool:?}, ep_in[14]: {=bool:?}, ep_in[15]: {=bool:?}, ep_out[0]: {=bool:?}, ep_out[1]: {=bool:?}, ep_out[2]: {=bool:?}, ep_out[3]: {=bool:?}, ep_out[4]: {=bool:?}, ep_out[5]: {=bool:?}, ep_out[6]: {=bool:?}, ep_out[7]: {=bool:?}, ep_out[8]: {=bool:?}, ep_out[9]: {=bool:?}, ep_out[10]: {=bool:?}, ep_out[11]: {=bool:?}, ep_out[12]: {=bool:?}, ep_out[13]: {=bool:?}, ep_out[14]: {=bool:?}, ep_out[15]: {=bool:?} }}" , self . ep_in (0usize) , self . ep_in (1usize) , self . ep_in (2usize) , self . ep_in (3usize) , self . ep_in (4usize) , self . ep_in (5usize) , self . ep_in (6usize) , self . ep_in (7usize) , self . ep_in (8usize) , self . ep_in (9usize) , self . ep_in (10usize) , self . ep_in (11usize) , self . ep_in (12usize) , self . ep_in (13usize) , self . ep_in (14usize) , self . ep_in (15usize) , self . ep_out (0usize) , self . ep_out (1usize) , self . ep_out (2usize) , self . ep_out (3usize) , self . ep_out (4usize) , self . ep_out (5usize) , self . ep_out (6usize) , self . ep_out (7usize) , self . ep_out (8usize) , self . ep_out (9usize) , self . ep_out (10usize) , self . ep_out (11usize) , self . ep_out (12usize) , self . ep_out (13usize) , self . ep_out (14usize) , self . ep_out (15usize))
     }
 }
 #[doc = "Device only: Used in conjunction with `EP_ABORT`. Set once an endpoint is idle so the programmer knows it is safe to modify the buffer control register."]
@@ -550,6 +386,7 @@ impl defmt::Format for EpAbort {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct EpAbortDone(pub u32);
 impl EpAbortDone {
+    #[must_use]
     #[inline(always)]
     pub const fn ep_in(&self, n: usize) -> bool {
         assert!(n < 16usize);
@@ -558,11 +395,12 @@ impl EpAbortDone {
         val != 0
     }
     #[inline(always)]
-    pub fn set_ep_in(&mut self, n: usize, val: bool) {
+    pub const fn set_ep_in(&mut self, n: usize, val: bool) {
         assert!(n < 16usize);
         let offs = 0usize + n * 2usize;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ep_out(&self, n: usize) -> bool {
         assert!(n < 16usize);
@@ -571,7 +409,7 @@ impl EpAbortDone {
         val != 0
     }
     #[inline(always)]
-    pub fn set_ep_out(&mut self, n: usize, val: bool) {
+    pub const fn set_ep_out(&mut self, n: usize, val: bool) {
         assert!(n < 16usize);
         let offs = 1usize + n * 2usize;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -586,98 +424,45 @@ impl Default for EpAbortDone {
 impl core::fmt::Debug for EpAbortDone {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         f.debug_struct("EpAbortDone")
-            .field(
-                "ep_in",
-                &[
-                    self.ep_in(0usize),
-                    self.ep_in(1usize),
-                    self.ep_in(2usize),
-                    self.ep_in(3usize),
-                    self.ep_in(4usize),
-                    self.ep_in(5usize),
-                    self.ep_in(6usize),
-                    self.ep_in(7usize),
-                    self.ep_in(8usize),
-                    self.ep_in(9usize),
-                    self.ep_in(10usize),
-                    self.ep_in(11usize),
-                    self.ep_in(12usize),
-                    self.ep_in(13usize),
-                    self.ep_in(14usize),
-                    self.ep_in(15usize),
-                ],
-            )
-            .field(
-                "ep_out",
-                &[
-                    self.ep_out(0usize),
-                    self.ep_out(1usize),
-                    self.ep_out(2usize),
-                    self.ep_out(3usize),
-                    self.ep_out(4usize),
-                    self.ep_out(5usize),
-                    self.ep_out(6usize),
-                    self.ep_out(7usize),
-                    self.ep_out(8usize),
-                    self.ep_out(9usize),
-                    self.ep_out(10usize),
-                    self.ep_out(11usize),
-                    self.ep_out(12usize),
-                    self.ep_out(13usize),
-                    self.ep_out(14usize),
-                    self.ep_out(15usize),
-                ],
-            )
+            .field("ep_in[0]", &self.ep_in(0usize))
+            .field("ep_in[1]", &self.ep_in(1usize))
+            .field("ep_in[2]", &self.ep_in(2usize))
+            .field("ep_in[3]", &self.ep_in(3usize))
+            .field("ep_in[4]", &self.ep_in(4usize))
+            .field("ep_in[5]", &self.ep_in(5usize))
+            .field("ep_in[6]", &self.ep_in(6usize))
+            .field("ep_in[7]", &self.ep_in(7usize))
+            .field("ep_in[8]", &self.ep_in(8usize))
+            .field("ep_in[9]", &self.ep_in(9usize))
+            .field("ep_in[10]", &self.ep_in(10usize))
+            .field("ep_in[11]", &self.ep_in(11usize))
+            .field("ep_in[12]", &self.ep_in(12usize))
+            .field("ep_in[13]", &self.ep_in(13usize))
+            .field("ep_in[14]", &self.ep_in(14usize))
+            .field("ep_in[15]", &self.ep_in(15usize))
+            .field("ep_out[0]", &self.ep_out(0usize))
+            .field("ep_out[1]", &self.ep_out(1usize))
+            .field("ep_out[2]", &self.ep_out(2usize))
+            .field("ep_out[3]", &self.ep_out(3usize))
+            .field("ep_out[4]", &self.ep_out(4usize))
+            .field("ep_out[5]", &self.ep_out(5usize))
+            .field("ep_out[6]", &self.ep_out(6usize))
+            .field("ep_out[7]", &self.ep_out(7usize))
+            .field("ep_out[8]", &self.ep_out(8usize))
+            .field("ep_out[9]", &self.ep_out(9usize))
+            .field("ep_out[10]", &self.ep_out(10usize))
+            .field("ep_out[11]", &self.ep_out(11usize))
+            .field("ep_out[12]", &self.ep_out(12usize))
+            .field("ep_out[13]", &self.ep_out(13usize))
+            .field("ep_out[14]", &self.ep_out(14usize))
+            .field("ep_out[15]", &self.ep_out(15usize))
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
 impl defmt::Format for EpAbortDone {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct EpAbortDone {
-            ep_in: [bool; 16usize],
-            ep_out: [bool; 16usize],
-        }
-        let proxy = EpAbortDone {
-            ep_in: [
-                self.ep_in(0usize),
-                self.ep_in(1usize),
-                self.ep_in(2usize),
-                self.ep_in(3usize),
-                self.ep_in(4usize),
-                self.ep_in(5usize),
-                self.ep_in(6usize),
-                self.ep_in(7usize),
-                self.ep_in(8usize),
-                self.ep_in(9usize),
-                self.ep_in(10usize),
-                self.ep_in(11usize),
-                self.ep_in(12usize),
-                self.ep_in(13usize),
-                self.ep_in(14usize),
-                self.ep_in(15usize),
-            ],
-            ep_out: [
-                self.ep_out(0usize),
-                self.ep_out(1usize),
-                self.ep_out(2usize),
-                self.ep_out(3usize),
-                self.ep_out(4usize),
-                self.ep_out(5usize),
-                self.ep_out(6usize),
-                self.ep_out(7usize),
-                self.ep_out(8usize),
-                self.ep_out(9usize),
-                self.ep_out(10usize),
-                self.ep_out(11usize),
-                self.ep_out(12usize),
-                self.ep_out(13usize),
-                self.ep_out(14usize),
-                self.ep_out(15usize),
-            ],
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "EpAbortDone {{ ep_in[0]: {=bool:?}, ep_in[1]: {=bool:?}, ep_in[2]: {=bool:?}, ep_in[3]: {=bool:?}, ep_in[4]: {=bool:?}, ep_in[5]: {=bool:?}, ep_in[6]: {=bool:?}, ep_in[7]: {=bool:?}, ep_in[8]: {=bool:?}, ep_in[9]: {=bool:?}, ep_in[10]: {=bool:?}, ep_in[11]: {=bool:?}, ep_in[12]: {=bool:?}, ep_in[13]: {=bool:?}, ep_in[14]: {=bool:?}, ep_in[15]: {=bool:?}, ep_out[0]: {=bool:?}, ep_out[1]: {=bool:?}, ep_out[2]: {=bool:?}, ep_out[3]: {=bool:?}, ep_out[4]: {=bool:?}, ep_out[5]: {=bool:?}, ep_out[6]: {=bool:?}, ep_out[7]: {=bool:?}, ep_out[8]: {=bool:?}, ep_out[9]: {=bool:?}, ep_out[10]: {=bool:?}, ep_out[11]: {=bool:?}, ep_out[12]: {=bool:?}, ep_out[13]: {=bool:?}, ep_out[14]: {=bool:?}, ep_out[15]: {=bool:?} }}" , self . ep_in (0usize) , self . ep_in (1usize) , self . ep_in (2usize) , self . ep_in (3usize) , self . ep_in (4usize) , self . ep_in (5usize) , self . ep_in (6usize) , self . ep_in (7usize) , self . ep_in (8usize) , self . ep_in (9usize) , self . ep_in (10usize) , self . ep_in (11usize) , self . ep_in (12usize) , self . ep_in (13usize) , self . ep_in (14usize) , self . ep_in (15usize) , self . ep_out (0usize) , self . ep_out (1usize) , self . ep_out (2usize) , self . ep_out (3usize) , self . ep_out (4usize) , self . ep_out (5usize) , self . ep_out (6usize) , self . ep_out (7usize) , self . ep_out (8usize) , self . ep_out (9usize) , self . ep_out (10usize) , self . ep_out (11usize) , self . ep_out (12usize) , self . ep_out (13usize) , self . ep_out (14usize) , self . ep_out (15usize))
     }
 }
 #[doc = "Device: this bit must be set in conjunction with the `STALL` bit in the buffer control register to send a STALL on EP0. The device controller clears these bits when a SETUP packet is received because the USB spec requires that a STALL condition is cleared when a SETUP packet is received."]
@@ -685,22 +470,24 @@ impl defmt::Format for EpAbortDone {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct EpStallArm(pub u32);
 impl EpStallArm {
+    #[must_use]
     #[inline(always)]
     pub const fn ep0_in(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ep0_in(&mut self, val: bool) {
+    pub const fn set_ep0_in(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ep0_out(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ep0_out(&mut self, val: bool) {
+    pub const fn set_ep0_out(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
@@ -721,16 +508,12 @@ impl core::fmt::Debug for EpStallArm {
 #[cfg(feature = "defmt")]
 impl defmt::Format for EpStallArm {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct EpStallArm {
-            ep0_in: bool,
-            ep0_out: bool,
-        }
-        let proxy = EpStallArm {
-            ep0_in: self.ep0_in(),
-            ep0_out: self.ep0_out(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "EpStallArm {{ ep0_in: {=bool:?}, ep0_out: {=bool:?} }}",
+            self.ep0_in(),
+            self.ep0_out()
+        )
     }
 }
 #[doc = "Device: bits are set when the `IRQ_ON_NAK` or `IRQ_ON_STALL` bits are set. For EP0 this comes from `SIE_CTRL`. For all other endpoints it comes from the endpoint control register."]
@@ -738,6 +521,7 @@ impl defmt::Format for EpStallArm {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct EpStatusStallNak(pub u32);
 impl EpStatusStallNak {
+    #[must_use]
     #[inline(always)]
     pub const fn ep_in(&self, n: usize) -> bool {
         assert!(n < 16usize);
@@ -746,11 +530,12 @@ impl EpStatusStallNak {
         val != 0
     }
     #[inline(always)]
-    pub fn set_ep_in(&mut self, n: usize, val: bool) {
+    pub const fn set_ep_in(&mut self, n: usize, val: bool) {
         assert!(n < 16usize);
         let offs = 0usize + n * 2usize;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ep_out(&self, n: usize) -> bool {
         assert!(n < 16usize);
@@ -759,7 +544,7 @@ impl EpStatusStallNak {
         val != 0
     }
     #[inline(always)]
-    pub fn set_ep_out(&mut self, n: usize, val: bool) {
+    pub const fn set_ep_out(&mut self, n: usize, val: bool) {
         assert!(n < 16usize);
         let offs = 1usize + n * 2usize;
         self.0 = (self.0 & !(0x01 << offs)) | (((val as u32) & 0x01) << offs);
@@ -774,98 +559,45 @@ impl Default for EpStatusStallNak {
 impl core::fmt::Debug for EpStatusStallNak {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         f.debug_struct("EpStatusStallNak")
-            .field(
-                "ep_in",
-                &[
-                    self.ep_in(0usize),
-                    self.ep_in(1usize),
-                    self.ep_in(2usize),
-                    self.ep_in(3usize),
-                    self.ep_in(4usize),
-                    self.ep_in(5usize),
-                    self.ep_in(6usize),
-                    self.ep_in(7usize),
-                    self.ep_in(8usize),
-                    self.ep_in(9usize),
-                    self.ep_in(10usize),
-                    self.ep_in(11usize),
-                    self.ep_in(12usize),
-                    self.ep_in(13usize),
-                    self.ep_in(14usize),
-                    self.ep_in(15usize),
-                ],
-            )
-            .field(
-                "ep_out",
-                &[
-                    self.ep_out(0usize),
-                    self.ep_out(1usize),
-                    self.ep_out(2usize),
-                    self.ep_out(3usize),
-                    self.ep_out(4usize),
-                    self.ep_out(5usize),
-                    self.ep_out(6usize),
-                    self.ep_out(7usize),
-                    self.ep_out(8usize),
-                    self.ep_out(9usize),
-                    self.ep_out(10usize),
-                    self.ep_out(11usize),
-                    self.ep_out(12usize),
-                    self.ep_out(13usize),
-                    self.ep_out(14usize),
-                    self.ep_out(15usize),
-                ],
-            )
+            .field("ep_in[0]", &self.ep_in(0usize))
+            .field("ep_in[1]", &self.ep_in(1usize))
+            .field("ep_in[2]", &self.ep_in(2usize))
+            .field("ep_in[3]", &self.ep_in(3usize))
+            .field("ep_in[4]", &self.ep_in(4usize))
+            .field("ep_in[5]", &self.ep_in(5usize))
+            .field("ep_in[6]", &self.ep_in(6usize))
+            .field("ep_in[7]", &self.ep_in(7usize))
+            .field("ep_in[8]", &self.ep_in(8usize))
+            .field("ep_in[9]", &self.ep_in(9usize))
+            .field("ep_in[10]", &self.ep_in(10usize))
+            .field("ep_in[11]", &self.ep_in(11usize))
+            .field("ep_in[12]", &self.ep_in(12usize))
+            .field("ep_in[13]", &self.ep_in(13usize))
+            .field("ep_in[14]", &self.ep_in(14usize))
+            .field("ep_in[15]", &self.ep_in(15usize))
+            .field("ep_out[0]", &self.ep_out(0usize))
+            .field("ep_out[1]", &self.ep_out(1usize))
+            .field("ep_out[2]", &self.ep_out(2usize))
+            .field("ep_out[3]", &self.ep_out(3usize))
+            .field("ep_out[4]", &self.ep_out(4usize))
+            .field("ep_out[5]", &self.ep_out(5usize))
+            .field("ep_out[6]", &self.ep_out(6usize))
+            .field("ep_out[7]", &self.ep_out(7usize))
+            .field("ep_out[8]", &self.ep_out(8usize))
+            .field("ep_out[9]", &self.ep_out(9usize))
+            .field("ep_out[10]", &self.ep_out(10usize))
+            .field("ep_out[11]", &self.ep_out(11usize))
+            .field("ep_out[12]", &self.ep_out(12usize))
+            .field("ep_out[13]", &self.ep_out(13usize))
+            .field("ep_out[14]", &self.ep_out(14usize))
+            .field("ep_out[15]", &self.ep_out(15usize))
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
 impl defmt::Format for EpStatusStallNak {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct EpStatusStallNak {
-            ep_in: [bool; 16usize],
-            ep_out: [bool; 16usize],
-        }
-        let proxy = EpStatusStallNak {
-            ep_in: [
-                self.ep_in(0usize),
-                self.ep_in(1usize),
-                self.ep_in(2usize),
-                self.ep_in(3usize),
-                self.ep_in(4usize),
-                self.ep_in(5usize),
-                self.ep_in(6usize),
-                self.ep_in(7usize),
-                self.ep_in(8usize),
-                self.ep_in(9usize),
-                self.ep_in(10usize),
-                self.ep_in(11usize),
-                self.ep_in(12usize),
-                self.ep_in(13usize),
-                self.ep_in(14usize),
-                self.ep_in(15usize),
-            ],
-            ep_out: [
-                self.ep_out(0usize),
-                self.ep_out(1usize),
-                self.ep_out(2usize),
-                self.ep_out(3usize),
-                self.ep_out(4usize),
-                self.ep_out(5usize),
-                self.ep_out(6usize),
-                self.ep_out(7usize),
-                self.ep_out(8usize),
-                self.ep_out(9usize),
-                self.ep_out(10usize),
-                self.ep_out(11usize),
-                self.ep_out(12usize),
-                self.ep_out(13usize),
-                self.ep_out(14usize),
-                self.ep_out(15usize),
-            ],
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "EpStatusStallNak {{ ep_in[0]: {=bool:?}, ep_in[1]: {=bool:?}, ep_in[2]: {=bool:?}, ep_in[3]: {=bool:?}, ep_in[4]: {=bool:?}, ep_in[5]: {=bool:?}, ep_in[6]: {=bool:?}, ep_in[7]: {=bool:?}, ep_in[8]: {=bool:?}, ep_in[9]: {=bool:?}, ep_in[10]: {=bool:?}, ep_in[11]: {=bool:?}, ep_in[12]: {=bool:?}, ep_in[13]: {=bool:?}, ep_in[14]: {=bool:?}, ep_in[15]: {=bool:?}, ep_out[0]: {=bool:?}, ep_out[1]: {=bool:?}, ep_out[2]: {=bool:?}, ep_out[3]: {=bool:?}, ep_out[4]: {=bool:?}, ep_out[5]: {=bool:?}, ep_out[6]: {=bool:?}, ep_out[7]: {=bool:?}, ep_out[8]: {=bool:?}, ep_out[9]: {=bool:?}, ep_out[10]: {=bool:?}, ep_out[11]: {=bool:?}, ep_out[12]: {=bool:?}, ep_out[13]: {=bool:?}, ep_out[14]: {=bool:?}, ep_out[15]: {=bool:?} }}" , self . ep_in (0usize) , self . ep_in (1usize) , self . ep_in (2usize) , self . ep_in (3usize) , self . ep_in (4usize) , self . ep_in (5usize) , self . ep_in (6usize) , self . ep_in (7usize) , self . ep_in (8usize) , self . ep_in (9usize) , self . ep_in (10usize) , self . ep_in (11usize) , self . ep_in (12usize) , self . ep_in (13usize) , self . ep_in (14usize) , self . ep_in (15usize) , self . ep_out (0usize) , self . ep_out (1usize) , self . ep_out (2usize) , self . ep_out (3usize) , self . ep_out (4usize) , self . ep_out (5usize) , self . ep_out (6usize) , self . ep_out (7usize) , self . ep_out (8usize) , self . ep_out (9usize) , self . ep_out (10usize) , self . ep_out (11usize) , self . ep_out (12usize) , self . ep_out (13usize) , self . ep_out (14usize) , self . ep_out (15usize))
     }
 }
 #[doc = "Interrupt Enable"]
@@ -874,6 +606,7 @@ impl defmt::Format for EpStatusStallNak {
 pub struct Int(pub u32);
 impl Int {
     #[doc = "Host: raised when a device is connected or disconnected (i.e. when SIE_STATUS.SPEED changes). Cleared by writing to SIE_STATUS.SPEED"]
+    #[must_use]
     #[inline(always)]
     pub const fn host_conn_dis(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -881,10 +614,11 @@ impl Int {
     }
     #[doc = "Host: raised when a device is connected or disconnected (i.e. when SIE_STATUS.SPEED changes). Cleared by writing to SIE_STATUS.SPEED"]
     #[inline(always)]
-    pub fn set_host_conn_dis(&mut self, val: bool) {
+    pub const fn set_host_conn_dis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Host: raised when a device wakes up the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE"]
+    #[must_use]
     #[inline(always)]
     pub const fn host_resume(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -892,10 +626,11 @@ impl Int {
     }
     #[doc = "Host: raised when a device wakes up the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE"]
     #[inline(always)]
-    pub fn set_host_resume(&mut self, val: bool) {
+    pub const fn set_host_resume(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "Host: raised every time the host sends a SOF (Start of Frame). Cleared by reading SOF_RD"]
+    #[must_use]
     #[inline(always)]
     pub const fn host_sof(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -903,10 +638,11 @@ impl Int {
     }
     #[doc = "Host: raised every time the host sends a SOF (Start of Frame). Cleared by reading SOF_RD"]
     #[inline(always)]
-    pub fn set_host_sof(&mut self, val: bool) {
+    pub const fn set_host_sof(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "Raised every time SIE_STATUS.TRANS_COMPLETE is set. Clear by writing to this bit."]
+    #[must_use]
     #[inline(always)]
     pub const fn trans_complete(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -914,10 +650,11 @@ impl Int {
     }
     #[doc = "Raised every time SIE_STATUS.TRANS_COMPLETE is set. Clear by writing to this bit."]
     #[inline(always)]
-    pub fn set_trans_complete(&mut self, val: bool) {
+    pub const fn set_trans_complete(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "Raised when any bit in BUFF_STATUS is set. Clear by clearing all bits in BUFF_STATUS."]
+    #[must_use]
     #[inline(always)]
     pub const fn buff_status(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -925,10 +662,11 @@ impl Int {
     }
     #[doc = "Raised when any bit in BUFF_STATUS is set. Clear by clearing all bits in BUFF_STATUS."]
     #[inline(always)]
-    pub fn set_buff_status(&mut self, val: bool) {
+    pub const fn set_buff_status(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "Source: SIE_STATUS.DATA_SEQ_ERROR"]
+    #[must_use]
     #[inline(always)]
     pub const fn error_data_seq(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
@@ -936,10 +674,11 @@ impl Int {
     }
     #[doc = "Source: SIE_STATUS.DATA_SEQ_ERROR"]
     #[inline(always)]
-    pub fn set_error_data_seq(&mut self, val: bool) {
+    pub const fn set_error_data_seq(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
     #[doc = "Source: SIE_STATUS.RX_TIMEOUT"]
+    #[must_use]
     #[inline(always)]
     pub const fn error_rx_timeout(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
@@ -947,10 +686,11 @@ impl Int {
     }
     #[doc = "Source: SIE_STATUS.RX_TIMEOUT"]
     #[inline(always)]
-    pub fn set_error_rx_timeout(&mut self, val: bool) {
+    pub const fn set_error_rx_timeout(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
     #[doc = "Source: SIE_STATUS.RX_OVERFLOW"]
+    #[must_use]
     #[inline(always)]
     pub const fn error_rx_overflow(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
@@ -958,10 +698,11 @@ impl Int {
     }
     #[doc = "Source: SIE_STATUS.RX_OVERFLOW"]
     #[inline(always)]
-    pub fn set_error_rx_overflow(&mut self, val: bool) {
+    pub const fn set_error_rx_overflow(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
     #[doc = "Source: SIE_STATUS.BIT_STUFF_ERROR"]
+    #[must_use]
     #[inline(always)]
     pub const fn error_bit_stuff(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -969,10 +710,11 @@ impl Int {
     }
     #[doc = "Source: SIE_STATUS.BIT_STUFF_ERROR"]
     #[inline(always)]
-    pub fn set_error_bit_stuff(&mut self, val: bool) {
+    pub const fn set_error_bit_stuff(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
     #[doc = "Source: SIE_STATUS.CRC_ERROR"]
+    #[must_use]
     #[inline(always)]
     pub const fn error_crc(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
@@ -980,10 +722,11 @@ impl Int {
     }
     #[doc = "Source: SIE_STATUS.CRC_ERROR"]
     #[inline(always)]
-    pub fn set_error_crc(&mut self, val: bool) {
+    pub const fn set_error_crc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
     #[doc = "Source: SIE_STATUS.STALL_REC"]
+    #[must_use]
     #[inline(always)]
     pub const fn stall(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
@@ -991,10 +734,11 @@ impl Int {
     }
     #[doc = "Source: SIE_STATUS.STALL_REC"]
     #[inline(always)]
-    pub fn set_stall(&mut self, val: bool) {
+    pub const fn set_stall(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
     #[doc = "Source: SIE_STATUS.VBUS_DETECT"]
+    #[must_use]
     #[inline(always)]
     pub const fn vbus_detect(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
@@ -1002,10 +746,11 @@ impl Int {
     }
     #[doc = "Source: SIE_STATUS.VBUS_DETECT"]
     #[inline(always)]
-    pub fn set_vbus_detect(&mut self, val: bool) {
+    pub const fn set_vbus_detect(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
     #[doc = "Source: SIE_STATUS.BUS_RESET"]
+    #[must_use]
     #[inline(always)]
     pub const fn bus_reset(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
@@ -1013,10 +758,11 @@ impl Int {
     }
     #[doc = "Source: SIE_STATUS.BUS_RESET"]
     #[inline(always)]
-    pub fn set_bus_reset(&mut self, val: bool) {
+    pub const fn set_bus_reset(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
     #[doc = "Set when the device connection state changes. Cleared by writing to SIE_STATUS.CONNECTED"]
+    #[must_use]
     #[inline(always)]
     pub const fn dev_conn_dis(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
@@ -1024,10 +770,11 @@ impl Int {
     }
     #[doc = "Set when the device connection state changes. Cleared by writing to SIE_STATUS.CONNECTED"]
     #[inline(always)]
-    pub fn set_dev_conn_dis(&mut self, val: bool) {
+    pub const fn set_dev_conn_dis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
     #[doc = "Set when the device suspend state changes. Cleared by writing to SIE_STATUS.SUSPENDED"]
+    #[must_use]
     #[inline(always)]
     pub const fn dev_suspend(&self) -> bool {
         let val = (self.0 >> 14usize) & 0x01;
@@ -1035,10 +782,11 @@ impl Int {
     }
     #[doc = "Set when the device suspend state changes. Cleared by writing to SIE_STATUS.SUSPENDED"]
     #[inline(always)]
-    pub fn set_dev_suspend(&mut self, val: bool) {
+    pub const fn set_dev_suspend(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
     }
     #[doc = "Set when the device receives a resume from the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE"]
+    #[must_use]
     #[inline(always)]
     pub const fn dev_resume_from_host(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
@@ -1046,10 +794,11 @@ impl Int {
     }
     #[doc = "Set when the device receives a resume from the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE"]
     #[inline(always)]
-    pub fn set_dev_resume_from_host(&mut self, val: bool) {
+    pub const fn set_dev_resume_from_host(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
     #[doc = "Device. Source: SIE_STATUS.SETUP_REC"]
+    #[must_use]
     #[inline(always)]
     pub const fn setup_req(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
@@ -1057,10 +806,11 @@ impl Int {
     }
     #[doc = "Device. Source: SIE_STATUS.SETUP_REC"]
     #[inline(always)]
-    pub fn set_setup_req(&mut self, val: bool) {
+    pub const fn set_setup_req(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
     #[doc = "Set every time the device receives a SOF (Start of Frame) packet. Cleared by reading SOF_RD"]
+    #[must_use]
     #[inline(always)]
     pub const fn dev_sof(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
@@ -1068,10 +818,11 @@ impl Int {
     }
     #[doc = "Set every time the device receives a SOF (Start of Frame) packet. Cleared by reading SOF_RD"]
     #[inline(always)]
-    pub fn set_dev_sof(&mut self, val: bool) {
+    pub const fn set_dev_sof(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
     #[doc = "Raised when any bit in ABORT_DONE is set. Clear by clearing all bits in ABORT_DONE."]
+    #[must_use]
     #[inline(always)]
     pub const fn abort_done(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
@@ -1079,10 +830,11 @@ impl Int {
     }
     #[doc = "Raised when any bit in ABORT_DONE is set. Clear by clearing all bits in ABORT_DONE."]
     #[inline(always)]
-    pub fn set_abort_done(&mut self, val: bool) {
+    pub const fn set_abort_done(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
     #[doc = "Raised when any bit in EP_STATUS_STALL_NAK is set. Clear by clearing all bits in EP_STATUS_STALL_NAK."]
+    #[must_use]
     #[inline(always)]
     pub const fn ep_stall_nak(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
@@ -1090,7 +842,7 @@ impl Int {
     }
     #[doc = "Raised when any bit in EP_STATUS_STALL_NAK is set. Clear by clearing all bits in EP_STATUS_STALL_NAK."]
     #[inline(always)]
-    pub fn set_ep_stall_nak(&mut self, val: bool) {
+    pub const fn set_ep_stall_nak(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
     }
 }
@@ -1129,52 +881,7 @@ impl core::fmt::Debug for Int {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Int {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Int {
-            host_conn_dis: bool,
-            host_resume: bool,
-            host_sof: bool,
-            trans_complete: bool,
-            buff_status: bool,
-            error_data_seq: bool,
-            error_rx_timeout: bool,
-            error_rx_overflow: bool,
-            error_bit_stuff: bool,
-            error_crc: bool,
-            stall: bool,
-            vbus_detect: bool,
-            bus_reset: bool,
-            dev_conn_dis: bool,
-            dev_suspend: bool,
-            dev_resume_from_host: bool,
-            setup_req: bool,
-            dev_sof: bool,
-            abort_done: bool,
-            ep_stall_nak: bool,
-        }
-        let proxy = Int {
-            host_conn_dis: self.host_conn_dis(),
-            host_resume: self.host_resume(),
-            host_sof: self.host_sof(),
-            trans_complete: self.trans_complete(),
-            buff_status: self.buff_status(),
-            error_data_seq: self.error_data_seq(),
-            error_rx_timeout: self.error_rx_timeout(),
-            error_rx_overflow: self.error_rx_overflow(),
-            error_bit_stuff: self.error_bit_stuff(),
-            error_crc: self.error_crc(),
-            stall: self.stall(),
-            vbus_detect: self.vbus_detect(),
-            bus_reset: self.bus_reset(),
-            dev_conn_dis: self.dev_conn_dis(),
-            dev_suspend: self.dev_suspend(),
-            dev_resume_from_host: self.dev_resume_from_host(),
-            setup_req: self.setup_req(),
-            dev_sof: self.dev_sof(),
-            abort_done: self.abort_done(),
-            ep_stall_nak: self.ep_stall_nak(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Int {{ host_conn_dis: {=bool:?}, host_resume: {=bool:?}, host_sof: {=bool:?}, trans_complete: {=bool:?}, buff_status: {=bool:?}, error_data_seq: {=bool:?}, error_rx_timeout: {=bool:?}, error_rx_overflow: {=bool:?}, error_bit_stuff: {=bool:?}, error_crc: {=bool:?}, stall: {=bool:?}, vbus_detect: {=bool:?}, bus_reset: {=bool:?}, dev_conn_dis: {=bool:?}, dev_suspend: {=bool:?}, dev_resume_from_host: {=bool:?}, setup_req: {=bool:?}, dev_sof: {=bool:?}, abort_done: {=bool:?}, ep_stall_nak: {=bool:?} }}" , self . host_conn_dis () , self . host_resume () , self . host_sof () , self . trans_complete () , self . buff_status () , self . error_data_seq () , self . error_rx_timeout () , self . error_rx_overflow () , self . error_bit_stuff () , self . error_crc () , self . stall () , self . vbus_detect () , self . bus_reset () , self . dev_conn_dis () , self . dev_suspend () , self . dev_resume_from_host () , self . setup_req () , self . dev_sof () , self . abort_done () , self . ep_stall_nak ())
     }
 }
 #[doc = "interrupt endpoint control register"]
@@ -1183,6 +890,7 @@ impl defmt::Format for Int {
 pub struct IntEpCtrl(pub u32);
 impl IntEpCtrl {
     #[doc = "Host: Enable interrupt endpoint 1 => 15"]
+    #[must_use]
     #[inline(always)]
     pub const fn int_ep_active(&self) -> u16 {
         let val = (self.0 >> 1usize) & 0x7fff;
@@ -1190,7 +898,7 @@ impl IntEpCtrl {
     }
     #[doc = "Host: Enable interrupt endpoint 1 => 15"]
     #[inline(always)]
-    pub fn set_int_ep_active(&mut self, val: u16) {
+    pub const fn set_int_ep_active(&mut self, val: u16) {
         self.0 = (self.0 & !(0x7fff << 1usize)) | (((val as u32) & 0x7fff) << 1usize);
     }
 }
@@ -1210,14 +918,11 @@ impl core::fmt::Debug for IntEpCtrl {
 #[cfg(feature = "defmt")]
 impl defmt::Format for IntEpCtrl {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct IntEpCtrl {
-            int_ep_active: u16,
-        }
-        let proxy = IntEpCtrl {
-            int_ep_active: self.int_ep_active(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "IntEpCtrl {{ int_ep_active: {=u16:?} }}",
+            self.int_ep_active()
+        )
     }
 }
 #[doc = "Main control register"]
@@ -1226,6 +931,7 @@ impl defmt::Format for IntEpCtrl {
 pub struct MainCtrl(pub u32);
 impl MainCtrl {
     #[doc = "Enable controller"]
+    #[must_use]
     #[inline(always)]
     pub const fn controller_en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -1233,10 +939,11 @@ impl MainCtrl {
     }
     #[doc = "Enable controller"]
     #[inline(always)]
-    pub fn set_controller_en(&mut self, val: bool) {
+    pub const fn set_controller_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Device mode = 0, Host mode = 1"]
+    #[must_use]
     #[inline(always)]
     pub const fn host_ndevice(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -1244,10 +951,11 @@ impl MainCtrl {
     }
     #[doc = "Device mode = 0, Host mode = 1"]
     #[inline(always)]
-    pub fn set_host_ndevice(&mut self, val: bool) {
+    pub const fn set_host_ndevice(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "Reduced timings for simulation"]
+    #[must_use]
     #[inline(always)]
     pub const fn sim_timing(&self) -> bool {
         let val = (self.0 >> 31usize) & 0x01;
@@ -1255,7 +963,7 @@ impl MainCtrl {
     }
     #[doc = "Reduced timings for simulation"]
     #[inline(always)]
-    pub fn set_sim_timing(&mut self, val: bool) {
+    pub const fn set_sim_timing(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
     }
 }
@@ -1277,18 +985,7 @@ impl core::fmt::Debug for MainCtrl {
 #[cfg(feature = "defmt")]
 impl defmt::Format for MainCtrl {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct MainCtrl {
-            controller_en: bool,
-            host_ndevice: bool,
-            sim_timing: bool,
-        }
-        let proxy = MainCtrl {
-            controller_en: self.controller_en(),
-            host_ndevice: self.host_ndevice(),
-            sim_timing: self.sim_timing(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "MainCtrl {{ controller_en: {=bool:?}, host_ndevice: {=bool:?}, sim_timing: {=bool:?} }}" , self . controller_en () , self . host_ndevice () , self . sim_timing ())
     }
 }
 #[doc = "Used by the host controller. Sets the wait time in microseconds before trying again if the device replies with a NAK."]
@@ -1297,6 +994,7 @@ impl defmt::Format for MainCtrl {
 pub struct NakPoll(pub u32);
 impl NakPoll {
     #[doc = "NAK polling interval for a low speed device"]
+    #[must_use]
     #[inline(always)]
     pub const fn delay_ls(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x03ff;
@@ -1304,10 +1002,11 @@ impl NakPoll {
     }
     #[doc = "NAK polling interval for a low speed device"]
     #[inline(always)]
-    pub fn set_delay_ls(&mut self, val: u16) {
+    pub const fn set_delay_ls(&mut self, val: u16) {
         self.0 = (self.0 & !(0x03ff << 0usize)) | (((val as u32) & 0x03ff) << 0usize);
     }
     #[doc = "NAK polling interval for a full speed device"]
+    #[must_use]
     #[inline(always)]
     pub const fn delay_fs(&self) -> u16 {
         let val = (self.0 >> 16usize) & 0x03ff;
@@ -1315,7 +1014,7 @@ impl NakPoll {
     }
     #[doc = "NAK polling interval for a full speed device"]
     #[inline(always)]
-    pub fn set_delay_fs(&mut self, val: u16) {
+    pub const fn set_delay_fs(&mut self, val: u16) {
         self.0 = (self.0 & !(0x03ff << 16usize)) | (((val as u32) & 0x03ff) << 16usize);
     }
 }
@@ -1336,16 +1035,12 @@ impl core::fmt::Debug for NakPoll {
 #[cfg(feature = "defmt")]
 impl defmt::Format for NakPoll {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct NakPoll {
-            delay_ls: u16,
-            delay_fs: u16,
-        }
-        let proxy = NakPoll {
-            delay_ls: self.delay_ls(),
-            delay_fs: self.delay_fs(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "NakPoll {{ delay_ls: {=u16:?}, delay_fs: {=u16:?} }}",
+            self.delay_ls(),
+            self.delay_fs()
+        )
     }
 }
 #[doc = "SIE control register"]
@@ -1354,6 +1049,7 @@ impl defmt::Format for NakPoll {
 pub struct SieCtrl(pub u32);
 impl SieCtrl {
     #[doc = "Host: Start transaction"]
+    #[must_use]
     #[inline(always)]
     pub const fn start_trans(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -1361,10 +1057,11 @@ impl SieCtrl {
     }
     #[doc = "Host: Start transaction"]
     #[inline(always)]
-    pub fn set_start_trans(&mut self, val: bool) {
+    pub const fn set_start_trans(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Host: Send Setup packet"]
+    #[must_use]
     #[inline(always)]
     pub const fn send_setup(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -1372,10 +1069,11 @@ impl SieCtrl {
     }
     #[doc = "Host: Send Setup packet"]
     #[inline(always)]
-    pub fn set_send_setup(&mut self, val: bool) {
+    pub const fn set_send_setup(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "Host: Send transaction (OUT from host)"]
+    #[must_use]
     #[inline(always)]
     pub const fn send_data(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -1383,10 +1081,11 @@ impl SieCtrl {
     }
     #[doc = "Host: Send transaction (OUT from host)"]
     #[inline(always)]
-    pub fn set_send_data(&mut self, val: bool) {
+    pub const fn set_send_data(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "Host: Receive transaction (IN to host)"]
+    #[must_use]
     #[inline(always)]
     pub const fn receive_data(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -1394,10 +1093,11 @@ impl SieCtrl {
     }
     #[doc = "Host: Receive transaction (IN to host)"]
     #[inline(always)]
-    pub fn set_receive_data(&mut self, val: bool) {
+    pub const fn set_receive_data(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "Host: Stop transaction"]
+    #[must_use]
     #[inline(always)]
     pub const fn stop_trans(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -1405,10 +1105,11 @@ impl SieCtrl {
     }
     #[doc = "Host: Stop transaction"]
     #[inline(always)]
-    pub fn set_stop_trans(&mut self, val: bool) {
+    pub const fn set_stop_trans(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "Host: Preable enable for LS device on FS hub"]
+    #[must_use]
     #[inline(always)]
     pub const fn preamble_en(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
@@ -1416,10 +1117,11 @@ impl SieCtrl {
     }
     #[doc = "Host: Preable enable for LS device on FS hub"]
     #[inline(always)]
-    pub fn set_preamble_en(&mut self, val: bool) {
+    pub const fn set_preamble_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
     #[doc = "Host: Delay packet(s) until after SOF"]
+    #[must_use]
     #[inline(always)]
     pub const fn sof_sync(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -1427,10 +1129,11 @@ impl SieCtrl {
     }
     #[doc = "Host: Delay packet(s) until after SOF"]
     #[inline(always)]
-    pub fn set_sof_sync(&mut self, val: bool) {
+    pub const fn set_sof_sync(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
     #[doc = "Host: Enable SOF generation (for full speed bus)"]
+    #[must_use]
     #[inline(always)]
     pub const fn sof_en(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
@@ -1438,10 +1141,11 @@ impl SieCtrl {
     }
     #[doc = "Host: Enable SOF generation (for full speed bus)"]
     #[inline(always)]
-    pub fn set_sof_en(&mut self, val: bool) {
+    pub const fn set_sof_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
     #[doc = "Host: Enable keep alive packet (for low speed bus)"]
+    #[must_use]
     #[inline(always)]
     pub const fn keep_alive_en(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
@@ -1449,10 +1153,11 @@ impl SieCtrl {
     }
     #[doc = "Host: Enable keep alive packet (for low speed bus)"]
     #[inline(always)]
-    pub fn set_keep_alive_en(&mut self, val: bool) {
+    pub const fn set_keep_alive_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
     #[doc = "Host: Enable VBUS"]
+    #[must_use]
     #[inline(always)]
     pub const fn vbus_en(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
@@ -1460,10 +1165,11 @@ impl SieCtrl {
     }
     #[doc = "Host: Enable VBUS"]
     #[inline(always)]
-    pub fn set_vbus_en(&mut self, val: bool) {
+    pub const fn set_vbus_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
     #[doc = "Device: Remote wakeup. Device can initiate its own resume after suspend."]
+    #[must_use]
     #[inline(always)]
     pub const fn resume(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
@@ -1471,10 +1177,11 @@ impl SieCtrl {
     }
     #[doc = "Device: Remote wakeup. Device can initiate its own resume after suspend."]
     #[inline(always)]
-    pub fn set_resume(&mut self, val: bool) {
+    pub const fn set_resume(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
     #[doc = "Host: Reset bus"]
+    #[must_use]
     #[inline(always)]
     pub const fn reset_bus(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
@@ -1482,10 +1189,11 @@ impl SieCtrl {
     }
     #[doc = "Host: Reset bus"]
     #[inline(always)]
-    pub fn set_reset_bus(&mut self, val: bool) {
+    pub const fn set_reset_bus(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
     #[doc = "Host: Enable pull down resistors"]
+    #[must_use]
     #[inline(always)]
     pub const fn pulldown_en(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
@@ -1493,10 +1201,11 @@ impl SieCtrl {
     }
     #[doc = "Host: Enable pull down resistors"]
     #[inline(always)]
-    pub fn set_pulldown_en(&mut self, val: bool) {
+    pub const fn set_pulldown_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
     #[doc = "Device: Enable pull up resistor"]
+    #[must_use]
     #[inline(always)]
     pub const fn pullup_en(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
@@ -1504,10 +1213,11 @@ impl SieCtrl {
     }
     #[doc = "Device: Enable pull up resistor"]
     #[inline(always)]
-    pub fn set_pullup_en(&mut self, val: bool) {
+    pub const fn set_pullup_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
     #[doc = "Device: Pull-up strength (0=1K2, 1=2k3)"]
+    #[must_use]
     #[inline(always)]
     pub const fn rpu_opt(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
@@ -1515,10 +1225,11 @@ impl SieCtrl {
     }
     #[doc = "Device: Pull-up strength (0=1K2, 1=2k3)"]
     #[inline(always)]
-    pub fn set_rpu_opt(&mut self, val: bool) {
+    pub const fn set_rpu_opt(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
     #[doc = "Power down bus transceiver"]
+    #[must_use]
     #[inline(always)]
     pub const fn transceiver_pd(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
@@ -1526,10 +1237,11 @@ impl SieCtrl {
     }
     #[doc = "Power down bus transceiver"]
     #[inline(always)]
-    pub fn set_transceiver_pd(&mut self, val: bool) {
+    pub const fn set_transceiver_pd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
     #[doc = "Direct control of DM"]
+    #[must_use]
     #[inline(always)]
     pub const fn direct_dm(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
@@ -1537,10 +1249,11 @@ impl SieCtrl {
     }
     #[doc = "Direct control of DM"]
     #[inline(always)]
-    pub fn set_direct_dm(&mut self, val: bool) {
+    pub const fn set_direct_dm(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
     #[doc = "Direct control of DP"]
+    #[must_use]
     #[inline(always)]
     pub const fn direct_dp(&self) -> bool {
         let val = (self.0 >> 25usize) & 0x01;
@@ -1548,10 +1261,11 @@ impl SieCtrl {
     }
     #[doc = "Direct control of DP"]
     #[inline(always)]
-    pub fn set_direct_dp(&mut self, val: bool) {
+    pub const fn set_direct_dp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
     }
     #[doc = "Direct bus drive enable"]
+    #[must_use]
     #[inline(always)]
     pub const fn direct_en(&self) -> bool {
         let val = (self.0 >> 26usize) & 0x01;
@@ -1559,10 +1273,11 @@ impl SieCtrl {
     }
     #[doc = "Direct bus drive enable"]
     #[inline(always)]
-    pub fn set_direct_en(&mut self, val: bool) {
+    pub const fn set_direct_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
     }
     #[doc = "Device: Set bit in EP_STATUS_STALL_NAK when EP0 sends a NAK"]
+    #[must_use]
     #[inline(always)]
     pub const fn ep0_int_nak(&self) -> bool {
         let val = (self.0 >> 27usize) & 0x01;
@@ -1570,10 +1285,11 @@ impl SieCtrl {
     }
     #[doc = "Device: Set bit in EP_STATUS_STALL_NAK when EP0 sends a NAK"]
     #[inline(always)]
-    pub fn set_ep0_int_nak(&mut self, val: bool) {
+    pub const fn set_ep0_int_nak(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 27usize)) | (((val as u32) & 0x01) << 27usize);
     }
     #[doc = "Device: Set bit in BUFF_STATUS for every 2 buffers completed on EP0"]
+    #[must_use]
     #[inline(always)]
     pub const fn ep0_int_2buf(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
@@ -1581,10 +1297,11 @@ impl SieCtrl {
     }
     #[doc = "Device: Set bit in BUFF_STATUS for every 2 buffers completed on EP0"]
     #[inline(always)]
-    pub fn set_ep0_int_2buf(&mut self, val: bool) {
+    pub const fn set_ep0_int_2buf(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
     }
     #[doc = "Device: Set bit in BUFF_STATUS for every buffer completed on EP0"]
+    #[must_use]
     #[inline(always)]
     pub const fn ep0_int_1buf(&self) -> bool {
         let val = (self.0 >> 29usize) & 0x01;
@@ -1592,10 +1309,11 @@ impl SieCtrl {
     }
     #[doc = "Device: Set bit in BUFF_STATUS for every buffer completed on EP0"]
     #[inline(always)]
-    pub fn set_ep0_int_1buf(&mut self, val: bool) {
+    pub const fn set_ep0_int_1buf(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 29usize)) | (((val as u32) & 0x01) << 29usize);
     }
     #[doc = "Device: EP0 single buffered = 0, double buffered = 1"]
+    #[must_use]
     #[inline(always)]
     pub const fn ep0_double_buf(&self) -> bool {
         let val = (self.0 >> 30usize) & 0x01;
@@ -1603,10 +1321,11 @@ impl SieCtrl {
     }
     #[doc = "Device: EP0 single buffered = 0, double buffered = 1"]
     #[inline(always)]
-    pub fn set_ep0_double_buf(&mut self, val: bool) {
+    pub const fn set_ep0_double_buf(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 30usize)) | (((val as u32) & 0x01) << 30usize);
     }
     #[doc = "Device: Set bit in EP_STATUS_STALL_NAK when EP0 sends a STALL"]
+    #[must_use]
     #[inline(always)]
     pub const fn ep0_int_stall(&self) -> bool {
         let val = (self.0 >> 31usize) & 0x01;
@@ -1614,7 +1333,7 @@ impl SieCtrl {
     }
     #[doc = "Device: Set bit in EP_STATUS_STALL_NAK when EP0 sends a STALL"]
     #[inline(always)]
-    pub fn set_ep0_int_stall(&mut self, val: bool) {
+    pub const fn set_ep0_int_stall(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
     }
 }
@@ -1657,60 +1376,7 @@ impl core::fmt::Debug for SieCtrl {
 #[cfg(feature = "defmt")]
 impl defmt::Format for SieCtrl {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct SieCtrl {
-            start_trans: bool,
-            send_setup: bool,
-            send_data: bool,
-            receive_data: bool,
-            stop_trans: bool,
-            preamble_en: bool,
-            sof_sync: bool,
-            sof_en: bool,
-            keep_alive_en: bool,
-            vbus_en: bool,
-            resume: bool,
-            reset_bus: bool,
-            pulldown_en: bool,
-            pullup_en: bool,
-            rpu_opt: bool,
-            transceiver_pd: bool,
-            direct_dm: bool,
-            direct_dp: bool,
-            direct_en: bool,
-            ep0_int_nak: bool,
-            ep0_int_2buf: bool,
-            ep0_int_1buf: bool,
-            ep0_double_buf: bool,
-            ep0_int_stall: bool,
-        }
-        let proxy = SieCtrl {
-            start_trans: self.start_trans(),
-            send_setup: self.send_setup(),
-            send_data: self.send_data(),
-            receive_data: self.receive_data(),
-            stop_trans: self.stop_trans(),
-            preamble_en: self.preamble_en(),
-            sof_sync: self.sof_sync(),
-            sof_en: self.sof_en(),
-            keep_alive_en: self.keep_alive_en(),
-            vbus_en: self.vbus_en(),
-            resume: self.resume(),
-            reset_bus: self.reset_bus(),
-            pulldown_en: self.pulldown_en(),
-            pullup_en: self.pullup_en(),
-            rpu_opt: self.rpu_opt(),
-            transceiver_pd: self.transceiver_pd(),
-            direct_dm: self.direct_dm(),
-            direct_dp: self.direct_dp(),
-            direct_en: self.direct_en(),
-            ep0_int_nak: self.ep0_int_nak(),
-            ep0_int_2buf: self.ep0_int_2buf(),
-            ep0_int_1buf: self.ep0_int_1buf(),
-            ep0_double_buf: self.ep0_double_buf(),
-            ep0_int_stall: self.ep0_int_stall(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "SieCtrl {{ start_trans: {=bool:?}, send_setup: {=bool:?}, send_data: {=bool:?}, receive_data: {=bool:?}, stop_trans: {=bool:?}, preamble_en: {=bool:?}, sof_sync: {=bool:?}, sof_en: {=bool:?}, keep_alive_en: {=bool:?}, vbus_en: {=bool:?}, resume: {=bool:?}, reset_bus: {=bool:?}, pulldown_en: {=bool:?}, pullup_en: {=bool:?}, rpu_opt: {=bool:?}, transceiver_pd: {=bool:?}, direct_dm: {=bool:?}, direct_dp: {=bool:?}, direct_en: {=bool:?}, ep0_int_nak: {=bool:?}, ep0_int_2buf: {=bool:?}, ep0_int_1buf: {=bool:?}, ep0_double_buf: {=bool:?}, ep0_int_stall: {=bool:?} }}" , self . start_trans () , self . send_setup () , self . send_data () , self . receive_data () , self . stop_trans () , self . preamble_en () , self . sof_sync () , self . sof_en () , self . keep_alive_en () , self . vbus_en () , self . resume () , self . reset_bus () , self . pulldown_en () , self . pullup_en () , self . rpu_opt () , self . transceiver_pd () , self . direct_dm () , self . direct_dp () , self . direct_en () , self . ep0_int_nak () , self . ep0_int_2buf () , self . ep0_int_1buf () , self . ep0_double_buf () , self . ep0_int_stall ())
     }
 }
 #[doc = "SIE status register"]
@@ -1719,6 +1385,7 @@ impl defmt::Format for SieCtrl {
 pub struct SieStatus(pub u32);
 impl SieStatus {
     #[doc = "Device: VBUS Detected"]
+    #[must_use]
     #[inline(always)]
     pub const fn vbus_detected(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -1726,10 +1393,11 @@ impl SieStatus {
     }
     #[doc = "Device: VBUS Detected"]
     #[inline(always)]
-    pub fn set_vbus_detected(&mut self, val: bool) {
+    pub const fn set_vbus_detected(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "USB bus line state"]
+    #[must_use]
     #[inline(always)]
     pub const fn line_state(&self) -> u8 {
         let val = (self.0 >> 2usize) & 0x03;
@@ -1737,10 +1405,11 @@ impl SieStatus {
     }
     #[doc = "USB bus line state"]
     #[inline(always)]
-    pub fn set_line_state(&mut self, val: u8) {
+    pub const fn set_line_state(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 2usize)) | (((val as u32) & 0x03) << 2usize);
     }
     #[doc = "Bus in suspended state. Valid for device and host. Host and device will go into suspend if neither Keep Alive / SOF frames are enabled."]
+    #[must_use]
     #[inline(always)]
     pub const fn suspended(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -1748,10 +1417,11 @@ impl SieStatus {
     }
     #[doc = "Bus in suspended state. Valid for device and host. Host and device will go into suspend if neither Keep Alive / SOF frames are enabled."]
     #[inline(always)]
-    pub fn set_suspended(&mut self, val: bool) {
+    pub const fn set_suspended(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "Host: device speed. Disconnected = 00, LS = 01, FS = 10"]
+    #[must_use]
     #[inline(always)]
     pub const fn speed(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x03;
@@ -1759,10 +1429,11 @@ impl SieStatus {
     }
     #[doc = "Host: device speed. Disconnected = 00, LS = 01, FS = 10"]
     #[inline(always)]
-    pub fn set_speed(&mut self, val: u8) {
+    pub const fn set_speed(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 8usize)) | (((val as u32) & 0x03) << 8usize);
     }
     #[doc = "VBUS over current detected"]
+    #[must_use]
     #[inline(always)]
     pub const fn vbus_over_curr(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
@@ -1770,10 +1441,11 @@ impl SieStatus {
     }
     #[doc = "VBUS over current detected"]
     #[inline(always)]
-    pub fn set_vbus_over_curr(&mut self, val: bool) {
+    pub const fn set_vbus_over_curr(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
     #[doc = "Host: Device has initiated a remote resume. Device: host has initiated a resume."]
+    #[must_use]
     #[inline(always)]
     pub const fn resume(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
@@ -1781,10 +1453,11 @@ impl SieStatus {
     }
     #[doc = "Host: Device has initiated a remote resume. Device: host has initiated a resume."]
     #[inline(always)]
-    pub fn set_resume(&mut self, val: bool) {
+    pub const fn set_resume(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
     #[doc = "Device: connected"]
+    #[must_use]
     #[inline(always)]
     pub const fn connected(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
@@ -1792,10 +1465,11 @@ impl SieStatus {
     }
     #[doc = "Device: connected"]
     #[inline(always)]
-    pub fn set_connected(&mut self, val: bool) {
+    pub const fn set_connected(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
     #[doc = "Device: Setup packet received"]
+    #[must_use]
     #[inline(always)]
     pub const fn setup_rec(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
@@ -1803,10 +1477,11 @@ impl SieStatus {
     }
     #[doc = "Device: Setup packet received"]
     #[inline(always)]
-    pub fn set_setup_rec(&mut self, val: bool) {
+    pub const fn set_setup_rec(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
     #[doc = "Transaction complete. Raised by device if: * An IN or OUT packet is sent with the `LAST_BUFF` bit set in the buffer control register Raised by host if: * A setup packet is sent when no data in or data out transaction follows * An IN packet is received and the `LAST_BUFF` bit is set in the buffer control register * An IN packet is received with zero length * An OUT packet is sent and the `LAST_BUFF` bit is set"]
+    #[must_use]
     #[inline(always)]
     pub const fn trans_complete(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
@@ -1814,10 +1489,11 @@ impl SieStatus {
     }
     #[doc = "Transaction complete. Raised by device if: * An IN or OUT packet is sent with the `LAST_BUFF` bit set in the buffer control register Raised by host if: * A setup packet is sent when no data in or data out transaction follows * An IN packet is received and the `LAST_BUFF` bit is set in the buffer control register * An IN packet is received with zero length * An OUT packet is sent and the `LAST_BUFF` bit is set"]
     #[inline(always)]
-    pub fn set_trans_complete(&mut self, val: bool) {
+    pub const fn set_trans_complete(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
     #[doc = "Device: bus reset received"]
+    #[must_use]
     #[inline(always)]
     pub const fn bus_reset(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
@@ -1825,10 +1501,11 @@ impl SieStatus {
     }
     #[doc = "Device: bus reset received"]
     #[inline(always)]
-    pub fn set_bus_reset(&mut self, val: bool) {
+    pub const fn set_bus_reset(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
     }
     #[doc = "CRC Error. Raised by the Serial RX engine."]
+    #[must_use]
     #[inline(always)]
     pub const fn crc_error(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
@@ -1836,10 +1513,11 @@ impl SieStatus {
     }
     #[doc = "CRC Error. Raised by the Serial RX engine."]
     #[inline(always)]
-    pub fn set_crc_error(&mut self, val: bool) {
+    pub const fn set_crc_error(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
     #[doc = "Bit Stuff Error. Raised by the Serial RX engine."]
+    #[must_use]
     #[inline(always)]
     pub const fn bit_stuff_error(&self) -> bool {
         let val = (self.0 >> 25usize) & 0x01;
@@ -1847,10 +1525,11 @@ impl SieStatus {
     }
     #[doc = "Bit Stuff Error. Raised by the Serial RX engine."]
     #[inline(always)]
-    pub fn set_bit_stuff_error(&mut self, val: bool) {
+    pub const fn set_bit_stuff_error(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
     }
     #[doc = "RX overflow is raised by the Serial RX engine if the incoming data is too fast."]
+    #[must_use]
     #[inline(always)]
     pub const fn rx_overflow(&self) -> bool {
         let val = (self.0 >> 26usize) & 0x01;
@@ -1858,10 +1537,11 @@ impl SieStatus {
     }
     #[doc = "RX overflow is raised by the Serial RX engine if the incoming data is too fast."]
     #[inline(always)]
-    pub fn set_rx_overflow(&mut self, val: bool) {
+    pub const fn set_rx_overflow(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
     }
     #[doc = "RX timeout is raised by both the host and device if an ACK is not received in the maximum time specified by the USB spec."]
+    #[must_use]
     #[inline(always)]
     pub const fn rx_timeout(&self) -> bool {
         let val = (self.0 >> 27usize) & 0x01;
@@ -1869,10 +1549,11 @@ impl SieStatus {
     }
     #[doc = "RX timeout is raised by both the host and device if an ACK is not received in the maximum time specified by the USB spec."]
     #[inline(always)]
-    pub fn set_rx_timeout(&mut self, val: bool) {
+    pub const fn set_rx_timeout(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 27usize)) | (((val as u32) & 0x01) << 27usize);
     }
     #[doc = "Host: NAK received"]
+    #[must_use]
     #[inline(always)]
     pub const fn nak_rec(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
@@ -1880,10 +1561,11 @@ impl SieStatus {
     }
     #[doc = "Host: NAK received"]
     #[inline(always)]
-    pub fn set_nak_rec(&mut self, val: bool) {
+    pub const fn set_nak_rec(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
     }
     #[doc = "Host: STALL received"]
+    #[must_use]
     #[inline(always)]
     pub const fn stall_rec(&self) -> bool {
         let val = (self.0 >> 29usize) & 0x01;
@@ -1891,10 +1573,11 @@ impl SieStatus {
     }
     #[doc = "Host: STALL received"]
     #[inline(always)]
-    pub fn set_stall_rec(&mut self, val: bool) {
+    pub const fn set_stall_rec(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 29usize)) | (((val as u32) & 0x01) << 29usize);
     }
     #[doc = "ACK received. Raised by both host and device."]
+    #[must_use]
     #[inline(always)]
     pub const fn ack_rec(&self) -> bool {
         let val = (self.0 >> 30usize) & 0x01;
@@ -1902,10 +1585,11 @@ impl SieStatus {
     }
     #[doc = "ACK received. Raised by both host and device."]
     #[inline(always)]
-    pub fn set_ack_rec(&mut self, val: bool) {
+    pub const fn set_ack_rec(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 30usize)) | (((val as u32) & 0x01) << 30usize);
     }
     #[doc = "Data Sequence Error. The device can raise a sequence error in the following conditions: * A SETUP packet is received followed by a DATA1 packet (data phase should always be DATA0) * An OUT packet is received from the host but doesn't match the data pid in the buffer control register read from DPSRAM The host can raise a data sequence error in the following conditions: * An IN packet from the device has the wrong data PID"]
+    #[must_use]
     #[inline(always)]
     pub const fn data_seq_error(&self) -> bool {
         let val = (self.0 >> 31usize) & 0x01;
@@ -1913,7 +1597,7 @@ impl SieStatus {
     }
     #[doc = "Data Sequence Error. The device can raise a sequence error in the following conditions: * A SETUP packet is received followed by a DATA1 packet (data phase should always be DATA0) * An OUT packet is received from the host but doesn't match the data pid in the buffer control register read from DPSRAM The host can raise a data sequence error in the following conditions: * An IN packet from the device has the wrong data PID"]
     #[inline(always)]
-    pub fn set_data_seq_error(&mut self, val: bool) {
+    pub const fn set_data_seq_error(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
     }
 }
@@ -1950,48 +1634,7 @@ impl core::fmt::Debug for SieStatus {
 #[cfg(feature = "defmt")]
 impl defmt::Format for SieStatus {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct SieStatus {
-            vbus_detected: bool,
-            line_state: u8,
-            suspended: bool,
-            speed: u8,
-            vbus_over_curr: bool,
-            resume: bool,
-            connected: bool,
-            setup_rec: bool,
-            trans_complete: bool,
-            bus_reset: bool,
-            crc_error: bool,
-            bit_stuff_error: bool,
-            rx_overflow: bool,
-            rx_timeout: bool,
-            nak_rec: bool,
-            stall_rec: bool,
-            ack_rec: bool,
-            data_seq_error: bool,
-        }
-        let proxy = SieStatus {
-            vbus_detected: self.vbus_detected(),
-            line_state: self.line_state(),
-            suspended: self.suspended(),
-            speed: self.speed(),
-            vbus_over_curr: self.vbus_over_curr(),
-            resume: self.resume(),
-            connected: self.connected(),
-            setup_rec: self.setup_rec(),
-            trans_complete: self.trans_complete(),
-            bus_reset: self.bus_reset(),
-            crc_error: self.crc_error(),
-            bit_stuff_error: self.bit_stuff_error(),
-            rx_overflow: self.rx_overflow(),
-            rx_timeout: self.rx_timeout(),
-            nak_rec: self.nak_rec(),
-            stall_rec: self.stall_rec(),
-            ack_rec: self.ack_rec(),
-            data_seq_error: self.data_seq_error(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "SieStatus {{ vbus_detected: {=bool:?}, line_state: {=u8:?}, suspended: {=bool:?}, speed: {=u8:?}, vbus_over_curr: {=bool:?}, resume: {=bool:?}, connected: {=bool:?}, setup_rec: {=bool:?}, trans_complete: {=bool:?}, bus_reset: {=bool:?}, crc_error: {=bool:?}, bit_stuff_error: {=bool:?}, rx_overflow: {=bool:?}, rx_timeout: {=bool:?}, nak_rec: {=bool:?}, stall_rec: {=bool:?}, ack_rec: {=bool:?}, data_seq_error: {=bool:?} }}" , self . vbus_detected () , self . line_state () , self . suspended () , self . speed () , self . vbus_over_curr () , self . resume () , self . connected () , self . setup_rec () , self . trans_complete () , self . bus_reset () , self . crc_error () , self . bit_stuff_error () , self . rx_overflow () , self . rx_timeout () , self . nak_rec () , self . stall_rec () , self . ack_rec () , self . data_seq_error ())
     }
 }
 #[doc = "Read the last SOF (Start of Frame) frame number seen. In device mode the last SOF received from the host. In host mode the last SOF sent by the host."]
@@ -1999,13 +1642,14 @@ impl defmt::Format for SieStatus {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SofRd(pub u32);
 impl SofRd {
+    #[must_use]
     #[inline(always)]
     pub const fn count(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x07ff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_count(&mut self, val: u16) {
+    pub const fn set_count(&mut self, val: u16) {
         self.0 = (self.0 & !(0x07ff << 0usize)) | (((val as u32) & 0x07ff) << 0usize);
     }
 }
@@ -2025,14 +1669,7 @@ impl core::fmt::Debug for SofRd {
 #[cfg(feature = "defmt")]
 impl defmt::Format for SofRd {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct SofRd {
-            count: u16,
-        }
-        let proxy = SofRd {
-            count: self.count(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "SofRd {{ count: {=u16:?} }}", self.count())
     }
 }
 #[doc = "Set the SOF (Start of Frame) frame number in the host controller. The SOF packet is sent every 1ms and the host will increment the frame number by 1 each time."]
@@ -2040,13 +1677,14 @@ impl defmt::Format for SofRd {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SofWr(pub u32);
 impl SofWr {
+    #[must_use]
     #[inline(always)]
     pub const fn count(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x07ff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_count(&mut self, val: u16) {
+    pub const fn set_count(&mut self, val: u16) {
         self.0 = (self.0 & !(0x07ff << 0usize)) | (((val as u32) & 0x07ff) << 0usize);
     }
 }
@@ -2066,14 +1704,7 @@ impl core::fmt::Debug for SofWr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for SofWr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct SofWr {
-            count: u16,
-        }
-        let proxy = SofWr {
-            count: self.count(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "SofWr {{ count: {=u16:?} }}", self.count())
     }
 }
 #[doc = "Where to connect the USB controller. Should be to_phy by default."]
@@ -2081,40 +1712,44 @@ impl defmt::Format for SofWr {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct UsbMuxing(pub u32);
 impl UsbMuxing {
+    #[must_use]
     #[inline(always)]
     pub const fn to_phy(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_to_phy(&mut self, val: bool) {
+    pub const fn set_to_phy(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn to_extphy(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_to_extphy(&mut self, val: bool) {
+    pub const fn set_to_extphy(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn to_digital_pad(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_to_digital_pad(&mut self, val: bool) {
+    pub const fn set_to_digital_pad(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn softcon(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_softcon(&mut self, val: bool) {
+    pub const fn set_softcon(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
 }
@@ -2137,20 +1772,7 @@ impl core::fmt::Debug for UsbMuxing {
 #[cfg(feature = "defmt")]
 impl defmt::Format for UsbMuxing {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct UsbMuxing {
-            to_phy: bool,
-            to_extphy: bool,
-            to_digital_pad: bool,
-            softcon: bool,
-        }
-        let proxy = UsbMuxing {
-            to_phy: self.to_phy(),
-            to_extphy: self.to_extphy(),
-            to_digital_pad: self.to_digital_pad(),
-            softcon: self.softcon(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "UsbMuxing {{ to_phy: {=bool:?}, to_extphy: {=bool:?}, to_digital_pad: {=bool:?}, softcon: {=bool:?} }}" , self . to_phy () , self . to_extphy () , self . to_digital_pad () , self . softcon ())
     }
 }
 #[doc = "Overrides for the power signals in the event that the VBUS signals are not hooked up to GPIO. Set the value of the override and then the override enable so switch over to the override value."]
@@ -2158,58 +1780,64 @@ impl defmt::Format for UsbMuxing {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct UsbPwr(pub u32);
 impl UsbPwr {
+    #[must_use]
     #[inline(always)]
     pub const fn vbus_en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_vbus_en(&mut self, val: bool) {
+    pub const fn set_vbus_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn vbus_en_override_en(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_vbus_en_override_en(&mut self, val: bool) {
+    pub const fn set_vbus_en_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn vbus_detect(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_vbus_detect(&mut self, val: bool) {
+    pub const fn set_vbus_detect(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn vbus_detect_override_en(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_vbus_detect_override_en(&mut self, val: bool) {
+    pub const fn set_vbus_detect_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn overcurr_detect(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_overcurr_detect(&mut self, val: bool) {
+    pub const fn set_overcurr_detect(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn overcurr_detect_en(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_overcurr_detect_en(&mut self, val: bool) {
+    pub const fn set_overcurr_detect_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
 }
@@ -2234,24 +1862,7 @@ impl core::fmt::Debug for UsbPwr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for UsbPwr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct UsbPwr {
-            vbus_en: bool,
-            vbus_en_override_en: bool,
-            vbus_detect: bool,
-            vbus_detect_override_en: bool,
-            overcurr_detect: bool,
-            overcurr_detect_en: bool,
-        }
-        let proxy = UsbPwr {
-            vbus_en: self.vbus_en(),
-            vbus_en_override_en: self.vbus_en_override_en(),
-            vbus_detect: self.vbus_detect(),
-            vbus_detect_override_en: self.vbus_detect_override_en(),
-            overcurr_detect: self.overcurr_detect(),
-            overcurr_detect_en: self.overcurr_detect_en(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "UsbPwr {{ vbus_en: {=bool:?}, vbus_en_override_en: {=bool:?}, vbus_detect: {=bool:?}, vbus_detect_override_en: {=bool:?}, overcurr_detect: {=bool:?}, overcurr_detect_en: {=bool:?} }}" , self . vbus_en () , self . vbus_en_override_en () , self . vbus_detect () , self . vbus_detect_override_en () , self . overcurr_detect () , self . overcurr_detect_en ())
     }
 }
 #[doc = "Note that most functions are driven directly from usb_fsls controller. This register allows more detailed control/status from the USB PHY. Useful for debug but not expected to be used in normal operation Use in conjunction with usbphy_direct_override register"]
@@ -2260,6 +1871,7 @@ impl defmt::Format for UsbPwr {
 pub struct UsbphyDirect(pub u32);
 impl UsbphyDirect {
     #[doc = "when dp_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
+    #[must_use]
     #[inline(always)]
     pub const fn dp_pullup_hisel(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -2267,10 +1879,11 @@ impl UsbphyDirect {
     }
     #[doc = "when dp_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
     #[inline(always)]
-    pub fn set_dp_pullup_hisel(&mut self, val: bool) {
+    pub const fn set_dp_pullup_hisel(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller"]
+    #[must_use]
     #[inline(always)]
     pub const fn dp_pullup_en(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -2278,10 +1891,11 @@ impl UsbphyDirect {
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller"]
     #[inline(always)]
-    pub fn set_dp_pullup_en(&mut self, val: bool) {
+    pub const fn set_dp_pullup_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPP"]
+    #[must_use]
     #[inline(always)]
     pub const fn dp_pulldn_en(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -2289,10 +1903,11 @@ impl UsbphyDirect {
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPP"]
     #[inline(always)]
-    pub fn set_dp_pulldn_en(&mut self, val: bool) {
+    pub const fn set_dp_pulldn_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "when dm_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
+    #[must_use]
     #[inline(always)]
     pub const fn dm_pullup_hisel(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -2300,10 +1915,11 @@ impl UsbphyDirect {
     }
     #[doc = "when dm_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
     #[inline(always)]
-    pub fn set_dm_pullup_hisel(&mut self, val: bool) {
+    pub const fn set_dm_pullup_hisel(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpu on DPM"]
+    #[must_use]
     #[inline(always)]
     pub const fn dm_pullup_en(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
@@ -2311,10 +1927,11 @@ impl UsbphyDirect {
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpu on DPM"]
     #[inline(always)]
-    pub fn set_dm_pullup_en(&mut self, val: bool) {
+    pub const fn set_dm_pullup_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPM"]
+    #[must_use]
     #[inline(always)]
     pub const fn dm_pulldn_en(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
@@ -2322,10 +1939,11 @@ impl UsbphyDirect {
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPM"]
     #[inline(always)]
-    pub fn set_dm_pulldn_en(&mut self, val: bool) {
+    pub const fn set_dm_pulldn_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, OE for DPP/DPM diff pair. 0 - DPP/DPM in Hi-Z state; 1 - DPP/DPM driving TX_SEMODE=1, OE for DPP only. 0 - DPP in Hi-Z state; 1 - DPP driving"]
+    #[must_use]
     #[inline(always)]
     pub const fn tx_dp_oe(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -2333,10 +1951,11 @@ impl UsbphyDirect {
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, OE for DPP/DPM diff pair. 0 - DPP/DPM in Hi-Z state; 1 - DPP/DPM driving TX_SEMODE=1, OE for DPP only. 0 - DPP in Hi-Z state; 1 - DPP driving"]
     #[inline(always)]
-    pub fn set_tx_dp_oe(&mut self, val: bool) {
+    pub const fn set_tx_dp_oe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored. TX_SEMODE=1, OE for DPM only. 0 - DPM in Hi-Z state; 1 - DPM driving"]
+    #[must_use]
     #[inline(always)]
     pub const fn tx_dm_oe(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
@@ -2344,10 +1963,11 @@ impl UsbphyDirect {
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored. TX_SEMODE=1, OE for DPM only. 0 - DPM in Hi-Z state; 1 - DPM driving"]
     #[inline(always)]
-    pub fn set_tx_dm_oe(&mut self, val: bool) {
+    pub const fn set_tx_dm_oe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Drives DPP/DPM diff pair. TX_DP_OE=1 to enable drive. DPP=TX_DP, DPM=~TX_DP TX_SEMODE=1, Drives DPP only. TX_DP_OE=1 to enable drive. DPP=TX_DP"]
+    #[must_use]
     #[inline(always)]
     pub const fn tx_dp(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
@@ -2355,10 +1975,11 @@ impl UsbphyDirect {
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Drives DPP/DPM diff pair. TX_DP_OE=1 to enable drive. DPP=TX_DP, DPM=~TX_DP TX_SEMODE=1, Drives DPP only. TX_DP_OE=1 to enable drive. DPP=TX_DP"]
     #[inline(always)]
-    pub fn set_tx_dp(&mut self, val: bool) {
+    pub const fn set_tx_dp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored TX_SEMODE=1, Drives DPM only. TX_DM_OE=1 to enable drive. DPM=TX_DM"]
+    #[must_use]
     #[inline(always)]
     pub const fn tx_dm(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
@@ -2366,46 +1987,51 @@ impl UsbphyDirect {
     }
     #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored TX_SEMODE=1, Drives DPM only. TX_DM_OE=1 to enable drive. DPM=TX_DM"]
     #[inline(always)]
-    pub fn set_tx_dm(&mut self, val: bool) {
+    pub const fn set_tx_dm(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn rx_pd(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_rx_pd(&mut self, val: bool) {
+    pub const fn set_rx_pd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn tx_pd(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_tx_pd(&mut self, val: bool) {
+    pub const fn set_tx_pd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn tx_fsslew(&self) -> bool {
         let val = (self.0 >> 14usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_tx_fsslew(&mut self, val: bool) {
+    pub const fn set_tx_fsslew(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn tx_diffmode(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_tx_diffmode(&mut self, val: bool) {
+    pub const fn set_tx_diffmode(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
     #[doc = "Status bit from USB PHY RX Diff data"]
+    #[must_use]
     #[inline(always)]
     pub const fn rx_dd(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
@@ -2413,10 +2039,11 @@ impl UsbphyDirect {
     }
     #[doc = "Status bit from USB PHY RX Diff data"]
     #[inline(always)]
-    pub fn set_rx_dd(&mut self, val: bool) {
+    pub const fn set_rx_dd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
     #[doc = "Status bit from USB PHY DPP pin state"]
+    #[must_use]
     #[inline(always)]
     pub const fn rx_dp(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
@@ -2424,10 +2051,11 @@ impl UsbphyDirect {
     }
     #[doc = "Status bit from USB PHY DPP pin state"]
     #[inline(always)]
-    pub fn set_rx_dp(&mut self, val: bool) {
+    pub const fn set_rx_dp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
     #[doc = "Status bit from USB PHY DPM pin state"]
+    #[must_use]
     #[inline(always)]
     pub const fn rx_dm(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
@@ -2435,10 +2063,11 @@ impl UsbphyDirect {
     }
     #[doc = "Status bit from USB PHY DPM pin state"]
     #[inline(always)]
-    pub fn set_rx_dm(&mut self, val: bool) {
+    pub const fn set_rx_dm(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
     #[doc = "Status bit from USB PHY"]
+    #[must_use]
     #[inline(always)]
     pub const fn dp_ovcn(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
@@ -2446,10 +2075,11 @@ impl UsbphyDirect {
     }
     #[doc = "Status bit from USB PHY"]
     #[inline(always)]
-    pub fn set_dp_ovcn(&mut self, val: bool) {
+    pub const fn set_dp_ovcn(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
     }
     #[doc = "Status bit from USB PHY"]
+    #[must_use]
     #[inline(always)]
     pub const fn dm_ovcn(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
@@ -2457,10 +2087,11 @@ impl UsbphyDirect {
     }
     #[doc = "Status bit from USB PHY"]
     #[inline(always)]
-    pub fn set_dm_ovcn(&mut self, val: bool) {
+    pub const fn set_dm_ovcn(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
     #[doc = "Status bit from USB PHY"]
+    #[must_use]
     #[inline(always)]
     pub const fn dp_ovv(&self) -> bool {
         let val = (self.0 >> 21usize) & 0x01;
@@ -2468,10 +2099,11 @@ impl UsbphyDirect {
     }
     #[doc = "Status bit from USB PHY"]
     #[inline(always)]
-    pub fn set_dp_ovv(&mut self, val: bool) {
+    pub const fn set_dp_ovv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
     }
     #[doc = "Status bit from USB PHY"]
+    #[must_use]
     #[inline(always)]
     pub const fn dm_ovv(&self) -> bool {
         let val = (self.0 >> 22usize) & 0x01;
@@ -2479,7 +2111,7 @@ impl UsbphyDirect {
     }
     #[doc = "Status bit from USB PHY"]
     #[inline(always)]
-    pub fn set_dm_ovv(&mut self, val: bool) {
+    pub const fn set_dm_ovv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
     }
 }
@@ -2519,79 +2151,35 @@ impl core::fmt::Debug for UsbphyDirect {
 #[cfg(feature = "defmt")]
 impl defmt::Format for UsbphyDirect {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct UsbphyDirect {
-            dp_pullup_hisel: bool,
-            dp_pullup_en: bool,
-            dp_pulldn_en: bool,
-            dm_pullup_hisel: bool,
-            dm_pullup_en: bool,
-            dm_pulldn_en: bool,
-            tx_dp_oe: bool,
-            tx_dm_oe: bool,
-            tx_dp: bool,
-            tx_dm: bool,
-            rx_pd: bool,
-            tx_pd: bool,
-            tx_fsslew: bool,
-            tx_diffmode: bool,
-            rx_dd: bool,
-            rx_dp: bool,
-            rx_dm: bool,
-            dp_ovcn: bool,
-            dm_ovcn: bool,
-            dp_ovv: bool,
-            dm_ovv: bool,
-        }
-        let proxy = UsbphyDirect {
-            dp_pullup_hisel: self.dp_pullup_hisel(),
-            dp_pullup_en: self.dp_pullup_en(),
-            dp_pulldn_en: self.dp_pulldn_en(),
-            dm_pullup_hisel: self.dm_pullup_hisel(),
-            dm_pullup_en: self.dm_pullup_en(),
-            dm_pulldn_en: self.dm_pulldn_en(),
-            tx_dp_oe: self.tx_dp_oe(),
-            tx_dm_oe: self.tx_dm_oe(),
-            tx_dp: self.tx_dp(),
-            tx_dm: self.tx_dm(),
-            rx_pd: self.rx_pd(),
-            tx_pd: self.tx_pd(),
-            tx_fsslew: self.tx_fsslew(),
-            tx_diffmode: self.tx_diffmode(),
-            rx_dd: self.rx_dd(),
-            rx_dp: self.rx_dp(),
-            rx_dm: self.rx_dm(),
-            dp_ovcn: self.dp_ovcn(),
-            dm_ovcn: self.dm_ovcn(),
-            dp_ovv: self.dp_ovv(),
-            dm_ovv: self.dm_ovv(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "UsbphyDirect {{ dp_pullup_hisel: {=bool:?}, dp_pullup_en: {=bool:?}, dp_pulldn_en: {=bool:?}, dm_pullup_hisel: {=bool:?}, dm_pullup_en: {=bool:?}, dm_pulldn_en: {=bool:?}, tx_dp_oe: {=bool:?}, tx_dm_oe: {=bool:?}, tx_dp: {=bool:?}, tx_dm: {=bool:?}, rx_pd: {=bool:?}, tx_pd: {=bool:?}, tx_fsslew: {=bool:?}, tx_diffmode: {=bool:?}, rx_dd: {=bool:?}, rx_dp: {=bool:?}, rx_dm: {=bool:?}, dp_ovcn: {=bool:?}, dm_ovcn: {=bool:?}, dp_ovv: {=bool:?}, dm_ovv: {=bool:?} }}" , self . dp_pullup_hisel () , self . dp_pullup_en () , self . dp_pulldn_en () , self . dm_pullup_hisel () , self . dm_pullup_en () , self . dm_pulldn_en () , self . tx_dp_oe () , self . tx_dm_oe () , self . tx_dp () , self . tx_dm () , self . rx_pd () , self . tx_pd () , self . tx_fsslew () , self . tx_diffmode () , self . rx_dd () , self . rx_dp () , self . rx_dm () , self . dp_ovcn () , self . dm_ovcn () , self . dp_ovv () , self . dm_ovv ())
     }
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct UsbphyDirectOverride(pub u32);
 impl UsbphyDirectOverride {
+    #[must_use]
     #[inline(always)]
     pub const fn dp_pullup_hisel_override_en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_dp_pullup_hisel_override_en(&mut self, val: bool) {
+    pub const fn set_dp_pullup_hisel_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn dm_pullup_hisel_override_en(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_dm_pullup_hisel_override_en(&mut self, val: bool) {
+    pub const fn set_dm_pullup_hisel_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[must_use]
     #[inline(always)]
     pub const fn dp_pullup_en_override_en(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -2599,10 +2187,11 @@ impl UsbphyDirectOverride {
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
-    pub fn set_dp_pullup_en_override_en(&mut self, val: bool) {
+    pub const fn set_dp_pullup_en_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[must_use]
     #[inline(always)]
     pub const fn dp_pulldn_en_override_en(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -2610,10 +2199,11 @@ impl UsbphyDirectOverride {
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
-    pub fn set_dp_pulldn_en_override_en(&mut self, val: bool) {
+    pub const fn set_dp_pulldn_en_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[must_use]
     #[inline(always)]
     pub const fn dm_pulldn_en_override_en(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -2621,10 +2211,11 @@ impl UsbphyDirectOverride {
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
-    pub fn set_dm_pulldn_en_override_en(&mut self, val: bool) {
+    pub const fn set_dm_pulldn_en_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[must_use]
     #[inline(always)]
     pub const fn tx_dp_oe_override_en(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
@@ -2632,10 +2223,11 @@ impl UsbphyDirectOverride {
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
-    pub fn set_tx_dp_oe_override_en(&mut self, val: bool) {
+    pub const fn set_tx_dp_oe_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[must_use]
     #[inline(always)]
     pub const fn tx_dm_oe_override_en(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
@@ -2643,10 +2235,11 @@ impl UsbphyDirectOverride {
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
-    pub fn set_tx_dm_oe_override_en(&mut self, val: bool) {
+    pub const fn set_tx_dm_oe_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[must_use]
     #[inline(always)]
     pub const fn tx_dp_override_en(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
@@ -2654,10 +2247,11 @@ impl UsbphyDirectOverride {
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
-    pub fn set_tx_dp_override_en(&mut self, val: bool) {
+    pub const fn set_tx_dp_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[must_use]
     #[inline(always)]
     pub const fn tx_dm_override_en(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -2665,52 +2259,57 @@ impl UsbphyDirectOverride {
     }
     #[doc = "Override default value or value driven from USB Controller to PHY"]
     #[inline(always)]
-    pub fn set_tx_dm_override_en(&mut self, val: bool) {
+    pub const fn set_tx_dm_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn rx_pd_override_en(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_rx_pd_override_en(&mut self, val: bool) {
+    pub const fn set_rx_pd_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn tx_pd_override_en(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_tx_pd_override_en(&mut self, val: bool) {
+    pub const fn set_tx_pd_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn tx_fsslew_override_en(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_tx_fsslew_override_en(&mut self, val: bool) {
+    pub const fn set_tx_fsslew_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn dm_pullup_override_en(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_dm_pullup_override_en(&mut self, val: bool) {
+    pub const fn set_dm_pullup_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn tx_diffmode_override_en(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_tx_diffmode_override_en(&mut self, val: bool) {
+    pub const fn set_tx_diffmode_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
 }
@@ -2749,40 +2348,7 @@ impl core::fmt::Debug for UsbphyDirectOverride {
 #[cfg(feature = "defmt")]
 impl defmt::Format for UsbphyDirectOverride {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct UsbphyDirectOverride {
-            dp_pullup_hisel_override_en: bool,
-            dm_pullup_hisel_override_en: bool,
-            dp_pullup_en_override_en: bool,
-            dp_pulldn_en_override_en: bool,
-            dm_pulldn_en_override_en: bool,
-            tx_dp_oe_override_en: bool,
-            tx_dm_oe_override_en: bool,
-            tx_dp_override_en: bool,
-            tx_dm_override_en: bool,
-            rx_pd_override_en: bool,
-            tx_pd_override_en: bool,
-            tx_fsslew_override_en: bool,
-            dm_pullup_override_en: bool,
-            tx_diffmode_override_en: bool,
-        }
-        let proxy = UsbphyDirectOverride {
-            dp_pullup_hisel_override_en: self.dp_pullup_hisel_override_en(),
-            dm_pullup_hisel_override_en: self.dm_pullup_hisel_override_en(),
-            dp_pullup_en_override_en: self.dp_pullup_en_override_en(),
-            dp_pulldn_en_override_en: self.dp_pulldn_en_override_en(),
-            dm_pulldn_en_override_en: self.dm_pulldn_en_override_en(),
-            tx_dp_oe_override_en: self.tx_dp_oe_override_en(),
-            tx_dm_oe_override_en: self.tx_dm_oe_override_en(),
-            tx_dp_override_en: self.tx_dp_override_en(),
-            tx_dm_override_en: self.tx_dm_override_en(),
-            rx_pd_override_en: self.rx_pd_override_en(),
-            tx_pd_override_en: self.tx_pd_override_en(),
-            tx_fsslew_override_en: self.tx_fsslew_override_en(),
-            dm_pullup_override_en: self.dm_pullup_override_en(),
-            tx_diffmode_override_en: self.tx_diffmode_override_en(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "UsbphyDirectOverride {{ dp_pullup_hisel_override_en: {=bool:?}, dm_pullup_hisel_override_en: {=bool:?}, dp_pullup_en_override_en: {=bool:?}, dp_pulldn_en_override_en: {=bool:?}, dm_pulldn_en_override_en: {=bool:?}, tx_dp_oe_override_en: {=bool:?}, tx_dm_oe_override_en: {=bool:?}, tx_dp_override_en: {=bool:?}, tx_dm_override_en: {=bool:?}, rx_pd_override_en: {=bool:?}, tx_pd_override_en: {=bool:?}, tx_fsslew_override_en: {=bool:?}, dm_pullup_override_en: {=bool:?}, tx_diffmode_override_en: {=bool:?} }}" , self . dp_pullup_hisel_override_en () , self . dm_pullup_hisel_override_en () , self . dp_pullup_en_override_en () , self . dp_pulldn_en_override_en () , self . dm_pulldn_en_override_en () , self . tx_dp_oe_override_en () , self . tx_dm_oe_override_en () , self . tx_dp_override_en () , self . tx_dm_override_en () , self . rx_pd_override_en () , self . tx_pd_override_en () , self . tx_fsslew_override_en () , self . dm_pullup_override_en () , self . tx_diffmode_override_en ())
     }
 }
 #[doc = "Note that most functions are driven directly from usb_fsls controller. This register allows more detailed control/status from the USB PHY. Useful for debug but not expected to be used in normal operation"]
@@ -2791,6 +2357,7 @@ impl defmt::Format for UsbphyDirectOverride {
 pub struct UsbphyTrim(pub u32);
 impl UsbphyTrim {
     #[doc = "Value to drive to USB PHY DP pulldown resistor trim control Experimental data suggests that the reset value will work, but this register allows adjustment if required"]
+    #[must_use]
     #[inline(always)]
     pub const fn dp_pulldn_trim(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x1f;
@@ -2798,10 +2365,11 @@ impl UsbphyTrim {
     }
     #[doc = "Value to drive to USB PHY DP pulldown resistor trim control Experimental data suggests that the reset value will work, but this register allows adjustment if required"]
     #[inline(always)]
-    pub fn set_dp_pulldn_trim(&mut self, val: u8) {
+    pub const fn set_dp_pulldn_trim(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
     }
     #[doc = "Value to drive to USB PHY DM pulldown resistor trim control Experimental data suggests that the reset value will work, but this register allows adjustment if required"]
+    #[must_use]
     #[inline(always)]
     pub const fn dm_pulldn_trim(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x1f;
@@ -2809,7 +2377,7 @@ impl UsbphyTrim {
     }
     #[doc = "Value to drive to USB PHY DM pulldown resistor trim control Experimental data suggests that the reset value will work, but this register allows adjustment if required"]
     #[inline(always)]
-    pub fn set_dm_pulldn_trim(&mut self, val: u8) {
+    pub const fn set_dm_pulldn_trim(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 8usize)) | (((val as u32) & 0x1f) << 8usize);
     }
 }
@@ -2830,15 +2398,11 @@ impl core::fmt::Debug for UsbphyTrim {
 #[cfg(feature = "defmt")]
 impl defmt::Format for UsbphyTrim {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct UsbphyTrim {
-            dp_pulldn_trim: u8,
-            dm_pulldn_trim: u8,
-        }
-        let proxy = UsbphyTrim {
-            dp_pulldn_trim: self.dp_pulldn_trim(),
-            dm_pulldn_trim: self.dm_pulldn_trim(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "UsbphyTrim {{ dp_pulldn_trim: {=u8:?}, dm_pulldn_trim: {=u8:?} }}",
+            self.dp_pulldn_trim(),
+            self.dm_pulldn_trim()
+        )
     }
 }

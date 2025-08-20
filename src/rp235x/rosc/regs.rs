@@ -3,13 +3,14 @@
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Count(pub u32);
 impl Count {
+    #[must_use]
     #[inline(always)]
     pub const fn count(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_count(&mut self, val: u16) {
+    pub const fn set_count(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
 }
@@ -29,14 +30,7 @@ impl core::fmt::Debug for Count {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Count {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Count {
-            count: u16,
-        }
-        let proxy = Count {
-            count: self.count(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "Count {{ count: {=u16:?} }}", self.count())
     }
 }
 #[doc = "Ring Oscillator control"]
@@ -45,6 +39,7 @@ impl defmt::Format for Count {
 pub struct Ctrl(pub u32);
 impl Ctrl {
     #[doc = "Controls the number of delay stages in the ROSC ring LOW uses stages 0 to 7 MEDIUM uses stages 2 to 7 HIGH uses stages 4 to 7 TOOHIGH uses stages 6 to 7 and should not be used because its frequency exceeds design specifications The clock output will not glitch when changing the range up one step at a time The clock output will glitch when changing the range down Note: the values here are gray coded which is why HIGH comes before TOOHIGH"]
+    #[must_use]
     #[inline(always)]
     pub const fn freq_range(&self) -> super::vals::FreqRange {
         let val = (self.0 >> 0usize) & 0x0fff;
@@ -52,10 +47,11 @@ impl Ctrl {
     }
     #[doc = "Controls the number of delay stages in the ROSC ring LOW uses stages 0 to 7 MEDIUM uses stages 2 to 7 HIGH uses stages 4 to 7 TOOHIGH uses stages 6 to 7 and should not be used because its frequency exceeds design specifications The clock output will not glitch when changing the range up one step at a time The clock output will glitch when changing the range down Note: the values here are gray coded which is why HIGH comes before TOOHIGH"]
     #[inline(always)]
-    pub fn set_freq_range(&mut self, val: super::vals::FreqRange) {
+    pub const fn set_freq_range(&mut self, val: super::vals::FreqRange) {
         self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.to_bits() as u32) & 0x0fff) << 0usize);
     }
     #[doc = "On power-up this field is initialised to ENABLE The system clock must be switched to another source before setting this field to DISABLE otherwise the chip will lock up The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
+    #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> super::vals::Enable {
         let val = (self.0 >> 12usize) & 0x0fff;
@@ -63,7 +59,7 @@ impl Ctrl {
     }
     #[doc = "On power-up this field is initialised to ENABLE The system clock must be switched to another source before setting this field to DISABLE otherwise the chip will lock up The 12-bit code is intended to give some protection against accidental writes. An invalid setting will enable the oscillator."]
     #[inline(always)]
-    pub fn set_enable(&mut self, val: super::vals::Enable) {
+    pub const fn set_enable(&mut self, val: super::vals::Enable) {
         self.0 = (self.0 & !(0x0fff << 12usize)) | (((val.to_bits() as u32) & 0x0fff) << 12usize);
     }
 }
@@ -84,16 +80,12 @@ impl core::fmt::Debug for Ctrl {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Ctrl {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Ctrl {
-            freq_range: super::vals::FreqRange,
-            enable: super::vals::Enable,
-        }
-        let proxy = Ctrl {
-            freq_range: self.freq_range(),
-            enable: self.enable(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Ctrl {{ freq_range: {:?}, enable: {:?} }}",
+            self.freq_range(),
+            self.enable()
+        )
     }
 }
 #[doc = "Controls the output divider"]
@@ -102,6 +94,7 @@ impl defmt::Format for Ctrl {
 pub struct Div(pub u32);
 impl Div {
     #[doc = "set to 0xaa00 + div where div = 0 divides by 128 div = 1-127 divides by div any other value sets div=128 this register resets to div=32"]
+    #[must_use]
     #[inline(always)]
     pub const fn div(&self) -> super::vals::Div {
         let val = (self.0 >> 0usize) & 0xffff;
@@ -109,7 +102,7 @@ impl Div {
     }
     #[doc = "set to 0xaa00 + div where div = 0 divides by 128 div = 1-127 divides by div any other value sets div=128 this register resets to div=32"]
     #[inline(always)]
-    pub fn set_div(&mut self, val: super::vals::Div) {
+    pub const fn set_div(&mut self, val: super::vals::Div) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val.to_bits() as u32) & 0xffff) << 0usize);
     }
 }
@@ -127,12 +120,7 @@ impl core::fmt::Debug for Div {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Div {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Div {
-            div: super::vals::Div,
-        }
-        let proxy = Div { div: self.div() };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "Div {{ div: {:?} }}", self.div())
     }
 }
 #[doc = "Ring Oscillator pause control"]
@@ -141,6 +129,7 @@ impl defmt::Format for Div {
 pub struct Dormant(pub u32);
 impl Dormant {
     #[doc = "This is used to save power by pausing the ROSC On power-up this field is initialised to WAKE An invalid write will also select WAKE Warning: setup the irq before selecting dormant mode"]
+    #[must_use]
     #[inline(always)]
     pub const fn dormant(&self) -> super::vals::Dormant {
         let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -148,7 +137,7 @@ impl Dormant {
     }
     #[doc = "This is used to save power by pausing the ROSC On power-up this field is initialised to WAKE An invalid write will also select WAKE Warning: setup the irq before selecting dormant mode"]
     #[inline(always)]
-    pub fn set_dormant(&mut self, val: super::vals::Dormant) {
+    pub const fn set_dormant(&mut self, val: super::vals::Dormant) {
         self.0 = (self.0 & !(0xffff_ffff << 0usize))
             | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
     }
@@ -169,14 +158,7 @@ impl core::fmt::Debug for Dormant {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Dormant {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Dormant {
-            dormant: super::vals::Dormant,
-        }
-        let proxy = Dormant {
-            dormant: self.dormant(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "Dormant {{ dormant: {:?} }}", self.dormant())
     }
 }
 #[doc = "The FREQA & FREQB registers control the frequency by controlling the drive strength of each stage The drive strength has 4 levels determined by the number of bits set Increasing the number of bits set increases the drive strength and increases the oscillation frequency 0 bits set is the default drive strength 1 bit set doubles the drive strength 2 bits set triples drive strength 3 bits set quadruples drive strength For frequency randomisation set both DS0_RANDOM=1 & DS1_RANDOM=1"]
@@ -185,6 +167,7 @@ impl defmt::Format for Dormant {
 pub struct Freqa(pub u32);
 impl Freqa {
     #[doc = "Stage 0 drive strength"]
+    #[must_use]
     #[inline(always)]
     pub const fn ds0(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x07;
@@ -192,10 +175,11 @@ impl Freqa {
     }
     #[doc = "Stage 0 drive strength"]
     #[inline(always)]
-    pub fn set_ds0(&mut self, val: u8) {
+    pub const fn set_ds0(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 0usize)) | (((val as u32) & 0x07) << 0usize);
     }
     #[doc = "Randomises the stage 0 drive strength"]
+    #[must_use]
     #[inline(always)]
     pub const fn ds0_random(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -203,10 +187,11 @@ impl Freqa {
     }
     #[doc = "Randomises the stage 0 drive strength"]
     #[inline(always)]
-    pub fn set_ds0_random(&mut self, val: bool) {
+    pub const fn set_ds0_random(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "Stage 1 drive strength"]
+    #[must_use]
     #[inline(always)]
     pub const fn ds1(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x07;
@@ -214,10 +199,11 @@ impl Freqa {
     }
     #[doc = "Stage 1 drive strength"]
     #[inline(always)]
-    pub fn set_ds1(&mut self, val: u8) {
+    pub const fn set_ds1(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 4usize)) | (((val as u32) & 0x07) << 4usize);
     }
     #[doc = "Randomises the stage 1 drive strength"]
+    #[must_use]
     #[inline(always)]
     pub const fn ds1_random(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
@@ -225,10 +211,11 @@ impl Freqa {
     }
     #[doc = "Randomises the stage 1 drive strength"]
     #[inline(always)]
-    pub fn set_ds1_random(&mut self, val: bool) {
+    pub const fn set_ds1_random(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
     #[doc = "Stage 2 drive strength"]
+    #[must_use]
     #[inline(always)]
     pub const fn ds2(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x07;
@@ -236,10 +223,11 @@ impl Freqa {
     }
     #[doc = "Stage 2 drive strength"]
     #[inline(always)]
-    pub fn set_ds2(&mut self, val: u8) {
+    pub const fn set_ds2(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 8usize)) | (((val as u32) & 0x07) << 8usize);
     }
     #[doc = "Stage 3 drive strength"]
+    #[must_use]
     #[inline(always)]
     pub const fn ds3(&self) -> u8 {
         let val = (self.0 >> 12usize) & 0x07;
@@ -247,10 +235,11 @@ impl Freqa {
     }
     #[doc = "Stage 3 drive strength"]
     #[inline(always)]
-    pub fn set_ds3(&mut self, val: u8) {
+    pub const fn set_ds3(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 12usize)) | (((val as u32) & 0x07) << 12usize);
     }
     #[doc = "Set to 0x9696 to apply the settings Any other value in this field will set all drive strengths to 0"]
+    #[must_use]
     #[inline(always)]
     pub const fn passwd(&self) -> super::vals::Passwd {
         let val = (self.0 >> 16usize) & 0xffff;
@@ -258,7 +247,7 @@ impl Freqa {
     }
     #[doc = "Set to 0x9696 to apply the settings Any other value in this field will set all drive strengths to 0"]
     #[inline(always)]
-    pub fn set_passwd(&mut self, val: super::vals::Passwd) {
+    pub const fn set_passwd(&mut self, val: super::vals::Passwd) {
         self.0 = (self.0 & !(0xffff << 16usize)) | (((val.to_bits() as u32) & 0xffff) << 16usize);
     }
 }
@@ -284,26 +273,7 @@ impl core::fmt::Debug for Freqa {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Freqa {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Freqa {
-            ds0: u8,
-            ds0_random: bool,
-            ds1: u8,
-            ds1_random: bool,
-            ds2: u8,
-            ds3: u8,
-            passwd: super::vals::Passwd,
-        }
-        let proxy = Freqa {
-            ds0: self.ds0(),
-            ds0_random: self.ds0_random(),
-            ds1: self.ds1(),
-            ds1_random: self.ds1_random(),
-            ds2: self.ds2(),
-            ds3: self.ds3(),
-            passwd: self.passwd(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Freqa {{ ds0: {=u8:?}, ds0_random: {=bool:?}, ds1: {=u8:?}, ds1_random: {=bool:?}, ds2: {=u8:?}, ds3: {=u8:?}, passwd: {:?} }}" , self . ds0 () , self . ds0_random () , self . ds1 () , self . ds1_random () , self . ds2 () , self . ds3 () , self . passwd ())
     }
 }
 #[doc = "For a detailed description see freqa register"]
@@ -312,6 +282,7 @@ impl defmt::Format for Freqa {
 pub struct Freqb(pub u32);
 impl Freqb {
     #[doc = "Stage 4 drive strength"]
+    #[must_use]
     #[inline(always)]
     pub const fn ds4(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x07;
@@ -319,10 +290,11 @@ impl Freqb {
     }
     #[doc = "Stage 4 drive strength"]
     #[inline(always)]
-    pub fn set_ds4(&mut self, val: u8) {
+    pub const fn set_ds4(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 0usize)) | (((val as u32) & 0x07) << 0usize);
     }
     #[doc = "Stage 5 drive strength"]
+    #[must_use]
     #[inline(always)]
     pub const fn ds5(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x07;
@@ -330,10 +302,11 @@ impl Freqb {
     }
     #[doc = "Stage 5 drive strength"]
     #[inline(always)]
-    pub fn set_ds5(&mut self, val: u8) {
+    pub const fn set_ds5(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 4usize)) | (((val as u32) & 0x07) << 4usize);
     }
     #[doc = "Stage 6 drive strength"]
+    #[must_use]
     #[inline(always)]
     pub const fn ds6(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x07;
@@ -341,10 +314,11 @@ impl Freqb {
     }
     #[doc = "Stage 6 drive strength"]
     #[inline(always)]
-    pub fn set_ds6(&mut self, val: u8) {
+    pub const fn set_ds6(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 8usize)) | (((val as u32) & 0x07) << 8usize);
     }
     #[doc = "Stage 7 drive strength"]
+    #[must_use]
     #[inline(always)]
     pub const fn ds7(&self) -> u8 {
         let val = (self.0 >> 12usize) & 0x07;
@@ -352,10 +326,11 @@ impl Freqb {
     }
     #[doc = "Stage 7 drive strength"]
     #[inline(always)]
-    pub fn set_ds7(&mut self, val: u8) {
+    pub const fn set_ds7(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 12usize)) | (((val as u32) & 0x07) << 12usize);
     }
     #[doc = "Set to 0x9696 to apply the settings Any other value in this field will set all drive strengths to 0"]
+    #[must_use]
     #[inline(always)]
     pub const fn passwd(&self) -> super::vals::Passwd {
         let val = (self.0 >> 16usize) & 0xffff;
@@ -363,7 +338,7 @@ impl Freqb {
     }
     #[doc = "Set to 0x9696 to apply the settings Any other value in this field will set all drive strengths to 0"]
     #[inline(always)]
-    pub fn set_passwd(&mut self, val: super::vals::Passwd) {
+    pub const fn set_passwd(&mut self, val: super::vals::Passwd) {
         self.0 = (self.0 & !(0xffff << 16usize)) | (((val.to_bits() as u32) & 0xffff) << 16usize);
     }
 }
@@ -387,22 +362,15 @@ impl core::fmt::Debug for Freqb {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Freqb {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Freqb {
-            ds4: u8,
-            ds5: u8,
-            ds6: u8,
-            ds7: u8,
-            passwd: super::vals::Passwd,
-        }
-        let proxy = Freqb {
-            ds4: self.ds4(),
-            ds5: self.ds5(),
-            ds6: self.ds6(),
-            ds7: self.ds7(),
-            passwd: self.passwd(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Freqb {{ ds4: {=u8:?}, ds5: {=u8:?}, ds6: {=u8:?}, ds7: {=u8:?}, passwd: {:?} }}",
+            self.ds4(),
+            self.ds5(),
+            self.ds6(),
+            self.ds7(),
+            self.passwd()
+        )
     }
 }
 #[doc = "Controls the phase shifted output"]
@@ -411,6 +379,7 @@ impl defmt::Format for Freqb {
 pub struct Phase(pub u32);
 impl Phase {
     #[doc = "phase shift the phase-shifted output by SHIFT input clocks this can be changed on-the-fly must be set to 0 before setting div=1"]
+    #[must_use]
     #[inline(always)]
     pub const fn shift(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x03;
@@ -418,10 +387,11 @@ impl Phase {
     }
     #[doc = "phase shift the phase-shifted output by SHIFT input clocks this can be changed on-the-fly must be set to 0 before setting div=1"]
     #[inline(always)]
-    pub fn set_shift(&mut self, val: u8) {
+    pub const fn set_shift(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 0usize)) | (((val as u32) & 0x03) << 0usize);
     }
     #[doc = "invert the phase-shifted output this is ignored when div=1"]
+    #[must_use]
     #[inline(always)]
     pub const fn flip(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -429,10 +399,11 @@ impl Phase {
     }
     #[doc = "invert the phase-shifted output this is ignored when div=1"]
     #[inline(always)]
-    pub fn set_flip(&mut self, val: bool) {
+    pub const fn set_flip(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "enable the phase-shifted output this can be changed on-the-fly"]
+    #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -440,10 +411,11 @@ impl Phase {
     }
     #[doc = "enable the phase-shifted output this can be changed on-the-fly"]
     #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
+    pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "set to 0xaa any other value enables the output with shift=0"]
+    #[must_use]
     #[inline(always)]
     pub const fn passwd(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0xff;
@@ -451,7 +423,7 @@ impl Phase {
     }
     #[doc = "set to 0xaa any other value enables the output with shift=0"]
     #[inline(always)]
-    pub fn set_passwd(&mut self, val: u8) {
+    pub const fn set_passwd(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 4usize)) | (((val as u32) & 0xff) << 4usize);
     }
 }
@@ -474,20 +446,14 @@ impl core::fmt::Debug for Phase {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Phase {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Phase {
-            shift: u8,
-            flip: bool,
-            enable: bool,
-            passwd: u8,
-        }
-        let proxy = Phase {
-            shift: self.shift(),
-            flip: self.flip(),
-            enable: self.enable(),
-            passwd: self.passwd(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Phase {{ shift: {=u8:?}, flip: {=bool:?}, enable: {=bool:?}, passwd: {=u8:?} }}",
+            self.shift(),
+            self.flip(),
+            self.enable(),
+            self.passwd()
+        )
     }
 }
 #[doc = "This just reads the state of the oscillator output so randomness is compromised if the ring oscillator is stopped or run at a harmonic of the bus frequency"]
@@ -495,13 +461,14 @@ impl defmt::Format for Phase {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Randombit(pub u32);
 impl Randombit {
+    #[must_use]
     #[inline(always)]
     pub const fn randombit(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_randombit(&mut self, val: bool) {
+    pub const fn set_randombit(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
 }
@@ -521,14 +488,7 @@ impl core::fmt::Debug for Randombit {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Randombit {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Randombit {
-            randombit: bool,
-        }
-        let proxy = Randombit {
-            randombit: self.randombit(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "Randombit {{ randombit: {=bool:?} }}", self.randombit())
     }
 }
 #[doc = "Ring Oscillator Status"]
@@ -537,6 +497,7 @@ impl defmt::Format for Randombit {
 pub struct Status(pub u32);
 impl Status {
     #[doc = "Oscillator is enabled but not necessarily running and stable this resets to 0 but transitions to 1 during chip startup"]
+    #[must_use]
     #[inline(always)]
     pub const fn enabled(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
@@ -544,10 +505,11 @@ impl Status {
     }
     #[doc = "Oscillator is enabled but not necessarily running and stable this resets to 0 but transitions to 1 during chip startup"]
     #[inline(always)]
-    pub fn set_enabled(&mut self, val: bool) {
+    pub const fn set_enabled(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
     #[doc = "post-divider is running this resets to 0 but transitions to 1 during chip startup"]
+    #[must_use]
     #[inline(always)]
     pub const fn div_running(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
@@ -555,10 +517,11 @@ impl Status {
     }
     #[doc = "post-divider is running this resets to 0 but transitions to 1 during chip startup"]
     #[inline(always)]
-    pub fn set_div_running(&mut self, val: bool) {
+    pub const fn set_div_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
     #[doc = "An invalid value has been written to CTRL_ENABLE or CTRL_FREQ_RANGE or FREQA or FREQB or DIV or PHASE or DORMANT"]
+    #[must_use]
     #[inline(always)]
     pub const fn badwrite(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
@@ -566,10 +529,11 @@ impl Status {
     }
     #[doc = "An invalid value has been written to CTRL_ENABLE or CTRL_FREQ_RANGE or FREQA or FREQB or DIV or PHASE or DORMANT"]
     #[inline(always)]
-    pub fn set_badwrite(&mut self, val: bool) {
+    pub const fn set_badwrite(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
     #[doc = "Oscillator is running and stable"]
+    #[must_use]
     #[inline(always)]
     pub const fn stable(&self) -> bool {
         let val = (self.0 >> 31usize) & 0x01;
@@ -577,7 +541,7 @@ impl Status {
     }
     #[doc = "Oscillator is running and stable"]
     #[inline(always)]
-    pub fn set_stable(&mut self, val: bool) {
+    pub const fn set_stable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
     }
 }
@@ -600,19 +564,6 @@ impl core::fmt::Debug for Status {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Status {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Status {
-            enabled: bool,
-            div_running: bool,
-            badwrite: bool,
-            stable: bool,
-        }
-        let proxy = Status {
-            enabled: self.enabled(),
-            div_running: self.div_running(),
-            badwrite: self.badwrite(),
-            stable: self.stable(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Status {{ enabled: {=bool:?}, div_running: {=bool:?}, badwrite: {=bool:?}, stable: {=bool:?} }}" , self . enabled () , self . div_running () , self . badwrite () , self . stable ())
     }
 }

@@ -4,6 +4,7 @@
 pub struct Uartcr(pub u32);
 impl Uartcr {
     #[doc = "UART enable: 0 = UART is disabled. If the UART is disabled in the middle of transmission or reception, it completes the current character before stopping. 1 = the UART is enabled. Data transmission and reception occurs for either UART signals or SIR signals depending on the setting of the SIREN bit."]
+    #[must_use]
     #[inline(always)]
     pub const fn uarten(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -11,10 +12,11 @@ impl Uartcr {
     }
     #[doc = "UART enable: 0 = UART is disabled. If the UART is disabled in the middle of transmission or reception, it completes the current character before stopping. 1 = the UART is enabled. Data transmission and reception occurs for either UART signals or SIR signals depending on the setting of the SIREN bit."]
     #[inline(always)]
-    pub fn set_uarten(&mut self, val: bool) {
+    pub const fn set_uarten(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "SIR enable: 0 = IrDA SIR ENDEC is disabled. nSIROUT remains LOW (no light pulse generated), and signal transitions on SIRIN have no effect. 1 = IrDA SIR ENDEC is enabled. Data is transmitted and received on nSIROUT and SIRIN. UARTTXD remains HIGH, in the marking state. Signal transitions on UARTRXD or modem status inputs have no effect. This bit has no effect if the UARTEN bit disables the UART."]
+    #[must_use]
     #[inline(always)]
     pub const fn siren(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -22,10 +24,11 @@ impl Uartcr {
     }
     #[doc = "SIR enable: 0 = IrDA SIR ENDEC is disabled. nSIROUT remains LOW (no light pulse generated), and signal transitions on SIRIN have no effect. 1 = IrDA SIR ENDEC is enabled. Data is transmitted and received on nSIROUT and SIRIN. UARTTXD remains HIGH, in the marking state. Signal transitions on UARTRXD or modem status inputs have no effect. This bit has no effect if the UARTEN bit disables the UART."]
     #[inline(always)]
-    pub fn set_siren(&mut self, val: bool) {
+    pub const fn set_siren(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "SIR low-power IrDA mode. This bit selects the IrDA encoding mode. If this bit is cleared to 0, low-level bits are transmitted as an active high pulse with a width of 3 / 16th of the bit period. If this bit is set to 1, low-level bits are transmitted with a pulse width that is 3 times the period of the IrLPBaud16 input signal, regardless of the selected bit rate. Setting this bit uses less power, but might reduce transmission distances."]
+    #[must_use]
     #[inline(always)]
     pub const fn sirlp(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -33,10 +36,11 @@ impl Uartcr {
     }
     #[doc = "SIR low-power IrDA mode. This bit selects the IrDA encoding mode. If this bit is cleared to 0, low-level bits are transmitted as an active high pulse with a width of 3 / 16th of the bit period. If this bit is set to 1, low-level bits are transmitted with a pulse width that is 3 times the period of the IrLPBaud16 input signal, regardless of the selected bit rate. Setting this bit uses less power, but might reduce transmission distances."]
     #[inline(always)]
-    pub fn set_sirlp(&mut self, val: bool) {
+    pub const fn set_sirlp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "Loopback enable. If this bit is set to 1 and the SIREN bit is set to 1 and the SIRTEST bit in the Test Control Register, UARTTCR is set to 1, then the nSIROUT path is inverted, and fed through to the SIRIN path. The SIRTEST bit in the test register must be set to 1 to override the normal half-duplex SIR operation. This must be the requirement for accessing the test registers during normal operation, and SIRTEST must be cleared to 0 when loopback testing is finished. This feature reduces the amount of external coupling required during system test. If this bit is set to 1, and the SIRTEST bit is set to 0, the UARTTXD path is fed through to the UARTRXD path. In either SIR mode or UART mode, when this bit is set, the modem outputs are also fed through to the modem inputs. This bit is cleared to 0 on reset, to disable loopback."]
+    #[must_use]
     #[inline(always)]
     pub const fn lbe(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
@@ -44,10 +48,11 @@ impl Uartcr {
     }
     #[doc = "Loopback enable. If this bit is set to 1 and the SIREN bit is set to 1 and the SIRTEST bit in the Test Control Register, UARTTCR is set to 1, then the nSIROUT path is inverted, and fed through to the SIRIN path. The SIRTEST bit in the test register must be set to 1 to override the normal half-duplex SIR operation. This must be the requirement for accessing the test registers during normal operation, and SIRTEST must be cleared to 0 when loopback testing is finished. This feature reduces the amount of external coupling required during system test. If this bit is set to 1, and the SIRTEST bit is set to 0, the UARTTXD path is fed through to the UARTRXD path. In either SIR mode or UART mode, when this bit is set, the modem outputs are also fed through to the modem inputs. This bit is cleared to 0 on reset, to disable loopback."]
     #[inline(always)]
-    pub fn set_lbe(&mut self, val: bool) {
+    pub const fn set_lbe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
     #[doc = "Transmit enable. If this bit is set to 1, the transmit section of the UART is enabled. Data transmission occurs for either UART signals, or SIR signals depending on the setting of the SIREN bit. When the UART is disabled in the middle of transmission, it completes the current character before stopping."]
+    #[must_use]
     #[inline(always)]
     pub const fn txe(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -55,10 +60,11 @@ impl Uartcr {
     }
     #[doc = "Transmit enable. If this bit is set to 1, the transmit section of the UART is enabled. Data transmission occurs for either UART signals, or SIR signals depending on the setting of the SIREN bit. When the UART is disabled in the middle of transmission, it completes the current character before stopping."]
     #[inline(always)]
-    pub fn set_txe(&mut self, val: bool) {
+    pub const fn set_txe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
     #[doc = "Receive enable. If this bit is set to 1, the receive section of the UART is enabled. Data reception occurs for either UART signals or SIR signals depending on the setting of the SIREN bit. When the UART is disabled in the middle of reception, it completes the current character before stopping."]
+    #[must_use]
     #[inline(always)]
     pub const fn rxe(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
@@ -66,10 +72,11 @@ impl Uartcr {
     }
     #[doc = "Receive enable. If this bit is set to 1, the receive section of the UART is enabled. Data reception occurs for either UART signals or SIR signals depending on the setting of the SIREN bit. When the UART is disabled in the middle of reception, it completes the current character before stopping."]
     #[inline(always)]
-    pub fn set_rxe(&mut self, val: bool) {
+    pub const fn set_rxe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
     #[doc = "Data transmit ready. This bit is the complement of the UART data transmit ready, nUARTDTR, modem status output. That is, when the bit is programmed to a 1 then nUARTDTR is LOW."]
+    #[must_use]
     #[inline(always)]
     pub const fn dtr(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
@@ -77,10 +84,11 @@ impl Uartcr {
     }
     #[doc = "Data transmit ready. This bit is the complement of the UART data transmit ready, nUARTDTR, modem status output. That is, when the bit is programmed to a 1 then nUARTDTR is LOW."]
     #[inline(always)]
-    pub fn set_dtr(&mut self, val: bool) {
+    pub const fn set_dtr(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
     #[doc = "Request to send. This bit is the complement of the UART request to send, nUARTRTS, modem status output. That is, when the bit is programmed to a 1 then nUARTRTS is LOW."]
+    #[must_use]
     #[inline(always)]
     pub const fn rts(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
@@ -88,10 +96,11 @@ impl Uartcr {
     }
     #[doc = "Request to send. This bit is the complement of the UART request to send, nUARTRTS, modem status output. That is, when the bit is programmed to a 1 then nUARTRTS is LOW."]
     #[inline(always)]
-    pub fn set_rts(&mut self, val: bool) {
+    pub const fn set_rts(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
     #[doc = "This bit is the complement of the UART Out1 (nUARTOut1) modem status output. That is, when the bit is programmed to a 1 the output is 0. For DTE this can be used as Data Carrier Detect (DCD)."]
+    #[must_use]
     #[inline(always)]
     pub const fn out1(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
@@ -99,10 +108,11 @@ impl Uartcr {
     }
     #[doc = "This bit is the complement of the UART Out1 (nUARTOut1) modem status output. That is, when the bit is programmed to a 1 the output is 0. For DTE this can be used as Data Carrier Detect (DCD)."]
     #[inline(always)]
-    pub fn set_out1(&mut self, val: bool) {
+    pub const fn set_out1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
     #[doc = "This bit is the complement of the UART Out2 (nUARTOut2) modem status output. That is, when the bit is programmed to a 1, the output is 0. For DTE this can be used as Ring Indicator (RI)."]
+    #[must_use]
     #[inline(always)]
     pub const fn out2(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
@@ -110,10 +120,11 @@ impl Uartcr {
     }
     #[doc = "This bit is the complement of the UART Out2 (nUARTOut2) modem status output. That is, when the bit is programmed to a 1, the output is 0. For DTE this can be used as Ring Indicator (RI)."]
     #[inline(always)]
-    pub fn set_out2(&mut self, val: bool) {
+    pub const fn set_out2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
     #[doc = "RTS hardware flow control enable. If this bit is set to 1, RTS hardware flow control is enabled. Data is only requested when there is space in the receive FIFO for it to be received."]
+    #[must_use]
     #[inline(always)]
     pub const fn rtsen(&self) -> bool {
         let val = (self.0 >> 14usize) & 0x01;
@@ -121,10 +132,11 @@ impl Uartcr {
     }
     #[doc = "RTS hardware flow control enable. If this bit is set to 1, RTS hardware flow control is enabled. Data is only requested when there is space in the receive FIFO for it to be received."]
     #[inline(always)]
-    pub fn set_rtsen(&mut self, val: bool) {
+    pub const fn set_rtsen(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
     }
     #[doc = "CTS hardware flow control enable. If this bit is set to 1, CTS hardware flow control is enabled. Data is only transmitted when the nUARTCTS signal is asserted."]
+    #[must_use]
     #[inline(always)]
     pub const fn ctsen(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
@@ -132,7 +144,7 @@ impl Uartcr {
     }
     #[doc = "CTS hardware flow control enable. If this bit is set to 1, CTS hardware flow control is enabled. Data is only transmitted when the nUARTCTS signal is asserted."]
     #[inline(always)]
-    pub fn set_ctsen(&mut self, val: bool) {
+    pub const fn set_ctsen(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
 }
@@ -163,36 +175,7 @@ impl core::fmt::Debug for Uartcr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartcr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartcr {
-            uarten: bool,
-            siren: bool,
-            sirlp: bool,
-            lbe: bool,
-            txe: bool,
-            rxe: bool,
-            dtr: bool,
-            rts: bool,
-            out1: bool,
-            out2: bool,
-            rtsen: bool,
-            ctsen: bool,
-        }
-        let proxy = Uartcr {
-            uarten: self.uarten(),
-            siren: self.siren(),
-            sirlp: self.sirlp(),
-            lbe: self.lbe(),
-            txe: self.txe(),
-            rxe: self.rxe(),
-            dtr: self.dtr(),
-            rts: self.rts(),
-            out1: self.out1(),
-            out2: self.out2(),
-            rtsen: self.rtsen(),
-            ctsen: self.ctsen(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Uartcr {{ uarten: {=bool:?}, siren: {=bool:?}, sirlp: {=bool:?}, lbe: {=bool:?}, txe: {=bool:?}, rxe: {=bool:?}, dtr: {=bool:?}, rts: {=bool:?}, out1: {=bool:?}, out2: {=bool:?}, rtsen: {=bool:?}, ctsen: {=bool:?} }}" , self . uarten () , self . siren () , self . sirlp () , self . lbe () , self . txe () , self . rxe () , self . dtr () , self . rts () , self . out1 () , self . out2 () , self . rtsen () , self . ctsen ())
     }
 }
 #[doc = "DMA Control Register, UARTDMACR"]
@@ -201,6 +184,7 @@ impl defmt::Format for Uartcr {
 pub struct Uartdmacr(pub u32);
 impl Uartdmacr {
     #[doc = "Receive DMA enable. If this bit is set to 1, DMA for the receive FIFO is enabled."]
+    #[must_use]
     #[inline(always)]
     pub const fn rxdmae(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -208,10 +192,11 @@ impl Uartdmacr {
     }
     #[doc = "Receive DMA enable. If this bit is set to 1, DMA for the receive FIFO is enabled."]
     #[inline(always)]
-    pub fn set_rxdmae(&mut self, val: bool) {
+    pub const fn set_rxdmae(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Transmit DMA enable. If this bit is set to 1, DMA for the transmit FIFO is enabled."]
+    #[must_use]
     #[inline(always)]
     pub const fn txdmae(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -219,10 +204,11 @@ impl Uartdmacr {
     }
     #[doc = "Transmit DMA enable. If this bit is set to 1, DMA for the transmit FIFO is enabled."]
     #[inline(always)]
-    pub fn set_txdmae(&mut self, val: bool) {
+    pub const fn set_txdmae(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "DMA on error. If this bit is set to 1, the DMA receive request outputs, UARTRXDMASREQ or UARTRXDMABREQ, are disabled when the UART error interrupt is asserted."]
+    #[must_use]
     #[inline(always)]
     pub const fn dmaonerr(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -230,7 +216,7 @@ impl Uartdmacr {
     }
     #[doc = "DMA on error. If this bit is set to 1, the DMA receive request outputs, UARTRXDMASREQ or UARTRXDMABREQ, are disabled when the UART error interrupt is asserted."]
     #[inline(always)]
-    pub fn set_dmaonerr(&mut self, val: bool) {
+    pub const fn set_dmaonerr(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
 }
@@ -252,18 +238,13 @@ impl core::fmt::Debug for Uartdmacr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartdmacr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartdmacr {
-            rxdmae: bool,
-            txdmae: bool,
-            dmaonerr: bool,
-        }
-        let proxy = Uartdmacr {
-            rxdmae: self.rxdmae(),
-            txdmae: self.txdmae(),
-            dmaonerr: self.dmaonerr(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Uartdmacr {{ rxdmae: {=bool:?}, txdmae: {=bool:?}, dmaonerr: {=bool:?} }}",
+            self.rxdmae(),
+            self.txdmae(),
+            self.dmaonerr()
+        )
     }
 }
 #[doc = "Data Register, UARTDR"]
@@ -272,6 +253,7 @@ impl defmt::Format for Uartdmacr {
 pub struct Uartdr(pub u32);
 impl Uartdr {
     #[doc = "Receive (read) data character. Transmit (write) data character."]
+    #[must_use]
     #[inline(always)]
     pub const fn data(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
@@ -279,10 +261,11 @@ impl Uartdr {
     }
     #[doc = "Receive (read) data character. Transmit (write) data character."]
     #[inline(always)]
-    pub fn set_data(&mut self, val: u8) {
+    pub const fn set_data(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
     #[doc = "Framing error. When set to 1, it indicates that the received character did not have a valid stop bit (a valid stop bit is 1). In FIFO mode, this error is associated with the character at the top of the FIFO."]
+    #[must_use]
     #[inline(always)]
     pub const fn fe(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -290,10 +273,11 @@ impl Uartdr {
     }
     #[doc = "Framing error. When set to 1, it indicates that the received character did not have a valid stop bit (a valid stop bit is 1). In FIFO mode, this error is associated with the character at the top of the FIFO."]
     #[inline(always)]
-    pub fn set_fe(&mut self, val: bool) {
+    pub const fn set_fe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
     #[doc = "Parity error. When set to 1, it indicates that the parity of the received data character does not match the parity that the EPS and SPS bits in the Line Control Register, UARTLCR_H. In FIFO mode, this error is associated with the character at the top of the FIFO."]
+    #[must_use]
     #[inline(always)]
     pub const fn pe(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
@@ -301,10 +285,11 @@ impl Uartdr {
     }
     #[doc = "Parity error. When set to 1, it indicates that the parity of the received data character does not match the parity that the EPS and SPS bits in the Line Control Register, UARTLCR_H. In FIFO mode, this error is associated with the character at the top of the FIFO."]
     #[inline(always)]
-    pub fn set_pe(&mut self, val: bool) {
+    pub const fn set_pe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
     #[doc = "Break error. This bit is set to 1 if a break condition was detected, indicating that the received data input was held LOW for longer than a full-word transmission time (defined as start, data, parity and stop bits). In FIFO mode, this error is associated with the character at the top of the FIFO. When a break occurs, only one 0 character is loaded into the FIFO. The next character is only enabled after the receive data input goes to a 1 (marking state), and the next valid start bit is received."]
+    #[must_use]
     #[inline(always)]
     pub const fn be(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
@@ -312,10 +297,11 @@ impl Uartdr {
     }
     #[doc = "Break error. This bit is set to 1 if a break condition was detected, indicating that the received data input was held LOW for longer than a full-word transmission time (defined as start, data, parity and stop bits). In FIFO mode, this error is associated with the character at the top of the FIFO. When a break occurs, only one 0 character is loaded into the FIFO. The next character is only enabled after the receive data input goes to a 1 (marking state), and the next valid start bit is received."]
     #[inline(always)]
-    pub fn set_be(&mut self, val: bool) {
+    pub const fn set_be(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
     #[doc = "Overrun error. This bit is set to 1 if data is received and the receive FIFO is already full. This is cleared to 0 once there is an empty space in the FIFO and a new character can be written to it."]
+    #[must_use]
     #[inline(always)]
     pub const fn oe(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
@@ -323,7 +309,7 @@ impl Uartdr {
     }
     #[doc = "Overrun error. This bit is set to 1 if data is received and the receive FIFO is already full. This is cleared to 0 once there is an empty space in the FIFO and a new character can be written to it."]
     #[inline(always)]
-    pub fn set_oe(&mut self, val: bool) {
+    pub const fn set_oe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
@@ -347,22 +333,7 @@ impl core::fmt::Debug for Uartdr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartdr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartdr {
-            data: u8,
-            fe: bool,
-            pe: bool,
-            be: bool,
-            oe: bool,
-        }
-        let proxy = Uartdr {
-            data: self.data(),
-            fe: self.fe(),
-            pe: self.pe(),
-            be: self.be(),
-            oe: self.oe(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Uartdr {{ data: {=u8:?}, fe: {=bool:?}, pe: {=bool:?}, be: {=bool:?}, oe: {=bool:?} }}" , self . data () , self . fe () , self . pe () , self . be () , self . oe ())
     }
 }
 #[doc = "Fractional Baud Rate Register, UARTFBRD"]
@@ -371,6 +342,7 @@ impl defmt::Format for Uartdr {
 pub struct Uartfbrd(pub u32);
 impl Uartfbrd {
     #[doc = "The fractional baud rate divisor. These bits are cleared to 0 on reset."]
+    #[must_use]
     #[inline(always)]
     pub const fn baud_divfrac(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x3f;
@@ -378,7 +350,7 @@ impl Uartfbrd {
     }
     #[doc = "The fractional baud rate divisor. These bits are cleared to 0 on reset."]
     #[inline(always)]
-    pub fn set_baud_divfrac(&mut self, val: u8) {
+    pub const fn set_baud_divfrac(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
     }
 }
@@ -398,14 +370,11 @@ impl core::fmt::Debug for Uartfbrd {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartfbrd {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartfbrd {
-            baud_divfrac: u8,
-        }
-        let proxy = Uartfbrd {
-            baud_divfrac: self.baud_divfrac(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Uartfbrd {{ baud_divfrac: {=u8:?} }}",
+            self.baud_divfrac()
+        )
     }
 }
 #[doc = "Flag Register, UARTFR"]
@@ -414,6 +383,7 @@ impl defmt::Format for Uartfbrd {
 pub struct Uartfr(pub u32);
 impl Uartfr {
     #[doc = "Clear to send. This bit is the complement of the UART clear to send, nUARTCTS, modem status input. That is, the bit is 1 when nUARTCTS is LOW."]
+    #[must_use]
     #[inline(always)]
     pub const fn cts(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -421,10 +391,11 @@ impl Uartfr {
     }
     #[doc = "Clear to send. This bit is the complement of the UART clear to send, nUARTCTS, modem status input. That is, the bit is 1 when nUARTCTS is LOW."]
     #[inline(always)]
-    pub fn set_cts(&mut self, val: bool) {
+    pub const fn set_cts(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Data set ready. This bit is the complement of the UART data set ready, nUARTDSR, modem status input. That is, the bit is 1 when nUARTDSR is LOW."]
+    #[must_use]
     #[inline(always)]
     pub const fn dsr(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -432,10 +403,11 @@ impl Uartfr {
     }
     #[doc = "Data set ready. This bit is the complement of the UART data set ready, nUARTDSR, modem status input. That is, the bit is 1 when nUARTDSR is LOW."]
     #[inline(always)]
-    pub fn set_dsr(&mut self, val: bool) {
+    pub const fn set_dsr(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "Data carrier detect. This bit is the complement of the UART data carrier detect, nUARTDCD, modem status input. That is, the bit is 1 when nUARTDCD is LOW."]
+    #[must_use]
     #[inline(always)]
     pub const fn dcd(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -443,10 +415,11 @@ impl Uartfr {
     }
     #[doc = "Data carrier detect. This bit is the complement of the UART data carrier detect, nUARTDCD, modem status input. That is, the bit is 1 when nUARTDCD is LOW."]
     #[inline(always)]
-    pub fn set_dcd(&mut self, val: bool) {
+    pub const fn set_dcd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "UART busy. If this bit is set to 1, the UART is busy transmitting data. This bit remains set until the complete byte, including all the stop bits, has been sent from the shift register. This bit is set as soon as the transmit FIFO becomes non-empty, regardless of whether the UART is enabled or not."]
+    #[must_use]
     #[inline(always)]
     pub const fn busy(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -454,10 +427,11 @@ impl Uartfr {
     }
     #[doc = "UART busy. If this bit is set to 1, the UART is busy transmitting data. This bit remains set until the complete byte, including all the stop bits, has been sent from the shift register. This bit is set as soon as the transmit FIFO becomes non-empty, regardless of whether the UART is enabled or not."]
     #[inline(always)]
-    pub fn set_busy(&mut self, val: bool) {
+    pub const fn set_busy(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "Receive FIFO empty. The meaning of this bit depends on the state of the FEN bit in the UARTLCR_H Register. If the FIFO is disabled, this bit is set when the receive holding register is empty. If the FIFO is enabled, the RXFE bit is set when the receive FIFO is empty."]
+    #[must_use]
     #[inline(always)]
     pub const fn rxfe(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -465,10 +439,11 @@ impl Uartfr {
     }
     #[doc = "Receive FIFO empty. The meaning of this bit depends on the state of the FEN bit in the UARTLCR_H Register. If the FIFO is disabled, this bit is set when the receive holding register is empty. If the FIFO is enabled, the RXFE bit is set when the receive FIFO is empty."]
     #[inline(always)]
-    pub fn set_rxfe(&mut self, val: bool) {
+    pub const fn set_rxfe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "Transmit FIFO full. The meaning of this bit depends on the state of the FEN bit in the UARTLCR_H Register. If the FIFO is disabled, this bit is set when the transmit holding register is full. If the FIFO is enabled, the TXFF bit is set when the transmit FIFO is full."]
+    #[must_use]
     #[inline(always)]
     pub const fn txff(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
@@ -476,10 +451,11 @@ impl Uartfr {
     }
     #[doc = "Transmit FIFO full. The meaning of this bit depends on the state of the FEN bit in the UARTLCR_H Register. If the FIFO is disabled, this bit is set when the transmit holding register is full. If the FIFO is enabled, the TXFF bit is set when the transmit FIFO is full."]
     #[inline(always)]
-    pub fn set_txff(&mut self, val: bool) {
+    pub const fn set_txff(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
     #[doc = "Receive FIFO full. The meaning of this bit depends on the state of the FEN bit in the UARTLCR_H Register. If the FIFO is disabled, this bit is set when the receive holding register is full. If the FIFO is enabled, the RXFF bit is set when the receive FIFO is full."]
+    #[must_use]
     #[inline(always)]
     pub const fn rxff(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
@@ -487,10 +463,11 @@ impl Uartfr {
     }
     #[doc = "Receive FIFO full. The meaning of this bit depends on the state of the FEN bit in the UARTLCR_H Register. If the FIFO is disabled, this bit is set when the receive holding register is full. If the FIFO is enabled, the RXFF bit is set when the receive FIFO is full."]
     #[inline(always)]
-    pub fn set_rxff(&mut self, val: bool) {
+    pub const fn set_rxff(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
     #[doc = "Transmit FIFO empty. The meaning of this bit depends on the state of the FEN bit in the Line Control Register, UARTLCR_H. If the FIFO is disabled, this bit is set when the transmit holding register is empty. If the FIFO is enabled, the TXFE bit is set when the transmit FIFO is empty. This bit does not indicate if there is data in the transmit shift register."]
+    #[must_use]
     #[inline(always)]
     pub const fn txfe(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
@@ -498,10 +475,11 @@ impl Uartfr {
     }
     #[doc = "Transmit FIFO empty. The meaning of this bit depends on the state of the FEN bit in the Line Control Register, UARTLCR_H. If the FIFO is disabled, this bit is set when the transmit holding register is empty. If the FIFO is enabled, the TXFE bit is set when the transmit FIFO is empty. This bit does not indicate if there is data in the transmit shift register."]
     #[inline(always)]
-    pub fn set_txfe(&mut self, val: bool) {
+    pub const fn set_txfe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
     #[doc = "Ring indicator. This bit is the complement of the UART ring indicator, nUARTRI, modem status input. That is, the bit is 1 when nUARTRI is LOW."]
+    #[must_use]
     #[inline(always)]
     pub const fn ri(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -509,7 +487,7 @@ impl Uartfr {
     }
     #[doc = "Ring indicator. This bit is the complement of the UART ring indicator, nUARTRI, modem status input. That is, the bit is 1 when nUARTRI is LOW."]
     #[inline(always)]
-    pub fn set_ri(&mut self, val: bool) {
+    pub const fn set_ri(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
 }
@@ -537,30 +515,7 @@ impl core::fmt::Debug for Uartfr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartfr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartfr {
-            cts: bool,
-            dsr: bool,
-            dcd: bool,
-            busy: bool,
-            rxfe: bool,
-            txff: bool,
-            rxff: bool,
-            txfe: bool,
-            ri: bool,
-        }
-        let proxy = Uartfr {
-            cts: self.cts(),
-            dsr: self.dsr(),
-            dcd: self.dcd(),
-            busy: self.busy(),
-            rxfe: self.rxfe(),
-            txff: self.txff(),
-            rxff: self.rxff(),
-            txfe: self.txfe(),
-            ri: self.ri(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Uartfr {{ cts: {=bool:?}, dsr: {=bool:?}, dcd: {=bool:?}, busy: {=bool:?}, rxfe: {=bool:?}, txff: {=bool:?}, rxff: {=bool:?}, txfe: {=bool:?}, ri: {=bool:?} }}" , self . cts () , self . dsr () , self . dcd () , self . busy () , self . rxfe () , self . txff () , self . rxff () , self . txfe () , self . ri ())
     }
 }
 #[doc = "Integer Baud Rate Register, UARTIBRD"]
@@ -569,6 +524,7 @@ impl defmt::Format for Uartfr {
 pub struct Uartibrd(pub u32);
 impl Uartibrd {
     #[doc = "The integer baud rate divisor. These bits are cleared to 0 on reset."]
+    #[must_use]
     #[inline(always)]
     pub const fn baud_divint(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
@@ -576,7 +532,7 @@ impl Uartibrd {
     }
     #[doc = "The integer baud rate divisor. These bits are cleared to 0 on reset."]
     #[inline(always)]
-    pub fn set_baud_divint(&mut self, val: u16) {
+    pub const fn set_baud_divint(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
 }
@@ -596,14 +552,11 @@ impl core::fmt::Debug for Uartibrd {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartibrd {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartibrd {
-            baud_divint: u16,
-        }
-        let proxy = Uartibrd {
-            baud_divint: self.baud_divint(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Uartibrd {{ baud_divint: {=u16:?} }}",
+            self.baud_divint()
+        )
     }
 }
 #[doc = "Interrupt Clear Register, UARTICR"]
@@ -612,6 +565,7 @@ impl defmt::Format for Uartibrd {
 pub struct Uarticr(pub u32);
 impl Uarticr {
     #[doc = "nUARTRI modem interrupt clear. Clears the UARTRIINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn rimic(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -619,10 +573,11 @@ impl Uarticr {
     }
     #[doc = "nUARTRI modem interrupt clear. Clears the UARTRIINTR interrupt."]
     #[inline(always)]
-    pub fn set_rimic(&mut self, val: bool) {
+    pub const fn set_rimic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "nUARTCTS modem interrupt clear. Clears the UARTCTSINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn ctsmic(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -630,10 +585,11 @@ impl Uarticr {
     }
     #[doc = "nUARTCTS modem interrupt clear. Clears the UARTCTSINTR interrupt."]
     #[inline(always)]
-    pub fn set_ctsmic(&mut self, val: bool) {
+    pub const fn set_ctsmic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "nUARTDCD modem interrupt clear. Clears the UARTDCDINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn dcdmic(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -641,10 +597,11 @@ impl Uarticr {
     }
     #[doc = "nUARTDCD modem interrupt clear. Clears the UARTDCDINTR interrupt."]
     #[inline(always)]
-    pub fn set_dcdmic(&mut self, val: bool) {
+    pub const fn set_dcdmic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "nUARTDSR modem interrupt clear. Clears the UARTDSRINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn dsrmic(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -652,10 +609,11 @@ impl Uarticr {
     }
     #[doc = "nUARTDSR modem interrupt clear. Clears the UARTDSRINTR interrupt."]
     #[inline(always)]
-    pub fn set_dsrmic(&mut self, val: bool) {
+    pub const fn set_dsrmic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "Receive interrupt clear. Clears the UARTRXINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn rxic(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -663,10 +621,11 @@ impl Uarticr {
     }
     #[doc = "Receive interrupt clear. Clears the UARTRXINTR interrupt."]
     #[inline(always)]
-    pub fn set_rxic(&mut self, val: bool) {
+    pub const fn set_rxic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "Transmit interrupt clear. Clears the UARTTXINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn txic(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
@@ -674,10 +633,11 @@ impl Uarticr {
     }
     #[doc = "Transmit interrupt clear. Clears the UARTTXINTR interrupt."]
     #[inline(always)]
-    pub fn set_txic(&mut self, val: bool) {
+    pub const fn set_txic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
     #[doc = "Receive timeout interrupt clear. Clears the UARTRTINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn rtic(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
@@ -685,10 +645,11 @@ impl Uarticr {
     }
     #[doc = "Receive timeout interrupt clear. Clears the UARTRTINTR interrupt."]
     #[inline(always)]
-    pub fn set_rtic(&mut self, val: bool) {
+    pub const fn set_rtic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
     #[doc = "Framing error interrupt clear. Clears the UARTFEINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn feic(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
@@ -696,10 +657,11 @@ impl Uarticr {
     }
     #[doc = "Framing error interrupt clear. Clears the UARTFEINTR interrupt."]
     #[inline(always)]
-    pub fn set_feic(&mut self, val: bool) {
+    pub const fn set_feic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
     #[doc = "Parity error interrupt clear. Clears the UARTPEINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn peic(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -707,10 +669,11 @@ impl Uarticr {
     }
     #[doc = "Parity error interrupt clear. Clears the UARTPEINTR interrupt."]
     #[inline(always)]
-    pub fn set_peic(&mut self, val: bool) {
+    pub const fn set_peic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
     #[doc = "Break error interrupt clear. Clears the UARTBEINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn beic(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
@@ -718,10 +681,11 @@ impl Uarticr {
     }
     #[doc = "Break error interrupt clear. Clears the UARTBEINTR interrupt."]
     #[inline(always)]
-    pub fn set_beic(&mut self, val: bool) {
+    pub const fn set_beic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
     #[doc = "Overrun error interrupt clear. Clears the UARTOEINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn oeic(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
@@ -729,7 +693,7 @@ impl Uarticr {
     }
     #[doc = "Overrun error interrupt clear. Clears the UARTOEINTR interrupt."]
     #[inline(always)]
-    pub fn set_oeic(&mut self, val: bool) {
+    pub const fn set_oeic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
 }
@@ -759,34 +723,7 @@ impl core::fmt::Debug for Uarticr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uarticr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uarticr {
-            rimic: bool,
-            ctsmic: bool,
-            dcdmic: bool,
-            dsrmic: bool,
-            rxic: bool,
-            txic: bool,
-            rtic: bool,
-            feic: bool,
-            peic: bool,
-            beic: bool,
-            oeic: bool,
-        }
-        let proxy = Uarticr {
-            rimic: self.rimic(),
-            ctsmic: self.ctsmic(),
-            dcdmic: self.dcdmic(),
-            dsrmic: self.dsrmic(),
-            rxic: self.rxic(),
-            txic: self.txic(),
-            rtic: self.rtic(),
-            feic: self.feic(),
-            peic: self.peic(),
-            beic: self.beic(),
-            oeic: self.oeic(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Uarticr {{ rimic: {=bool:?}, ctsmic: {=bool:?}, dcdmic: {=bool:?}, dsrmic: {=bool:?}, rxic: {=bool:?}, txic: {=bool:?}, rtic: {=bool:?}, feic: {=bool:?}, peic: {=bool:?}, beic: {=bool:?}, oeic: {=bool:?} }}" , self . rimic () , self . ctsmic () , self . dcdmic () , self . dsrmic () , self . rxic () , self . txic () , self . rtic () , self . feic () , self . peic () , self . beic () , self . oeic ())
     }
 }
 #[doc = "Interrupt FIFO Level Select Register, UARTIFLS"]
@@ -795,6 +732,7 @@ impl defmt::Format for Uarticr {
 pub struct Uartifls(pub u32);
 impl Uartifls {
     #[doc = "Transmit interrupt FIFO level select. The trigger points for the transmit interrupt are as follows: b000 = Transmit FIFO becomes <= 1 / 8 full b001 = Transmit FIFO becomes <= 1 / 4 full b010 = Transmit FIFO becomes <= 1 / 2 full b011 = Transmit FIFO becomes <= 3 / 4 full b100 = Transmit FIFO becomes <= 7 / 8 full b101-b111 = reserved."]
+    #[must_use]
     #[inline(always)]
     pub const fn txiflsel(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x07;
@@ -802,10 +740,11 @@ impl Uartifls {
     }
     #[doc = "Transmit interrupt FIFO level select. The trigger points for the transmit interrupt are as follows: b000 = Transmit FIFO becomes <= 1 / 8 full b001 = Transmit FIFO becomes <= 1 / 4 full b010 = Transmit FIFO becomes <= 1 / 2 full b011 = Transmit FIFO becomes <= 3 / 4 full b100 = Transmit FIFO becomes <= 7 / 8 full b101-b111 = reserved."]
     #[inline(always)]
-    pub fn set_txiflsel(&mut self, val: u8) {
+    pub const fn set_txiflsel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 0usize)) | (((val as u32) & 0x07) << 0usize);
     }
     #[doc = "Receive interrupt FIFO level select. The trigger points for the receive interrupt are as follows: b000 = Receive FIFO becomes >= 1 / 8 full b001 = Receive FIFO becomes >= 1 / 4 full b010 = Receive FIFO becomes >= 1 / 2 full b011 = Receive FIFO becomes >= 3 / 4 full b100 = Receive FIFO becomes >= 7 / 8 full b101-b111 = reserved."]
+    #[must_use]
     #[inline(always)]
     pub const fn rxiflsel(&self) -> u8 {
         let val = (self.0 >> 3usize) & 0x07;
@@ -813,7 +752,7 @@ impl Uartifls {
     }
     #[doc = "Receive interrupt FIFO level select. The trigger points for the receive interrupt are as follows: b000 = Receive FIFO becomes >= 1 / 8 full b001 = Receive FIFO becomes >= 1 / 4 full b010 = Receive FIFO becomes >= 1 / 2 full b011 = Receive FIFO becomes >= 3 / 4 full b100 = Receive FIFO becomes >= 7 / 8 full b101-b111 = reserved."]
     #[inline(always)]
-    pub fn set_rxiflsel(&mut self, val: u8) {
+    pub const fn set_rxiflsel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 3usize)) | (((val as u32) & 0x07) << 3usize);
     }
 }
@@ -834,16 +773,12 @@ impl core::fmt::Debug for Uartifls {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartifls {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartifls {
-            txiflsel: u8,
-            rxiflsel: u8,
-        }
-        let proxy = Uartifls {
-            txiflsel: self.txiflsel(),
-            rxiflsel: self.rxiflsel(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Uartifls {{ txiflsel: {=u8:?}, rxiflsel: {=u8:?} }}",
+            self.txiflsel(),
+            self.rxiflsel()
+        )
     }
 }
 #[doc = "IrDA Low-Power Counter Register, UARTILPR"]
@@ -852,6 +787,7 @@ impl defmt::Format for Uartifls {
 pub struct Uartilpr(pub u32);
 impl Uartilpr {
     #[doc = "8-bit low-power divisor value. These bits are cleared to 0 at reset."]
+    #[must_use]
     #[inline(always)]
     pub const fn ilpdvsr(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
@@ -859,7 +795,7 @@ impl Uartilpr {
     }
     #[doc = "8-bit low-power divisor value. These bits are cleared to 0 at reset."]
     #[inline(always)]
-    pub fn set_ilpdvsr(&mut self, val: u8) {
+    pub const fn set_ilpdvsr(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
 }
@@ -879,14 +815,7 @@ impl core::fmt::Debug for Uartilpr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartilpr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartilpr {
-            ilpdvsr: u8,
-        }
-        let proxy = Uartilpr {
-            ilpdvsr: self.ilpdvsr(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "Uartilpr {{ ilpdvsr: {=u8:?} }}", self.ilpdvsr())
     }
 }
 #[doc = "Interrupt Mask Set/Clear Register, UARTIMSC"]
@@ -895,6 +824,7 @@ impl defmt::Format for Uartilpr {
 pub struct Uartimsc(pub u32);
 impl Uartimsc {
     #[doc = "nUARTRI modem interrupt mask. A read returns the current mask for the UARTRIINTR interrupt. On a write of 1, the mask of the UARTRIINTR interrupt is set. A write of 0 clears the mask."]
+    #[must_use]
     #[inline(always)]
     pub const fn rimim(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -902,10 +832,11 @@ impl Uartimsc {
     }
     #[doc = "nUARTRI modem interrupt mask. A read returns the current mask for the UARTRIINTR interrupt. On a write of 1, the mask of the UARTRIINTR interrupt is set. A write of 0 clears the mask."]
     #[inline(always)]
-    pub fn set_rimim(&mut self, val: bool) {
+    pub const fn set_rimim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "nUARTCTS modem interrupt mask. A read returns the current mask for the UARTCTSINTR interrupt. On a write of 1, the mask of the UARTCTSINTR interrupt is set. A write of 0 clears the mask."]
+    #[must_use]
     #[inline(always)]
     pub const fn ctsmim(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -913,10 +844,11 @@ impl Uartimsc {
     }
     #[doc = "nUARTCTS modem interrupt mask. A read returns the current mask for the UARTCTSINTR interrupt. On a write of 1, the mask of the UARTCTSINTR interrupt is set. A write of 0 clears the mask."]
     #[inline(always)]
-    pub fn set_ctsmim(&mut self, val: bool) {
+    pub const fn set_ctsmim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "nUARTDCD modem interrupt mask. A read returns the current mask for the UARTDCDINTR interrupt. On a write of 1, the mask of the UARTDCDINTR interrupt is set. A write of 0 clears the mask."]
+    #[must_use]
     #[inline(always)]
     pub const fn dcdmim(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -924,10 +856,11 @@ impl Uartimsc {
     }
     #[doc = "nUARTDCD modem interrupt mask. A read returns the current mask for the UARTDCDINTR interrupt. On a write of 1, the mask of the UARTDCDINTR interrupt is set. A write of 0 clears the mask."]
     #[inline(always)]
-    pub fn set_dcdmim(&mut self, val: bool) {
+    pub const fn set_dcdmim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "nUARTDSR modem interrupt mask. A read returns the current mask for the UARTDSRINTR interrupt. On a write of 1, the mask of the UARTDSRINTR interrupt is set. A write of 0 clears the mask."]
+    #[must_use]
     #[inline(always)]
     pub const fn dsrmim(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -935,10 +868,11 @@ impl Uartimsc {
     }
     #[doc = "nUARTDSR modem interrupt mask. A read returns the current mask for the UARTDSRINTR interrupt. On a write of 1, the mask of the UARTDSRINTR interrupt is set. A write of 0 clears the mask."]
     #[inline(always)]
-    pub fn set_dsrmim(&mut self, val: bool) {
+    pub const fn set_dsrmim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "Receive interrupt mask. A read returns the current mask for the UARTRXINTR interrupt. On a write of 1, the mask of the UARTRXINTR interrupt is set. A write of 0 clears the mask."]
+    #[must_use]
     #[inline(always)]
     pub const fn rxim(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -946,10 +880,11 @@ impl Uartimsc {
     }
     #[doc = "Receive interrupt mask. A read returns the current mask for the UARTRXINTR interrupt. On a write of 1, the mask of the UARTRXINTR interrupt is set. A write of 0 clears the mask."]
     #[inline(always)]
-    pub fn set_rxim(&mut self, val: bool) {
+    pub const fn set_rxim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "Transmit interrupt mask. A read returns the current mask for the UARTTXINTR interrupt. On a write of 1, the mask of the UARTTXINTR interrupt is set. A write of 0 clears the mask."]
+    #[must_use]
     #[inline(always)]
     pub const fn txim(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
@@ -957,10 +892,11 @@ impl Uartimsc {
     }
     #[doc = "Transmit interrupt mask. A read returns the current mask for the UARTTXINTR interrupt. On a write of 1, the mask of the UARTTXINTR interrupt is set. A write of 0 clears the mask."]
     #[inline(always)]
-    pub fn set_txim(&mut self, val: bool) {
+    pub const fn set_txim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
     #[doc = "Receive timeout interrupt mask. A read returns the current mask for the UARTRTINTR interrupt. On a write of 1, the mask of the UARTRTINTR interrupt is set. A write of 0 clears the mask."]
+    #[must_use]
     #[inline(always)]
     pub const fn rtim(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
@@ -968,10 +904,11 @@ impl Uartimsc {
     }
     #[doc = "Receive timeout interrupt mask. A read returns the current mask for the UARTRTINTR interrupt. On a write of 1, the mask of the UARTRTINTR interrupt is set. A write of 0 clears the mask."]
     #[inline(always)]
-    pub fn set_rtim(&mut self, val: bool) {
+    pub const fn set_rtim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
     #[doc = "Framing error interrupt mask. A read returns the current mask for the UARTFEINTR interrupt. On a write of 1, the mask of the UARTFEINTR interrupt is set. A write of 0 clears the mask."]
+    #[must_use]
     #[inline(always)]
     pub const fn feim(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
@@ -979,10 +916,11 @@ impl Uartimsc {
     }
     #[doc = "Framing error interrupt mask. A read returns the current mask for the UARTFEINTR interrupt. On a write of 1, the mask of the UARTFEINTR interrupt is set. A write of 0 clears the mask."]
     #[inline(always)]
-    pub fn set_feim(&mut self, val: bool) {
+    pub const fn set_feim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
     #[doc = "Parity error interrupt mask. A read returns the current mask for the UARTPEINTR interrupt. On a write of 1, the mask of the UARTPEINTR interrupt is set. A write of 0 clears the mask."]
+    #[must_use]
     #[inline(always)]
     pub const fn peim(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -990,10 +928,11 @@ impl Uartimsc {
     }
     #[doc = "Parity error interrupt mask. A read returns the current mask for the UARTPEINTR interrupt. On a write of 1, the mask of the UARTPEINTR interrupt is set. A write of 0 clears the mask."]
     #[inline(always)]
-    pub fn set_peim(&mut self, val: bool) {
+    pub const fn set_peim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
     #[doc = "Break error interrupt mask. A read returns the current mask for the UARTBEINTR interrupt. On a write of 1, the mask of the UARTBEINTR interrupt is set. A write of 0 clears the mask."]
+    #[must_use]
     #[inline(always)]
     pub const fn beim(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
@@ -1001,10 +940,11 @@ impl Uartimsc {
     }
     #[doc = "Break error interrupt mask. A read returns the current mask for the UARTBEINTR interrupt. On a write of 1, the mask of the UARTBEINTR interrupt is set. A write of 0 clears the mask."]
     #[inline(always)]
-    pub fn set_beim(&mut self, val: bool) {
+    pub const fn set_beim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
     #[doc = "Overrun error interrupt mask. A read returns the current mask for the UARTOEINTR interrupt. On a write of 1, the mask of the UARTOEINTR interrupt is set. A write of 0 clears the mask."]
+    #[must_use]
     #[inline(always)]
     pub const fn oeim(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
@@ -1012,7 +952,7 @@ impl Uartimsc {
     }
     #[doc = "Overrun error interrupt mask. A read returns the current mask for the UARTOEINTR interrupt. On a write of 1, the mask of the UARTOEINTR interrupt is set. A write of 0 clears the mask."]
     #[inline(always)]
-    pub fn set_oeim(&mut self, val: bool) {
+    pub const fn set_oeim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
 }
@@ -1042,34 +982,7 @@ impl core::fmt::Debug for Uartimsc {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartimsc {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartimsc {
-            rimim: bool,
-            ctsmim: bool,
-            dcdmim: bool,
-            dsrmim: bool,
-            rxim: bool,
-            txim: bool,
-            rtim: bool,
-            feim: bool,
-            peim: bool,
-            beim: bool,
-            oeim: bool,
-        }
-        let proxy = Uartimsc {
-            rimim: self.rimim(),
-            ctsmim: self.ctsmim(),
-            dcdmim: self.dcdmim(),
-            dsrmim: self.dsrmim(),
-            rxim: self.rxim(),
-            txim: self.txim(),
-            rtim: self.rtim(),
-            feim: self.feim(),
-            peim: self.peim(),
-            beim: self.beim(),
-            oeim: self.oeim(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Uartimsc {{ rimim: {=bool:?}, ctsmim: {=bool:?}, dcdmim: {=bool:?}, dsrmim: {=bool:?}, rxim: {=bool:?}, txim: {=bool:?}, rtim: {=bool:?}, feim: {=bool:?}, peim: {=bool:?}, beim: {=bool:?}, oeim: {=bool:?} }}" , self . rimim () , self . ctsmim () , self . dcdmim () , self . dsrmim () , self . rxim () , self . txim () , self . rtim () , self . feim () , self . peim () , self . beim () , self . oeim ())
     }
 }
 #[doc = "Line Control Register, UARTLCR_H"]
@@ -1078,6 +991,7 @@ impl defmt::Format for Uartimsc {
 pub struct UartlcrH(pub u32);
 impl UartlcrH {
     #[doc = "Send break. If this bit is set to 1, a low-level is continually output on the UARTTXD output, after completing transmission of the current character. For the proper execution of the break command, the software must set this bit for at least two complete frames. For normal use, this bit must be cleared to 0."]
+    #[must_use]
     #[inline(always)]
     pub const fn brk(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -1085,10 +999,11 @@ impl UartlcrH {
     }
     #[doc = "Send break. If this bit is set to 1, a low-level is continually output on the UARTTXD output, after completing transmission of the current character. For the proper execution of the break command, the software must set this bit for at least two complete frames. For normal use, this bit must be cleared to 0."]
     #[inline(always)]
-    pub fn set_brk(&mut self, val: bool) {
+    pub const fn set_brk(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Parity enable: 0 = parity is disabled and no parity bit added to the data frame 1 = parity checking and generation is enabled."]
+    #[must_use]
     #[inline(always)]
     pub const fn pen(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -1096,10 +1011,11 @@ impl UartlcrH {
     }
     #[doc = "Parity enable: 0 = parity is disabled and no parity bit added to the data frame 1 = parity checking and generation is enabled."]
     #[inline(always)]
-    pub fn set_pen(&mut self, val: bool) {
+    pub const fn set_pen(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "Even parity select. Controls the type of parity the UART uses during transmission and reception: 0 = odd parity. The UART generates or checks for an odd number of 1s in the data and parity bits. 1 = even parity. The UART generates or checks for an even number of 1s in the data and parity bits. This bit has no effect when the PEN bit disables parity checking and generation."]
+    #[must_use]
     #[inline(always)]
     pub const fn eps(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -1107,10 +1023,11 @@ impl UartlcrH {
     }
     #[doc = "Even parity select. Controls the type of parity the UART uses during transmission and reception: 0 = odd parity. The UART generates or checks for an odd number of 1s in the data and parity bits. 1 = even parity. The UART generates or checks for an even number of 1s in the data and parity bits. This bit has no effect when the PEN bit disables parity checking and generation."]
     #[inline(always)]
-    pub fn set_eps(&mut self, val: bool) {
+    pub const fn set_eps(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "Two stop bits select. If this bit is set to 1, two stop bits are transmitted at the end of the frame. The receive logic does not check for two stop bits being received."]
+    #[must_use]
     #[inline(always)]
     pub const fn stp2(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -1118,10 +1035,11 @@ impl UartlcrH {
     }
     #[doc = "Two stop bits select. If this bit is set to 1, two stop bits are transmitted at the end of the frame. The receive logic does not check for two stop bits being received."]
     #[inline(always)]
-    pub fn set_stp2(&mut self, val: bool) {
+    pub const fn set_stp2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "Enable FIFOs: 0 = FIFOs are disabled (character mode) that is, the FIFOs become 1-byte-deep holding registers 1 = transmit and receive FIFO buffers are enabled (FIFO mode)."]
+    #[must_use]
     #[inline(always)]
     pub const fn fen(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -1129,10 +1047,11 @@ impl UartlcrH {
     }
     #[doc = "Enable FIFOs: 0 = FIFOs are disabled (character mode) that is, the FIFOs become 1-byte-deep holding registers 1 = transmit and receive FIFO buffers are enabled (FIFO mode)."]
     #[inline(always)]
-    pub fn set_fen(&mut self, val: bool) {
+    pub const fn set_fen(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "Word length. These bits indicate the number of data bits transmitted or received in a frame as follows: b11 = 8 bits b10 = 7 bits b01 = 6 bits b00 = 5 bits."]
+    #[must_use]
     #[inline(always)]
     pub const fn wlen(&self) -> u8 {
         let val = (self.0 >> 5usize) & 0x03;
@@ -1140,10 +1059,11 @@ impl UartlcrH {
     }
     #[doc = "Word length. These bits indicate the number of data bits transmitted or received in a frame as follows: b11 = 8 bits b10 = 7 bits b01 = 6 bits b00 = 5 bits."]
     #[inline(always)]
-    pub fn set_wlen(&mut self, val: u8) {
+    pub const fn set_wlen(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 5usize)) | (((val as u32) & 0x03) << 5usize);
     }
     #[doc = "Stick parity select. 0 = stick parity is disabled 1 = either: * if the EPS bit is 0 then the parity bit is transmitted and checked as a 1 * if the EPS bit is 1 then the parity bit is transmitted and checked as a 0. This bit has no effect when the PEN bit disables parity checking and generation."]
+    #[must_use]
     #[inline(always)]
     pub const fn sps(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
@@ -1151,7 +1071,7 @@ impl UartlcrH {
     }
     #[doc = "Stick parity select. 0 = stick parity is disabled 1 = either: * if the EPS bit is 0 then the parity bit is transmitted and checked as a 1 * if the EPS bit is 1 then the parity bit is transmitted and checked as a 0. This bit has no effect when the PEN bit disables parity checking and generation."]
     #[inline(always)]
-    pub fn set_sps(&mut self, val: bool) {
+    pub const fn set_sps(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
 }
@@ -1177,26 +1097,7 @@ impl core::fmt::Debug for UartlcrH {
 #[cfg(feature = "defmt")]
 impl defmt::Format for UartlcrH {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct UartlcrH {
-            brk: bool,
-            pen: bool,
-            eps: bool,
-            stp2: bool,
-            fen: bool,
-            wlen: u8,
-            sps: bool,
-        }
-        let proxy = UartlcrH {
-            brk: self.brk(),
-            pen: self.pen(),
-            eps: self.eps(),
-            stp2: self.stp2(),
-            fen: self.fen(),
-            wlen: self.wlen(),
-            sps: self.sps(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "UartlcrH {{ brk: {=bool:?}, pen: {=bool:?}, eps: {=bool:?}, stp2: {=bool:?}, fen: {=bool:?}, wlen: {=u8:?}, sps: {=bool:?} }}" , self . brk () , self . pen () , self . eps () , self . stp2 () , self . fen () , self . wlen () , self . sps ())
     }
 }
 #[doc = "Masked Interrupt Status Register, UARTMIS"]
@@ -1205,6 +1106,7 @@ impl defmt::Format for UartlcrH {
 pub struct Uartmis(pub u32);
 impl Uartmis {
     #[doc = "nUARTRI modem masked interrupt status. Returns the masked interrupt state of the UARTRIINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn rimmis(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -1212,10 +1114,11 @@ impl Uartmis {
     }
     #[doc = "nUARTRI modem masked interrupt status. Returns the masked interrupt state of the UARTRIINTR interrupt."]
     #[inline(always)]
-    pub fn set_rimmis(&mut self, val: bool) {
+    pub const fn set_rimmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "nUARTCTS modem masked interrupt status. Returns the masked interrupt state of the UARTCTSINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn ctsmmis(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -1223,10 +1126,11 @@ impl Uartmis {
     }
     #[doc = "nUARTCTS modem masked interrupt status. Returns the masked interrupt state of the UARTCTSINTR interrupt."]
     #[inline(always)]
-    pub fn set_ctsmmis(&mut self, val: bool) {
+    pub const fn set_ctsmmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "nUARTDCD modem masked interrupt status. Returns the masked interrupt state of the UARTDCDINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn dcdmmis(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -1234,10 +1138,11 @@ impl Uartmis {
     }
     #[doc = "nUARTDCD modem masked interrupt status. Returns the masked interrupt state of the UARTDCDINTR interrupt."]
     #[inline(always)]
-    pub fn set_dcdmmis(&mut self, val: bool) {
+    pub const fn set_dcdmmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "nUARTDSR modem masked interrupt status. Returns the masked interrupt state of the UARTDSRINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn dsrmmis(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -1245,10 +1150,11 @@ impl Uartmis {
     }
     #[doc = "nUARTDSR modem masked interrupt status. Returns the masked interrupt state of the UARTDSRINTR interrupt."]
     #[inline(always)]
-    pub fn set_dsrmmis(&mut self, val: bool) {
+    pub const fn set_dsrmmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "Receive masked interrupt status. Returns the masked interrupt state of the UARTRXINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn rxmis(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -1256,10 +1162,11 @@ impl Uartmis {
     }
     #[doc = "Receive masked interrupt status. Returns the masked interrupt state of the UARTRXINTR interrupt."]
     #[inline(always)]
-    pub fn set_rxmis(&mut self, val: bool) {
+    pub const fn set_rxmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "Transmit masked interrupt status. Returns the masked interrupt state of the UARTTXINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn txmis(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
@@ -1267,10 +1174,11 @@ impl Uartmis {
     }
     #[doc = "Transmit masked interrupt status. Returns the masked interrupt state of the UARTTXINTR interrupt."]
     #[inline(always)]
-    pub fn set_txmis(&mut self, val: bool) {
+    pub const fn set_txmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
     #[doc = "Receive timeout masked interrupt status. Returns the masked interrupt state of the UARTRTINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn rtmis(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
@@ -1278,10 +1186,11 @@ impl Uartmis {
     }
     #[doc = "Receive timeout masked interrupt status. Returns the masked interrupt state of the UARTRTINTR interrupt."]
     #[inline(always)]
-    pub fn set_rtmis(&mut self, val: bool) {
+    pub const fn set_rtmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
     #[doc = "Framing error masked interrupt status. Returns the masked interrupt state of the UARTFEINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn femis(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
@@ -1289,10 +1198,11 @@ impl Uartmis {
     }
     #[doc = "Framing error masked interrupt status. Returns the masked interrupt state of the UARTFEINTR interrupt."]
     #[inline(always)]
-    pub fn set_femis(&mut self, val: bool) {
+    pub const fn set_femis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
     #[doc = "Parity error masked interrupt status. Returns the masked interrupt state of the UARTPEINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn pemis(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -1300,10 +1210,11 @@ impl Uartmis {
     }
     #[doc = "Parity error masked interrupt status. Returns the masked interrupt state of the UARTPEINTR interrupt."]
     #[inline(always)]
-    pub fn set_pemis(&mut self, val: bool) {
+    pub const fn set_pemis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
     #[doc = "Break error masked interrupt status. Returns the masked interrupt state of the UARTBEINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn bemis(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
@@ -1311,10 +1222,11 @@ impl Uartmis {
     }
     #[doc = "Break error masked interrupt status. Returns the masked interrupt state of the UARTBEINTR interrupt."]
     #[inline(always)]
-    pub fn set_bemis(&mut self, val: bool) {
+    pub const fn set_bemis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
     #[doc = "Overrun error masked interrupt status. Returns the masked interrupt state of the UARTOEINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn oemis(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
@@ -1322,7 +1234,7 @@ impl Uartmis {
     }
     #[doc = "Overrun error masked interrupt status. Returns the masked interrupt state of the UARTOEINTR interrupt."]
     #[inline(always)]
-    pub fn set_oemis(&mut self, val: bool) {
+    pub const fn set_oemis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
 }
@@ -1352,34 +1264,7 @@ impl core::fmt::Debug for Uartmis {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartmis {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartmis {
-            rimmis: bool,
-            ctsmmis: bool,
-            dcdmmis: bool,
-            dsrmmis: bool,
-            rxmis: bool,
-            txmis: bool,
-            rtmis: bool,
-            femis: bool,
-            pemis: bool,
-            bemis: bool,
-            oemis: bool,
-        }
-        let proxy = Uartmis {
-            rimmis: self.rimmis(),
-            ctsmmis: self.ctsmmis(),
-            dcdmmis: self.dcdmmis(),
-            dsrmmis: self.dsrmmis(),
-            rxmis: self.rxmis(),
-            txmis: self.txmis(),
-            rtmis: self.rtmis(),
-            femis: self.femis(),
-            pemis: self.pemis(),
-            bemis: self.bemis(),
-            oemis: self.oemis(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Uartmis {{ rimmis: {=bool:?}, ctsmmis: {=bool:?}, dcdmmis: {=bool:?}, dsrmmis: {=bool:?}, rxmis: {=bool:?}, txmis: {=bool:?}, rtmis: {=bool:?}, femis: {=bool:?}, pemis: {=bool:?}, bemis: {=bool:?}, oemis: {=bool:?} }}" , self . rimmis () , self . ctsmmis () , self . dcdmmis () , self . dsrmmis () , self . rxmis () , self . txmis () , self . rtmis () , self . femis () , self . pemis () , self . bemis () , self . oemis ())
     }
 }
 #[doc = "UARTPCellID0 Register"]
@@ -1388,6 +1273,7 @@ impl defmt::Format for Uartmis {
 pub struct Uartpcellid0(pub u32);
 impl Uartpcellid0 {
     #[doc = "These bits read back as 0x0D"]
+    #[must_use]
     #[inline(always)]
     pub const fn uartpcellid0(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
@@ -1395,7 +1281,7 @@ impl Uartpcellid0 {
     }
     #[doc = "These bits read back as 0x0D"]
     #[inline(always)]
-    pub fn set_uartpcellid0(&mut self, val: u8) {
+    pub const fn set_uartpcellid0(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
 }
@@ -1415,14 +1301,11 @@ impl core::fmt::Debug for Uartpcellid0 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartpcellid0 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartpcellid0 {
-            uartpcellid0: u8,
-        }
-        let proxy = Uartpcellid0 {
-            uartpcellid0: self.uartpcellid0(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Uartpcellid0 {{ uartpcellid0: {=u8:?} }}",
+            self.uartpcellid0()
+        )
     }
 }
 #[doc = "UARTPCellID1 Register"]
@@ -1431,6 +1314,7 @@ impl defmt::Format for Uartpcellid0 {
 pub struct Uartpcellid1(pub u32);
 impl Uartpcellid1 {
     #[doc = "These bits read back as 0xF0"]
+    #[must_use]
     #[inline(always)]
     pub const fn uartpcellid1(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
@@ -1438,7 +1322,7 @@ impl Uartpcellid1 {
     }
     #[doc = "These bits read back as 0xF0"]
     #[inline(always)]
-    pub fn set_uartpcellid1(&mut self, val: u8) {
+    pub const fn set_uartpcellid1(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
 }
@@ -1458,14 +1342,11 @@ impl core::fmt::Debug for Uartpcellid1 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartpcellid1 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartpcellid1 {
-            uartpcellid1: u8,
-        }
-        let proxy = Uartpcellid1 {
-            uartpcellid1: self.uartpcellid1(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Uartpcellid1 {{ uartpcellid1: {=u8:?} }}",
+            self.uartpcellid1()
+        )
     }
 }
 #[doc = "UARTPCellID2 Register"]
@@ -1474,6 +1355,7 @@ impl defmt::Format for Uartpcellid1 {
 pub struct Uartpcellid2(pub u32);
 impl Uartpcellid2 {
     #[doc = "These bits read back as 0x05"]
+    #[must_use]
     #[inline(always)]
     pub const fn uartpcellid2(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
@@ -1481,7 +1363,7 @@ impl Uartpcellid2 {
     }
     #[doc = "These bits read back as 0x05"]
     #[inline(always)]
-    pub fn set_uartpcellid2(&mut self, val: u8) {
+    pub const fn set_uartpcellid2(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
 }
@@ -1501,14 +1383,11 @@ impl core::fmt::Debug for Uartpcellid2 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartpcellid2 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartpcellid2 {
-            uartpcellid2: u8,
-        }
-        let proxy = Uartpcellid2 {
-            uartpcellid2: self.uartpcellid2(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Uartpcellid2 {{ uartpcellid2: {=u8:?} }}",
+            self.uartpcellid2()
+        )
     }
 }
 #[doc = "UARTPCellID3 Register"]
@@ -1517,6 +1396,7 @@ impl defmt::Format for Uartpcellid2 {
 pub struct Uartpcellid3(pub u32);
 impl Uartpcellid3 {
     #[doc = "These bits read back as 0xB1"]
+    #[must_use]
     #[inline(always)]
     pub const fn uartpcellid3(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
@@ -1524,7 +1404,7 @@ impl Uartpcellid3 {
     }
     #[doc = "These bits read back as 0xB1"]
     #[inline(always)]
-    pub fn set_uartpcellid3(&mut self, val: u8) {
+    pub const fn set_uartpcellid3(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
 }
@@ -1544,14 +1424,11 @@ impl core::fmt::Debug for Uartpcellid3 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartpcellid3 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartpcellid3 {
-            uartpcellid3: u8,
-        }
-        let proxy = Uartpcellid3 {
-            uartpcellid3: self.uartpcellid3(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Uartpcellid3 {{ uartpcellid3: {=u8:?} }}",
+            self.uartpcellid3()
+        )
     }
 }
 #[doc = "UARTPeriphID0 Register"]
@@ -1560,6 +1437,7 @@ impl defmt::Format for Uartpcellid3 {
 pub struct Uartperiphid0(pub u32);
 impl Uartperiphid0 {
     #[doc = "These bits read back as 0x11"]
+    #[must_use]
     #[inline(always)]
     pub const fn partnumber0(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
@@ -1567,7 +1445,7 @@ impl Uartperiphid0 {
     }
     #[doc = "These bits read back as 0x11"]
     #[inline(always)]
-    pub fn set_partnumber0(&mut self, val: u8) {
+    pub const fn set_partnumber0(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
 }
@@ -1587,14 +1465,11 @@ impl core::fmt::Debug for Uartperiphid0 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartperiphid0 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartperiphid0 {
-            partnumber0: u8,
-        }
-        let proxy = Uartperiphid0 {
-            partnumber0: self.partnumber0(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Uartperiphid0 {{ partnumber0: {=u8:?} }}",
+            self.partnumber0()
+        )
     }
 }
 #[doc = "UARTPeriphID1 Register"]
@@ -1603,6 +1478,7 @@ impl defmt::Format for Uartperiphid0 {
 pub struct Uartperiphid1(pub u32);
 impl Uartperiphid1 {
     #[doc = "These bits read back as 0x0"]
+    #[must_use]
     #[inline(always)]
     pub const fn partnumber1(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x0f;
@@ -1610,10 +1486,11 @@ impl Uartperiphid1 {
     }
     #[doc = "These bits read back as 0x0"]
     #[inline(always)]
-    pub fn set_partnumber1(&mut self, val: u8) {
+    pub const fn set_partnumber1(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
     }
     #[doc = "These bits read back as 0x1"]
+    #[must_use]
     #[inline(always)]
     pub const fn designer0(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x0f;
@@ -1621,7 +1498,7 @@ impl Uartperiphid1 {
     }
     #[doc = "These bits read back as 0x1"]
     #[inline(always)]
-    pub fn set_designer0(&mut self, val: u8) {
+    pub const fn set_designer0(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
     }
 }
@@ -1642,16 +1519,12 @@ impl core::fmt::Debug for Uartperiphid1 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartperiphid1 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartperiphid1 {
-            partnumber1: u8,
-            designer0: u8,
-        }
-        let proxy = Uartperiphid1 {
-            partnumber1: self.partnumber1(),
-            designer0: self.designer0(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Uartperiphid1 {{ partnumber1: {=u8:?}, designer0: {=u8:?} }}",
+            self.partnumber1(),
+            self.designer0()
+        )
     }
 }
 #[doc = "UARTPeriphID2 Register"]
@@ -1660,6 +1533,7 @@ impl defmt::Format for Uartperiphid1 {
 pub struct Uartperiphid2(pub u32);
 impl Uartperiphid2 {
     #[doc = "These bits read back as 0x4"]
+    #[must_use]
     #[inline(always)]
     pub const fn designer1(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x0f;
@@ -1667,10 +1541,11 @@ impl Uartperiphid2 {
     }
     #[doc = "These bits read back as 0x4"]
     #[inline(always)]
-    pub fn set_designer1(&mut self, val: u8) {
+    pub const fn set_designer1(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
     }
     #[doc = "This field depends on the revision of the UART: r1p0 0x0 r1p1 0x1 r1p3 0x2 r1p4 0x2 r1p5 0x3"]
+    #[must_use]
     #[inline(always)]
     pub const fn revision(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x0f;
@@ -1678,7 +1553,7 @@ impl Uartperiphid2 {
     }
     #[doc = "This field depends on the revision of the UART: r1p0 0x0 r1p1 0x1 r1p3 0x2 r1p4 0x2 r1p5 0x3"]
     #[inline(always)]
-    pub fn set_revision(&mut self, val: u8) {
+    pub const fn set_revision(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
     }
 }
@@ -1699,16 +1574,12 @@ impl core::fmt::Debug for Uartperiphid2 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartperiphid2 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartperiphid2 {
-            designer1: u8,
-            revision: u8,
-        }
-        let proxy = Uartperiphid2 {
-            designer1: self.designer1(),
-            revision: self.revision(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Uartperiphid2 {{ designer1: {=u8:?}, revision: {=u8:?} }}",
+            self.designer1(),
+            self.revision()
+        )
     }
 }
 #[doc = "UARTPeriphID3 Register"]
@@ -1717,6 +1588,7 @@ impl defmt::Format for Uartperiphid2 {
 pub struct Uartperiphid3(pub u32);
 impl Uartperiphid3 {
     #[doc = "These bits read back as 0x00"]
+    #[must_use]
     #[inline(always)]
     pub const fn configuration(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
@@ -1724,7 +1596,7 @@ impl Uartperiphid3 {
     }
     #[doc = "These bits read back as 0x00"]
     #[inline(always)]
-    pub fn set_configuration(&mut self, val: u8) {
+    pub const fn set_configuration(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
 }
@@ -1744,14 +1616,11 @@ impl core::fmt::Debug for Uartperiphid3 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartperiphid3 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartperiphid3 {
-            configuration: u8,
-        }
-        let proxy = Uartperiphid3 {
-            configuration: self.configuration(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Uartperiphid3 {{ configuration: {=u8:?} }}",
+            self.configuration()
+        )
     }
 }
 #[doc = "Raw Interrupt Status Register, UARTRIS"]
@@ -1760,6 +1629,7 @@ impl defmt::Format for Uartperiphid3 {
 pub struct Uartris(pub u32);
 impl Uartris {
     #[doc = "nUARTRI modem interrupt status. Returns the raw interrupt state of the UARTRIINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn rirmis(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -1767,10 +1637,11 @@ impl Uartris {
     }
     #[doc = "nUARTRI modem interrupt status. Returns the raw interrupt state of the UARTRIINTR interrupt."]
     #[inline(always)]
-    pub fn set_rirmis(&mut self, val: bool) {
+    pub const fn set_rirmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "nUARTCTS modem interrupt status. Returns the raw interrupt state of the UARTCTSINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn ctsrmis(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -1778,10 +1649,11 @@ impl Uartris {
     }
     #[doc = "nUARTCTS modem interrupt status. Returns the raw interrupt state of the UARTCTSINTR interrupt."]
     #[inline(always)]
-    pub fn set_ctsrmis(&mut self, val: bool) {
+    pub const fn set_ctsrmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "nUARTDCD modem interrupt status. Returns the raw interrupt state of the UARTDCDINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn dcdrmis(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -1789,10 +1661,11 @@ impl Uartris {
     }
     #[doc = "nUARTDCD modem interrupt status. Returns the raw interrupt state of the UARTDCDINTR interrupt."]
     #[inline(always)]
-    pub fn set_dcdrmis(&mut self, val: bool) {
+    pub const fn set_dcdrmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "nUARTDSR modem interrupt status. Returns the raw interrupt state of the UARTDSRINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn dsrrmis(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -1800,10 +1673,11 @@ impl Uartris {
     }
     #[doc = "nUARTDSR modem interrupt status. Returns the raw interrupt state of the UARTDSRINTR interrupt."]
     #[inline(always)]
-    pub fn set_dsrrmis(&mut self, val: bool) {
+    pub const fn set_dsrrmis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "Receive interrupt status. Returns the raw interrupt state of the UARTRXINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn rxris(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -1811,10 +1685,11 @@ impl Uartris {
     }
     #[doc = "Receive interrupt status. Returns the raw interrupt state of the UARTRXINTR interrupt."]
     #[inline(always)]
-    pub fn set_rxris(&mut self, val: bool) {
+    pub const fn set_rxris(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "Transmit interrupt status. Returns the raw interrupt state of the UARTTXINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn txris(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
@@ -1822,10 +1697,11 @@ impl Uartris {
     }
     #[doc = "Transmit interrupt status. Returns the raw interrupt state of the UARTTXINTR interrupt."]
     #[inline(always)]
-    pub fn set_txris(&mut self, val: bool) {
+    pub const fn set_txris(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
     #[doc = "Receive timeout interrupt status. Returns the raw interrupt state of the UARTRTINTR interrupt. a"]
+    #[must_use]
     #[inline(always)]
     pub const fn rtris(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
@@ -1833,10 +1709,11 @@ impl Uartris {
     }
     #[doc = "Receive timeout interrupt status. Returns the raw interrupt state of the UARTRTINTR interrupt. a"]
     #[inline(always)]
-    pub fn set_rtris(&mut self, val: bool) {
+    pub const fn set_rtris(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
     #[doc = "Framing error interrupt status. Returns the raw interrupt state of the UARTFEINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn feris(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
@@ -1844,10 +1721,11 @@ impl Uartris {
     }
     #[doc = "Framing error interrupt status. Returns the raw interrupt state of the UARTFEINTR interrupt."]
     #[inline(always)]
-    pub fn set_feris(&mut self, val: bool) {
+    pub const fn set_feris(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
     #[doc = "Parity error interrupt status. Returns the raw interrupt state of the UARTPEINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn peris(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -1855,10 +1733,11 @@ impl Uartris {
     }
     #[doc = "Parity error interrupt status. Returns the raw interrupt state of the UARTPEINTR interrupt."]
     #[inline(always)]
-    pub fn set_peris(&mut self, val: bool) {
+    pub const fn set_peris(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
     #[doc = "Break error interrupt status. Returns the raw interrupt state of the UARTBEINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn beris(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
@@ -1866,10 +1745,11 @@ impl Uartris {
     }
     #[doc = "Break error interrupt status. Returns the raw interrupt state of the UARTBEINTR interrupt."]
     #[inline(always)]
-    pub fn set_beris(&mut self, val: bool) {
+    pub const fn set_beris(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
     #[doc = "Overrun error interrupt status. Returns the raw interrupt state of the UARTOEINTR interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn oeris(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
@@ -1877,7 +1757,7 @@ impl Uartris {
     }
     #[doc = "Overrun error interrupt status. Returns the raw interrupt state of the UARTOEINTR interrupt."]
     #[inline(always)]
-    pub fn set_oeris(&mut self, val: bool) {
+    pub const fn set_oeris(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
 }
@@ -1907,34 +1787,7 @@ impl core::fmt::Debug for Uartris {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartris {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartris {
-            rirmis: bool,
-            ctsrmis: bool,
-            dcdrmis: bool,
-            dsrrmis: bool,
-            rxris: bool,
-            txris: bool,
-            rtris: bool,
-            feris: bool,
-            peris: bool,
-            beris: bool,
-            oeris: bool,
-        }
-        let proxy = Uartris {
-            rirmis: self.rirmis(),
-            ctsrmis: self.ctsrmis(),
-            dcdrmis: self.dcdrmis(),
-            dsrrmis: self.dsrrmis(),
-            rxris: self.rxris(),
-            txris: self.txris(),
-            rtris: self.rtris(),
-            feris: self.feris(),
-            peris: self.peris(),
-            beris: self.beris(),
-            oeris: self.oeris(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Uartris {{ rirmis: {=bool:?}, ctsrmis: {=bool:?}, dcdrmis: {=bool:?}, dsrrmis: {=bool:?}, rxris: {=bool:?}, txris: {=bool:?}, rtris: {=bool:?}, feris: {=bool:?}, peris: {=bool:?}, beris: {=bool:?}, oeris: {=bool:?} }}" , self . rirmis () , self . ctsrmis () , self . dcdrmis () , self . dsrrmis () , self . rxris () , self . txris () , self . rtris () , self . feris () , self . peris () , self . beris () , self . oeris ())
     }
 }
 #[doc = "Receive Status Register/Error Clear Register, UARTRSR/UARTECR"]
@@ -1943,6 +1796,7 @@ impl defmt::Format for Uartris {
 pub struct Uartrsr(pub u32);
 impl Uartrsr {
     #[doc = "Framing error. When set to 1, it indicates that the received character did not have a valid stop bit (a valid stop bit is 1). This bit is cleared to 0 by a write to UARTECR. In FIFO mode, this error is associated with the character at the top of the FIFO."]
+    #[must_use]
     #[inline(always)]
     pub const fn fe(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -1950,10 +1804,11 @@ impl Uartrsr {
     }
     #[doc = "Framing error. When set to 1, it indicates that the received character did not have a valid stop bit (a valid stop bit is 1). This bit is cleared to 0 by a write to UARTECR. In FIFO mode, this error is associated with the character at the top of the FIFO."]
     #[inline(always)]
-    pub fn set_fe(&mut self, val: bool) {
+    pub const fn set_fe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Parity error. When set to 1, it indicates that the parity of the received data character does not match the parity that the EPS and SPS bits in the Line Control Register, UARTLCR_H. This bit is cleared to 0 by a write to UARTECR. In FIFO mode, this error is associated with the character at the top of the FIFO."]
+    #[must_use]
     #[inline(always)]
     pub const fn pe(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -1961,10 +1816,11 @@ impl Uartrsr {
     }
     #[doc = "Parity error. When set to 1, it indicates that the parity of the received data character does not match the parity that the EPS and SPS bits in the Line Control Register, UARTLCR_H. This bit is cleared to 0 by a write to UARTECR. In FIFO mode, this error is associated with the character at the top of the FIFO."]
     #[inline(always)]
-    pub fn set_pe(&mut self, val: bool) {
+    pub const fn set_pe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "Break error. This bit is set to 1 if a break condition was detected, indicating that the received data input was held LOW for longer than a full-word transmission time (defined as start, data, parity, and stop bits). This bit is cleared to 0 after a write to UARTECR. In FIFO mode, this error is associated with the character at the top of the FIFO. When a break occurs, only one 0 character is loaded into the FIFO. The next character is only enabled after the receive data input goes to a 1 (marking state) and the next valid start bit is received."]
+    #[must_use]
     #[inline(always)]
     pub const fn be(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -1972,10 +1828,11 @@ impl Uartrsr {
     }
     #[doc = "Break error. This bit is set to 1 if a break condition was detected, indicating that the received data input was held LOW for longer than a full-word transmission time (defined as start, data, parity, and stop bits). This bit is cleared to 0 after a write to UARTECR. In FIFO mode, this error is associated with the character at the top of the FIFO. When a break occurs, only one 0 character is loaded into the FIFO. The next character is only enabled after the receive data input goes to a 1 (marking state) and the next valid start bit is received."]
     #[inline(always)]
-    pub fn set_be(&mut self, val: bool) {
+    pub const fn set_be(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "Overrun error. This bit is set to 1 if data is received and the FIFO is already full. This bit is cleared to 0 by a write to UARTECR. The FIFO contents remain valid because no more data is written when the FIFO is full, only the contents of the shift register are overwritten. The CPU must now read the data, to empty the FIFO."]
+    #[must_use]
     #[inline(always)]
     pub const fn oe(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -1983,7 +1840,7 @@ impl Uartrsr {
     }
     #[doc = "Overrun error. This bit is set to 1 if data is received and the FIFO is already full. This bit is cleared to 0 by a write to UARTECR. The FIFO contents remain valid because no more data is written when the FIFO is full, only the contents of the shift register are overwritten. The CPU must now read the data, to empty the FIFO."]
     #[inline(always)]
-    pub fn set_oe(&mut self, val: bool) {
+    pub const fn set_oe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
 }
@@ -2006,19 +1863,13 @@ impl core::fmt::Debug for Uartrsr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Uartrsr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Uartrsr {
-            fe: bool,
-            pe: bool,
-            be: bool,
-            oe: bool,
-        }
-        let proxy = Uartrsr {
-            fe: self.fe(),
-            pe: self.pe(),
-            be: self.be(),
-            oe: self.oe(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Uartrsr {{ fe: {=bool:?}, pe: {=bool:?}, be: {=bool:?}, oe: {=bool:?} }}",
+            self.fe(),
+            self.pe(),
+            self.be(),
+            self.oe()
+        )
     }
 }

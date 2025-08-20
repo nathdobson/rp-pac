@@ -4,6 +4,7 @@
 pub struct QmiDirectRx(pub u32);
 impl QmiDirectRx {
     #[doc = "With each byte clocked out on the serial interface, one byte will simultaneously be clocked in, and will appear in this FIFO. The serial interface will stall when this FIFO is full, to avoid dropping data. When 16-bit data is pushed into the TX FIFO, the corresponding RX FIFO push will also contain 16 bits of data. The least-significant byte is the first one received."]
+    #[must_use]
     #[inline(always)]
     pub const fn qmi_direct_rx(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
@@ -11,7 +12,7 @@ impl QmiDirectRx {
     }
     #[doc = "With each byte clocked out on the serial interface, one byte will simultaneously be clocked in, and will appear in this FIFO. The serial interface will stall when this FIFO is full, to avoid dropping data. When 16-bit data is pushed into the TX FIFO, the corresponding RX FIFO push will also contain 16 bits of data. The least-significant byte is the first one received."]
     #[inline(always)]
-    pub fn set_qmi_direct_rx(&mut self, val: u16) {
+    pub const fn set_qmi_direct_rx(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
 }
@@ -31,14 +32,11 @@ impl core::fmt::Debug for QmiDirectRx {
 #[cfg(feature = "defmt")]
 impl defmt::Format for QmiDirectRx {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct QmiDirectRx {
-            qmi_direct_rx: u16,
-        }
-        let proxy = QmiDirectRx {
-            qmi_direct_rx: self.qmi_direct_rx(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "QmiDirectRx {{ qmi_direct_rx: {=u16:?} }}",
+            self.qmi_direct_rx()
+        )
     }
 }
 #[doc = "Write to the QMI direct-mode TX FIFO (fast bus access to QMI_DIRECT_TX)"]
@@ -47,6 +45,7 @@ impl defmt::Format for QmiDirectRx {
 pub struct QmiDirectTx(pub u32);
 impl QmiDirectTx {
     #[doc = "Data pushed here will be clocked out falling edges of SCK (or before the very first rising edge of SCK, if this is the first pulse). For each byte clocked out, the interface will simultaneously sample one byte, on rising edges of SCK, and push this to the DIRECT_RX FIFO. For 16-bit data, the least-significant byte is transmitted first."]
+    #[must_use]
     #[inline(always)]
     pub const fn data(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
@@ -54,10 +53,11 @@ impl QmiDirectTx {
     }
     #[doc = "Data pushed here will be clocked out falling edges of SCK (or before the very first rising edge of SCK, if this is the first pulse). For each byte clocked out, the interface will simultaneously sample one byte, on rising edges of SCK, and push this to the DIRECT_RX FIFO. For 16-bit data, the least-significant byte is transmitted first."]
     #[inline(always)]
-    pub fn set_data(&mut self, val: u16) {
+    pub const fn set_data(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
     #[doc = "Configure whether this FIFO record is transferred with single/dual/quad interface width (0/1/2). Different widths can be mixed freely."]
+    #[must_use]
     #[inline(always)]
     pub const fn iwidth(&self) -> super::vals::Iwidth {
         let val = (self.0 >> 16usize) & 0x03;
@@ -65,10 +65,11 @@ impl QmiDirectTx {
     }
     #[doc = "Configure whether this FIFO record is transferred with single/dual/quad interface width (0/1/2). Different widths can be mixed freely."]
     #[inline(always)]
-    pub fn set_iwidth(&mut self, val: super::vals::Iwidth) {
+    pub const fn set_iwidth(&mut self, val: super::vals::Iwidth) {
         self.0 = (self.0 & !(0x03 << 16usize)) | (((val.to_bits() as u32) & 0x03) << 16usize);
     }
     #[doc = "Data width. If 0, hardware will transmit the 8 LSBs of the DIRECT_TX DATA field, and return an 8-bit value in the 8 LSBs of DIRECT_RX. If 1, the full 16-bit width is used. 8-bit and 16-bit transfers can be mixed freely."]
+    #[must_use]
     #[inline(always)]
     pub const fn dwidth(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
@@ -76,10 +77,11 @@ impl QmiDirectTx {
     }
     #[doc = "Data width. If 0, hardware will transmit the 8 LSBs of the DIRECT_TX DATA field, and return an 8-bit value in the 8 LSBs of DIRECT_RX. If 1, the full 16-bit width is used. 8-bit and 16-bit transfers can be mixed freely."]
     #[inline(always)]
-    pub fn set_dwidth(&mut self, val: bool) {
+    pub const fn set_dwidth(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
     #[doc = "Output enable (active-high). For single width (SPI), this field is ignored, and SD0 is always set to output, with SD1 always set to input. For dual and quad width (DSPI/QSPI), this sets whether the relevant SDx pads are set to output whilst transferring this FIFO record. In this case the command/address should have OE set, and the data transfer should have OE set or clear depending on the direction of the transfer."]
+    #[must_use]
     #[inline(always)]
     pub const fn oe(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
@@ -87,10 +89,11 @@ impl QmiDirectTx {
     }
     #[doc = "Output enable (active-high). For single width (SPI), this field is ignored, and SD0 is always set to output, with SD1 always set to input. For dual and quad width (DSPI/QSPI), this sets whether the relevant SDx pads are set to output whilst transferring this FIFO record. In this case the command/address should have OE set, and the data transfer should have OE set or clear depending on the direction of the transfer."]
     #[inline(always)]
-    pub fn set_oe(&mut self, val: bool) {
+    pub const fn set_oe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
     }
     #[doc = "Inhibit the RX FIFO push that would correspond to this TX FIFO entry. Useful to avoid garbage appearing in the RX FIFO when pushing the command at the beginning of a SPI transfer."]
+    #[must_use]
     #[inline(always)]
     pub const fn nopush(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
@@ -98,7 +101,7 @@ impl QmiDirectTx {
     }
     #[doc = "Inhibit the RX FIFO push that would correspond to this TX FIFO entry. Useful to avoid garbage appearing in the RX FIFO when pushing the command at the beginning of a SPI transfer."]
     #[inline(always)]
-    pub fn set_nopush(&mut self, val: bool) {
+    pub const fn set_nopush(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
 }
@@ -122,21 +125,6 @@ impl core::fmt::Debug for QmiDirectTx {
 #[cfg(feature = "defmt")]
 impl defmt::Format for QmiDirectTx {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct QmiDirectTx {
-            data: u16,
-            iwidth: super::vals::Iwidth,
-            dwidth: bool,
-            oe: bool,
-            nopush: bool,
-        }
-        let proxy = QmiDirectTx {
-            data: self.data(),
-            iwidth: self.iwidth(),
-            dwidth: self.dwidth(),
-            oe: self.oe(),
-            nopush: self.nopush(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "QmiDirectTx {{ data: {=u16:?}, iwidth: {:?}, dwidth: {=bool:?}, oe: {=bool:?}, nopush: {=bool:?} }}" , self . data () , self . iwidth () , self . dwidth () , self . oe () , self . nopush ())
     }
 }

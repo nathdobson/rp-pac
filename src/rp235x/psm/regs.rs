@@ -3,229 +3,254 @@
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Done(pub u32);
 impl Done {
+    #[must_use]
     #[inline(always)]
     pub const fn proc_cold(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_proc_cold(&mut self, val: bool) {
+    pub const fn set_proc_cold(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn otp(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_otp(&mut self, val: bool) {
+    pub const fn set_otp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn rosc(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_rosc(&mut self, val: bool) {
+    pub const fn set_rosc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn xosc(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_xosc(&mut self, val: bool) {
+    pub const fn set_xosc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn resets(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_resets(&mut self, val: bool) {
+    pub const fn set_resets(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn clocks(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_clocks(&mut self, val: bool) {
+    pub const fn set_clocks(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn psm_ready(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_psm_ready(&mut self, val: bool) {
+    pub const fn set_psm_ready(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn busfabric(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_busfabric(&mut self, val: bool) {
+    pub const fn set_busfabric(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn rom(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_rom(&mut self, val: bool) {
+    pub const fn set_rom(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn bootram(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_bootram(&mut self, val: bool) {
+    pub const fn set_bootram(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram0(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram0(&mut self, val: bool) {
+    pub const fn set_sram0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram1(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram1(&mut self, val: bool) {
+    pub const fn set_sram1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram2(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram2(&mut self, val: bool) {
+    pub const fn set_sram2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram3(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram3(&mut self, val: bool) {
+    pub const fn set_sram3(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram4(&self) -> bool {
         let val = (self.0 >> 14usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram4(&mut self, val: bool) {
+    pub const fn set_sram4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram5(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram5(&mut self, val: bool) {
+    pub const fn set_sram5(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram6(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram6(&mut self, val: bool) {
+    pub const fn set_sram6(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram7(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram7(&mut self, val: bool) {
+    pub const fn set_sram7(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram8(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram8(&mut self, val: bool) {
+    pub const fn set_sram8(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram9(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram9(&mut self, val: bool) {
+    pub const fn set_sram9(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn xip(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_xip(&mut self, val: bool) {
+    pub const fn set_xip(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sio(&self) -> bool {
         let val = (self.0 >> 21usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sio(&mut self, val: bool) {
+    pub const fn set_sio(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn accessctrl(&self) -> bool {
         let val = (self.0 >> 22usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_accessctrl(&mut self, val: bool) {
+    pub const fn set_accessctrl(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn proc0(&self) -> bool {
         let val = (self.0 >> 23usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_proc0(&mut self, val: bool) {
+    pub const fn set_proc0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 23usize)) | (((val as u32) & 0x01) << 23usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn proc1(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_proc1(&mut self, val: bool) {
+    pub const fn set_proc1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
 }
@@ -269,62 +294,7 @@ impl core::fmt::Debug for Done {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Done {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Done {
-            proc_cold: bool,
-            otp: bool,
-            rosc: bool,
-            xosc: bool,
-            resets: bool,
-            clocks: bool,
-            psm_ready: bool,
-            busfabric: bool,
-            rom: bool,
-            bootram: bool,
-            sram0: bool,
-            sram1: bool,
-            sram2: bool,
-            sram3: bool,
-            sram4: bool,
-            sram5: bool,
-            sram6: bool,
-            sram7: bool,
-            sram8: bool,
-            sram9: bool,
-            xip: bool,
-            sio: bool,
-            accessctrl: bool,
-            proc0: bool,
-            proc1: bool,
-        }
-        let proxy = Done {
-            proc_cold: self.proc_cold(),
-            otp: self.otp(),
-            rosc: self.rosc(),
-            xosc: self.xosc(),
-            resets: self.resets(),
-            clocks: self.clocks(),
-            psm_ready: self.psm_ready(),
-            busfabric: self.busfabric(),
-            rom: self.rom(),
-            bootram: self.bootram(),
-            sram0: self.sram0(),
-            sram1: self.sram1(),
-            sram2: self.sram2(),
-            sram3: self.sram3(),
-            sram4: self.sram4(),
-            sram5: self.sram5(),
-            sram6: self.sram6(),
-            sram7: self.sram7(),
-            sram8: self.sram8(),
-            sram9: self.sram9(),
-            xip: self.xip(),
-            sio: self.sio(),
-            accessctrl: self.accessctrl(),
-            proc0: self.proc0(),
-            proc1: self.proc1(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Done {{ proc_cold: {=bool:?}, otp: {=bool:?}, rosc: {=bool:?}, xosc: {=bool:?}, resets: {=bool:?}, clocks: {=bool:?}, psm_ready: {=bool:?}, busfabric: {=bool:?}, rom: {=bool:?}, bootram: {=bool:?}, sram0: {=bool:?}, sram1: {=bool:?}, sram2: {=bool:?}, sram3: {=bool:?}, sram4: {=bool:?}, sram5: {=bool:?}, sram6: {=bool:?}, sram7: {=bool:?}, sram8: {=bool:?}, sram9: {=bool:?}, xip: {=bool:?}, sio: {=bool:?}, accessctrl: {=bool:?}, proc0: {=bool:?}, proc1: {=bool:?} }}" , self . proc_cold () , self . otp () , self . rosc () , self . xosc () , self . resets () , self . clocks () , self . psm_ready () , self . busfabric () , self . rom () , self . bootram () , self . sram0 () , self . sram1 () , self . sram2 () , self . sram3 () , self . sram4 () , self . sram5 () , self . sram6 () , self . sram7 () , self . sram8 () , self . sram9 () , self . xip () , self . sio () , self . accessctrl () , self . proc0 () , self . proc1 ())
     }
 }
 #[doc = "Force into reset (i.e. power it off)"]
@@ -332,229 +302,254 @@ impl defmt::Format for Done {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct FrceOff(pub u32);
 impl FrceOff {
+    #[must_use]
     #[inline(always)]
     pub const fn proc_cold(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_proc_cold(&mut self, val: bool) {
+    pub const fn set_proc_cold(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn otp(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_otp(&mut self, val: bool) {
+    pub const fn set_otp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn rosc(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_rosc(&mut self, val: bool) {
+    pub const fn set_rosc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn xosc(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_xosc(&mut self, val: bool) {
+    pub const fn set_xosc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn resets(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_resets(&mut self, val: bool) {
+    pub const fn set_resets(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn clocks(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_clocks(&mut self, val: bool) {
+    pub const fn set_clocks(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn psm_ready(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_psm_ready(&mut self, val: bool) {
+    pub const fn set_psm_ready(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn busfabric(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_busfabric(&mut self, val: bool) {
+    pub const fn set_busfabric(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn rom(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_rom(&mut self, val: bool) {
+    pub const fn set_rom(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn bootram(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_bootram(&mut self, val: bool) {
+    pub const fn set_bootram(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram0(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram0(&mut self, val: bool) {
+    pub const fn set_sram0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram1(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram1(&mut self, val: bool) {
+    pub const fn set_sram1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram2(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram2(&mut self, val: bool) {
+    pub const fn set_sram2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram3(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram3(&mut self, val: bool) {
+    pub const fn set_sram3(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram4(&self) -> bool {
         let val = (self.0 >> 14usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram4(&mut self, val: bool) {
+    pub const fn set_sram4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram5(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram5(&mut self, val: bool) {
+    pub const fn set_sram5(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram6(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram6(&mut self, val: bool) {
+    pub const fn set_sram6(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram7(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram7(&mut self, val: bool) {
+    pub const fn set_sram7(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram8(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram8(&mut self, val: bool) {
+    pub const fn set_sram8(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram9(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram9(&mut self, val: bool) {
+    pub const fn set_sram9(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn xip(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_xip(&mut self, val: bool) {
+    pub const fn set_xip(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sio(&self) -> bool {
         let val = (self.0 >> 21usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sio(&mut self, val: bool) {
+    pub const fn set_sio(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn accessctrl(&self) -> bool {
         let val = (self.0 >> 22usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_accessctrl(&mut self, val: bool) {
+    pub const fn set_accessctrl(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn proc0(&self) -> bool {
         let val = (self.0 >> 23usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_proc0(&mut self, val: bool) {
+    pub const fn set_proc0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 23usize)) | (((val as u32) & 0x01) << 23usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn proc1(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_proc1(&mut self, val: bool) {
+    pub const fn set_proc1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
 }
@@ -598,62 +593,7 @@ impl core::fmt::Debug for FrceOff {
 #[cfg(feature = "defmt")]
 impl defmt::Format for FrceOff {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct FrceOff {
-            proc_cold: bool,
-            otp: bool,
-            rosc: bool,
-            xosc: bool,
-            resets: bool,
-            clocks: bool,
-            psm_ready: bool,
-            busfabric: bool,
-            rom: bool,
-            bootram: bool,
-            sram0: bool,
-            sram1: bool,
-            sram2: bool,
-            sram3: bool,
-            sram4: bool,
-            sram5: bool,
-            sram6: bool,
-            sram7: bool,
-            sram8: bool,
-            sram9: bool,
-            xip: bool,
-            sio: bool,
-            accessctrl: bool,
-            proc0: bool,
-            proc1: bool,
-        }
-        let proxy = FrceOff {
-            proc_cold: self.proc_cold(),
-            otp: self.otp(),
-            rosc: self.rosc(),
-            xosc: self.xosc(),
-            resets: self.resets(),
-            clocks: self.clocks(),
-            psm_ready: self.psm_ready(),
-            busfabric: self.busfabric(),
-            rom: self.rom(),
-            bootram: self.bootram(),
-            sram0: self.sram0(),
-            sram1: self.sram1(),
-            sram2: self.sram2(),
-            sram3: self.sram3(),
-            sram4: self.sram4(),
-            sram5: self.sram5(),
-            sram6: self.sram6(),
-            sram7: self.sram7(),
-            sram8: self.sram8(),
-            sram9: self.sram9(),
-            xip: self.xip(),
-            sio: self.sio(),
-            accessctrl: self.accessctrl(),
-            proc0: self.proc0(),
-            proc1: self.proc1(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "FrceOff {{ proc_cold: {=bool:?}, otp: {=bool:?}, rosc: {=bool:?}, xosc: {=bool:?}, resets: {=bool:?}, clocks: {=bool:?}, psm_ready: {=bool:?}, busfabric: {=bool:?}, rom: {=bool:?}, bootram: {=bool:?}, sram0: {=bool:?}, sram1: {=bool:?}, sram2: {=bool:?}, sram3: {=bool:?}, sram4: {=bool:?}, sram5: {=bool:?}, sram6: {=bool:?}, sram7: {=bool:?}, sram8: {=bool:?}, sram9: {=bool:?}, xip: {=bool:?}, sio: {=bool:?}, accessctrl: {=bool:?}, proc0: {=bool:?}, proc1: {=bool:?} }}" , self . proc_cold () , self . otp () , self . rosc () , self . xosc () , self . resets () , self . clocks () , self . psm_ready () , self . busfabric () , self . rom () , self . bootram () , self . sram0 () , self . sram1 () , self . sram2 () , self . sram3 () , self . sram4 () , self . sram5 () , self . sram6 () , self . sram7 () , self . sram8 () , self . sram9 () , self . xip () , self . sio () , self . accessctrl () , self . proc0 () , self . proc1 ())
     }
 }
 #[doc = "Force block out of reset (i.e. power it on)"]
@@ -661,229 +601,254 @@ impl defmt::Format for FrceOff {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct FrceOn(pub u32);
 impl FrceOn {
+    #[must_use]
     #[inline(always)]
     pub const fn proc_cold(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_proc_cold(&mut self, val: bool) {
+    pub const fn set_proc_cold(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn otp(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_otp(&mut self, val: bool) {
+    pub const fn set_otp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn rosc(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_rosc(&mut self, val: bool) {
+    pub const fn set_rosc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn xosc(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_xosc(&mut self, val: bool) {
+    pub const fn set_xosc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn resets(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_resets(&mut self, val: bool) {
+    pub const fn set_resets(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn clocks(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_clocks(&mut self, val: bool) {
+    pub const fn set_clocks(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn psm_ready(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_psm_ready(&mut self, val: bool) {
+    pub const fn set_psm_ready(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn busfabric(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_busfabric(&mut self, val: bool) {
+    pub const fn set_busfabric(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn rom(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_rom(&mut self, val: bool) {
+    pub const fn set_rom(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn bootram(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_bootram(&mut self, val: bool) {
+    pub const fn set_bootram(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram0(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram0(&mut self, val: bool) {
+    pub const fn set_sram0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram1(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram1(&mut self, val: bool) {
+    pub const fn set_sram1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram2(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram2(&mut self, val: bool) {
+    pub const fn set_sram2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram3(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram3(&mut self, val: bool) {
+    pub const fn set_sram3(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram4(&self) -> bool {
         let val = (self.0 >> 14usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram4(&mut self, val: bool) {
+    pub const fn set_sram4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram5(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram5(&mut self, val: bool) {
+    pub const fn set_sram5(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram6(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram6(&mut self, val: bool) {
+    pub const fn set_sram6(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram7(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram7(&mut self, val: bool) {
+    pub const fn set_sram7(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram8(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram8(&mut self, val: bool) {
+    pub const fn set_sram8(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram9(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram9(&mut self, val: bool) {
+    pub const fn set_sram9(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn xip(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_xip(&mut self, val: bool) {
+    pub const fn set_xip(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sio(&self) -> bool {
         let val = (self.0 >> 21usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sio(&mut self, val: bool) {
+    pub const fn set_sio(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn accessctrl(&self) -> bool {
         let val = (self.0 >> 22usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_accessctrl(&mut self, val: bool) {
+    pub const fn set_accessctrl(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn proc0(&self) -> bool {
         let val = (self.0 >> 23usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_proc0(&mut self, val: bool) {
+    pub const fn set_proc0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 23usize)) | (((val as u32) & 0x01) << 23usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn proc1(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_proc1(&mut self, val: bool) {
+    pub const fn set_proc1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
 }
@@ -927,62 +892,7 @@ impl core::fmt::Debug for FrceOn {
 #[cfg(feature = "defmt")]
 impl defmt::Format for FrceOn {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct FrceOn {
-            proc_cold: bool,
-            otp: bool,
-            rosc: bool,
-            xosc: bool,
-            resets: bool,
-            clocks: bool,
-            psm_ready: bool,
-            busfabric: bool,
-            rom: bool,
-            bootram: bool,
-            sram0: bool,
-            sram1: bool,
-            sram2: bool,
-            sram3: bool,
-            sram4: bool,
-            sram5: bool,
-            sram6: bool,
-            sram7: bool,
-            sram8: bool,
-            sram9: bool,
-            xip: bool,
-            sio: bool,
-            accessctrl: bool,
-            proc0: bool,
-            proc1: bool,
-        }
-        let proxy = FrceOn {
-            proc_cold: self.proc_cold(),
-            otp: self.otp(),
-            rosc: self.rosc(),
-            xosc: self.xosc(),
-            resets: self.resets(),
-            clocks: self.clocks(),
-            psm_ready: self.psm_ready(),
-            busfabric: self.busfabric(),
-            rom: self.rom(),
-            bootram: self.bootram(),
-            sram0: self.sram0(),
-            sram1: self.sram1(),
-            sram2: self.sram2(),
-            sram3: self.sram3(),
-            sram4: self.sram4(),
-            sram5: self.sram5(),
-            sram6: self.sram6(),
-            sram7: self.sram7(),
-            sram8: self.sram8(),
-            sram9: self.sram9(),
-            xip: self.xip(),
-            sio: self.sio(),
-            accessctrl: self.accessctrl(),
-            proc0: self.proc0(),
-            proc1: self.proc1(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "FrceOn {{ proc_cold: {=bool:?}, otp: {=bool:?}, rosc: {=bool:?}, xosc: {=bool:?}, resets: {=bool:?}, clocks: {=bool:?}, psm_ready: {=bool:?}, busfabric: {=bool:?}, rom: {=bool:?}, bootram: {=bool:?}, sram0: {=bool:?}, sram1: {=bool:?}, sram2: {=bool:?}, sram3: {=bool:?}, sram4: {=bool:?}, sram5: {=bool:?}, sram6: {=bool:?}, sram7: {=bool:?}, sram8: {=bool:?}, sram9: {=bool:?}, xip: {=bool:?}, sio: {=bool:?}, accessctrl: {=bool:?}, proc0: {=bool:?}, proc1: {=bool:?} }}" , self . proc_cold () , self . otp () , self . rosc () , self . xosc () , self . resets () , self . clocks () , self . psm_ready () , self . busfabric () , self . rom () , self . bootram () , self . sram0 () , self . sram1 () , self . sram2 () , self . sram3 () , self . sram4 () , self . sram5 () , self . sram6 () , self . sram7 () , self . sram8 () , self . sram9 () , self . xip () , self . sio () , self . accessctrl () , self . proc0 () , self . proc1 ())
     }
 }
 #[doc = "Set to 1 if the watchdog should reset this"]
@@ -990,229 +900,254 @@ impl defmt::Format for FrceOn {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Wdsel(pub u32);
 impl Wdsel {
+    #[must_use]
     #[inline(always)]
     pub const fn proc_cold(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_proc_cold(&mut self, val: bool) {
+    pub const fn set_proc_cold(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn otp(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_otp(&mut self, val: bool) {
+    pub const fn set_otp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn rosc(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_rosc(&mut self, val: bool) {
+    pub const fn set_rosc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn xosc(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_xosc(&mut self, val: bool) {
+    pub const fn set_xosc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn resets(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_resets(&mut self, val: bool) {
+    pub const fn set_resets(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn clocks(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_clocks(&mut self, val: bool) {
+    pub const fn set_clocks(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn psm_ready(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_psm_ready(&mut self, val: bool) {
+    pub const fn set_psm_ready(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn busfabric(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_busfabric(&mut self, val: bool) {
+    pub const fn set_busfabric(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn rom(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_rom(&mut self, val: bool) {
+    pub const fn set_rom(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn bootram(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_bootram(&mut self, val: bool) {
+    pub const fn set_bootram(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram0(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram0(&mut self, val: bool) {
+    pub const fn set_sram0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram1(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram1(&mut self, val: bool) {
+    pub const fn set_sram1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram2(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram2(&mut self, val: bool) {
+    pub const fn set_sram2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram3(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram3(&mut self, val: bool) {
+    pub const fn set_sram3(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram4(&self) -> bool {
         let val = (self.0 >> 14usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram4(&mut self, val: bool) {
+    pub const fn set_sram4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram5(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram5(&mut self, val: bool) {
+    pub const fn set_sram5(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram6(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram6(&mut self, val: bool) {
+    pub const fn set_sram6(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram7(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram7(&mut self, val: bool) {
+    pub const fn set_sram7(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram8(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram8(&mut self, val: bool) {
+    pub const fn set_sram8(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram9(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram9(&mut self, val: bool) {
+    pub const fn set_sram9(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn xip(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_xip(&mut self, val: bool) {
+    pub const fn set_xip(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sio(&self) -> bool {
         let val = (self.0 >> 21usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sio(&mut self, val: bool) {
+    pub const fn set_sio(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn accessctrl(&self) -> bool {
         let val = (self.0 >> 22usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_accessctrl(&mut self, val: bool) {
+    pub const fn set_accessctrl(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn proc0(&self) -> bool {
         let val = (self.0 >> 23usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_proc0(&mut self, val: bool) {
+    pub const fn set_proc0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 23usize)) | (((val as u32) & 0x01) << 23usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn proc1(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_proc1(&mut self, val: bool) {
+    pub const fn set_proc1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
 }
@@ -1256,61 +1191,6 @@ impl core::fmt::Debug for Wdsel {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Wdsel {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Wdsel {
-            proc_cold: bool,
-            otp: bool,
-            rosc: bool,
-            xosc: bool,
-            resets: bool,
-            clocks: bool,
-            psm_ready: bool,
-            busfabric: bool,
-            rom: bool,
-            bootram: bool,
-            sram0: bool,
-            sram1: bool,
-            sram2: bool,
-            sram3: bool,
-            sram4: bool,
-            sram5: bool,
-            sram6: bool,
-            sram7: bool,
-            sram8: bool,
-            sram9: bool,
-            xip: bool,
-            sio: bool,
-            accessctrl: bool,
-            proc0: bool,
-            proc1: bool,
-        }
-        let proxy = Wdsel {
-            proc_cold: self.proc_cold(),
-            otp: self.otp(),
-            rosc: self.rosc(),
-            xosc: self.xosc(),
-            resets: self.resets(),
-            clocks: self.clocks(),
-            psm_ready: self.psm_ready(),
-            busfabric: self.busfabric(),
-            rom: self.rom(),
-            bootram: self.bootram(),
-            sram0: self.sram0(),
-            sram1: self.sram1(),
-            sram2: self.sram2(),
-            sram3: self.sram3(),
-            sram4: self.sram4(),
-            sram5: self.sram5(),
-            sram6: self.sram6(),
-            sram7: self.sram7(),
-            sram8: self.sram8(),
-            sram9: self.sram9(),
-            xip: self.xip(),
-            sio: self.sio(),
-            accessctrl: self.accessctrl(),
-            proc0: self.proc0(),
-            proc1: self.proc1(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Wdsel {{ proc_cold: {=bool:?}, otp: {=bool:?}, rosc: {=bool:?}, xosc: {=bool:?}, resets: {=bool:?}, clocks: {=bool:?}, psm_ready: {=bool:?}, busfabric: {=bool:?}, rom: {=bool:?}, bootram: {=bool:?}, sram0: {=bool:?}, sram1: {=bool:?}, sram2: {=bool:?}, sram3: {=bool:?}, sram4: {=bool:?}, sram5: {=bool:?}, sram6: {=bool:?}, sram7: {=bool:?}, sram8: {=bool:?}, sram9: {=bool:?}, xip: {=bool:?}, sio: {=bool:?}, accessctrl: {=bool:?}, proc0: {=bool:?}, proc1: {=bool:?} }}" , self . proc_cold () , self . otp () , self . rosc () , self . xosc () , self . resets () , self . clocks () , self . psm_ready () , self . busfabric () , self . rom () , self . bootram () , self . sram0 () , self . sram1 () , self . sram2 () , self . sram3 () , self . sram4 () , self . sram5 () , self . sram6 () , self . sram7 () , self . sram8 () , self . sram9 () , self . xip () , self . sio () , self . accessctrl () , self . proc0 () , self . proc1 ())
     }
 }

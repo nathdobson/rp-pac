@@ -3,13 +3,14 @@
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkdivM1(pub u32);
 impl ClkdivM1 {
+    #[must_use]
     #[inline(always)]
     pub const fn clkdiv_m1(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_clkdiv_m1(&mut self, val: u16) {
+    pub const fn set_clkdiv_m1(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
 }
@@ -29,14 +30,7 @@ impl core::fmt::Debug for ClkdivM1 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for ClkdivM1 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct ClkdivM1 {
-            clkdiv_m1: u16,
-        }
-        let proxy = ClkdivM1 {
-            clkdiv_m1: self.clkdiv_m1(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "ClkdivM1 {{ clkdiv_m1: {=u16:?} }}", self.clkdiv_m1())
     }
 }
 #[doc = "RTC Control and status"]
@@ -45,6 +39,7 @@ impl defmt::Format for ClkdivM1 {
 pub struct Ctrl(pub u32);
 impl Ctrl {
     #[doc = "Enable RTC"]
+    #[must_use]
     #[inline(always)]
     pub const fn rtc_enable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -52,10 +47,11 @@ impl Ctrl {
     }
     #[doc = "Enable RTC"]
     #[inline(always)]
-    pub fn set_rtc_enable(&mut self, val: bool) {
+    pub const fn set_rtc_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "RTC enabled (running)"]
+    #[must_use]
     #[inline(always)]
     pub const fn rtc_active(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -63,10 +59,11 @@ impl Ctrl {
     }
     #[doc = "RTC enabled (running)"]
     #[inline(always)]
-    pub fn set_rtc_active(&mut self, val: bool) {
+    pub const fn set_rtc_active(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "Load RTC"]
+    #[must_use]
     #[inline(always)]
     pub const fn load(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -74,10 +71,11 @@ impl Ctrl {
     }
     #[doc = "Load RTC"]
     #[inline(always)]
-    pub fn set_load(&mut self, val: bool) {
+    pub const fn set_load(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "If set, leapyear is forced off. Useful for years divisible by 100 but not by 400"]
+    #[must_use]
     #[inline(always)]
     pub const fn force_notleapyear(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -85,7 +83,7 @@ impl Ctrl {
     }
     #[doc = "If set, leapyear is forced off. Useful for years divisible by 100 but not by 400"]
     #[inline(always)]
-    pub fn set_force_notleapyear(&mut self, val: bool) {
+    pub const fn set_force_notleapyear(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
 }
@@ -108,20 +106,7 @@ impl core::fmt::Debug for Ctrl {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Ctrl {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Ctrl {
-            rtc_enable: bool,
-            rtc_active: bool,
-            load: bool,
-            force_notleapyear: bool,
-        }
-        let proxy = Ctrl {
-            rtc_enable: self.rtc_enable(),
-            rtc_active: self.rtc_active(),
-            load: self.load(),
-            force_notleapyear: self.force_notleapyear(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Ctrl {{ rtc_enable: {=bool:?}, rtc_active: {=bool:?}, load: {=bool:?}, force_notleapyear: {=bool:?} }}" , self . rtc_enable () , self . rtc_active () , self . load () , self . force_notleapyear ())
     }
 }
 #[doc = "Interrupt Enable"]
@@ -129,13 +114,14 @@ impl defmt::Format for Ctrl {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
 impl Int {
+    #[must_use]
     #[inline(always)]
     pub const fn rtc(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_rtc(&mut self, val: bool) {
+    pub const fn set_rtc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
 }
@@ -153,12 +139,7 @@ impl core::fmt::Debug for Int {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Int {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Int {
-            rtc: bool,
-        }
-        let proxy = Int { rtc: self.rtc() };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "Int {{ rtc: {=bool:?} }}", self.rtc())
     }
 }
 #[doc = "Interrupt setup register 0"]
@@ -167,6 +148,7 @@ impl defmt::Format for Int {
 pub struct IrqSetup0(pub u32);
 impl IrqSetup0 {
     #[doc = "Day of the month (1..31)"]
+    #[must_use]
     #[inline(always)]
     pub const fn day(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x1f;
@@ -174,10 +156,11 @@ impl IrqSetup0 {
     }
     #[doc = "Day of the month (1..31)"]
     #[inline(always)]
-    pub fn set_day(&mut self, val: u8) {
+    pub const fn set_day(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
     }
     #[doc = "Month (1..12)"]
+    #[must_use]
     #[inline(always)]
     pub const fn month(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x0f;
@@ -185,10 +168,11 @@ impl IrqSetup0 {
     }
     #[doc = "Month (1..12)"]
     #[inline(always)]
-    pub fn set_month(&mut self, val: u8) {
+    pub const fn set_month(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
     }
     #[doc = "Year"]
+    #[must_use]
     #[inline(always)]
     pub const fn year(&self) -> u16 {
         let val = (self.0 >> 12usize) & 0x0fff;
@@ -196,10 +180,11 @@ impl IrqSetup0 {
     }
     #[doc = "Year"]
     #[inline(always)]
-    pub fn set_year(&mut self, val: u16) {
+    pub const fn set_year(&mut self, val: u16) {
         self.0 = (self.0 & !(0x0fff << 12usize)) | (((val as u32) & 0x0fff) << 12usize);
     }
     #[doc = "Enable day matching"]
+    #[must_use]
     #[inline(always)]
     pub const fn day_ena(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
@@ -207,10 +192,11 @@ impl IrqSetup0 {
     }
     #[doc = "Enable day matching"]
     #[inline(always)]
-    pub fn set_day_ena(&mut self, val: bool) {
+    pub const fn set_day_ena(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
     #[doc = "Enable month matching"]
+    #[must_use]
     #[inline(always)]
     pub const fn month_ena(&self) -> bool {
         let val = (self.0 >> 25usize) & 0x01;
@@ -218,10 +204,11 @@ impl IrqSetup0 {
     }
     #[doc = "Enable month matching"]
     #[inline(always)]
-    pub fn set_month_ena(&mut self, val: bool) {
+    pub const fn set_month_ena(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
     }
     #[doc = "Enable year matching"]
+    #[must_use]
     #[inline(always)]
     pub const fn year_ena(&self) -> bool {
         let val = (self.0 >> 26usize) & 0x01;
@@ -229,10 +216,11 @@ impl IrqSetup0 {
     }
     #[doc = "Enable year matching"]
     #[inline(always)]
-    pub fn set_year_ena(&mut self, val: bool) {
+    pub const fn set_year_ena(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
     }
     #[doc = "Global match enable. Don't change any other value while this one is enabled"]
+    #[must_use]
     #[inline(always)]
     pub const fn match_ena(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
@@ -240,16 +228,17 @@ impl IrqSetup0 {
     }
     #[doc = "Global match enable. Don't change any other value while this one is enabled"]
     #[inline(always)]
-    pub fn set_match_ena(&mut self, val: bool) {
+    pub const fn set_match_ena(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn match_active(&self) -> bool {
         let val = (self.0 >> 29usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_match_active(&mut self, val: bool) {
+    pub const fn set_match_active(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 29usize)) | (((val as u32) & 0x01) << 29usize);
     }
 }
@@ -276,28 +265,7 @@ impl core::fmt::Debug for IrqSetup0 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for IrqSetup0 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct IrqSetup0 {
-            day: u8,
-            month: u8,
-            year: u16,
-            day_ena: bool,
-            month_ena: bool,
-            year_ena: bool,
-            match_ena: bool,
-            match_active: bool,
-        }
-        let proxy = IrqSetup0 {
-            day: self.day(),
-            month: self.month(),
-            year: self.year(),
-            day_ena: self.day_ena(),
-            month_ena: self.month_ena(),
-            year_ena: self.year_ena(),
-            match_ena: self.match_ena(),
-            match_active: self.match_active(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "IrqSetup0 {{ day: {=u8:?}, month: {=u8:?}, year: {=u16:?}, day_ena: {=bool:?}, month_ena: {=bool:?}, year_ena: {=bool:?}, match_ena: {=bool:?}, match_active: {=bool:?} }}" , self . day () , self . month () , self . year () , self . day_ena () , self . month_ena () , self . year_ena () , self . match_ena () , self . match_active ())
     }
 }
 #[doc = "Interrupt setup register 1"]
@@ -306,6 +274,7 @@ impl defmt::Format for IrqSetup0 {
 pub struct IrqSetup1(pub u32);
 impl IrqSetup1 {
     #[doc = "Seconds"]
+    #[must_use]
     #[inline(always)]
     pub const fn sec(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x3f;
@@ -313,10 +282,11 @@ impl IrqSetup1 {
     }
     #[doc = "Seconds"]
     #[inline(always)]
-    pub fn set_sec(&mut self, val: u8) {
+    pub const fn set_sec(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
     }
     #[doc = "Minutes"]
+    #[must_use]
     #[inline(always)]
     pub const fn min(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x3f;
@@ -324,10 +294,11 @@ impl IrqSetup1 {
     }
     #[doc = "Minutes"]
     #[inline(always)]
-    pub fn set_min(&mut self, val: u8) {
+    pub const fn set_min(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 8usize)) | (((val as u32) & 0x3f) << 8usize);
     }
     #[doc = "Hours"]
+    #[must_use]
     #[inline(always)]
     pub const fn hour(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x1f;
@@ -335,10 +306,11 @@ impl IrqSetup1 {
     }
     #[doc = "Hours"]
     #[inline(always)]
-    pub fn set_hour(&mut self, val: u8) {
+    pub const fn set_hour(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 16usize)) | (((val as u32) & 0x1f) << 16usize);
     }
     #[doc = "Day of the week"]
+    #[must_use]
     #[inline(always)]
     pub const fn dotw(&self) -> u8 {
         let val = (self.0 >> 24usize) & 0x07;
@@ -346,10 +318,11 @@ impl IrqSetup1 {
     }
     #[doc = "Day of the week"]
     #[inline(always)]
-    pub fn set_dotw(&mut self, val: u8) {
+    pub const fn set_dotw(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 24usize)) | (((val as u32) & 0x07) << 24usize);
     }
     #[doc = "Enable second matching"]
+    #[must_use]
     #[inline(always)]
     pub const fn sec_ena(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
@@ -357,10 +330,11 @@ impl IrqSetup1 {
     }
     #[doc = "Enable second matching"]
     #[inline(always)]
-    pub fn set_sec_ena(&mut self, val: bool) {
+    pub const fn set_sec_ena(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
     }
     #[doc = "Enable minute matching"]
+    #[must_use]
     #[inline(always)]
     pub const fn min_ena(&self) -> bool {
         let val = (self.0 >> 29usize) & 0x01;
@@ -368,10 +342,11 @@ impl IrqSetup1 {
     }
     #[doc = "Enable minute matching"]
     #[inline(always)]
-    pub fn set_min_ena(&mut self, val: bool) {
+    pub const fn set_min_ena(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 29usize)) | (((val as u32) & 0x01) << 29usize);
     }
     #[doc = "Enable hour matching"]
+    #[must_use]
     #[inline(always)]
     pub const fn hour_ena(&self) -> bool {
         let val = (self.0 >> 30usize) & 0x01;
@@ -379,10 +354,11 @@ impl IrqSetup1 {
     }
     #[doc = "Enable hour matching"]
     #[inline(always)]
-    pub fn set_hour_ena(&mut self, val: bool) {
+    pub const fn set_hour_ena(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 30usize)) | (((val as u32) & 0x01) << 30usize);
     }
     #[doc = "Enable day of the week matching"]
+    #[must_use]
     #[inline(always)]
     pub const fn dotw_ena(&self) -> bool {
         let val = (self.0 >> 31usize) & 0x01;
@@ -390,7 +366,7 @@ impl IrqSetup1 {
     }
     #[doc = "Enable day of the week matching"]
     #[inline(always)]
-    pub fn set_dotw_ena(&mut self, val: bool) {
+    pub const fn set_dotw_ena(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
     }
 }
@@ -417,28 +393,7 @@ impl core::fmt::Debug for IrqSetup1 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for IrqSetup1 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct IrqSetup1 {
-            sec: u8,
-            min: u8,
-            hour: u8,
-            dotw: u8,
-            sec_ena: bool,
-            min_ena: bool,
-            hour_ena: bool,
-            dotw_ena: bool,
-        }
-        let proxy = IrqSetup1 {
-            sec: self.sec(),
-            min: self.min(),
-            hour: self.hour(),
-            dotw: self.dotw(),
-            sec_ena: self.sec_ena(),
-            min_ena: self.min_ena(),
-            hour_ena: self.hour_ena(),
-            dotw_ena: self.dotw_ena(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "IrqSetup1 {{ sec: {=u8:?}, min: {=u8:?}, hour: {=u8:?}, dotw: {=u8:?}, sec_ena: {=bool:?}, min_ena: {=bool:?}, hour_ena: {=bool:?}, dotw_ena: {=bool:?} }}" , self . sec () , self . min () , self . hour () , self . dotw () , self . sec_ena () , self . min_ena () , self . hour_ena () , self . dotw_ena ())
     }
 }
 #[doc = "RTC register 0 Read this before RTC 1!"]
@@ -447,6 +402,7 @@ impl defmt::Format for IrqSetup1 {
 pub struct Rtc0(pub u32);
 impl Rtc0 {
     #[doc = "Seconds"]
+    #[must_use]
     #[inline(always)]
     pub const fn sec(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x3f;
@@ -454,10 +410,11 @@ impl Rtc0 {
     }
     #[doc = "Seconds"]
     #[inline(always)]
-    pub fn set_sec(&mut self, val: u8) {
+    pub const fn set_sec(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
     }
     #[doc = "Minutes"]
+    #[must_use]
     #[inline(always)]
     pub const fn min(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x3f;
@@ -465,10 +422,11 @@ impl Rtc0 {
     }
     #[doc = "Minutes"]
     #[inline(always)]
-    pub fn set_min(&mut self, val: u8) {
+    pub const fn set_min(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 8usize)) | (((val as u32) & 0x3f) << 8usize);
     }
     #[doc = "Hours"]
+    #[must_use]
     #[inline(always)]
     pub const fn hour(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x1f;
@@ -476,10 +434,11 @@ impl Rtc0 {
     }
     #[doc = "Hours"]
     #[inline(always)]
-    pub fn set_hour(&mut self, val: u8) {
+    pub const fn set_hour(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 16usize)) | (((val as u32) & 0x1f) << 16usize);
     }
     #[doc = "Day of the week"]
+    #[must_use]
     #[inline(always)]
     pub const fn dotw(&self) -> u8 {
         let val = (self.0 >> 24usize) & 0x07;
@@ -487,7 +446,7 @@ impl Rtc0 {
     }
     #[doc = "Day of the week"]
     #[inline(always)]
-    pub fn set_dotw(&mut self, val: u8) {
+    pub const fn set_dotw(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 24usize)) | (((val as u32) & 0x07) << 24usize);
     }
 }
@@ -510,20 +469,14 @@ impl core::fmt::Debug for Rtc0 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Rtc0 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Rtc0 {
-            sec: u8,
-            min: u8,
-            hour: u8,
-            dotw: u8,
-        }
-        let proxy = Rtc0 {
-            sec: self.sec(),
-            min: self.min(),
-            hour: self.hour(),
-            dotw: self.dotw(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Rtc0 {{ sec: {=u8:?}, min: {=u8:?}, hour: {=u8:?}, dotw: {=u8:?} }}",
+            self.sec(),
+            self.min(),
+            self.hour(),
+            self.dotw()
+        )
     }
 }
 #[doc = "RTC register 1."]
@@ -532,6 +485,7 @@ impl defmt::Format for Rtc0 {
 pub struct Rtc1(pub u32);
 impl Rtc1 {
     #[doc = "Day of the month (1..31)"]
+    #[must_use]
     #[inline(always)]
     pub const fn day(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x1f;
@@ -539,10 +493,11 @@ impl Rtc1 {
     }
     #[doc = "Day of the month (1..31)"]
     #[inline(always)]
-    pub fn set_day(&mut self, val: u8) {
+    pub const fn set_day(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
     }
     #[doc = "Month (1..12)"]
+    #[must_use]
     #[inline(always)]
     pub const fn month(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x0f;
@@ -550,10 +505,11 @@ impl Rtc1 {
     }
     #[doc = "Month (1..12)"]
     #[inline(always)]
-    pub fn set_month(&mut self, val: u8) {
+    pub const fn set_month(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
     }
     #[doc = "Year"]
+    #[must_use]
     #[inline(always)]
     pub const fn year(&self) -> u16 {
         let val = (self.0 >> 12usize) & 0x0fff;
@@ -561,7 +517,7 @@ impl Rtc1 {
     }
     #[doc = "Year"]
     #[inline(always)]
-    pub fn set_year(&mut self, val: u16) {
+    pub const fn set_year(&mut self, val: u16) {
         self.0 = (self.0 & !(0x0fff << 12usize)) | (((val as u32) & 0x0fff) << 12usize);
     }
 }
@@ -583,18 +539,13 @@ impl core::fmt::Debug for Rtc1 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Rtc1 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Rtc1 {
-            day: u8,
-            month: u8,
-            year: u16,
-        }
-        let proxy = Rtc1 {
-            day: self.day(),
-            month: self.month(),
-            year: self.year(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Rtc1 {{ day: {=u8:?}, month: {=u8:?}, year: {=u16:?} }}",
+            self.day(),
+            self.month(),
+            self.year()
+        )
     }
 }
 #[doc = "RTC setup register 0"]
@@ -603,6 +554,7 @@ impl defmt::Format for Rtc1 {
 pub struct Setup0(pub u32);
 impl Setup0 {
     #[doc = "Day of the month (1..31)"]
+    #[must_use]
     #[inline(always)]
     pub const fn day(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x1f;
@@ -610,10 +562,11 @@ impl Setup0 {
     }
     #[doc = "Day of the month (1..31)"]
     #[inline(always)]
-    pub fn set_day(&mut self, val: u8) {
+    pub const fn set_day(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
     }
     #[doc = "Month (1..12)"]
+    #[must_use]
     #[inline(always)]
     pub const fn month(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x0f;
@@ -621,10 +574,11 @@ impl Setup0 {
     }
     #[doc = "Month (1..12)"]
     #[inline(always)]
-    pub fn set_month(&mut self, val: u8) {
+    pub const fn set_month(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
     }
     #[doc = "Year"]
+    #[must_use]
     #[inline(always)]
     pub const fn year(&self) -> u16 {
         let val = (self.0 >> 12usize) & 0x0fff;
@@ -632,7 +586,7 @@ impl Setup0 {
     }
     #[doc = "Year"]
     #[inline(always)]
-    pub fn set_year(&mut self, val: u16) {
+    pub const fn set_year(&mut self, val: u16) {
         self.0 = (self.0 & !(0x0fff << 12usize)) | (((val as u32) & 0x0fff) << 12usize);
     }
 }
@@ -654,18 +608,13 @@ impl core::fmt::Debug for Setup0 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Setup0 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Setup0 {
-            day: u8,
-            month: u8,
-            year: u16,
-        }
-        let proxy = Setup0 {
-            day: self.day(),
-            month: self.month(),
-            year: self.year(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Setup0 {{ day: {=u8:?}, month: {=u8:?}, year: {=u16:?} }}",
+            self.day(),
+            self.month(),
+            self.year()
+        )
     }
 }
 #[doc = "RTC setup register 1"]
@@ -674,6 +623,7 @@ impl defmt::Format for Setup0 {
 pub struct Setup1(pub u32);
 impl Setup1 {
     #[doc = "Seconds"]
+    #[must_use]
     #[inline(always)]
     pub const fn sec(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x3f;
@@ -681,10 +631,11 @@ impl Setup1 {
     }
     #[doc = "Seconds"]
     #[inline(always)]
-    pub fn set_sec(&mut self, val: u8) {
+    pub const fn set_sec(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
     }
     #[doc = "Minutes"]
+    #[must_use]
     #[inline(always)]
     pub const fn min(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x3f;
@@ -692,10 +643,11 @@ impl Setup1 {
     }
     #[doc = "Minutes"]
     #[inline(always)]
-    pub fn set_min(&mut self, val: u8) {
+    pub const fn set_min(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 8usize)) | (((val as u32) & 0x3f) << 8usize);
     }
     #[doc = "Hours"]
+    #[must_use]
     #[inline(always)]
     pub const fn hour(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x1f;
@@ -703,10 +655,11 @@ impl Setup1 {
     }
     #[doc = "Hours"]
     #[inline(always)]
-    pub fn set_hour(&mut self, val: u8) {
+    pub const fn set_hour(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 16usize)) | (((val as u32) & 0x1f) << 16usize);
     }
     #[doc = "Day of the week: 1-Monday...0-Sunday ISO 8601 mod 7"]
+    #[must_use]
     #[inline(always)]
     pub const fn dotw(&self) -> u8 {
         let val = (self.0 >> 24usize) & 0x07;
@@ -714,7 +667,7 @@ impl Setup1 {
     }
     #[doc = "Day of the week: 1-Monday...0-Sunday ISO 8601 mod 7"]
     #[inline(always)]
-    pub fn set_dotw(&mut self, val: u8) {
+    pub const fn set_dotw(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 24usize)) | (((val as u32) & 0x07) << 24usize);
     }
 }
@@ -737,19 +690,13 @@ impl core::fmt::Debug for Setup1 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Setup1 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Setup1 {
-            sec: u8,
-            min: u8,
-            hour: u8,
-            dotw: u8,
-        }
-        let proxy = Setup1 {
-            sec: self.sec(),
-            min: self.min(),
-            hour: self.hour(),
-            dotw: self.dotw(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Setup1 {{ sec: {=u8:?}, min: {=u8:?}, hour: {=u8:?}, dotw: {=u8:?} }}",
+            self.sec(),
+            self.min(),
+            self.hour(),
+            self.dotw()
+        )
     }
 }

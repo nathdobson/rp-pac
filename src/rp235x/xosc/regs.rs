@@ -3,13 +3,14 @@
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Count(pub u32);
 impl Count {
+    #[must_use]
     #[inline(always)]
     pub const fn count(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_count(&mut self, val: u16) {
+    pub const fn set_count(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
 }
@@ -29,14 +30,7 @@ impl core::fmt::Debug for Count {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Count {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Count {
-            count: u16,
-        }
-        let proxy = Count {
-            count: self.count(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "Count {{ count: {=u16:?} }}", self.count())
     }
 }
 #[doc = "Crystal Oscillator Control"]
@@ -45,6 +39,7 @@ impl defmt::Format for Count {
 pub struct Ctrl(pub u32);
 impl Ctrl {
     #[doc = "The 12-bit code is intended to give some protection against accidental writes. An invalid setting will retain the previous value. The actual value being used can be read from STATUS_FREQ_RANGE"]
+    #[must_use]
     #[inline(always)]
     pub const fn freq_range(&self) -> super::vals::CtrlFreqRange {
         let val = (self.0 >> 0usize) & 0x0fff;
@@ -52,10 +47,11 @@ impl Ctrl {
     }
     #[doc = "The 12-bit code is intended to give some protection against accidental writes. An invalid setting will retain the previous value. The actual value being used can be read from STATUS_FREQ_RANGE"]
     #[inline(always)]
-    pub fn set_freq_range(&mut self, val: super::vals::CtrlFreqRange) {
+    pub const fn set_freq_range(&mut self, val: super::vals::CtrlFreqRange) {
         self.0 = (self.0 & !(0x0fff << 0usize)) | (((val.to_bits() as u32) & 0x0fff) << 0usize);
     }
     #[doc = "On power-up this field is initialised to DISABLE and the chip runs from the ROSC. If the chip has subsequently been programmed to run from the XOSC then setting this field to DISABLE may lock-up the chip. If this is a concern then run the clk_ref from the ROSC and enable the clk_sys RESUS feature. The 12-bit code is intended to give some protection against accidental writes. An invalid setting will retain the previous value. The actual value being used can be read from STATUS_ENABLED"]
+    #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> super::vals::Enable {
         let val = (self.0 >> 12usize) & 0x0fff;
@@ -63,7 +59,7 @@ impl Ctrl {
     }
     #[doc = "On power-up this field is initialised to DISABLE and the chip runs from the ROSC. If the chip has subsequently been programmed to run from the XOSC then setting this field to DISABLE may lock-up the chip. If this is a concern then run the clk_ref from the ROSC and enable the clk_sys RESUS feature. The 12-bit code is intended to give some protection against accidental writes. An invalid setting will retain the previous value. The actual value being used can be read from STATUS_ENABLED"]
     #[inline(always)]
-    pub fn set_enable(&mut self, val: super::vals::Enable) {
+    pub const fn set_enable(&mut self, val: super::vals::Enable) {
         self.0 = (self.0 & !(0x0fff << 12usize)) | (((val.to_bits() as u32) & 0x0fff) << 12usize);
     }
 }
@@ -84,16 +80,12 @@ impl core::fmt::Debug for Ctrl {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Ctrl {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Ctrl {
-            freq_range: super::vals::CtrlFreqRange,
-            enable: super::vals::Enable,
-        }
-        let proxy = Ctrl {
-            freq_range: self.freq_range(),
-            enable: self.enable(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Ctrl {{ freq_range: {:?}, enable: {:?} }}",
+            self.freq_range(),
+            self.enable()
+        )
     }
 }
 #[doc = "Crystal Oscillator pause control"]
@@ -102,6 +94,7 @@ impl defmt::Format for Ctrl {
 pub struct Dormant(pub u32);
 impl Dormant {
     #[doc = "This is used to save power by pausing the XOSC On power-up this field is initialised to WAKE An invalid write will also select WAKE Warning: stop the PLLs before selecting dormant mode Warning: setup the irq before selecting dormant mode"]
+    #[must_use]
     #[inline(always)]
     pub const fn dormant(&self) -> super::vals::Dormant {
         let val = (self.0 >> 0usize) & 0xffff_ffff;
@@ -109,7 +102,7 @@ impl Dormant {
     }
     #[doc = "This is used to save power by pausing the XOSC On power-up this field is initialised to WAKE An invalid write will also select WAKE Warning: stop the PLLs before selecting dormant mode Warning: setup the irq before selecting dormant mode"]
     #[inline(always)]
-    pub fn set_dormant(&mut self, val: super::vals::Dormant) {
+    pub const fn set_dormant(&mut self, val: super::vals::Dormant) {
         self.0 = (self.0 & !(0xffff_ffff << 0usize))
             | (((val.to_bits() as u32) & 0xffff_ffff) << 0usize);
     }
@@ -130,14 +123,7 @@ impl core::fmt::Debug for Dormant {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Dormant {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Dormant {
-            dormant: super::vals::Dormant,
-        }
-        let proxy = Dormant {
-            dormant: self.dormant(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "Dormant {{ dormant: {:?} }}", self.dormant())
     }
 }
 #[doc = "Controls the startup delay"]
@@ -146,6 +132,7 @@ impl defmt::Format for Dormant {
 pub struct Startup(pub u32);
 impl Startup {
     #[doc = "in multiples of 256*xtal_period. The reset value of 0xc4 corresponds to approx 50 000 cycles."]
+    #[must_use]
     #[inline(always)]
     pub const fn delay(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x3fff;
@@ -153,10 +140,11 @@ impl Startup {
     }
     #[doc = "in multiples of 256*xtal_period. The reset value of 0xc4 corresponds to approx 50 000 cycles."]
     #[inline(always)]
-    pub fn set_delay(&mut self, val: u16) {
+    pub const fn set_delay(&mut self, val: u16) {
         self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
     }
     #[doc = "Multiplies the startup_delay by 4, just in case. The reset value is controlled by a mask-programmable tiecell and is provided in case we are booting from XOSC and the default startup delay is insufficient. The reset value is 0x0."]
+    #[must_use]
     #[inline(always)]
     pub const fn x4(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
@@ -164,7 +152,7 @@ impl Startup {
     }
     #[doc = "Multiplies the startup_delay by 4, just in case. The reset value is controlled by a mask-programmable tiecell and is provided in case we are booting from XOSC and the default startup delay is insufficient. The reset value is 0x0."]
     #[inline(always)]
-    pub fn set_x4(&mut self, val: bool) {
+    pub const fn set_x4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
 }
@@ -185,16 +173,12 @@ impl core::fmt::Debug for Startup {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Startup {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Startup {
-            delay: u16,
-            x4: bool,
-        }
-        let proxy = Startup {
-            delay: self.delay(),
-            x4: self.x4(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Startup {{ delay: {=u16:?}, x4: {=bool:?} }}",
+            self.delay(),
+            self.x4()
+        )
     }
 }
 #[doc = "Crystal Oscillator Status"]
@@ -203,6 +187,7 @@ impl defmt::Format for Startup {
 pub struct Status(pub u32);
 impl Status {
     #[doc = "The current frequency range setting"]
+    #[must_use]
     #[inline(always)]
     pub const fn freq_range(&self) -> super::vals::StatusFreqRange {
         let val = (self.0 >> 0usize) & 0x03;
@@ -210,10 +195,11 @@ impl Status {
     }
     #[doc = "The current frequency range setting"]
     #[inline(always)]
-    pub fn set_freq_range(&mut self, val: super::vals::StatusFreqRange) {
+    pub const fn set_freq_range(&mut self, val: super::vals::StatusFreqRange) {
         self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
     }
     #[doc = "Oscillator is enabled but not necessarily running and stable, resets to 0"]
+    #[must_use]
     #[inline(always)]
     pub const fn enabled(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
@@ -221,10 +207,11 @@ impl Status {
     }
     #[doc = "Oscillator is enabled but not necessarily running and stable, resets to 0"]
     #[inline(always)]
-    pub fn set_enabled(&mut self, val: bool) {
+    pub const fn set_enabled(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
     #[doc = "An invalid value has been written to CTRL_ENABLE or CTRL_FREQ_RANGE or DORMANT"]
+    #[must_use]
     #[inline(always)]
     pub const fn badwrite(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
@@ -232,10 +219,11 @@ impl Status {
     }
     #[doc = "An invalid value has been written to CTRL_ENABLE or CTRL_FREQ_RANGE or DORMANT"]
     #[inline(always)]
-    pub fn set_badwrite(&mut self, val: bool) {
+    pub const fn set_badwrite(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
     #[doc = "Oscillator is running and stable"]
+    #[must_use]
     #[inline(always)]
     pub const fn stable(&self) -> bool {
         let val = (self.0 >> 31usize) & 0x01;
@@ -243,7 +231,7 @@ impl Status {
     }
     #[doc = "Oscillator is running and stable"]
     #[inline(always)]
-    pub fn set_stable(&mut self, val: bool) {
+    pub const fn set_stable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
     }
 }
@@ -266,19 +254,6 @@ impl core::fmt::Debug for Status {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Status {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Status {
-            freq_range: super::vals::StatusFreqRange,
-            enabled: bool,
-            badwrite: bool,
-            stable: bool,
-        }
-        let proxy = Status {
-            freq_range: self.freq_range(),
-            enabled: self.enabled(),
-            badwrite: self.badwrite(),
-            stable: self.stable(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Status {{ freq_range: {:?}, enabled: {=bool:?}, badwrite: {=bool:?}, stable: {=bool:?} }}" , self . freq_range () , self . enabled () , self . badwrite () , self . stable ())
     }
 }

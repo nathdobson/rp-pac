@@ -3,13 +3,14 @@
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct BootlockStat(pub u32);
 impl BootlockStat {
+    #[must_use]
     #[inline(always)]
     pub const fn bootlock_stat(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
         val as u8
     }
     #[inline(always)]
-    pub fn set_bootlock_stat(&mut self, val: u8) {
+    pub const fn set_bootlock_stat(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
 }
@@ -29,13 +30,10 @@ impl core::fmt::Debug for BootlockStat {
 #[cfg(feature = "defmt")]
 impl defmt::Format for BootlockStat {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct BootlockStat {
-            bootlock_stat: u8,
-        }
-        let proxy = BootlockStat {
-            bootlock_stat: self.bootlock_stat(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "BootlockStat {{ bootlock_stat: {=u8:?} }}",
+            self.bootlock_stat()
+        )
     }
 }

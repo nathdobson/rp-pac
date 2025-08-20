@@ -43,7 +43,7 @@ impl From<Cs0size> for u8 {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct Cs1size(pub u16);
+pub struct Cs1size(u16);
 impl Cs1size {
     pub const NONE: Self = Self(0x0);
     pub const _8K: Self = Self(0x01);
@@ -186,7 +186,7 @@ impl From<PageLockNoKeyState> for u8 {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct Range(pub u16);
+pub struct Range(u16);
 impl Range {
     pub const _1_15MHZ: Self = Self(0x0);
     pub const _10_30MHZ: Self = Self(0x01);
@@ -238,7 +238,7 @@ impl From<Range> for u16 {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct UsbWhiteLabelAddr(pub u32);
+pub struct UsbWhiteLabelAddr(u32);
 impl UsbWhiteLabelAddr {
     pub const INDEX_USB_DEVICE_VID_VALUE: Self = Self(0x0);
     pub const INDEX_USB_DEVICE_PID_VALUE: Self = Self(0x01);
