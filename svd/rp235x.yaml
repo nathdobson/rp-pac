@@ -28,7 +28,7 @@ transforms:
       to: dma::regs::Timer
   - !MergeFieldsets
       from: dma::regs::Ch\d+CtrlTrig
-      to: dma::regs::CtrlTrig
+      to: dma::regs::Ctrl
   - !RenameFields
       fieldset: dma::regs::Ch\d+DbgCtdreq
       from: ch\d+_(.*)
@@ -42,6 +42,10 @@ transforms:
       to_block: dma::Channel
       to_outer: ch$1
       to_inner: $2
+  - !ModifyRegisters
+      blocks: dma::Channel
+      registers: al\d_ctrl
+      fieldset: dma::regs::Ctrl
   - !MakeRegisterArray
       blocks: dma::Dma
       from: ch\d+

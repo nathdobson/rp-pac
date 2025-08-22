@@ -38,8 +38,8 @@ impl defmt::Format for ChanAbort {
 #[doc = "DMA Channel 0 Control and Status"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct CtrlTrig(pub u32);
-impl CtrlTrig {
+pub struct Ctrl(pub u32);
+impl Ctrl {
     #[doc = "DMA Channel Enable. When 1, the channel will respond to triggering events, which will cause it to become BUSY and start transferring data. When 0, the channel will ignore triggers, stop issuing transfers, and pause the current transfer sequence (i.e. BUSY will remain high if already high)"]
     #[must_use]
     #[inline(always)]
@@ -233,15 +233,15 @@ impl CtrlTrig {
         self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
     }
 }
-impl Default for CtrlTrig {
+impl Default for Ctrl {
     #[inline(always)]
-    fn default() -> CtrlTrig {
-        CtrlTrig(0)
+    fn default() -> Ctrl {
+        Ctrl(0)
     }
 }
-impl core::fmt::Debug for CtrlTrig {
+impl core::fmt::Debug for Ctrl {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("CtrlTrig")
+        f.debug_struct("Ctrl")
             .field("en", &self.en())
             .field("high_priority", &self.high_priority())
             .field("data_size", &self.data_size())
@@ -262,9 +262,9 @@ impl core::fmt::Debug for CtrlTrig {
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for CtrlTrig {
+impl defmt::Format for Ctrl {
     fn format(&self, f: defmt::Formatter) {
-        defmt :: write ! (f , "CtrlTrig {{ en: {=bool:?}, high_priority: {=bool:?}, data_size: {:?}, incr_read: {=bool:?}, incr_write: {=bool:?}, ring_size: {=u8:?}, ring_sel: {=bool:?}, chain_to: {=u8:?}, treq_sel: {:?}, irq_quiet: {=bool:?}, bswap: {=bool:?}, sniff_en: {=bool:?}, busy: {=bool:?}, write_error: {=bool:?}, read_error: {=bool:?}, ahb_error: {=bool:?} }}" , self . en () , self . high_priority () , self . data_size () , self . incr_read () , self . incr_write () , self . ring_size () , self . ring_sel () , self . chain_to () , self . treq_sel () , self . irq_quiet () , self . bswap () , self . sniff_en () , self . busy () , self . write_error () , self . read_error () , self . ahb_error ())
+        defmt :: write ! (f , "Ctrl {{ en: {=bool:?}, high_priority: {=bool:?}, data_size: {:?}, incr_read: {=bool:?}, incr_write: {=bool:?}, ring_size: {=u8:?}, ring_sel: {=bool:?}, chain_to: {=u8:?}, treq_sel: {:?}, irq_quiet: {=bool:?}, bswap: {=bool:?}, sniff_en: {=bool:?}, busy: {=bool:?}, write_error: {=bool:?}, read_error: {=bool:?}, ahb_error: {=bool:?} }}" , self . en () , self . high_priority () , self . data_size () , self . incr_read () , self . incr_write () , self . ring_size () , self . ring_sel () , self . chain_to () , self . treq_sel () , self . irq_quiet () , self . bswap () , self . sniff_en () , self . busy () , self . write_error () , self . read_error () , self . ahb_error ())
     }
 }
 #[doc = "Read: get channel DREQ counter (i.e. how many accesses the DMA expects it can perform on the peripheral without overflow/underflow. Write any value: clears the counter, and cause channel to re-initiate DREQ handshake."]
