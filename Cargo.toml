@@ -25,3 +25,8 @@ flavors = [
     { name = "rp2040", features = ["rp2040"], target = "thumbv6m-none-eabi" },
     { name = "rp235x", features = ["rp235x"], target = "thumbv8m.main-none-eabihf" },
 ]
+
+[package.metadata.docs.rs]
+# TODO: it's not GREAT to set a specific target, but docs.rs builds will fail otherwise
+# for now, default to rp2040
+features = ["defmt", "rt", "rp2040"]
