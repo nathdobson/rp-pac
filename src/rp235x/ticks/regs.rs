@@ -3,6 +3,7 @@
 pub struct Proc0count(pub u32);
 impl Proc0count {
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
+    #[must_use]
     #[inline(always)]
     pub const fn proc0_count(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x01ff;
@@ -10,7 +11,7 @@ impl Proc0count {
     }
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
     #[inline(always)]
-    pub fn set_proc0_count(&mut self, val: u16) {
+    pub const fn set_proc0_count(&mut self, val: u16) {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
@@ -30,14 +31,11 @@ impl core::fmt::Debug for Proc0count {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Proc0count {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Proc0count {
-            proc0_count: u16,
-        }
-        let proxy = Proc0count {
-            proc0_count: self.proc0_count(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Proc0count {{ proc0_count: {=u16:?} }}",
+            self.proc0_count()
+        )
     }
 }
 #[doc = "Controls the tick generator"]
@@ -46,6 +44,7 @@ impl defmt::Format for Proc0count {
 pub struct Proc0ctrl(pub u32);
 impl Proc0ctrl {
     #[doc = "start / stop tick generation"]
+    #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -53,10 +52,11 @@ impl Proc0ctrl {
     }
     #[doc = "start / stop tick generation"]
     #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
+    pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Is the tick generator running?"]
+    #[must_use]
     #[inline(always)]
     pub const fn running(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -64,7 +64,7 @@ impl Proc0ctrl {
     }
     #[doc = "Is the tick generator running?"]
     #[inline(always)]
-    pub fn set_running(&mut self, val: bool) {
+    pub const fn set_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
@@ -85,16 +85,12 @@ impl core::fmt::Debug for Proc0ctrl {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Proc0ctrl {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Proc0ctrl {
-            enable: bool,
-            running: bool,
-        }
-        let proxy = Proc0ctrl {
-            enable: self.enable(),
-            running: self.running(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Proc0ctrl {{ enable: {=bool:?}, running: {=bool:?} }}",
+            self.enable(),
+            self.running()
+        )
     }
 }
 #[repr(transparent)]
@@ -102,6 +98,7 @@ impl defmt::Format for Proc0ctrl {
 pub struct Proc0cycles(pub u32);
 impl Proc0cycles {
     #[doc = "Total number of clk_tick cycles before the next tick."]
+    #[must_use]
     #[inline(always)]
     pub const fn proc0_cycles(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x01ff;
@@ -109,7 +106,7 @@ impl Proc0cycles {
     }
     #[doc = "Total number of clk_tick cycles before the next tick."]
     #[inline(always)]
-    pub fn set_proc0_cycles(&mut self, val: u16) {
+    pub const fn set_proc0_cycles(&mut self, val: u16) {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
@@ -129,14 +126,11 @@ impl core::fmt::Debug for Proc0cycles {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Proc0cycles {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Proc0cycles {
-            proc0_cycles: u16,
-        }
-        let proxy = Proc0cycles {
-            proc0_cycles: self.proc0_cycles(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Proc0cycles {{ proc0_cycles: {=u16:?} }}",
+            self.proc0_cycles()
+        )
     }
 }
 #[repr(transparent)]
@@ -144,6 +138,7 @@ impl defmt::Format for Proc0cycles {
 pub struct Proc1count(pub u32);
 impl Proc1count {
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
+    #[must_use]
     #[inline(always)]
     pub const fn proc1_count(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x01ff;
@@ -151,7 +146,7 @@ impl Proc1count {
     }
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
     #[inline(always)]
-    pub fn set_proc1_count(&mut self, val: u16) {
+    pub const fn set_proc1_count(&mut self, val: u16) {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
@@ -171,14 +166,11 @@ impl core::fmt::Debug for Proc1count {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Proc1count {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Proc1count {
-            proc1_count: u16,
-        }
-        let proxy = Proc1count {
-            proc1_count: self.proc1_count(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Proc1count {{ proc1_count: {=u16:?} }}",
+            self.proc1_count()
+        )
     }
 }
 #[doc = "Controls the tick generator"]
@@ -187,6 +179,7 @@ impl defmt::Format for Proc1count {
 pub struct Proc1ctrl(pub u32);
 impl Proc1ctrl {
     #[doc = "start / stop tick generation"]
+    #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -194,10 +187,11 @@ impl Proc1ctrl {
     }
     #[doc = "start / stop tick generation"]
     #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
+    pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Is the tick generator running?"]
+    #[must_use]
     #[inline(always)]
     pub const fn running(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -205,7 +199,7 @@ impl Proc1ctrl {
     }
     #[doc = "Is the tick generator running?"]
     #[inline(always)]
-    pub fn set_running(&mut self, val: bool) {
+    pub const fn set_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
@@ -226,16 +220,12 @@ impl core::fmt::Debug for Proc1ctrl {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Proc1ctrl {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Proc1ctrl {
-            enable: bool,
-            running: bool,
-        }
-        let proxy = Proc1ctrl {
-            enable: self.enable(),
-            running: self.running(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Proc1ctrl {{ enable: {=bool:?}, running: {=bool:?} }}",
+            self.enable(),
+            self.running()
+        )
     }
 }
 #[repr(transparent)]
@@ -243,6 +233,7 @@ impl defmt::Format for Proc1ctrl {
 pub struct Proc1cycles(pub u32);
 impl Proc1cycles {
     #[doc = "Total number of clk_tick cycles before the next tick."]
+    #[must_use]
     #[inline(always)]
     pub const fn proc1_cycles(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x01ff;
@@ -250,7 +241,7 @@ impl Proc1cycles {
     }
     #[doc = "Total number of clk_tick cycles before the next tick."]
     #[inline(always)]
-    pub fn set_proc1_cycles(&mut self, val: u16) {
+    pub const fn set_proc1_cycles(&mut self, val: u16) {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
@@ -270,14 +261,11 @@ impl core::fmt::Debug for Proc1cycles {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Proc1cycles {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Proc1cycles {
-            proc1_cycles: u16,
-        }
-        let proxy = Proc1cycles {
-            proc1_cycles: self.proc1_cycles(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Proc1cycles {{ proc1_cycles: {=u16:?} }}",
+            self.proc1_cycles()
+        )
     }
 }
 #[repr(transparent)]
@@ -285,6 +273,7 @@ impl defmt::Format for Proc1cycles {
 pub struct RiscvCount(pub u32);
 impl RiscvCount {
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
+    #[must_use]
     #[inline(always)]
     pub const fn riscv_count(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x01ff;
@@ -292,7 +281,7 @@ impl RiscvCount {
     }
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
     #[inline(always)]
-    pub fn set_riscv_count(&mut self, val: u16) {
+    pub const fn set_riscv_count(&mut self, val: u16) {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
@@ -312,14 +301,11 @@ impl core::fmt::Debug for RiscvCount {
 #[cfg(feature = "defmt")]
 impl defmt::Format for RiscvCount {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct RiscvCount {
-            riscv_count: u16,
-        }
-        let proxy = RiscvCount {
-            riscv_count: self.riscv_count(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "RiscvCount {{ riscv_count: {=u16:?} }}",
+            self.riscv_count()
+        )
     }
 }
 #[doc = "Controls the tick generator"]
@@ -328,6 +314,7 @@ impl defmt::Format for RiscvCount {
 pub struct RiscvCtrl(pub u32);
 impl RiscvCtrl {
     #[doc = "start / stop tick generation"]
+    #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -335,10 +322,11 @@ impl RiscvCtrl {
     }
     #[doc = "start / stop tick generation"]
     #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
+    pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Is the tick generator running?"]
+    #[must_use]
     #[inline(always)]
     pub const fn running(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -346,7 +334,7 @@ impl RiscvCtrl {
     }
     #[doc = "Is the tick generator running?"]
     #[inline(always)]
-    pub fn set_running(&mut self, val: bool) {
+    pub const fn set_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
@@ -367,16 +355,12 @@ impl core::fmt::Debug for RiscvCtrl {
 #[cfg(feature = "defmt")]
 impl defmt::Format for RiscvCtrl {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct RiscvCtrl {
-            enable: bool,
-            running: bool,
-        }
-        let proxy = RiscvCtrl {
-            enable: self.enable(),
-            running: self.running(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "RiscvCtrl {{ enable: {=bool:?}, running: {=bool:?} }}",
+            self.enable(),
+            self.running()
+        )
     }
 }
 #[repr(transparent)]
@@ -384,6 +368,7 @@ impl defmt::Format for RiscvCtrl {
 pub struct RiscvCycles(pub u32);
 impl RiscvCycles {
     #[doc = "Total number of clk_tick cycles before the next tick."]
+    #[must_use]
     #[inline(always)]
     pub const fn riscv_cycles(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x01ff;
@@ -391,7 +376,7 @@ impl RiscvCycles {
     }
     #[doc = "Total number of clk_tick cycles before the next tick."]
     #[inline(always)]
-    pub fn set_riscv_cycles(&mut self, val: u16) {
+    pub const fn set_riscv_cycles(&mut self, val: u16) {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
@@ -411,14 +396,11 @@ impl core::fmt::Debug for RiscvCycles {
 #[cfg(feature = "defmt")]
 impl defmt::Format for RiscvCycles {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct RiscvCycles {
-            riscv_cycles: u16,
-        }
-        let proxy = RiscvCycles {
-            riscv_cycles: self.riscv_cycles(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "RiscvCycles {{ riscv_cycles: {=u16:?} }}",
+            self.riscv_cycles()
+        )
     }
 }
 #[repr(transparent)]
@@ -426,6 +408,7 @@ impl defmt::Format for RiscvCycles {
 pub struct Timer0count(pub u32);
 impl Timer0count {
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
+    #[must_use]
     #[inline(always)]
     pub const fn timer0_count(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x01ff;
@@ -433,7 +416,7 @@ impl Timer0count {
     }
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
     #[inline(always)]
-    pub fn set_timer0_count(&mut self, val: u16) {
+    pub const fn set_timer0_count(&mut self, val: u16) {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
@@ -453,14 +436,11 @@ impl core::fmt::Debug for Timer0count {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Timer0count {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Timer0count {
-            timer0_count: u16,
-        }
-        let proxy = Timer0count {
-            timer0_count: self.timer0_count(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Timer0count {{ timer0_count: {=u16:?} }}",
+            self.timer0_count()
+        )
     }
 }
 #[doc = "Controls the tick generator"]
@@ -469,6 +449,7 @@ impl defmt::Format for Timer0count {
 pub struct Timer0ctrl(pub u32);
 impl Timer0ctrl {
     #[doc = "start / stop tick generation"]
+    #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -476,10 +457,11 @@ impl Timer0ctrl {
     }
     #[doc = "start / stop tick generation"]
     #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
+    pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Is the tick generator running?"]
+    #[must_use]
     #[inline(always)]
     pub const fn running(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -487,7 +469,7 @@ impl Timer0ctrl {
     }
     #[doc = "Is the tick generator running?"]
     #[inline(always)]
-    pub fn set_running(&mut self, val: bool) {
+    pub const fn set_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
@@ -508,16 +490,12 @@ impl core::fmt::Debug for Timer0ctrl {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Timer0ctrl {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Timer0ctrl {
-            enable: bool,
-            running: bool,
-        }
-        let proxy = Timer0ctrl {
-            enable: self.enable(),
-            running: self.running(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Timer0ctrl {{ enable: {=bool:?}, running: {=bool:?} }}",
+            self.enable(),
+            self.running()
+        )
     }
 }
 #[repr(transparent)]
@@ -525,6 +503,7 @@ impl defmt::Format for Timer0ctrl {
 pub struct Timer0cycles(pub u32);
 impl Timer0cycles {
     #[doc = "Total number of clk_tick cycles before the next tick."]
+    #[must_use]
     #[inline(always)]
     pub const fn timer0_cycles(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x01ff;
@@ -532,7 +511,7 @@ impl Timer0cycles {
     }
     #[doc = "Total number of clk_tick cycles before the next tick."]
     #[inline(always)]
-    pub fn set_timer0_cycles(&mut self, val: u16) {
+    pub const fn set_timer0_cycles(&mut self, val: u16) {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
@@ -552,14 +531,11 @@ impl core::fmt::Debug for Timer0cycles {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Timer0cycles {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Timer0cycles {
-            timer0_cycles: u16,
-        }
-        let proxy = Timer0cycles {
-            timer0_cycles: self.timer0_cycles(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Timer0cycles {{ timer0_cycles: {=u16:?} }}",
+            self.timer0_cycles()
+        )
     }
 }
 #[repr(transparent)]
@@ -567,6 +543,7 @@ impl defmt::Format for Timer0cycles {
 pub struct Timer1count(pub u32);
 impl Timer1count {
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
+    #[must_use]
     #[inline(always)]
     pub const fn timer1_count(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x01ff;
@@ -574,7 +551,7 @@ impl Timer1count {
     }
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
     #[inline(always)]
-    pub fn set_timer1_count(&mut self, val: u16) {
+    pub const fn set_timer1_count(&mut self, val: u16) {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
@@ -594,14 +571,11 @@ impl core::fmt::Debug for Timer1count {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Timer1count {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Timer1count {
-            timer1_count: u16,
-        }
-        let proxy = Timer1count {
-            timer1_count: self.timer1_count(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Timer1count {{ timer1_count: {=u16:?} }}",
+            self.timer1_count()
+        )
     }
 }
 #[doc = "Controls the tick generator"]
@@ -610,6 +584,7 @@ impl defmt::Format for Timer1count {
 pub struct Timer1ctrl(pub u32);
 impl Timer1ctrl {
     #[doc = "start / stop tick generation"]
+    #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -617,10 +592,11 @@ impl Timer1ctrl {
     }
     #[doc = "start / stop tick generation"]
     #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
+    pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Is the tick generator running?"]
+    #[must_use]
     #[inline(always)]
     pub const fn running(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -628,7 +604,7 @@ impl Timer1ctrl {
     }
     #[doc = "Is the tick generator running?"]
     #[inline(always)]
-    pub fn set_running(&mut self, val: bool) {
+    pub const fn set_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
@@ -649,16 +625,12 @@ impl core::fmt::Debug for Timer1ctrl {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Timer1ctrl {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Timer1ctrl {
-            enable: bool,
-            running: bool,
-        }
-        let proxy = Timer1ctrl {
-            enable: self.enable(),
-            running: self.running(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Timer1ctrl {{ enable: {=bool:?}, running: {=bool:?} }}",
+            self.enable(),
+            self.running()
+        )
     }
 }
 #[repr(transparent)]
@@ -666,6 +638,7 @@ impl defmt::Format for Timer1ctrl {
 pub struct Timer1cycles(pub u32);
 impl Timer1cycles {
     #[doc = "Total number of clk_tick cycles before the next tick."]
+    #[must_use]
     #[inline(always)]
     pub const fn timer1_cycles(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x01ff;
@@ -673,7 +646,7 @@ impl Timer1cycles {
     }
     #[doc = "Total number of clk_tick cycles before the next tick."]
     #[inline(always)]
-    pub fn set_timer1_cycles(&mut self, val: u16) {
+    pub const fn set_timer1_cycles(&mut self, val: u16) {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
@@ -693,14 +666,11 @@ impl core::fmt::Debug for Timer1cycles {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Timer1cycles {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Timer1cycles {
-            timer1_cycles: u16,
-        }
-        let proxy = Timer1cycles {
-            timer1_cycles: self.timer1_cycles(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Timer1cycles {{ timer1_cycles: {=u16:?} }}",
+            self.timer1_cycles()
+        )
     }
 }
 #[repr(transparent)]
@@ -708,6 +678,7 @@ impl defmt::Format for Timer1cycles {
 pub struct WatchdogCount(pub u32);
 impl WatchdogCount {
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
+    #[must_use]
     #[inline(always)]
     pub const fn watchdog_count(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x01ff;
@@ -715,7 +686,7 @@ impl WatchdogCount {
     }
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
     #[inline(always)]
-    pub fn set_watchdog_count(&mut self, val: u16) {
+    pub const fn set_watchdog_count(&mut self, val: u16) {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
@@ -735,14 +706,11 @@ impl core::fmt::Debug for WatchdogCount {
 #[cfg(feature = "defmt")]
 impl defmt::Format for WatchdogCount {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct WatchdogCount {
-            watchdog_count: u16,
-        }
-        let proxy = WatchdogCount {
-            watchdog_count: self.watchdog_count(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "WatchdogCount {{ watchdog_count: {=u16:?} }}",
+            self.watchdog_count()
+        )
     }
 }
 #[doc = "Controls the tick generator"]
@@ -751,6 +719,7 @@ impl defmt::Format for WatchdogCount {
 pub struct WatchdogCtrl(pub u32);
 impl WatchdogCtrl {
     #[doc = "start / stop tick generation"]
+    #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -758,10 +727,11 @@ impl WatchdogCtrl {
     }
     #[doc = "start / stop tick generation"]
     #[inline(always)]
-    pub fn set_enable(&mut self, val: bool) {
+    pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Is the tick generator running?"]
+    #[must_use]
     #[inline(always)]
     pub const fn running(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -769,7 +739,7 @@ impl WatchdogCtrl {
     }
     #[doc = "Is the tick generator running?"]
     #[inline(always)]
-    pub fn set_running(&mut self, val: bool) {
+    pub const fn set_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
@@ -790,16 +760,12 @@ impl core::fmt::Debug for WatchdogCtrl {
 #[cfg(feature = "defmt")]
 impl defmt::Format for WatchdogCtrl {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct WatchdogCtrl {
-            enable: bool,
-            running: bool,
-        }
-        let proxy = WatchdogCtrl {
-            enable: self.enable(),
-            running: self.running(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "WatchdogCtrl {{ enable: {=bool:?}, running: {=bool:?} }}",
+            self.enable(),
+            self.running()
+        )
     }
 }
 #[repr(transparent)]
@@ -807,6 +773,7 @@ impl defmt::Format for WatchdogCtrl {
 pub struct WatchdogCycles(pub u32);
 impl WatchdogCycles {
     #[doc = "Total number of clk_tick cycles before the next tick."]
+    #[must_use]
     #[inline(always)]
     pub const fn watchdog_cycles(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x01ff;
@@ -814,7 +781,7 @@ impl WatchdogCycles {
     }
     #[doc = "Total number of clk_tick cycles before the next tick."]
     #[inline(always)]
-    pub fn set_watchdog_cycles(&mut self, val: u16) {
+    pub const fn set_watchdog_cycles(&mut self, val: u16) {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
@@ -834,13 +801,10 @@ impl core::fmt::Debug for WatchdogCycles {
 #[cfg(feature = "defmt")]
 impl defmt::Format for WatchdogCycles {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct WatchdogCycles {
-            watchdog_cycles: u16,
-        }
-        let proxy = WatchdogCycles {
-            watchdog_cycles: self.watchdog_cycles(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "WatchdogCycles {{ watchdog_cycles: {=u16:?} }}",
+            self.watchdog_cycles()
+        )
     }
 }

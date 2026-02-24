@@ -117,7 +117,7 @@ impl From<Range> for u8 {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct UsbWhiteLabelAddr(pub u16);
+pub struct UsbWhiteLabelAddr(u16);
 impl UsbWhiteLabelAddr {
     pub const INDEX_USB_DEVICE_VID_VALUE: Self = Self(0x0);
     pub const INDEX_USB_DEVICE_PID_VALUE: Self = Self(0x01);

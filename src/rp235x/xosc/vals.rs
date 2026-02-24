@@ -1,6 +1,6 @@
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct CtrlFreqRange(pub u16);
+pub struct CtrlFreqRange(u16);
 impl CtrlFreqRange {
     pub const _1_15MHZ: Self = Self(0x0aa0);
     pub const _10_30MHZ: Self = Self(0x0aa1);
@@ -52,7 +52,7 @@ impl From<CtrlFreqRange> for u16 {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct Dormant(pub u32);
+pub struct Dormant(u32);
 impl Dormant {
     pub const DORMANT: Self = Self(0x636f_6d61);
     pub const WAKE: Self = Self(0x7761_6b65);
@@ -98,7 +98,7 @@ impl From<Dormant> for u32 {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct Enable(pub u16);
+pub struct Enable(u16);
 impl Enable {
     pub const DISABLE: Self = Self(0x0d1e);
     pub const ENABLE: Self = Self(0x0fab);

@@ -4,6 +4,7 @@
 pub struct AutocorrStatistic(pub u32);
 impl AutocorrStatistic {
     #[doc = "Count each time an autocorrelation test starts. Any write to the register reset the counter. Stop collecting statistic if one of the counters reached the limit."]
+    #[must_use]
     #[inline(always)]
     pub const fn autocorr_trys(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x3fff;
@@ -11,10 +12,11 @@ impl AutocorrStatistic {
     }
     #[doc = "Count each time an autocorrelation test starts. Any write to the register reset the counter. Stop collecting statistic if one of the counters reached the limit."]
     #[inline(always)]
-    pub fn set_autocorr_trys(&mut self, val: u16) {
+    pub const fn set_autocorr_trys(&mut self, val: u16) {
         self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
     }
     #[doc = "Count each time an autocorrelation test fails. Any write to the register reset the counter. Stop collecting statistic if one of the counters reached the limit."]
+    #[must_use]
     #[inline(always)]
     pub const fn autocorr_fails(&self) -> u8 {
         let val = (self.0 >> 14usize) & 0xff;
@@ -22,10 +24,11 @@ impl AutocorrStatistic {
     }
     #[doc = "Count each time an autocorrelation test fails. Any write to the register reset the counter. Stop collecting statistic if one of the counters reached the limit."]
     #[inline(always)]
-    pub fn set_autocorr_fails(&mut self, val: u8) {
+    pub const fn set_autocorr_fails(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 14usize)) | (((val as u32) & 0xff) << 14usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u16 {
         let val = (self.0 >> 22usize) & 0x03ff;
@@ -33,7 +36,7 @@ impl AutocorrStatistic {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u16) {
+    pub const fn set_reserved(&mut self, val: u16) {
         self.0 = (self.0 & !(0x03ff << 22usize)) | (((val as u32) & 0x03ff) << 22usize);
     }
 }
@@ -55,18 +58,7 @@ impl core::fmt::Debug for AutocorrStatistic {
 #[cfg(feature = "defmt")]
 impl defmt::Format for AutocorrStatistic {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct AutocorrStatistic {
-            autocorr_trys: u16,
-            autocorr_fails: u8,
-            reserved: u16,
-        }
-        let proxy = AutocorrStatistic {
-            autocorr_trys: self.autocorr_trys(),
-            autocorr_fails: self.autocorr_fails(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "AutocorrStatistic {{ autocorr_trys: {=u16:?}, autocorr_fails: {=u8:?}, reserved: {=u16:?} }}" , self . autocorr_trys () , self . autocorr_fails () , self . reserved ())
     }
 }
 #[doc = "Enable signal for the random source."]
@@ -75,6 +67,7 @@ impl defmt::Format for AutocorrStatistic {
 pub struct RndSourceEnable(pub u32);
 impl RndSourceEnable {
     #[doc = "* 1'b1 - entropy source is enabled. *1'b0 - entropy source is disabled"]
+    #[must_use]
     #[inline(always)]
     pub const fn rnd_src_en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -82,10 +75,11 @@ impl RndSourceEnable {
     }
     #[doc = "* 1'b1 - entropy source is enabled. *1'b0 - entropy source is disabled"]
     #[inline(always)]
-    pub fn set_rnd_src_en(&mut self, val: bool) {
+    pub const fn set_rnd_src_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 1usize) & 0x7fff_ffff;
@@ -93,7 +87,7 @@ impl RndSourceEnable {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u32) {
+    pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x7fff_ffff << 1usize)) | (((val as u32) & 0x7fff_ffff) << 1usize);
     }
 }
@@ -114,16 +108,12 @@ impl core::fmt::Debug for RndSourceEnable {
 #[cfg(feature = "defmt")]
 impl defmt::Format for RndSourceEnable {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct RndSourceEnable {
-            rnd_src_en: bool,
-            reserved: u32,
-        }
-        let proxy = RndSourceEnable {
-            rnd_src_en: self.rnd_src_en(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "RndSourceEnable {{ rnd_src_en: {=bool:?}, reserved: {=u32:?} }}",
+            self.rnd_src_en(),
+            self.reserved()
+        )
     }
 }
 #[doc = "Collected BIST results."]
@@ -132,6 +122,7 @@ impl defmt::Format for RndSourceEnable {
 pub struct RngBistCntr0(pub u32);
 impl RngBistCntr0 {
     #[doc = "Reflects the results of RNG BIST counter."]
+    #[must_use]
     #[inline(always)]
     pub const fn rosc_cntr_val(&self) -> u32 {
         let val = (self.0 >> 0usize) & 0x003f_ffff;
@@ -139,10 +130,11 @@ impl RngBistCntr0 {
     }
     #[doc = "Reflects the results of RNG BIST counter."]
     #[inline(always)]
-    pub fn set_rosc_cntr_val(&mut self, val: u32) {
+    pub const fn set_rosc_cntr_val(&mut self, val: u32) {
         self.0 = (self.0 & !(0x003f_ffff << 0usize)) | (((val as u32) & 0x003f_ffff) << 0usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u16 {
         let val = (self.0 >> 22usize) & 0x03ff;
@@ -150,7 +142,7 @@ impl RngBistCntr0 {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u16) {
+    pub const fn set_reserved(&mut self, val: u16) {
         self.0 = (self.0 & !(0x03ff << 22usize)) | (((val as u32) & 0x03ff) << 22usize);
     }
 }
@@ -171,16 +163,12 @@ impl core::fmt::Debug for RngBistCntr0 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for RngBistCntr0 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct RngBistCntr0 {
-            rosc_cntr_val: u32,
-            reserved: u16,
-        }
-        let proxy = RngBistCntr0 {
-            rosc_cntr_val: self.rosc_cntr_val(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "RngBistCntr0 {{ rosc_cntr_val: {=u32:?}, reserved: {=u16:?} }}",
+            self.rosc_cntr_val(),
+            self.reserved()
+        )
     }
 }
 #[doc = "Collected BIST results."]
@@ -189,6 +177,7 @@ impl defmt::Format for RngBistCntr0 {
 pub struct RngBistCntr1(pub u32);
 impl RngBistCntr1 {
     #[doc = "Reflects the results of RNG BIST counter."]
+    #[must_use]
     #[inline(always)]
     pub const fn rosc_cntr_val(&self) -> u32 {
         let val = (self.0 >> 0usize) & 0x003f_ffff;
@@ -196,10 +185,11 @@ impl RngBistCntr1 {
     }
     #[doc = "Reflects the results of RNG BIST counter."]
     #[inline(always)]
-    pub fn set_rosc_cntr_val(&mut self, val: u32) {
+    pub const fn set_rosc_cntr_val(&mut self, val: u32) {
         self.0 = (self.0 & !(0x003f_ffff << 0usize)) | (((val as u32) & 0x003f_ffff) << 0usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u16 {
         let val = (self.0 >> 22usize) & 0x03ff;
@@ -207,7 +197,7 @@ impl RngBistCntr1 {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u16) {
+    pub const fn set_reserved(&mut self, val: u16) {
         self.0 = (self.0 & !(0x03ff << 22usize)) | (((val as u32) & 0x03ff) << 22usize);
     }
 }
@@ -228,16 +218,12 @@ impl core::fmt::Debug for RngBistCntr1 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for RngBistCntr1 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct RngBistCntr1 {
-            rosc_cntr_val: u32,
-            reserved: u16,
-        }
-        let proxy = RngBistCntr1 {
-            rosc_cntr_val: self.rosc_cntr_val(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "RngBistCntr1 {{ rosc_cntr_val: {=u32:?}, reserved: {=u16:?} }}",
+            self.rosc_cntr_val(),
+            self.reserved()
+        )
     }
 }
 #[doc = "Collected BIST results."]
@@ -246,6 +232,7 @@ impl defmt::Format for RngBistCntr1 {
 pub struct RngBistCntr2(pub u32);
 impl RngBistCntr2 {
     #[doc = "Reflects the results of RNG BIST counter."]
+    #[must_use]
     #[inline(always)]
     pub const fn rosc_cntr_val(&self) -> u32 {
         let val = (self.0 >> 0usize) & 0x003f_ffff;
@@ -253,10 +240,11 @@ impl RngBistCntr2 {
     }
     #[doc = "Reflects the results of RNG BIST counter."]
     #[inline(always)]
-    pub fn set_rosc_cntr_val(&mut self, val: u32) {
+    pub const fn set_rosc_cntr_val(&mut self, val: u32) {
         self.0 = (self.0 & !(0x003f_ffff << 0usize)) | (((val as u32) & 0x003f_ffff) << 0usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u16 {
         let val = (self.0 >> 22usize) & 0x03ff;
@@ -264,7 +252,7 @@ impl RngBistCntr2 {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u16) {
+    pub const fn set_reserved(&mut self, val: u16) {
         self.0 = (self.0 & !(0x03ff << 22usize)) | (((val as u32) & 0x03ff) << 22usize);
     }
 }
@@ -285,16 +273,12 @@ impl core::fmt::Debug for RngBistCntr2 {
 #[cfg(feature = "defmt")]
 impl defmt::Format for RngBistCntr2 {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct RngBistCntr2 {
-            rosc_cntr_val: u32,
-            reserved: u16,
-        }
-        let proxy = RngBistCntr2 {
-            rosc_cntr_val: self.rosc_cntr_val(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "RngBistCntr2 {{ rosc_cntr_val: {=u32:?}, reserved: {=u16:?} }}",
+            self.rosc_cntr_val(),
+            self.reserved()
+        )
     }
 }
 #[doc = "Enable the RNG debug mode"]
@@ -303,6 +287,7 @@ impl defmt::Format for RngBistCntr2 {
 pub struct RngDebugEnInput(pub u32);
 impl RngDebugEnInput {
     #[doc = "* 1'b1 - debug mode is enabled. *1'b0 - debug mode is disabled"]
+    #[must_use]
     #[inline(always)]
     pub const fn rng_debug_en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -310,10 +295,11 @@ impl RngDebugEnInput {
     }
     #[doc = "* 1'b1 - debug mode is enabled. *1'b0 - debug mode is disabled"]
     #[inline(always)]
-    pub fn set_rng_debug_en(&mut self, val: bool) {
+    pub const fn set_rng_debug_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 1usize) & 0x7fff_ffff;
@@ -321,7 +307,7 @@ impl RngDebugEnInput {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u32) {
+    pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x7fff_ffff << 1usize)) | (((val as u32) & 0x7fff_ffff) << 1usize);
     }
 }
@@ -342,16 +328,12 @@ impl core::fmt::Debug for RngDebugEnInput {
 #[cfg(feature = "defmt")]
 impl defmt::Format for RngDebugEnInput {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct RngDebugEnInput {
-            rng_debug_en: bool,
-            reserved: u32,
-        }
-        let proxy = RngDebugEnInput {
-            rng_debug_en: self.rng_debug_en(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "RngDebugEnInput {{ rng_debug_en: {=bool:?}, reserved: {=u32:?} }}",
+            self.rng_debug_en(),
+            self.reserved()
+        )
     }
 }
 #[doc = "Interrupt/status bit clear Register."]
@@ -360,6 +342,7 @@ impl defmt::Format for RngDebugEnInput {
 pub struct RngIcr(pub u32);
 impl RngIcr {
     #[doc = "Write 1'b1 - clear corresponding bit in RNG_ISR."]
+    #[must_use]
     #[inline(always)]
     pub const fn ehr_valid(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -367,10 +350,11 @@ impl RngIcr {
     }
     #[doc = "Write 1'b1 - clear corresponding bit in RNG_ISR."]
     #[inline(always)]
-    pub fn set_ehr_valid(&mut self, val: bool) {
+    pub const fn set_ehr_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Cannot be cleared by SW! Only RNG reset clears this bit."]
+    #[must_use]
     #[inline(always)]
     pub const fn autocorr_err(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -378,10 +362,11 @@ impl RngIcr {
     }
     #[doc = "Cannot be cleared by SW! Only RNG reset clears this bit."]
     #[inline(always)]
-    pub fn set_autocorr_err(&mut self, val: bool) {
+    pub const fn set_autocorr_err(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "Write 1'b1 - clear corresponding bit in RNG_ISR."]
+    #[must_use]
     #[inline(always)]
     pub const fn crngt_err(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -389,10 +374,11 @@ impl RngIcr {
     }
     #[doc = "Write 1'b1 - clear corresponding bit in RNG_ISR."]
     #[inline(always)]
-    pub fn set_crngt_err(&mut self, val: bool) {
+    pub const fn set_crngt_err(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "Write 1'b1 - clear corresponding bit in RNG_ISR."]
+    #[must_use]
     #[inline(always)]
     pub const fn vn_err(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -400,10 +386,11 @@ impl RngIcr {
     }
     #[doc = "Write 1'b1 - clear corresponding bit in RNG_ISR."]
     #[inline(always)]
-    pub fn set_vn_err(&mut self, val: bool) {
+    pub const fn set_vn_err(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 4usize) & 0x0fff_ffff;
@@ -411,7 +398,7 @@ impl RngIcr {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u32) {
+    pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x0fff_ffff << 4usize)) | (((val as u32) & 0x0fff_ffff) << 4usize);
     }
 }
@@ -435,22 +422,7 @@ impl core::fmt::Debug for RngIcr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for RngIcr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct RngIcr {
-            ehr_valid: bool,
-            autocorr_err: bool,
-            crngt_err: bool,
-            vn_err: bool,
-            reserved: u32,
-        }
-        let proxy = RngIcr {
-            ehr_valid: self.ehr_valid(),
-            autocorr_err: self.autocorr_err(),
-            crngt_err: self.crngt_err(),
-            vn_err: self.vn_err(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "RngIcr {{ ehr_valid: {=bool:?}, autocorr_err: {=bool:?}, crngt_err: {=bool:?}, vn_err: {=bool:?}, reserved: {=u32:?} }}" , self . ehr_valid () , self . autocorr_err () , self . crngt_err () , self . vn_err () , self . reserved ())
     }
 }
 #[doc = "Interrupt masking."]
@@ -459,6 +431,7 @@ impl defmt::Format for RngIcr {
 pub struct RngImr(pub u32);
 impl RngImr {
     #[doc = "1'b1-mask interrupt, no interrupt will be generated. See RNG_ISR for an explanation on this interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn ehr_valid_int_mask(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -466,10 +439,11 @@ impl RngImr {
     }
     #[doc = "1'b1-mask interrupt, no interrupt will be generated. See RNG_ISR for an explanation on this interrupt."]
     #[inline(always)]
-    pub fn set_ehr_valid_int_mask(&mut self, val: bool) {
+    pub const fn set_ehr_valid_int_mask(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "1'b1-mask interrupt, no interrupt will be generated. See RNG_ISR for an explanation on this interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn autocorr_err_int_mask(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -477,10 +451,11 @@ impl RngImr {
     }
     #[doc = "1'b1-mask interrupt, no interrupt will be generated. See RNG_ISR for an explanation on this interrupt."]
     #[inline(always)]
-    pub fn set_autocorr_err_int_mask(&mut self, val: bool) {
+    pub const fn set_autocorr_err_int_mask(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "1'b1-mask interrupt, no interrupt will be generated. See RNG_ISR for an explanation on this interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn crngt_err_int_mask(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -488,10 +463,11 @@ impl RngImr {
     }
     #[doc = "1'b1-mask interrupt, no interrupt will be generated. See RNG_ISR for an explanation on this interrupt."]
     #[inline(always)]
-    pub fn set_crngt_err_int_mask(&mut self, val: bool) {
+    pub const fn set_crngt_err_int_mask(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "1'b1-mask interrupt, no interrupt will be generated. See RNG_ISR for an explanation on this interrupt."]
+    #[must_use]
     #[inline(always)]
     pub const fn vn_err_int_mask(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -499,10 +475,11 @@ impl RngImr {
     }
     #[doc = "1'b1-mask interrupt, no interrupt will be generated. See RNG_ISR for an explanation on this interrupt."]
     #[inline(always)]
-    pub fn set_vn_err_int_mask(&mut self, val: bool) {
+    pub const fn set_vn_err_int_mask(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 4usize) & 0x0fff_ffff;
@@ -510,7 +487,7 @@ impl RngImr {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u32) {
+    pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x0fff_ffff << 4usize)) | (((val as u32) & 0x0fff_ffff) << 4usize);
     }
 }
@@ -534,22 +511,7 @@ impl core::fmt::Debug for RngImr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for RngImr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct RngImr {
-            ehr_valid_int_mask: bool,
-            autocorr_err_int_mask: bool,
-            crngt_err_int_mask: bool,
-            vn_err_int_mask: bool,
-            reserved: u32,
-        }
-        let proxy = RngImr {
-            ehr_valid_int_mask: self.ehr_valid_int_mask(),
-            autocorr_err_int_mask: self.autocorr_err_int_mask(),
-            crngt_err_int_mask: self.crngt_err_int_mask(),
-            vn_err_int_mask: self.vn_err_int_mask(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "RngImr {{ ehr_valid_int_mask: {=bool:?}, autocorr_err_int_mask: {=bool:?}, crngt_err_int_mask: {=bool:?}, vn_err_int_mask: {=bool:?}, reserved: {=u32:?} }}" , self . ehr_valid_int_mask () , self . autocorr_err_int_mask () , self . crngt_err_int_mask () , self . vn_err_int_mask () , self . reserved ())
     }
 }
 #[doc = "RNG status register. If corresponding RNG_IMR bit is unmasked, an interrupt will be generated."]
@@ -558,6 +520,7 @@ impl defmt::Format for RngImr {
 pub struct RngIsr(pub u32);
 impl RngIsr {
     #[doc = "1'b1 indicates that 192 bits have been collected in the RNG, and are ready to be read."]
+    #[must_use]
     #[inline(always)]
     pub const fn ehr_valid(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -565,10 +528,11 @@ impl RngIsr {
     }
     #[doc = "1'b1 indicates that 192 bits have been collected in the RNG, and are ready to be read."]
     #[inline(always)]
-    pub fn set_ehr_valid(&mut self, val: bool) {
+    pub const fn set_ehr_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "1'b1 indicates Autocorrelation test failed four times in a row. When set, RNG cease from functioning until next reset."]
+    #[must_use]
     #[inline(always)]
     pub const fn autocorr_err(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -576,10 +540,11 @@ impl RngIsr {
     }
     #[doc = "1'b1 indicates Autocorrelation test failed four times in a row. When set, RNG cease from functioning until next reset."]
     #[inline(always)]
-    pub fn set_autocorr_err(&mut self, val: bool) {
+    pub const fn set_autocorr_err(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "1'b1 indicates CRNGT in the RNG test failed. Failure occurs when two consecutive blocks of 16 collected bits are equal."]
+    #[must_use]
     #[inline(always)]
     pub const fn crngt_err(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -587,10 +552,11 @@ impl RngIsr {
     }
     #[doc = "1'b1 indicates CRNGT in the RNG test failed. Failure occurs when two consecutive blocks of 16 collected bits are equal."]
     #[inline(always)]
-    pub fn set_crngt_err(&mut self, val: bool) {
+    pub const fn set_crngt_err(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "1'b1 indicates Von Neuman error. Error in von Neuman occurs if 32 consecutive collected bits are identical, ZERO or ONE."]
+    #[must_use]
     #[inline(always)]
     pub const fn vn_err(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -598,10 +564,11 @@ impl RngIsr {
     }
     #[doc = "1'b1 indicates Von Neuman error. Error in von Neuman occurs if 32 consecutive collected bits are identical, ZERO or ONE."]
     #[inline(always)]
-    pub fn set_vn_err(&mut self, val: bool) {
+    pub const fn set_vn_err(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 4usize) & 0x0fff_ffff;
@@ -609,7 +576,7 @@ impl RngIsr {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u32) {
+    pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x0fff_ffff << 4usize)) | (((val as u32) & 0x0fff_ffff) << 4usize);
     }
 }
@@ -633,22 +600,7 @@ impl core::fmt::Debug for RngIsr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for RngIsr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct RngIsr {
-            ehr_valid: bool,
-            autocorr_err: bool,
-            crngt_err: bool,
-            vn_err: bool,
-            reserved: u32,
-        }
-        let proxy = RngIsr {
-            ehr_valid: self.ehr_valid(),
-            autocorr_err: self.autocorr_err(),
-            crngt_err: self.crngt_err(),
-            vn_err: self.vn_err(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "RngIsr {{ ehr_valid: {=bool:?}, autocorr_err: {=bool:?}, crngt_err: {=bool:?}, vn_err: {=bool:?}, reserved: {=u32:?} }}" , self . ehr_valid () , self . autocorr_err () , self . crngt_err () , self . vn_err () , self . reserved ())
     }
 }
 #[doc = "Displays the version settings of the TRNG."]
@@ -657,6 +609,7 @@ impl defmt::Format for RngIsr {
 pub struct RngVersion(pub u32);
 impl RngVersion {
     #[doc = "* 1'b1 - 192-bit EHR. *1'b0 - 128-bit EHR"]
+    #[must_use]
     #[inline(always)]
     pub const fn ehr_width_192(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -664,10 +617,11 @@ impl RngVersion {
     }
     #[doc = "* 1'b1 - 192-bit EHR. *1'b0 - 128-bit EHR"]
     #[inline(always)]
-    pub fn set_ehr_width_192(&mut self, val: bool) {
+    pub const fn set_ehr_width_192(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[must_use]
     #[inline(always)]
     pub const fn crngt_exists(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -675,10 +629,11 @@ impl RngVersion {
     }
     #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
     #[inline(always)]
-    pub fn set_crngt_exists(&mut self, val: bool) {
+    pub const fn set_crngt_exists(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[must_use]
     #[inline(always)]
     pub const fn autocorr_exists(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -686,10 +641,11 @@ impl RngVersion {
     }
     #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
     #[inline(always)]
-    pub fn set_autocorr_exists(&mut self, val: bool) {
+    pub const fn set_autocorr_exists(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[must_use]
     #[inline(always)]
     pub const fn trng_tests_bypass_en(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -697,10 +653,11 @@ impl RngVersion {
     }
     #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
     #[inline(always)]
-    pub fn set_trng_tests_bypass_en(&mut self, val: bool) {
+    pub const fn set_trng_tests_bypass_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[must_use]
     #[inline(always)]
     pub const fn prng_exists(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -708,10 +665,11 @@ impl RngVersion {
     }
     #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
     #[inline(always)]
-    pub fn set_prng_exists(&mut self, val: bool) {
+    pub const fn set_prng_exists(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[must_use]
     #[inline(always)]
     pub const fn kat_exists(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
@@ -719,10 +677,11 @@ impl RngVersion {
     }
     #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
     #[inline(always)]
-    pub fn set_kat_exists(&mut self, val: bool) {
+    pub const fn set_kat_exists(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
     #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[must_use]
     #[inline(always)]
     pub const fn reseeding_exists(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
@@ -730,10 +689,11 @@ impl RngVersion {
     }
     #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
     #[inline(always)]
-    pub fn set_reseeding_exists(&mut self, val: bool) {
+    pub const fn set_reseeding_exists(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
     #[doc = "* 1'b1 - 5 SBOX AES. *1'b0 - 20 SBOX AES"]
+    #[must_use]
     #[inline(always)]
     pub const fn rng_use_5_sboxes(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
@@ -741,10 +701,11 @@ impl RngVersion {
     }
     #[doc = "* 1'b1 - 5 SBOX AES. *1'b0 - 20 SBOX AES"]
     #[inline(always)]
-    pub fn set_rng_use_5_sboxes(&mut self, val: bool) {
+    pub const fn set_rng_use_5_sboxes(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 8usize) & 0x00ff_ffff;
@@ -752,7 +713,7 @@ impl RngVersion {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u32) {
+    pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x00ff_ffff << 8usize)) | (((val as u32) & 0x00ff_ffff) << 8usize);
     }
 }
@@ -780,30 +741,7 @@ impl core::fmt::Debug for RngVersion {
 #[cfg(feature = "defmt")]
 impl defmt::Format for RngVersion {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct RngVersion {
-            ehr_width_192: bool,
-            crngt_exists: bool,
-            autocorr_exists: bool,
-            trng_tests_bypass_en: bool,
-            prng_exists: bool,
-            kat_exists: bool,
-            reseeding_exists: bool,
-            rng_use_5_sboxes: bool,
-            reserved: u32,
-        }
-        let proxy = RngVersion {
-            ehr_width_192: self.ehr_width_192(),
-            crngt_exists: self.crngt_exists(),
-            autocorr_exists: self.autocorr_exists(),
-            trng_tests_bypass_en: self.trng_tests_bypass_en(),
-            prng_exists: self.prng_exists(),
-            kat_exists: self.kat_exists(),
-            reseeding_exists: self.reseeding_exists(),
-            rng_use_5_sboxes: self.rng_use_5_sboxes(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "RngVersion {{ ehr_width_192: {=bool:?}, crngt_exists: {=bool:?}, autocorr_exists: {=bool:?}, trng_tests_bypass_en: {=bool:?}, prng_exists: {=bool:?}, kat_exists: {=bool:?}, reseeding_exists: {=bool:?}, rng_use_5_sboxes: {=bool:?}, reserved: {=u32:?} }}" , self . ehr_width_192 () , self . crngt_exists () , self . autocorr_exists () , self . trng_tests_bypass_en () , self . prng_exists () , self . kat_exists () , self . reseeding_exists () , self . rng_use_5_sboxes () , self . reserved ())
     }
 }
 #[doc = "Reset the counter of collected bits in the RNG."]
@@ -812,6 +750,7 @@ impl defmt::Format for RngVersion {
 pub struct RstBitsCounter(pub u32);
 impl RstBitsCounter {
     #[doc = "Writing any value to this address will reset the bits counter and RNG valid registers. RND_SORCE_ENABLE register must be unset in order for the reset to take place."]
+    #[must_use]
     #[inline(always)]
     pub const fn rst_bits_counter(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -819,10 +758,11 @@ impl RstBitsCounter {
     }
     #[doc = "Writing any value to this address will reset the bits counter and RNG valid registers. RND_SORCE_ENABLE register must be unset in order for the reset to take place."]
     #[inline(always)]
-    pub fn set_rst_bits_counter(&mut self, val: bool) {
+    pub const fn set_rst_bits_counter(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 1usize) & 0x7fff_ffff;
@@ -830,7 +770,7 @@ impl RstBitsCounter {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u32) {
+    pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x7fff_ffff << 1usize)) | (((val as u32) & 0x7fff_ffff) << 1usize);
     }
 }
@@ -851,16 +791,12 @@ impl core::fmt::Debug for RstBitsCounter {
 #[cfg(feature = "defmt")]
 impl defmt::Format for RstBitsCounter {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct RstBitsCounter {
-            rst_bits_counter: bool,
-            reserved: u32,
-        }
-        let proxy = RstBitsCounter {
-            rst_bits_counter: self.rst_bits_counter(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "RstBitsCounter {{ rst_bits_counter: {=bool:?}, reserved: {=u32:?} }}",
+            self.rst_bits_counter(),
+            self.reserved()
+        )
     }
 }
 #[doc = "RNG Busy indication."]
@@ -869,6 +805,7 @@ impl defmt::Format for RstBitsCounter {
 pub struct TrngBusy(pub u32);
 impl TrngBusy {
     #[doc = "Reflects rng_busy status."]
+    #[must_use]
     #[inline(always)]
     pub const fn trng_busy(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -876,10 +813,11 @@ impl TrngBusy {
     }
     #[doc = "Reflects rng_busy status."]
     #[inline(always)]
-    pub fn set_trng_busy(&mut self, val: bool) {
+    pub const fn set_trng_busy(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 1usize) & 0x7fff_ffff;
@@ -887,7 +825,7 @@ impl TrngBusy {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u32) {
+    pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x7fff_ffff << 1usize)) | (((val as u32) & 0x7fff_ffff) << 1usize);
     }
 }
@@ -908,16 +846,12 @@ impl core::fmt::Debug for TrngBusy {
 #[cfg(feature = "defmt")]
 impl defmt::Format for TrngBusy {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct TrngBusy {
-            trng_busy: bool,
-            reserved: u32,
-        }
-        let proxy = TrngBusy {
-            trng_busy: self.trng_busy(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "TrngBusy {{ trng_busy: {=bool:?}, reserved: {=u32:?} }}",
+            self.trng_busy(),
+            self.reserved()
+        )
     }
 }
 #[doc = "Selecting the inverter-chain length."]
@@ -926,6 +860,7 @@ impl defmt::Format for TrngBusy {
 pub struct TrngConfig(pub u32);
 impl TrngConfig {
     #[doc = "Selects the number of inverters (out of four possible selections) in the ring oscillator (the entropy source)."]
+    #[must_use]
     #[inline(always)]
     pub const fn rnd_src_sel(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x03;
@@ -933,10 +868,11 @@ impl TrngConfig {
     }
     #[doc = "Selects the number of inverters (out of four possible selections) in the ring oscillator (the entropy source)."]
     #[inline(always)]
-    pub fn set_rnd_src_sel(&mut self, val: u8) {
+    pub const fn set_rnd_src_sel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 0usize)) | (((val as u32) & 0x03) << 0usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 2usize) & 0x3fff_ffff;
@@ -944,7 +880,7 @@ impl TrngConfig {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u32) {
+    pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x3fff_ffff << 2usize)) | (((val as u32) & 0x3fff_ffff) << 2usize);
     }
 }
@@ -965,16 +901,12 @@ impl core::fmt::Debug for TrngConfig {
 #[cfg(feature = "defmt")]
 impl defmt::Format for TrngConfig {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct TrngConfig {
-            rnd_src_sel: u8,
-            reserved: u32,
-        }
-        let proxy = TrngConfig {
-            rnd_src_sel: self.rnd_src_sel(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "TrngConfig {{ rnd_src_sel: {=u8:?}, reserved: {=u32:?} }}",
+            self.rnd_src_sel(),
+            self.reserved()
+        )
     }
 }
 #[doc = "Debug register."]
@@ -983,6 +915,7 @@ impl defmt::Format for TrngConfig {
 pub struct TrngDebugControl(pub u32);
 impl TrngDebugControl {
     #[doc = "N/A"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -990,10 +923,11 @@ impl TrngDebugControl {
     }
     #[doc = "N/A"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: bool) {
+    pub const fn set_reserved(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "When set, the Von-Neuman balancer is bypassed (including the 32 consecutive bits test)."]
+    #[must_use]
     #[inline(always)]
     pub const fn vnc_bypass(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -1001,10 +935,11 @@ impl TrngDebugControl {
     }
     #[doc = "When set, the Von-Neuman balancer is bypassed (including the 32 consecutive bits test)."]
     #[inline(always)]
-    pub fn set_vnc_bypass(&mut self, val: bool) {
+    pub const fn set_vnc_bypass(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "When set, the CRNGT test in the RNG is bypassed."]
+    #[must_use]
     #[inline(always)]
     pub const fn trng_crngt_bypass(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -1012,10 +947,11 @@ impl TrngDebugControl {
     }
     #[doc = "When set, the CRNGT test in the RNG is bypassed."]
     #[inline(always)]
-    pub fn set_trng_crngt_bypass(&mut self, val: bool) {
+    pub const fn set_trng_crngt_bypass(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "When set, the autocorrelation test in the TRNG module is bypassed."]
+    #[must_use]
     #[inline(always)]
     pub const fn auto_correlate_bypass(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -1023,7 +959,7 @@ impl TrngDebugControl {
     }
     #[doc = "When set, the autocorrelation test in the TRNG module is bypassed."]
     #[inline(always)]
-    pub fn set_auto_correlate_bypass(&mut self, val: bool) {
+    pub const fn set_auto_correlate_bypass(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
 }
@@ -1046,20 +982,7 @@ impl core::fmt::Debug for TrngDebugControl {
 #[cfg(feature = "defmt")]
 impl defmt::Format for TrngDebugControl {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct TrngDebugControl {
-            reserved: bool,
-            vnc_bypass: bool,
-            trng_crngt_bypass: bool,
-            auto_correlate_bypass: bool,
-        }
-        let proxy = TrngDebugControl {
-            reserved: self.reserved(),
-            vnc_bypass: self.vnc_bypass(),
-            trng_crngt_bypass: self.trng_crngt_bypass(),
-            auto_correlate_bypass: self.auto_correlate_bypass(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "TrngDebugControl {{ reserved: {=bool:?}, vnc_bypass: {=bool:?}, trng_crngt_bypass: {=bool:?}, auto_correlate_bypass: {=bool:?} }}" , self . reserved () , self . vnc_bypass () , self . trng_crngt_bypass () , self . auto_correlate_bypass ())
     }
 }
 #[doc = "Generate internal SW reset within the RNG block."]
@@ -1068,6 +991,7 @@ impl defmt::Format for TrngDebugControl {
 pub struct TrngSwReset(pub u32);
 impl TrngSwReset {
     #[doc = "Writing 1'b1 to this register causes an internal RNG reset."]
+    #[must_use]
     #[inline(always)]
     pub const fn trng_sw_reset(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -1075,10 +999,11 @@ impl TrngSwReset {
     }
     #[doc = "Writing 1'b1 to this register causes an internal RNG reset."]
     #[inline(always)]
-    pub fn set_trng_sw_reset(&mut self, val: bool) {
+    pub const fn set_trng_sw_reset(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 1usize) & 0x7fff_ffff;
@@ -1086,7 +1011,7 @@ impl TrngSwReset {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u32) {
+    pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x7fff_ffff << 1usize)) | (((val as u32) & 0x7fff_ffff) << 1usize);
     }
 }
@@ -1107,16 +1032,12 @@ impl core::fmt::Debug for TrngSwReset {
 #[cfg(feature = "defmt")]
 impl defmt::Format for TrngSwReset {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct TrngSwReset {
-            trng_sw_reset: bool,
-            reserved: u32,
-        }
-        let proxy = TrngSwReset {
-            trng_sw_reset: self.trng_sw_reset(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "TrngSwReset {{ trng_sw_reset: {=bool:?}, reserved: {=u32:?} }}",
+            self.trng_sw_reset(),
+            self.reserved()
+        )
     }
 }
 #[doc = "192 bit collection indication."]
@@ -1125,6 +1046,7 @@ impl defmt::Format for TrngSwReset {
 pub struct TrngValid(pub u32);
 impl TrngValid {
     #[doc = "1'b1 indicates that collection of bits in the RNG is completed, and data can be read from EHR_DATA register."]
+    #[must_use]
     #[inline(always)]
     pub const fn ehr_valid(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -1132,10 +1054,11 @@ impl TrngValid {
     }
     #[doc = "1'b1 indicates that collection of bits in the RNG is completed, and data can be read from EHR_DATA register."]
     #[inline(always)]
-    pub fn set_ehr_valid(&mut self, val: bool) {
+    pub const fn set_ehr_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "RESERVED"]
+    #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 1usize) & 0x7fff_ffff;
@@ -1143,7 +1066,7 @@ impl TrngValid {
     }
     #[doc = "RESERVED"]
     #[inline(always)]
-    pub fn set_reserved(&mut self, val: u32) {
+    pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x7fff_ffff << 1usize)) | (((val as u32) & 0x7fff_ffff) << 1usize);
     }
 }
@@ -1164,15 +1087,11 @@ impl core::fmt::Debug for TrngValid {
 #[cfg(feature = "defmt")]
 impl defmt::Format for TrngValid {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct TrngValid {
-            ehr_valid: bool,
-            reserved: u32,
-        }
-        let proxy = TrngValid {
-            ehr_valid: self.ehr_valid(),
-            reserved: self.reserved(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "TrngValid {{ ehr_valid: {=bool:?}, reserved: {=u32:?} }}",
+            self.ehr_valid(),
+            self.reserved()
+        )
     }
 }

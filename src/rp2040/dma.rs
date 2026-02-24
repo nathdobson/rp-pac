@@ -30,12 +30,12 @@ impl Channel {
     }
     #[doc = "DMA Channel 9 Control and Status"]
     #[inline(always)]
-    pub const fn ctrl_trig(self) -> crate::common::Reg<regs::CtrlTrig, crate::common::RW> {
+    pub const fn ctrl_trig(self) -> crate::common::Reg<regs::Ctrl, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
     }
     #[doc = "Alias for channel 9 CTRL register"]
     #[inline(always)]
-    pub const fn al1_ctrl(self) -> crate::common::Reg<u32, crate::common::RW> {
+    pub const fn al1_ctrl(self) -> crate::common::Reg<regs::Ctrl, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
     }
     #[doc = "Alias for channel 9 READ_ADDR register"]
@@ -55,7 +55,7 @@ impl Channel {
     }
     #[doc = "Alias for channel 9 CTRL register"]
     #[inline(always)]
-    pub const fn al2_ctrl(self) -> crate::common::Reg<u32, crate::common::RW> {
+    pub const fn al2_ctrl(self) -> crate::common::Reg<regs::Ctrl, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x20usize) as _) }
     }
     #[doc = "Alias for channel 9 TRANS_COUNT register"]
@@ -75,7 +75,7 @@ impl Channel {
     }
     #[doc = "Alias for channel 9 CTRL register"]
     #[inline(always)]
-    pub const fn al3_ctrl(self) -> crate::common::Reg<u32, crate::common::RW> {
+    pub const fn al3_ctrl(self) -> crate::common::Reg<regs::Ctrl, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x30usize) as _) }
     }
     #[doc = "Alias for channel 9 WRITE_ADDR register"]

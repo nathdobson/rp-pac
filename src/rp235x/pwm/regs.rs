@@ -3,22 +3,24 @@
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChCc(pub u32);
 impl ChCc {
+    #[must_use]
     #[inline(always)]
     pub const fn a(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_a(&mut self, val: u16) {
+    pub const fn set_a(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn b(&self) -> u16 {
         let val = (self.0 >> 16usize) & 0xffff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_b(&mut self, val: u16) {
+    pub const fn set_b(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
     }
 }
@@ -39,16 +41,7 @@ impl core::fmt::Debug for ChCc {
 #[cfg(feature = "defmt")]
 impl defmt::Format for ChCc {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct ChCc {
-            a: u16,
-            b: u16,
-        }
-        let proxy = ChCc {
-            a: self.a(),
-            b: self.b(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "ChCc {{ a: {=u16:?}, b: {=u16:?} }}", self.a(), self.b())
     }
 }
 #[doc = "Control and status register"]
@@ -57,6 +50,7 @@ impl defmt::Format for ChCc {
 pub struct ChCsr(pub u32);
 impl ChCsr {
     #[doc = "Enable the PWM channel."]
+    #[must_use]
     #[inline(always)]
     pub const fn en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -64,10 +58,11 @@ impl ChCsr {
     }
     #[doc = "Enable the PWM channel."]
     #[inline(always)]
-    pub fn set_en(&mut self, val: bool) {
+    pub const fn set_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "1: Enable phase-correct modulation. 0: Trailing-edge"]
+    #[must_use]
     #[inline(always)]
     pub const fn ph_correct(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -75,10 +70,11 @@ impl ChCsr {
     }
     #[doc = "1: Enable phase-correct modulation. 0: Trailing-edge"]
     #[inline(always)]
-    pub fn set_ph_correct(&mut self, val: bool) {
+    pub const fn set_ph_correct(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "Invert output A"]
+    #[must_use]
     #[inline(always)]
     pub const fn a_inv(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -86,10 +82,11 @@ impl ChCsr {
     }
     #[doc = "Invert output A"]
     #[inline(always)]
-    pub fn set_a_inv(&mut self, val: bool) {
+    pub const fn set_a_inv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "Invert output B"]
+    #[must_use]
     #[inline(always)]
     pub const fn b_inv(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -97,19 +94,21 @@ impl ChCsr {
     }
     #[doc = "Invert output B"]
     #[inline(always)]
-    pub fn set_b_inv(&mut self, val: bool) {
+    pub const fn set_b_inv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn divmode(&self) -> super::vals::Divmode {
         let val = (self.0 >> 4usize) & 0x03;
         super::vals::Divmode::from_bits(val as u8)
     }
     #[inline(always)]
-    pub fn set_divmode(&mut self, val: super::vals::Divmode) {
+    pub const fn set_divmode(&mut self, val: super::vals::Divmode) {
         self.0 = (self.0 & !(0x03 << 4usize)) | (((val.to_bits() as u32) & 0x03) << 4usize);
     }
     #[doc = "Retard the phase of the counter by 1 count, while it is running. Self-clearing. Write a 1, and poll until low. Counter must be running."]
+    #[must_use]
     #[inline(always)]
     pub const fn ph_ret(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
@@ -117,10 +116,11 @@ impl ChCsr {
     }
     #[doc = "Retard the phase of the counter by 1 count, while it is running. Self-clearing. Write a 1, and poll until low. Counter must be running."]
     #[inline(always)]
-    pub fn set_ph_ret(&mut self, val: bool) {
+    pub const fn set_ph_ret(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
     #[doc = "Advance the phase of the counter by 1 count, while it is running. Self-clearing. Write a 1, and poll until low. Counter must be running at less than full speed (div_int + div_frac / 16 > 1)"]
+    #[must_use]
     #[inline(always)]
     pub const fn ph_adv(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
@@ -128,7 +128,7 @@ impl ChCsr {
     }
     #[doc = "Advance the phase of the counter by 1 count, while it is running. Self-clearing. Write a 1, and poll until low. Counter must be running at less than full speed (div_int + div_frac / 16 > 1)"]
     #[inline(always)]
-    pub fn set_ph_adv(&mut self, val: bool) {
+    pub const fn set_ph_adv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
 }
@@ -154,26 +154,7 @@ impl core::fmt::Debug for ChCsr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for ChCsr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct ChCsr {
-            en: bool,
-            ph_correct: bool,
-            a_inv: bool,
-            b_inv: bool,
-            divmode: super::vals::Divmode,
-            ph_ret: bool,
-            ph_adv: bool,
-        }
-        let proxy = ChCsr {
-            en: self.en(),
-            ph_correct: self.ph_correct(),
-            a_inv: self.a_inv(),
-            b_inv: self.b_inv(),
-            divmode: self.divmode(),
-            ph_ret: self.ph_ret(),
-            ph_adv: self.ph_adv(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "ChCsr {{ en: {=bool:?}, ph_correct: {=bool:?}, a_inv: {=bool:?}, b_inv: {=bool:?}, divmode: {:?}, ph_ret: {=bool:?}, ph_adv: {=bool:?} }}" , self . en () , self . ph_correct () , self . a_inv () , self . b_inv () , self . divmode () , self . ph_ret () , self . ph_adv ())
     }
 }
 #[doc = "Direct access to the PWM counter"]
@@ -181,13 +162,14 @@ impl defmt::Format for ChCsr {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChCtr(pub u32);
 impl ChCtr {
+    #[must_use]
     #[inline(always)]
     pub const fn ctr(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_ctr(&mut self, val: u16) {
+    pub const fn set_ctr(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
 }
@@ -205,12 +187,7 @@ impl core::fmt::Debug for ChCtr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for ChCtr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct ChCtr {
-            ctr: u16,
-        }
-        let proxy = ChCtr { ctr: self.ctr() };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "ChCtr {{ ctr: {=u16:?} }}", self.ctr())
     }
 }
 #[doc = "INT and FRAC form a fixed-point fractional number. Counting rate is system clock frequency divided by this number. Fractional division uses simple 1st-order sigma-delta."]
@@ -218,22 +195,24 @@ impl defmt::Format for ChCtr {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChDiv(pub u32);
 impl ChDiv {
+    #[must_use]
     #[inline(always)]
     pub const fn frac(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x0f;
         val as u8
     }
     #[inline(always)]
-    pub fn set_frac(&mut self, val: u8) {
+    pub const fn set_frac(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn int(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0xff;
         val as u8
     }
     #[inline(always)]
-    pub fn set_int(&mut self, val: u8) {
+    pub const fn set_int(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 4usize)) | (((val as u32) & 0xff) << 4usize);
     }
 }
@@ -254,16 +233,12 @@ impl core::fmt::Debug for ChDiv {
 #[cfg(feature = "defmt")]
 impl defmt::Format for ChDiv {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct ChDiv {
-            frac: u8,
-            int: u8,
-        }
-        let proxy = ChDiv {
-            frac: self.frac(),
-            int: self.int(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "ChDiv {{ frac: {=u8:?}, int: {=u8:?} }}",
+            self.frac(),
+            self.int()
+        )
     }
 }
 #[doc = "Counter wrap value"]
@@ -271,13 +246,14 @@ impl defmt::Format for ChDiv {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChTop(pub u32);
 impl ChTop {
+    #[must_use]
     #[inline(always)]
     pub const fn top(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_top(&mut self, val: u16) {
+    pub const fn set_top(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
 }
@@ -295,12 +271,7 @@ impl core::fmt::Debug for ChTop {
 #[cfg(feature = "defmt")]
 impl defmt::Format for ChTop {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct ChTop {
-            top: u16,
-        }
-        let proxy = ChTop { top: self.top() };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "ChTop {{ top: {=u16:?} }}", self.top())
     }
 }
 #[doc = "This register aliases the CSR_EN bits for all channels. Writing to this register allows multiple channels to be enabled or disabled simultaneously, so they can run in perfect sync. For each channel, there is only one physical EN register bit, which can be accessed through here or CHx_CSR."]
@@ -308,112 +279,124 @@ impl defmt::Format for ChTop {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct En(pub u32);
 impl En {
+    #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch0(&mut self, val: bool) {
+    pub const fn set_ch0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch1(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch1(&mut self, val: bool) {
+    pub const fn set_ch1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch2(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch2(&mut self, val: bool) {
+    pub const fn set_ch2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch3(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch3(&mut self, val: bool) {
+    pub const fn set_ch3(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch4(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch4(&mut self, val: bool) {
+    pub const fn set_ch4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch5(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch5(&mut self, val: bool) {
+    pub const fn set_ch5(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch6(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch6(&mut self, val: bool) {
+    pub const fn set_ch6(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch7(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch7(&mut self, val: bool) {
+    pub const fn set_ch7(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch8(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch8(&mut self, val: bool) {
+    pub const fn set_ch8(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch9(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch9(&mut self, val: bool) {
+    pub const fn set_ch9(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch10(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch10(&mut self, val: bool) {
+    pub const fn set_ch10(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch11(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch11(&mut self, val: bool) {
+    pub const fn set_ch11(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
@@ -444,36 +427,7 @@ impl core::fmt::Debug for En {
 #[cfg(feature = "defmt")]
 impl defmt::Format for En {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct En {
-            ch0: bool,
-            ch1: bool,
-            ch2: bool,
-            ch3: bool,
-            ch4: bool,
-            ch5: bool,
-            ch6: bool,
-            ch7: bool,
-            ch8: bool,
-            ch9: bool,
-            ch10: bool,
-            ch11: bool,
-        }
-        let proxy = En {
-            ch0: self.ch0(),
-            ch1: self.ch1(),
-            ch2: self.ch2(),
-            ch3: self.ch3(),
-            ch4: self.ch4(),
-            ch5: self.ch5(),
-            ch6: self.ch6(),
-            ch7: self.ch7(),
-            ch8: self.ch8(),
-            ch9: self.ch9(),
-            ch10: self.ch10(),
-            ch11: self.ch11(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "En {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
 #[doc = "Raw Interrupts"]
@@ -481,112 +435,124 @@ impl defmt::Format for En {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Intr(pub u32);
 impl Intr {
+    #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch0(&mut self, val: bool) {
+    pub const fn set_ch0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch1(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch1(&mut self, val: bool) {
+    pub const fn set_ch1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch2(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch2(&mut self, val: bool) {
+    pub const fn set_ch2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch3(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch3(&mut self, val: bool) {
+    pub const fn set_ch3(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch4(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch4(&mut self, val: bool) {
+    pub const fn set_ch4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch5(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch5(&mut self, val: bool) {
+    pub const fn set_ch5(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch6(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch6(&mut self, val: bool) {
+    pub const fn set_ch6(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch7(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch7(&mut self, val: bool) {
+    pub const fn set_ch7(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch8(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch8(&mut self, val: bool) {
+    pub const fn set_ch8(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch9(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch9(&mut self, val: bool) {
+    pub const fn set_ch9(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch10(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch10(&mut self, val: bool) {
+    pub const fn set_ch10(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch11(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch11(&mut self, val: bool) {
+    pub const fn set_ch11(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
@@ -617,36 +583,7 @@ impl core::fmt::Debug for Intr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Intr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Intr {
-            ch0: bool,
-            ch1: bool,
-            ch2: bool,
-            ch3: bool,
-            ch4: bool,
-            ch5: bool,
-            ch6: bool,
-            ch7: bool,
-            ch8: bool,
-            ch9: bool,
-            ch10: bool,
-            ch11: bool,
-        }
-        let proxy = Intr {
-            ch0: self.ch0(),
-            ch1: self.ch1(),
-            ch2: self.ch2(),
-            ch3: self.ch3(),
-            ch4: self.ch4(),
-            ch5: self.ch5(),
-            ch6: self.ch6(),
-            ch7: self.ch7(),
-            ch8: self.ch8(),
-            ch9: self.ch9(),
-            ch10: self.ch10(),
-            ch11: self.ch11(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Intr {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
 #[doc = "Interrupt Enable for irq0"]
@@ -654,112 +591,124 @@ impl defmt::Format for Intr {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Irq0inte(pub u32);
 impl Irq0inte {
+    #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch0(&mut self, val: bool) {
+    pub const fn set_ch0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch1(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch1(&mut self, val: bool) {
+    pub const fn set_ch1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch2(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch2(&mut self, val: bool) {
+    pub const fn set_ch2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch3(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch3(&mut self, val: bool) {
+    pub const fn set_ch3(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch4(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch4(&mut self, val: bool) {
+    pub const fn set_ch4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch5(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch5(&mut self, val: bool) {
+    pub const fn set_ch5(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch6(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch6(&mut self, val: bool) {
+    pub const fn set_ch6(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch7(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch7(&mut self, val: bool) {
+    pub const fn set_ch7(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch8(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch8(&mut self, val: bool) {
+    pub const fn set_ch8(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch9(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch9(&mut self, val: bool) {
+    pub const fn set_ch9(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch10(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch10(&mut self, val: bool) {
+    pub const fn set_ch10(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch11(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch11(&mut self, val: bool) {
+    pub const fn set_ch11(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
@@ -790,36 +739,7 @@ impl core::fmt::Debug for Irq0inte {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Irq0inte {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Irq0inte {
-            ch0: bool,
-            ch1: bool,
-            ch2: bool,
-            ch3: bool,
-            ch4: bool,
-            ch5: bool,
-            ch6: bool,
-            ch7: bool,
-            ch8: bool,
-            ch9: bool,
-            ch10: bool,
-            ch11: bool,
-        }
-        let proxy = Irq0inte {
-            ch0: self.ch0(),
-            ch1: self.ch1(),
-            ch2: self.ch2(),
-            ch3: self.ch3(),
-            ch4: self.ch4(),
-            ch5: self.ch5(),
-            ch6: self.ch6(),
-            ch7: self.ch7(),
-            ch8: self.ch8(),
-            ch9: self.ch9(),
-            ch10: self.ch10(),
-            ch11: self.ch11(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Irq0inte {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
 #[doc = "Interrupt Force for irq0"]
@@ -827,112 +747,124 @@ impl defmt::Format for Irq0inte {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Irq0intf(pub u32);
 impl Irq0intf {
+    #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch0(&mut self, val: bool) {
+    pub const fn set_ch0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch1(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch1(&mut self, val: bool) {
+    pub const fn set_ch1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch2(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch2(&mut self, val: bool) {
+    pub const fn set_ch2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch3(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch3(&mut self, val: bool) {
+    pub const fn set_ch3(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch4(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch4(&mut self, val: bool) {
+    pub const fn set_ch4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch5(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch5(&mut self, val: bool) {
+    pub const fn set_ch5(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch6(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch6(&mut self, val: bool) {
+    pub const fn set_ch6(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch7(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch7(&mut self, val: bool) {
+    pub const fn set_ch7(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch8(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch8(&mut self, val: bool) {
+    pub const fn set_ch8(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch9(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch9(&mut self, val: bool) {
+    pub const fn set_ch9(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch10(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch10(&mut self, val: bool) {
+    pub const fn set_ch10(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch11(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch11(&mut self, val: bool) {
+    pub const fn set_ch11(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
@@ -963,36 +895,7 @@ impl core::fmt::Debug for Irq0intf {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Irq0intf {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Irq0intf {
-            ch0: bool,
-            ch1: bool,
-            ch2: bool,
-            ch3: bool,
-            ch4: bool,
-            ch5: bool,
-            ch6: bool,
-            ch7: bool,
-            ch8: bool,
-            ch9: bool,
-            ch10: bool,
-            ch11: bool,
-        }
-        let proxy = Irq0intf {
-            ch0: self.ch0(),
-            ch1: self.ch1(),
-            ch2: self.ch2(),
-            ch3: self.ch3(),
-            ch4: self.ch4(),
-            ch5: self.ch5(),
-            ch6: self.ch6(),
-            ch7: self.ch7(),
-            ch8: self.ch8(),
-            ch9: self.ch9(),
-            ch10: self.ch10(),
-            ch11: self.ch11(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Irq0intf {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
 #[doc = "Interrupt status after masking & forcing for irq0"]
@@ -1000,112 +903,124 @@ impl defmt::Format for Irq0intf {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Irq0ints(pub u32);
 impl Irq0ints {
+    #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch0(&mut self, val: bool) {
+    pub const fn set_ch0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch1(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch1(&mut self, val: bool) {
+    pub const fn set_ch1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch2(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch2(&mut self, val: bool) {
+    pub const fn set_ch2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch3(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch3(&mut self, val: bool) {
+    pub const fn set_ch3(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch4(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch4(&mut self, val: bool) {
+    pub const fn set_ch4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch5(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch5(&mut self, val: bool) {
+    pub const fn set_ch5(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch6(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch6(&mut self, val: bool) {
+    pub const fn set_ch6(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch7(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch7(&mut self, val: bool) {
+    pub const fn set_ch7(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch8(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch8(&mut self, val: bool) {
+    pub const fn set_ch8(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch9(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch9(&mut self, val: bool) {
+    pub const fn set_ch9(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch10(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch10(&mut self, val: bool) {
+    pub const fn set_ch10(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch11(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch11(&mut self, val: bool) {
+    pub const fn set_ch11(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
@@ -1136,36 +1051,7 @@ impl core::fmt::Debug for Irq0ints {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Irq0ints {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Irq0ints {
-            ch0: bool,
-            ch1: bool,
-            ch2: bool,
-            ch3: bool,
-            ch4: bool,
-            ch5: bool,
-            ch6: bool,
-            ch7: bool,
-            ch8: bool,
-            ch9: bool,
-            ch10: bool,
-            ch11: bool,
-        }
-        let proxy = Irq0ints {
-            ch0: self.ch0(),
-            ch1: self.ch1(),
-            ch2: self.ch2(),
-            ch3: self.ch3(),
-            ch4: self.ch4(),
-            ch5: self.ch5(),
-            ch6: self.ch6(),
-            ch7: self.ch7(),
-            ch8: self.ch8(),
-            ch9: self.ch9(),
-            ch10: self.ch10(),
-            ch11: self.ch11(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Irq0ints {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
 #[doc = "Interrupt Enable for irq1"]
@@ -1173,112 +1059,124 @@ impl defmt::Format for Irq0ints {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Irq1inte(pub u32);
 impl Irq1inte {
+    #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch0(&mut self, val: bool) {
+    pub const fn set_ch0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch1(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch1(&mut self, val: bool) {
+    pub const fn set_ch1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch2(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch2(&mut self, val: bool) {
+    pub const fn set_ch2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch3(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch3(&mut self, val: bool) {
+    pub const fn set_ch3(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch4(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch4(&mut self, val: bool) {
+    pub const fn set_ch4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch5(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch5(&mut self, val: bool) {
+    pub const fn set_ch5(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch6(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch6(&mut self, val: bool) {
+    pub const fn set_ch6(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch7(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch7(&mut self, val: bool) {
+    pub const fn set_ch7(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch8(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch8(&mut self, val: bool) {
+    pub const fn set_ch8(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch9(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch9(&mut self, val: bool) {
+    pub const fn set_ch9(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch10(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch10(&mut self, val: bool) {
+    pub const fn set_ch10(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch11(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch11(&mut self, val: bool) {
+    pub const fn set_ch11(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
@@ -1309,36 +1207,7 @@ impl core::fmt::Debug for Irq1inte {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Irq1inte {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Irq1inte {
-            ch0: bool,
-            ch1: bool,
-            ch2: bool,
-            ch3: bool,
-            ch4: bool,
-            ch5: bool,
-            ch6: bool,
-            ch7: bool,
-            ch8: bool,
-            ch9: bool,
-            ch10: bool,
-            ch11: bool,
-        }
-        let proxy = Irq1inte {
-            ch0: self.ch0(),
-            ch1: self.ch1(),
-            ch2: self.ch2(),
-            ch3: self.ch3(),
-            ch4: self.ch4(),
-            ch5: self.ch5(),
-            ch6: self.ch6(),
-            ch7: self.ch7(),
-            ch8: self.ch8(),
-            ch9: self.ch9(),
-            ch10: self.ch10(),
-            ch11: self.ch11(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Irq1inte {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
 #[doc = "Interrupt Force for irq1"]
@@ -1346,112 +1215,124 @@ impl defmt::Format for Irq1inte {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Irq1intf(pub u32);
 impl Irq1intf {
+    #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch0(&mut self, val: bool) {
+    pub const fn set_ch0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch1(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch1(&mut self, val: bool) {
+    pub const fn set_ch1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch2(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch2(&mut self, val: bool) {
+    pub const fn set_ch2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch3(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch3(&mut self, val: bool) {
+    pub const fn set_ch3(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch4(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch4(&mut self, val: bool) {
+    pub const fn set_ch4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch5(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch5(&mut self, val: bool) {
+    pub const fn set_ch5(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch6(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch6(&mut self, val: bool) {
+    pub const fn set_ch6(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch7(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch7(&mut self, val: bool) {
+    pub const fn set_ch7(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch8(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch8(&mut self, val: bool) {
+    pub const fn set_ch8(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch9(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch9(&mut self, val: bool) {
+    pub const fn set_ch9(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch10(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch10(&mut self, val: bool) {
+    pub const fn set_ch10(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch11(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch11(&mut self, val: bool) {
+    pub const fn set_ch11(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
@@ -1482,36 +1363,7 @@ impl core::fmt::Debug for Irq1intf {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Irq1intf {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Irq1intf {
-            ch0: bool,
-            ch1: bool,
-            ch2: bool,
-            ch3: bool,
-            ch4: bool,
-            ch5: bool,
-            ch6: bool,
-            ch7: bool,
-            ch8: bool,
-            ch9: bool,
-            ch10: bool,
-            ch11: bool,
-        }
-        let proxy = Irq1intf {
-            ch0: self.ch0(),
-            ch1: self.ch1(),
-            ch2: self.ch2(),
-            ch3: self.ch3(),
-            ch4: self.ch4(),
-            ch5: self.ch5(),
-            ch6: self.ch6(),
-            ch7: self.ch7(),
-            ch8: self.ch8(),
-            ch9: self.ch9(),
-            ch10: self.ch10(),
-            ch11: self.ch11(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Irq1intf {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
 #[doc = "Interrupt status after masking & forcing for irq1"]
@@ -1519,112 +1371,124 @@ impl defmt::Format for Irq1intf {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Irq1ints(pub u32);
 impl Irq1ints {
+    #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch0(&mut self, val: bool) {
+    pub const fn set_ch0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch1(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch1(&mut self, val: bool) {
+    pub const fn set_ch1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch2(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch2(&mut self, val: bool) {
+    pub const fn set_ch2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch3(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch3(&mut self, val: bool) {
+    pub const fn set_ch3(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch4(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch4(&mut self, val: bool) {
+    pub const fn set_ch4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch5(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch5(&mut self, val: bool) {
+    pub const fn set_ch5(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch6(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch6(&mut self, val: bool) {
+    pub const fn set_ch6(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch7(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch7(&mut self, val: bool) {
+    pub const fn set_ch7(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch8(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch8(&mut self, val: bool) {
+    pub const fn set_ch8(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch9(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch9(&mut self, val: bool) {
+    pub const fn set_ch9(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch10(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch10(&mut self, val: bool) {
+    pub const fn set_ch10(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn ch11(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_ch11(&mut self, val: bool) {
+    pub const fn set_ch11(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
@@ -1655,35 +1519,6 @@ impl core::fmt::Debug for Irq1ints {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Irq1ints {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Irq1ints {
-            ch0: bool,
-            ch1: bool,
-            ch2: bool,
-            ch3: bool,
-            ch4: bool,
-            ch5: bool,
-            ch6: bool,
-            ch7: bool,
-            ch8: bool,
-            ch9: bool,
-            ch10: bool,
-            ch11: bool,
-        }
-        let proxy = Irq1ints {
-            ch0: self.ch0(),
-            ch1: self.ch1(),
-            ch2: self.ch2(),
-            ch3: self.ch3(),
-            ch4: self.ch4(),
-            ch5: self.ch5(),
-            ch6: self.ch6(),
-            ch7: self.ch7(),
-            ch8: self.ch8(),
-            ch9: self.ch9(),
-            ch10: self.ch10(),
-            ch11: self.ch11(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Irq1ints {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }

@@ -1,6 +1,6 @@
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct Arm(pub u16);
+pub struct Arm(u16);
 impl Arm {
     #[doc = "Force the glitch detectors to be armed. (Any value other than ARM_NO counts as YES)"]
     pub const YES: Self = Self(0x0);
@@ -48,7 +48,7 @@ impl From<Arm> for u16 {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct Default(pub u8);
+pub struct Default(u8);
 impl Default {
     #[doc = "Use the default sensitivity configured in OTP for all detectors. (Any value other than DEFAULT_NO counts as YES)"]
     pub const YES: Self = Self(0x0);
@@ -96,7 +96,7 @@ impl From<Default> for u8 {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-pub struct Disarm(pub u16);
+pub struct Disarm(u16);
 impl Disarm {
     #[doc = "Do not disarm the glitch detectors. (Any value other than DISARM_YES counts as NO)"]
     pub const NO: Self = Self(0x0);

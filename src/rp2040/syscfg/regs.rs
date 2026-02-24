@@ -4,6 +4,7 @@
 pub struct Dbgforce(pub u32);
 impl Dbgforce {
     #[doc = "Observe the value of processor 0 SWDIO output."]
+    #[must_use]
     #[inline(always)]
     pub const fn proc0_swdo(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -11,10 +12,11 @@ impl Dbgforce {
     }
     #[doc = "Observe the value of processor 0 SWDIO output."]
     #[inline(always)]
-    pub fn set_proc0_swdo(&mut self, val: bool) {
+    pub const fn set_proc0_swdo(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Directly drive processor 0 SWDIO input, if PROC0_ATTACH is set"]
+    #[must_use]
     #[inline(always)]
     pub const fn proc0_swdi(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -22,10 +24,11 @@ impl Dbgforce {
     }
     #[doc = "Directly drive processor 0 SWDIO input, if PROC0_ATTACH is set"]
     #[inline(always)]
-    pub fn set_proc0_swdi(&mut self, val: bool) {
+    pub const fn set_proc0_swdi(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "Directly drive processor 0 SWCLK, if PROC0_ATTACH is set"]
+    #[must_use]
     #[inline(always)]
     pub const fn proc0_swclk(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -33,10 +36,11 @@ impl Dbgforce {
     }
     #[doc = "Directly drive processor 0 SWCLK, if PROC0_ATTACH is set"]
     #[inline(always)]
-    pub fn set_proc0_swclk(&mut self, val: bool) {
+    pub const fn set_proc0_swclk(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "Attach processor 0 debug port to syscfg controls, and disconnect it from external SWD pads."]
+    #[must_use]
     #[inline(always)]
     pub const fn proc0_attach(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -44,10 +48,11 @@ impl Dbgforce {
     }
     #[doc = "Attach processor 0 debug port to syscfg controls, and disconnect it from external SWD pads."]
     #[inline(always)]
-    pub fn set_proc0_attach(&mut self, val: bool) {
+    pub const fn set_proc0_attach(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "Observe the value of processor 1 SWDIO output."]
+    #[must_use]
     #[inline(always)]
     pub const fn proc1_swdo(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
@@ -55,10 +60,11 @@ impl Dbgforce {
     }
     #[doc = "Observe the value of processor 1 SWDIO output."]
     #[inline(always)]
-    pub fn set_proc1_swdo(&mut self, val: bool) {
+    pub const fn set_proc1_swdo(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
     #[doc = "Directly drive processor 1 SWDIO input, if PROC1_ATTACH is set"]
+    #[must_use]
     #[inline(always)]
     pub const fn proc1_swdi(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
@@ -66,10 +72,11 @@ impl Dbgforce {
     }
     #[doc = "Directly drive processor 1 SWDIO input, if PROC1_ATTACH is set"]
     #[inline(always)]
-    pub fn set_proc1_swdi(&mut self, val: bool) {
+    pub const fn set_proc1_swdi(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
     #[doc = "Directly drive processor 1 SWCLK, if PROC1_ATTACH is set"]
+    #[must_use]
     #[inline(always)]
     pub const fn proc1_swclk(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
@@ -77,10 +84,11 @@ impl Dbgforce {
     }
     #[doc = "Directly drive processor 1 SWCLK, if PROC1_ATTACH is set"]
     #[inline(always)]
-    pub fn set_proc1_swclk(&mut self, val: bool) {
+    pub const fn set_proc1_swclk(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
     #[doc = "Attach processor 1 debug port to syscfg controls, and disconnect it from external SWD pads."]
+    #[must_use]
     #[inline(always)]
     pub const fn proc1_attach(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
@@ -88,7 +96,7 @@ impl Dbgforce {
     }
     #[doc = "Attach processor 1 debug port to syscfg controls, and disconnect it from external SWD pads."]
     #[inline(always)]
-    pub fn set_proc1_attach(&mut self, val: bool) {
+    pub const fn set_proc1_attach(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
 }
@@ -115,28 +123,7 @@ impl core::fmt::Debug for Dbgforce {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Dbgforce {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Dbgforce {
-            proc0_swdo: bool,
-            proc0_swdi: bool,
-            proc0_swclk: bool,
-            proc0_attach: bool,
-            proc1_swdo: bool,
-            proc1_swdi: bool,
-            proc1_swclk: bool,
-            proc1_attach: bool,
-        }
-        let proxy = Dbgforce {
-            proc0_swdo: self.proc0_swdo(),
-            proc0_swdi: self.proc0_swdi(),
-            proc0_swclk: self.proc0_swclk(),
-            proc0_attach: self.proc0_attach(),
-            proc1_swdo: self.proc1_swdo(),
-            proc1_swdi: self.proc1_swdi(),
-            proc1_swclk: self.proc1_swclk(),
-            proc1_attach: self.proc1_attach(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Dbgforce {{ proc0_swdo: {=bool:?}, proc0_swdi: {=bool:?}, proc0_swclk: {=bool:?}, proc0_attach: {=bool:?}, proc1_swdo: {=bool:?}, proc1_swdi: {=bool:?}, proc1_swclk: {=bool:?}, proc1_attach: {=bool:?} }}" , self . proc0_swdo () , self . proc0_swdi () , self . proc0_swclk () , self . proc0_attach () , self . proc1_swdo () , self . proc1_swdi () , self . proc1_swclk () , self . proc1_attach ())
     }
 }
 #[doc = "Control power downs to memories. Set high to power down memories. Use with extreme caution"]
@@ -144,76 +131,84 @@ impl defmt::Format for Dbgforce {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Mempowerdown(pub u32);
 impl Mempowerdown {
+    #[must_use]
     #[inline(always)]
     pub const fn sram0(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram0(&mut self, val: bool) {
+    pub const fn set_sram0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram1(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram1(&mut self, val: bool) {
+    pub const fn set_sram1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram2(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram2(&mut self, val: bool) {
+    pub const fn set_sram2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram3(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram3(&mut self, val: bool) {
+    pub const fn set_sram3(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram4(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram4(&mut self, val: bool) {
+    pub const fn set_sram4(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn sram5(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_sram5(&mut self, val: bool) {
+    pub const fn set_sram5(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn usb(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_usb(&mut self, val: bool) {
+    pub const fn set_usb(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn rom(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_rom(&mut self, val: bool) {
+    pub const fn set_rom(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
 }
@@ -240,28 +235,7 @@ impl core::fmt::Debug for Mempowerdown {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Mempowerdown {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Mempowerdown {
-            sram0: bool,
-            sram1: bool,
-            sram2: bool,
-            sram3: bool,
-            sram4: bool,
-            sram5: bool,
-            usb: bool,
-            rom: bool,
-        }
-        let proxy = Mempowerdown {
-            sram0: self.sram0(),
-            sram1: self.sram1(),
-            sram2: self.sram2(),
-            sram3: self.sram3(),
-            sram4: self.sram4(),
-            sram5: self.sram5(),
-            usb: self.usb(),
-            rom: self.rom(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Mempowerdown {{ sram0: {=bool:?}, sram1: {=bool:?}, sram2: {=bool:?}, sram3: {=bool:?}, sram4: {=bool:?}, sram5: {=bool:?}, usb: {=bool:?}, rom: {=bool:?} }}" , self . sram0 () , self . sram1 () , self . sram2 () , self . sram3 () , self . sram4 () , self . sram5 () , self . usb () , self . rom ())
     }
 }
 #[doc = "Configuration for processors"]
@@ -270,6 +244,7 @@ impl defmt::Format for Mempowerdown {
 pub struct ProcConfig(pub u32);
 impl ProcConfig {
     #[doc = "Indication that proc0 has halted"]
+    #[must_use]
     #[inline(always)]
     pub const fn proc0_halted(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -277,10 +252,11 @@ impl ProcConfig {
     }
     #[doc = "Indication that proc0 has halted"]
     #[inline(always)]
-    pub fn set_proc0_halted(&mut self, val: bool) {
+    pub const fn set_proc0_halted(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "Indication that proc1 has halted"]
+    #[must_use]
     #[inline(always)]
     pub const fn proc1_halted(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -288,10 +264,11 @@ impl ProcConfig {
     }
     #[doc = "Indication that proc1 has halted"]
     #[inline(always)]
-    pub fn set_proc1_halted(&mut self, val: bool) {
+    pub const fn set_proc1_halted(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "Configure proc0 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
+    #[must_use]
     #[inline(always)]
     pub const fn proc0_dap_instid(&self) -> u8 {
         let val = (self.0 >> 24usize) & 0x0f;
@@ -299,10 +276,11 @@ impl ProcConfig {
     }
     #[doc = "Configure proc0 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
     #[inline(always)]
-    pub fn set_proc0_dap_instid(&mut self, val: u8) {
+    pub const fn set_proc0_dap_instid(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 24usize)) | (((val as u32) & 0x0f) << 24usize);
     }
     #[doc = "Configure proc1 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
+    #[must_use]
     #[inline(always)]
     pub const fn proc1_dap_instid(&self) -> u8 {
         let val = (self.0 >> 28usize) & 0x0f;
@@ -310,7 +288,7 @@ impl ProcConfig {
     }
     #[doc = "Configure proc1 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
     #[inline(always)]
-    pub fn set_proc1_dap_instid(&mut self, val: u8) {
+    pub const fn set_proc1_dap_instid(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 28usize)) | (((val as u32) & 0x0f) << 28usize);
     }
 }
@@ -333,20 +311,7 @@ impl core::fmt::Debug for ProcConfig {
 #[cfg(feature = "defmt")]
 impl defmt::Format for ProcConfig {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct ProcConfig {
-            proc0_halted: bool,
-            proc1_halted: bool,
-            proc0_dap_instid: u8,
-            proc1_dap_instid: u8,
-        }
-        let proxy = ProcConfig {
-            proc0_halted: self.proc0_halted(),
-            proc1_halted: self.proc1_halted(),
-            proc0_dap_instid: self.proc0_dap_instid(),
-            proc1_dap_instid: self.proc1_dap_instid(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "ProcConfig {{ proc0_halted: {=bool:?}, proc1_halted: {=bool:?}, proc0_dap_instid: {=u8:?}, proc1_dap_instid: {=u8:?} }}" , self . proc0_halted () , self . proc1_halted () , self . proc0_dap_instid () , self . proc1_dap_instid ())
     }
 }
 #[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 0...29."]
@@ -354,13 +319,14 @@ impl defmt::Format for ProcConfig {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ProcInSyncBypass(pub u32);
 impl ProcInSyncBypass {
+    #[must_use]
     #[inline(always)]
     pub const fn proc_in_sync_bypass(&self) -> u32 {
         let val = (self.0 >> 0usize) & 0x3fff_ffff;
         val as u32
     }
     #[inline(always)]
-    pub fn set_proc_in_sync_bypass(&mut self, val: u32) {
+    pub const fn set_proc_in_sync_bypass(&mut self, val: u32) {
         self.0 = (self.0 & !(0x3fff_ffff << 0usize)) | (((val as u32) & 0x3fff_ffff) << 0usize);
     }
 }
@@ -380,14 +346,11 @@ impl core::fmt::Debug for ProcInSyncBypass {
 #[cfg(feature = "defmt")]
 impl defmt::Format for ProcInSyncBypass {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct ProcInSyncBypass {
-            proc_in_sync_bypass: u32,
-        }
-        let proxy = ProcInSyncBypass {
-            proc_in_sync_bypass: self.proc_in_sync_bypass(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "ProcInSyncBypass {{ proc_in_sync_bypass: {=u32:?} }}",
+            self.proc_in_sync_bypass()
+        )
     }
 }
 #[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 30...35 (the QSPI IOs)."]
@@ -395,13 +358,14 @@ impl defmt::Format for ProcInSyncBypass {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ProcInSyncBypassHi(pub u32);
 impl ProcInSyncBypassHi {
+    #[must_use]
     #[inline(always)]
     pub const fn proc_in_sync_bypass_hi(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x3f;
         val as u8
     }
     #[inline(always)]
-    pub fn set_proc_in_sync_bypass_hi(&mut self, val: u8) {
+    pub const fn set_proc_in_sync_bypass_hi(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
     }
 }
@@ -421,13 +385,10 @@ impl core::fmt::Debug for ProcInSyncBypassHi {
 #[cfg(feature = "defmt")]
 impl defmt::Format for ProcInSyncBypassHi {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct ProcInSyncBypassHi {
-            proc_in_sync_bypass_hi: u8,
-        }
-        let proxy = ProcInSyncBypassHi {
-            proc_in_sync_bypass_hi: self.proc_in_sync_bypass_hi(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "ProcInSyncBypassHi {{ proc_in_sync_bypass_hi: {=u8:?} }}",
+            self.proc_in_sync_bypass_hi()
+        )
     }
 }

@@ -4,6 +4,7 @@
 pub struct Bod(pub u32);
 impl Bod {
     #[doc = "enable 0=not enabled, 1=enabled"]
+    #[must_use]
     #[inline(always)]
     pub const fn en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -11,10 +12,11 @@ impl Bod {
     }
     #[doc = "enable 0=not enabled, 1=enabled"]
     #[inline(always)]
-    pub fn set_en(&mut self, val: bool) {
+    pub const fn set_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "threshold select 0000 - 0.473V 0001 - 0.516V 0010 - 0.559V 0011 - 0.602V 0100 - 0.645V 0101 - 0.688V 0110 - 0.731V 0111 - 0.774V 1000 - 0.817V 1001 - 0.860V (default) 1010 - 0.903V 1011 - 0.946V 1100 - 0.989V 1101 - 1.032V 1110 - 1.075V 1111 - 1.118V"]
+    #[must_use]
     #[inline(always)]
     pub const fn vsel(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x0f;
@@ -22,7 +24,7 @@ impl Bod {
     }
     #[doc = "threshold select 0000 - 0.473V 0001 - 0.516V 0010 - 0.559V 0011 - 0.602V 0100 - 0.645V 0101 - 0.688V 0110 - 0.731V 0111 - 0.774V 1000 - 0.817V 1001 - 0.860V (default) 1010 - 0.903V 1011 - 0.946V 1100 - 0.989V 1101 - 1.032V 1110 - 1.075V 1111 - 1.118V"]
     #[inline(always)]
-    pub fn set_vsel(&mut self, val: u8) {
+    pub const fn set_vsel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
     }
 }
@@ -43,16 +45,12 @@ impl core::fmt::Debug for Bod {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Bod {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Bod {
-            en: bool,
-            vsel: u8,
-        }
-        let proxy = Bod {
-            en: self.en(),
-            vsel: self.vsel(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Bod {{ en: {=bool:?}, vsel: {=u8:?} }}",
+            self.en(),
+            self.vsel()
+        )
     }
 }
 #[doc = "Chip reset control and status"]
@@ -61,6 +59,7 @@ impl defmt::Format for Bod {
 pub struct ChipReset(pub u32);
 impl ChipReset {
     #[doc = "Last reset was from the power-on reset or brown-out detection blocks"]
+    #[must_use]
     #[inline(always)]
     pub const fn had_por(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -68,10 +67,11 @@ impl ChipReset {
     }
     #[doc = "Last reset was from the power-on reset or brown-out detection blocks"]
     #[inline(always)]
-    pub fn set_had_por(&mut self, val: bool) {
+    pub const fn set_had_por(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
     #[doc = "Last reset was from the RUN pin"]
+    #[must_use]
     #[inline(always)]
     pub const fn had_run(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
@@ -79,10 +79,11 @@ impl ChipReset {
     }
     #[doc = "Last reset was from the RUN pin"]
     #[inline(always)]
-    pub fn set_had_run(&mut self, val: bool) {
+    pub const fn set_had_run(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
     #[doc = "Last reset was from the debug port"]
+    #[must_use]
     #[inline(always)]
     pub const fn had_psm_restart(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
@@ -90,10 +91,11 @@ impl ChipReset {
     }
     #[doc = "Last reset was from the debug port"]
     #[inline(always)]
-    pub fn set_had_psm_restart(&mut self, val: bool) {
+    pub const fn set_had_psm_restart(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
     #[doc = "This is set by psm_restart from the debugger. Its purpose is to branch bootcode to a safe mode when the debugger has issued a psm_restart in order to recover from a boot lock-up. In the safe mode the debugger can repair the boot code, clear this flag then reboot the processor."]
+    #[must_use]
     #[inline(always)]
     pub const fn psm_restart_flag(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
@@ -101,7 +103,7 @@ impl ChipReset {
     }
     #[doc = "This is set by psm_restart from the debugger. Its purpose is to branch bootcode to a safe mode when the debugger has issued a psm_restart in order to recover from a boot lock-up. In the safe mode the debugger can repair the boot code, clear this flag then reboot the processor."]
     #[inline(always)]
-    pub fn set_psm_restart_flag(&mut self, val: bool) {
+    pub const fn set_psm_restart_flag(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
 }
@@ -124,20 +126,7 @@ impl core::fmt::Debug for ChipReset {
 #[cfg(feature = "defmt")]
 impl defmt::Format for ChipReset {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct ChipReset {
-            had_por: bool,
-            had_run: bool,
-            had_psm_restart: bool,
-            psm_restart_flag: bool,
-        }
-        let proxy = ChipReset {
-            had_por: self.had_por(),
-            had_run: self.had_run(),
-            had_psm_restart: self.had_psm_restart(),
-            psm_restart_flag: self.psm_restart_flag(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "ChipReset {{ had_por: {=bool:?}, had_run: {=bool:?}, had_psm_restart: {=bool:?}, psm_restart_flag: {=bool:?} }}" , self . had_por () , self . had_run () , self . had_psm_restart () , self . psm_restart_flag ())
     }
 }
 #[doc = "Voltage regulator control and status"]
@@ -146,6 +135,7 @@ impl defmt::Format for ChipReset {
 pub struct Vreg(pub u32);
 impl Vreg {
     #[doc = "enable 0=not enabled, 1=enabled"]
+    #[must_use]
     #[inline(always)]
     pub const fn en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -153,10 +143,11 @@ impl Vreg {
     }
     #[doc = "enable 0=not enabled, 1=enabled"]
     #[inline(always)]
-    pub fn set_en(&mut self, val: bool) {
+    pub const fn set_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode"]
+    #[must_use]
     #[inline(always)]
     pub const fn hiz(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
@@ -164,10 +155,11 @@ impl Vreg {
     }
     #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode"]
     #[inline(always)]
-    pub fn set_hiz(&mut self, val: bool) {
+    pub const fn set_hiz(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
     #[doc = "output voltage select 0000 to 0101 - 0.80V 0110 - 0.85V 0111 - 0.90V 1000 - 0.95V 1001 - 1.00V 1010 - 1.05V 1011 - 1.10V (default) 1100 - 1.15V 1101 - 1.20V 1110 - 1.25V 1111 - 1.30V"]
+    #[must_use]
     #[inline(always)]
     pub const fn vsel(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x0f;
@@ -175,10 +167,11 @@ impl Vreg {
     }
     #[doc = "output voltage select 0000 to 0101 - 0.80V 0110 - 0.85V 0111 - 0.90V 1000 - 0.95V 1001 - 1.00V 1010 - 1.05V 1011 - 1.10V (default) 1100 - 1.15V 1101 - 1.20V 1110 - 1.25V 1111 - 1.30V"]
     #[inline(always)]
-    pub fn set_vsel(&mut self, val: u8) {
+    pub const fn set_vsel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
     }
     #[doc = "regulation status 0=not in regulation, 1=in regulation"]
+    #[must_use]
     #[inline(always)]
     pub const fn rok(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
@@ -186,7 +179,7 @@ impl Vreg {
     }
     #[doc = "regulation status 0=not in regulation, 1=in regulation"]
     #[inline(always)]
-    pub fn set_rok(&mut self, val: bool) {
+    pub const fn set_rok(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
 }
@@ -209,19 +202,13 @@ impl core::fmt::Debug for Vreg {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Vreg {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Vreg {
-            en: bool,
-            hiz: bool,
-            vsel: u8,
-            rok: bool,
-        }
-        let proxy = Vreg {
-            en: self.en(),
-            hiz: self.hiz(),
-            vsel: self.vsel(),
-            rok: self.rok(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Vreg {{ en: {=bool:?}, hiz: {=bool:?}, vsel: {=u8:?}, rok: {=bool:?} }}",
+            self.en(),
+            self.hiz(),
+            self.vsel(),
+            self.rok()
+        )
     }
 }

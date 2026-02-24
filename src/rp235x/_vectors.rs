@@ -1,4 +1,4 @@
-extern "C" {
+unsafe extern "C" {
     fn TIMER0_IRQ_0();
     fn TIMER0_IRQ_1();
     fn TIMER0_IRQ_2();
@@ -54,8 +54,8 @@ pub union Vector {
     _handler: unsafe extern "C" fn(),
     _reserved: u32,
 }
-#[link_section = ".vector_table.interrupts"]
-#[no_mangle]
+#[unsafe(link_section = ".vector_table.interrupts")]
+#[unsafe(no_mangle)]
 pub static __INTERRUPTS: [Vector; 53] = [
     Vector {
         _handler: TIMER0_IRQ_0,

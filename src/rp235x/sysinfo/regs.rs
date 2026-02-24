@@ -3,40 +3,44 @@
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChipId(pub u32);
 impl ChipId {
+    #[must_use]
     #[inline(always)]
     pub const fn stop_bit(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_stop_bit(&mut self, val: bool) {
+    pub const fn set_stop_bit(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn manufacturer(&self) -> u16 {
         let val = (self.0 >> 1usize) & 0x07ff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_manufacturer(&mut self, val: u16) {
+    pub const fn set_manufacturer(&mut self, val: u16) {
         self.0 = (self.0 & !(0x07ff << 1usize)) | (((val as u32) & 0x07ff) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn part(&self) -> u16 {
         let val = (self.0 >> 12usize) & 0xffff;
         val as u16
     }
     #[inline(always)]
-    pub fn set_part(&mut self, val: u16) {
+    pub const fn set_part(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 12usize)) | (((val as u32) & 0xffff) << 12usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn revision(&self) -> u8 {
         let val = (self.0 >> 28usize) & 0x0f;
         val as u8
     }
     #[inline(always)]
-    pub fn set_revision(&mut self, val: u8) {
+    pub const fn set_revision(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 28usize)) | (((val as u32) & 0x0f) << 28usize);
     }
 }
@@ -59,33 +63,21 @@ impl core::fmt::Debug for ChipId {
 #[cfg(feature = "defmt")]
 impl defmt::Format for ChipId {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct ChipId {
-            stop_bit: bool,
-            manufacturer: u16,
-            part: u16,
-            revision: u8,
-        }
-        let proxy = ChipId {
-            stop_bit: self.stop_bit(),
-            manufacturer: self.manufacturer(),
-            part: self.part(),
-            revision: self.revision(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "ChipId {{ stop_bit: {=bool:?}, manufacturer: {=u16:?}, part: {=u16:?}, revision: {=u8:?} }}" , self . stop_bit () , self . manufacturer () , self . part () , self . revision ())
     }
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct PackageSel(pub u32);
 impl PackageSel {
+    #[must_use]
     #[inline(always)]
     pub const fn package_sel(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_package_sel(&mut self, val: bool) {
+    pub const fn set_package_sel(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
 }
@@ -105,14 +97,11 @@ impl core::fmt::Debug for PackageSel {
 #[cfg(feature = "defmt")]
 impl defmt::Format for PackageSel {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct PackageSel {
-            package_sel: bool,
-        }
-        let proxy = PackageSel {
-            package_sel: self.package_sel(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "PackageSel {{ package_sel: {=bool:?} }}",
+            self.package_sel()
+        )
     }
 }
 #[doc = "Platform register. Allows software to know what environment it is running in during pre-production development. Post-production, the PLATFORM is always ASIC, non-SIM."]
@@ -120,49 +109,54 @@ impl defmt::Format for PackageSel {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Platform(pub u32);
 impl Platform {
+    #[must_use]
     #[inline(always)]
     pub const fn fpga(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_fpga(&mut self, val: bool) {
+    pub const fn set_fpga(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn asic(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_asic(&mut self, val: bool) {
+    pub const fn set_asic(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn hdlsim(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_hdlsim(&mut self, val: bool) {
+    pub const fn set_hdlsim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn batchsim(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_batchsim(&mut self, val: bool) {
+    pub const fn set_batchsim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
+    #[must_use]
     #[inline(always)]
     pub const fn gatesim(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
     #[inline(always)]
-    pub fn set_gatesim(&mut self, val: bool) {
+    pub const fn set_gatesim(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
 }
@@ -186,21 +180,6 @@ impl core::fmt::Debug for Platform {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Platform {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Platform {
-            fpga: bool,
-            asic: bool,
-            hdlsim: bool,
-            batchsim: bool,
-            gatesim: bool,
-        }
-        let proxy = Platform {
-            fpga: self.fpga(),
-            asic: self.asic(),
-            hdlsim: self.hdlsim(),
-            batchsim: self.batchsim(),
-            gatesim: self.gatesim(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt :: write ! (f , "Platform {{ fpga: {=bool:?}, asic: {=bool:?}, hdlsim: {=bool:?}, batchsim: {=bool:?}, gatesim: {=bool:?} }}" , self . fpga () , self . asic () , self . hdlsim () , self . batchsim () , self . gatesim ())
     }
 }

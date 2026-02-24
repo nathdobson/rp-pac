@@ -4,6 +4,7 @@
 pub struct Cs(pub u32);
 impl Cs {
     #[doc = "Divides the PLL input reference clock. Behaviour is undefined for div=0. PLL output will be unpredictable during refdiv changes, wait for lock=1 before using it."]
+    #[must_use]
     #[inline(always)]
     pub const fn refdiv(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x3f;
@@ -11,10 +12,11 @@ impl Cs {
     }
     #[doc = "Divides the PLL input reference clock. Behaviour is undefined for div=0. PLL output will be unpredictable during refdiv changes, wait for lock=1 before using it."]
     #[inline(always)]
-    pub fn set_refdiv(&mut self, val: u8) {
+    pub const fn set_refdiv(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
     }
     #[doc = "Passes the reference clock to the output instead of the divided VCO. The VCO continues to run so the user can switch between the reference clock and the divided VCO but the output will glitch when doing so."]
+    #[must_use]
     #[inline(always)]
     pub const fn bypass(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
@@ -22,10 +24,11 @@ impl Cs {
     }
     #[doc = "Passes the reference clock to the output instead of the divided VCO. The VCO continues to run so the user can switch between the reference clock and the divided VCO but the output will glitch when doing so."]
     #[inline(always)]
-    pub fn set_bypass(&mut self, val: bool) {
+    pub const fn set_bypass(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
     #[doc = "PLL is locked"]
+    #[must_use]
     #[inline(always)]
     pub const fn lock(&self) -> bool {
         let val = (self.0 >> 31usize) & 0x01;
@@ -33,7 +36,7 @@ impl Cs {
     }
     #[doc = "PLL is locked"]
     #[inline(always)]
-    pub fn set_lock(&mut self, val: bool) {
+    pub const fn set_lock(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
     }
 }
@@ -55,18 +58,13 @@ impl core::fmt::Debug for Cs {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Cs {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Cs {
-            refdiv: u8,
-            bypass: bool,
-            lock: bool,
-        }
-        let proxy = Cs {
-            refdiv: self.refdiv(),
-            bypass: self.bypass(),
-            lock: self.lock(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Cs {{ refdiv: {=u8:?}, bypass: {=bool:?}, lock: {=bool:?} }}",
+            self.refdiv(),
+            self.bypass(),
+            self.lock()
+        )
     }
 }
 #[doc = "Feedback divisor (note: this PLL does not support fractional division)"]
@@ -75,6 +73,7 @@ impl defmt::Format for Cs {
 pub struct FbdivInt(pub u32);
 impl FbdivInt {
     #[doc = "see ctrl reg description for constraints"]
+    #[must_use]
     #[inline(always)]
     pub const fn fbdiv_int(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x0fff;
@@ -82,7 +81,7 @@ impl FbdivInt {
     }
     #[doc = "see ctrl reg description for constraints"]
     #[inline(always)]
-    pub fn set_fbdiv_int(&mut self, val: u16) {
+    pub const fn set_fbdiv_int(&mut self, val: u16) {
         self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
     }
 }
@@ -102,14 +101,7 @@ impl core::fmt::Debug for FbdivInt {
 #[cfg(feature = "defmt")]
 impl defmt::Format for FbdivInt {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct FbdivInt {
-            fbdiv_int: u16,
-        }
-        let proxy = FbdivInt {
-            fbdiv_int: self.fbdiv_int(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(f, "FbdivInt {{ fbdiv_int: {=u16:?} }}", self.fbdiv_int())
     }
 }
 #[doc = "Controls the PLL post dividers for the primary output (note: this PLL does not have a secondary output) the primary output is driven from VCO divided by postdiv1*postdiv2"]
@@ -118,6 +110,7 @@ impl defmt::Format for FbdivInt {
 pub struct Prim(pub u32);
 impl Prim {
     #[doc = "divide by 1-7"]
+    #[must_use]
     #[inline(always)]
     pub const fn postdiv2(&self) -> u8 {
         let val = (self.0 >> 12usize) & 0x07;
@@ -125,10 +118,11 @@ impl Prim {
     }
     #[doc = "divide by 1-7"]
     #[inline(always)]
-    pub fn set_postdiv2(&mut self, val: u8) {
+    pub const fn set_postdiv2(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 12usize)) | (((val as u32) & 0x07) << 12usize);
     }
     #[doc = "divide by 1-7"]
+    #[must_use]
     #[inline(always)]
     pub const fn postdiv1(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x07;
@@ -136,7 +130,7 @@ impl Prim {
     }
     #[doc = "divide by 1-7"]
     #[inline(always)]
-    pub fn set_postdiv1(&mut self, val: u8) {
+    pub const fn set_postdiv1(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 16usize)) | (((val as u32) & 0x07) << 16usize);
     }
 }
@@ -157,16 +151,12 @@ impl core::fmt::Debug for Prim {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Prim {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Prim {
-            postdiv2: u8,
-            postdiv1: u8,
-        }
-        let proxy = Prim {
-            postdiv2: self.postdiv2(),
-            postdiv1: self.postdiv1(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Prim {{ postdiv2: {=u8:?}, postdiv1: {=u8:?} }}",
+            self.postdiv2(),
+            self.postdiv1()
+        )
     }
 }
 #[doc = "Controls the PLL power modes."]
@@ -175,6 +165,7 @@ impl defmt::Format for Prim {
 pub struct Pwr(pub u32);
 impl Pwr {
     #[doc = "PLL powerdown To save power set high when PLL output not required."]
+    #[must_use]
     #[inline(always)]
     pub const fn pd(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
@@ -182,10 +173,11 @@ impl Pwr {
     }
     #[doc = "PLL powerdown To save power set high when PLL output not required."]
     #[inline(always)]
-    pub fn set_pd(&mut self, val: bool) {
+    pub const fn set_pd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
     #[doc = "PLL DSM powerdown Nothing is achieved by setting this low."]
+    #[must_use]
     #[inline(always)]
     pub const fn dsmpd(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
@@ -193,10 +185,11 @@ impl Pwr {
     }
     #[doc = "PLL DSM powerdown Nothing is achieved by setting this low."]
     #[inline(always)]
-    pub fn set_dsmpd(&mut self, val: bool) {
+    pub const fn set_dsmpd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
     #[doc = "PLL post divider powerdown To save power set high when PLL output not required or bypass=1."]
+    #[must_use]
     #[inline(always)]
     pub const fn postdivpd(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
@@ -204,10 +197,11 @@ impl Pwr {
     }
     #[doc = "PLL post divider powerdown To save power set high when PLL output not required or bypass=1."]
     #[inline(always)]
-    pub fn set_postdivpd(&mut self, val: bool) {
+    pub const fn set_postdivpd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
     #[doc = "PLL VCO powerdown To save power set high when PLL output not required or bypass=1."]
+    #[must_use]
     #[inline(always)]
     pub const fn vcopd(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
@@ -215,7 +209,7 @@ impl Pwr {
     }
     #[doc = "PLL VCO powerdown To save power set high when PLL output not required or bypass=1."]
     #[inline(always)]
-    pub fn set_vcopd(&mut self, val: bool) {
+    pub const fn set_vcopd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
 }
@@ -238,19 +232,13 @@ impl core::fmt::Debug for Pwr {
 #[cfg(feature = "defmt")]
 impl defmt::Format for Pwr {
     fn format(&self, f: defmt::Formatter) {
-        #[derive(defmt :: Format)]
-        struct Pwr {
-            pd: bool,
-            dsmpd: bool,
-            postdivpd: bool,
-            vcopd: bool,
-        }
-        let proxy = Pwr {
-            pd: self.pd(),
-            dsmpd: self.dsmpd(),
-            postdivpd: self.postdivpd(),
-            vcopd: self.vcopd(),
-        };
-        defmt::write!(f, "{}", proxy)
+        defmt::write!(
+            f,
+            "Pwr {{ pd: {=bool:?}, dsmpd: {=bool:?}, postdivpd: {=bool:?}, vcopd: {=bool:?} }}",
+            self.pd(),
+            self.dsmpd(),
+            self.postdivpd(),
+            self.vcopd()
+        )
     }
 }
