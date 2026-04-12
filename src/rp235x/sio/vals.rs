@@ -4,15 +4,15 @@
 pub enum PixShift {
     #[doc = "Do not shift the colour data register."]
     _0 = 0x0,
-    #[doc = "Shift the colour data register by 1 bit"]
+    #[doc = "Shift the colour data register by 1 bit."]
     _1 = 0x01,
-    #[doc = "Shift the colour data register by 2 bits"]
+    #[doc = "Shift the colour data register by 2 bits."]
     _2 = 0x02,
-    #[doc = "Shift the colour data register by 4 bits"]
+    #[doc = "Shift the colour data register by 4 bits."]
     _4 = 0x03,
-    #[doc = "Shift the colour data register by 8 bits"]
+    #[doc = "Shift the colour data register by 8 bits."]
     _8 = 0x04,
-    #[doc = "Shift the colour data register by 16 bits"]
+    #[doc = "Shift the colour data register by 16 bits."]
     _16 = 0x05,
     _RESERVED_6 = 0x06,
     _RESERVED_7 = 0x07,

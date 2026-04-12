@@ -3,14 +3,14 @@
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct GpioCtrl(pub u32);
 impl GpioCtrl {
-    #[doc = "0-31 -> selects pin function according to the gpio table 31 == NULL"]
+    #[doc = "0-31 -> selects pin function according to the gpio table 31 == NULL."]
     #[must_use]
     #[inline(always)]
     pub const fn funcsel(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x1f;
         val as u8
     }
-    #[doc = "0-31 -> selects pin function according to the gpio table 31 == NULL"]
+    #[doc = "0-31 -> selects pin function according to the gpio table 31 == NULL."]
     #[inline(always)]
     pub const fn set_funcsel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
@@ -79,103 +79,103 @@ impl defmt::Format for GpioCtrl {
         defmt :: write ! (f , "GpioCtrl {{ funcsel: {=u8:?}, outover: {:?}, oeover: {:?}, inover: {:?}, irqover: {:?} }}" , self . funcsel () , self . outover () , self . oeover () , self . inover () , self . irqover ())
     }
 }
-#[doc = "GPIO status"]
+#[doc = "GPIO status."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct GpioStatus(pub u32);
 impl GpioStatus {
-    #[doc = "output signal from selected peripheral, before register override is applied"]
+    #[doc = "output signal from selected peripheral, before register override is applied."]
     #[must_use]
     #[inline(always)]
     pub const fn outfromperi(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "output signal from selected peripheral, before register override is applied"]
+    #[doc = "output signal from selected peripheral, before register override is applied."]
     #[inline(always)]
     pub const fn set_outfromperi(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "output signal to pad after register override is applied"]
+    #[doc = "output signal to pad after register override is applied."]
     #[must_use]
     #[inline(always)]
     pub const fn outtopad(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
-    #[doc = "output signal to pad after register override is applied"]
+    #[doc = "output signal to pad after register override is applied."]
     #[inline(always)]
     pub const fn set_outtopad(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
-    #[doc = "output enable from selected peripheral, before register override is applied"]
+    #[doc = "output enable from selected peripheral, before register override is applied."]
     #[must_use]
     #[inline(always)]
     pub const fn oefromperi(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "output enable from selected peripheral, before register override is applied"]
+    #[doc = "output enable from selected peripheral, before register override is applied."]
     #[inline(always)]
     pub const fn set_oefromperi(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
-    #[doc = "output enable to pad after register override is applied"]
+    #[doc = "output enable to pad after register override is applied."]
     #[must_use]
     #[inline(always)]
     pub const fn oetopad(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
         val != 0
     }
-    #[doc = "output enable to pad after register override is applied"]
+    #[doc = "output enable to pad after register override is applied."]
     #[inline(always)]
     pub const fn set_oetopad(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
-    #[doc = "input signal from pad, before override is applied"]
+    #[doc = "input signal from pad, before override is applied."]
     #[must_use]
     #[inline(always)]
     pub const fn infrompad(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
-    #[doc = "input signal from pad, before override is applied"]
+    #[doc = "input signal from pad, before override is applied."]
     #[inline(always)]
     pub const fn set_infrompad(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
-    #[doc = "input signal to peripheral, after override is applied"]
+    #[doc = "input signal to peripheral, after override is applied."]
     #[must_use]
     #[inline(always)]
     pub const fn intoperi(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
         val != 0
     }
-    #[doc = "input signal to peripheral, after override is applied"]
+    #[doc = "input signal to peripheral, after override is applied."]
     #[inline(always)]
     pub const fn set_intoperi(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
     }
-    #[doc = "interrupt from pad before override is applied"]
+    #[doc = "interrupt from pad before override is applied."]
     #[must_use]
     #[inline(always)]
     pub const fn irqfrompad(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
         val != 0
     }
-    #[doc = "interrupt from pad before override is applied"]
+    #[doc = "interrupt from pad before override is applied."]
     #[inline(always)]
     pub const fn set_irqfrompad(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
-    #[doc = "interrupt to processors, after override is applied"]
+    #[doc = "interrupt to processors, after override is applied."]
     #[must_use]
     #[inline(always)]
     pub const fn irqtoproc(&self) -> bool {
         let val = (self.0 >> 26usize) & 0x01;
         val != 0
     }
-    #[doc = "interrupt to processors, after override is applied"]
+    #[doc = "interrupt to processors, after override is applied."]
     #[inline(always)]
     pub const fn set_irqtoproc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
@@ -207,7 +207,7 @@ impl defmt::Format for GpioStatus {
         defmt :: write ! (f , "GpioStatus {{ outfromperi: {=bool:?}, outtopad: {=bool:?}, oefromperi: {=bool:?}, oetopad: {=bool:?}, infrompad: {=bool:?}, intoperi: {=bool:?}, irqfrompad: {=bool:?}, irqtoproc: {=bool:?} }}" , self . outfromperi () , self . outtopad () , self . oefromperi () , self . oetopad () , self . infrompad () , self . intoperi () , self . irqfrompad () , self . irqtoproc ())
     }
 }
-#[doc = "Interrupt Enable for dormant_wake"]
+#[doc = "Interrupt Enable for dormant_wake."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);

@@ -1,4 +1,4 @@
-#[doc = "ADC Control and Status"]
+#[doc = "ADC Control and Status."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Cs(pub u32);
@@ -139,7 +139,7 @@ impl defmt::Format for Cs {
         defmt :: write ! (f , "Cs {{ en: {=bool:?}, ts_en: {=bool:?}, start_once: {=bool:?}, start_many: {=bool:?}, ready: {=bool:?}, err: {=bool:?}, err_sticky: {=bool:?}, ainsel: {=u8:?}, rrobin: {=u8:?} }}" , self . en () , self . ts_en () , self . start_once () , self . start_many () , self . ready () , self . err () , self . err_sticky () , self . ainsel () , self . rrobin ())
     }
 }
-#[doc = "Clock divider. If non-zero, CS_START_MANY will start conversions at regular intervals rather than back-to-back. The divider is reset when either of these fields are written. Total period is 1 + INT + FRAC / 256"]
+#[doc = "Clock divider. If non-zero, CS_START_MANY will start conversions at regular intervals rather than back-to-back. The divider is reset when either of these fields are written. Total period is 1 + INT + FRAC / 256."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Div(pub u32);
@@ -194,7 +194,7 @@ impl defmt::Format for Div {
         )
     }
 }
-#[doc = "FIFO control and status"]
+#[doc = "FIFO control and status."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Fcs(pub u32);
@@ -223,26 +223,26 @@ impl Fcs {
     pub const fn set_shift(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "If 1: conversion error bit appears in the FIFO alongside the result"]
+    #[doc = "If 1: conversion error bit appears in the FIFO alongside the result."]
     #[must_use]
     #[inline(always)]
     pub const fn err(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "If 1: conversion error bit appears in the FIFO alongside the result"]
+    #[doc = "If 1: conversion error bit appears in the FIFO alongside the result."]
     #[inline(always)]
     pub const fn set_err(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "If 1: assert DMA requests when FIFO contains data"]
+    #[doc = "If 1: assert DMA requests when FIFO contains data."]
     #[must_use]
     #[inline(always)]
     pub const fn dreq_en(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
-    #[doc = "If 1: assert DMA requests when FIFO contains data"]
+    #[doc = "If 1: assert DMA requests when FIFO contains data."]
     #[inline(always)]
     pub const fn set_dreq_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
@@ -291,26 +291,26 @@ impl Fcs {
     pub const fn set_over(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
-    #[doc = "The number of conversion results currently waiting in the FIFO"]
+    #[doc = "The number of conversion results currently waiting in the FIFO."]
     #[must_use]
     #[inline(always)]
     pub const fn level(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x0f;
         val as u8
     }
-    #[doc = "The number of conversion results currently waiting in the FIFO"]
+    #[doc = "The number of conversion results currently waiting in the FIFO."]
     #[inline(always)]
     pub const fn set_level(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
     }
-    #[doc = "DREQ/IRQ asserted when level >= threshold"]
+    #[doc = "DREQ/IRQ asserted when level >= threshold."]
     #[must_use]
     #[inline(always)]
     pub const fn thresh(&self) -> u8 {
         let val = (self.0 >> 24usize) & 0x0f;
         val as u8
     }
-    #[doc = "DREQ/IRQ asserted when level >= threshold"]
+    #[doc = "DREQ/IRQ asserted when level >= threshold."]
     #[inline(always)]
     pub const fn set_thresh(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 24usize)) | (((val as u32) & 0x0f) << 24usize);
@@ -344,7 +344,7 @@ impl defmt::Format for Fcs {
         defmt :: write ! (f , "Fcs {{ en: {=bool:?}, shift: {=bool:?}, err: {=bool:?}, dreq_en: {=bool:?}, empty: {=bool:?}, full: {=bool:?}, under: {=bool:?}, over: {=bool:?}, level: {=u8:?}, thresh: {=u8:?} }}" , self . en () , self . shift () , self . err () , self . dreq_en () , self . empty () , self . full () , self . under () , self . over () , self . level () , self . thresh ())
     }
 }
-#[doc = "Conversion result FIFO"]
+#[doc = "Conversion result FIFO."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Fifo(pub u32);
@@ -397,7 +397,7 @@ impl defmt::Format for Fifo {
         )
     }
 }
-#[doc = "Interrupt Enable"]
+#[doc = "Interrupt Enable."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
@@ -432,7 +432,7 @@ impl defmt::Format for Int {
         defmt::write!(f, "Int {{ fifo: {=bool:?} }}", self.fifo())
     }
 }
-#[doc = "Result of most recent ADC conversion"]
+#[doc = "Result of most recent ADC conversion."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Result(pub u32);

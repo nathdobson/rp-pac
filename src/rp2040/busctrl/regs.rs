@@ -3,50 +3,50 @@
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct BusPriority(pub u32);
 impl BusPriority {
-    #[doc = "0 - low priority, 1 - high priority"]
+    #[doc = "0 - low priority, 1 - high priority."]
     #[must_use]
     #[inline(always)]
     pub const fn proc0(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "0 - low priority, 1 - high priority"]
+    #[doc = "0 - low priority, 1 - high priority."]
     #[inline(always)]
     pub const fn set_proc0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "0 - low priority, 1 - high priority"]
+    #[doc = "0 - low priority, 1 - high priority."]
     #[must_use]
     #[inline(always)]
     pub const fn proc1(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "0 - low priority, 1 - high priority"]
+    #[doc = "0 - low priority, 1 - high priority."]
     #[inline(always)]
     pub const fn set_proc1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "0 - low priority, 1 - high priority"]
+    #[doc = "0 - low priority, 1 - high priority."]
     #[must_use]
     #[inline(always)]
     pub const fn dma_r(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "0 - low priority, 1 - high priority"]
+    #[doc = "0 - low priority, 1 - high priority."]
     #[inline(always)]
     pub const fn set_dma_r(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "0 - low priority, 1 - high priority"]
+    #[doc = "0 - low priority, 1 - high priority."]
     #[must_use]
     #[inline(always)]
     pub const fn dma_w(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "0 - low priority, 1 - high priority"]
+    #[doc = "0 - low priority, 1 - high priority."]
     #[inline(always)]
     pub const fn set_dma_w(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
@@ -74,7 +74,7 @@ impl defmt::Format for BusPriority {
         defmt :: write ! (f , "BusPriority {{ proc0: {=bool:?}, proc1: {=bool:?}, dma_r: {=bool:?}, dma_w: {=bool:?} }}" , self . proc0 () , self . proc1 () , self . dma_r () , self . dma_w ())
     }
 }
-#[doc = "Bus priority acknowledge"]
+#[doc = "Bus priority acknowledge."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct BusPriorityAck(pub u32);
@@ -115,19 +115,19 @@ impl defmt::Format for BusPriorityAck {
         )
     }
 }
-#[doc = "Bus fabric performance counter 0"]
+#[doc = "Bus fabric performance counter 0."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Perfctr(pub u32);
 impl Perfctr {
-    #[doc = "Busfabric saturating performance counter 0 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL0"]
+    #[doc = "Busfabric saturating performance counter 0 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL0."]
     #[must_use]
     #[inline(always)]
     pub const fn perfctr(&self) -> u32 {
         let val = (self.0 >> 0usize) & 0x00ff_ffff;
         val as u32
     }
-    #[doc = "Busfabric saturating performance counter 0 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL0"]
+    #[doc = "Busfabric saturating performance counter 0 Count some event signal from the busfabric arbiters. Write any value to clear. Select an event to count using PERFSEL0."]
     #[inline(always)]
     pub const fn set_perfctr(&mut self, val: u32) {
         self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
@@ -152,7 +152,7 @@ impl defmt::Format for Perfctr {
         defmt::write!(f, "Perfctr {{ perfctr: {=u32:?} }}", self.perfctr())
     }
 }
-#[doc = "Bus fabric performance event select for PERFCTR0"]
+#[doc = "Bus fabric performance event select for PERFCTR0."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Perfsel(pub u32);

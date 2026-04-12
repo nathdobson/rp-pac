@@ -2,14 +2,14 @@
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Divmode {
-    #[doc = "Free-running counting at rate dictated by fractional divider"]
-    DIV = 0x0,
+    #[doc = "Free-running counting at rate dictated by fractional divider."]
+    Div = 0x0,
     #[doc = "Fractional divider operation is gated by the PWM B pin."]
-    LEVEL = 0x01,
+    Level = 0x01,
     #[doc = "Counter advances with each rising edge of the PWM B pin."]
-    RISE = 0x02,
+    Rise = 0x02,
     #[doc = "Counter advances with each falling edge of the PWM B pin."]
-    FALL = 0x03,
+    Fall = 0x03,
 }
 impl Divmode {
     #[inline(always)]

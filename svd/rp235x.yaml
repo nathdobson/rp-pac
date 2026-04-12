@@ -1,4 +1,5 @@
 transforms:
+  - !Sanitize
   #- DeleteEnums:
   #    from: .*
   #    bit_size: 1
@@ -361,13 +362,17 @@ transforms:
       to: clocks::regs::Int
   - !RenameEnumVariants
       enum: clocks::vals::ClkGpout\dCtrlAuxsrc
-      from: ROSC_CLKSRC_PH
-      to: ROSC_CLKSRC
+      from: RoscClksrcPh
+      to: RoscClksrc
   - !MergeEnums
       from: clocks::vals::ClkGpout\dCtrlAuxsrc
       to: clocks::vals::ClkGpoutCtrlAuxsrc
+  - !RenameFields
+      fieldset: clocks::regs::ClkGpout\dSelected
+      from: clk_gpout\d+_selected
+      to: clk_gpout0_selected
   - !MergeFieldsets
-      from: clocks::regs::ClkGpout\d(Ctrl|Div)
+      from: clocks::regs::ClkGpout\d(Ctrl|Div|Selected)
       to: clocks::regs::ClkGpout$1
   - !MakeRegisterArray
       blocks: clocks::Clocks
@@ -610,4 +615,3 @@ transforms:
       from: pads_qspi::.*
   - !FixRegisterBitSizes # There's some 24-bit regs. This changes them to 32-bit.
       create_fieldsets: false
-  - !Sanitize

@@ -13,17 +13,17 @@ impl Pads {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Voltage select. Per bank control"]
+    #[doc = "Voltage select. Per bank control."]
     #[inline(always)]
     pub const fn voltage_select(
         self,
     ) -> crate::common::Reg<regs::VoltageSelect, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
     }
     #[inline(always)]
     pub const fn gpio(self, n: usize) -> crate::common::Reg<regs::GpioCtrl, crate::common::RW> {
         assert!(n < 50usize);
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize + n * 4usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize + n * 4usize) as _) }
     }
 }
 pub mod regs;

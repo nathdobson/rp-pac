@@ -1,7 +1,7 @@
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Proc0count(pub u32);
-impl Proc0count {
+pub struct Proc0Count(pub u32);
+impl Proc0Count {
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
     #[must_use]
     #[inline(always)]
@@ -15,79 +15,79 @@ impl Proc0count {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
-impl Default for Proc0count {
+impl Default for Proc0Count {
     #[inline(always)]
-    fn default() -> Proc0count {
-        Proc0count(0)
+    fn default() -> Proc0Count {
+        Proc0Count(0)
     }
 }
-impl core::fmt::Debug for Proc0count {
+impl core::fmt::Debug for Proc0Count {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Proc0count")
+        f.debug_struct("Proc0Count")
             .field("proc0_count", &self.proc0_count())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Proc0count {
+impl defmt::Format for Proc0Count {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Proc0count {{ proc0_count: {=u16:?} }}",
+            "Proc0Count {{ proc0_count: {=u16:?} }}",
             self.proc0_count()
         )
     }
 }
-#[doc = "Controls the tick generator"]
+#[doc = "Controls the tick generator."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Proc0ctrl(pub u32);
-impl Proc0ctrl {
-    #[doc = "start / stop tick generation"]
+pub struct Proc0Ctrl(pub u32);
+impl Proc0Ctrl {
+    #[doc = "start / stop tick generation."]
     #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "start / stop tick generation"]
+    #[doc = "start / stop tick generation."]
     #[inline(always)]
     pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Is the tick generator running?"]
+    #[doc = "Is the tick generator running?."]
     #[must_use]
     #[inline(always)]
     pub const fn running(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Is the tick generator running?"]
+    #[doc = "Is the tick generator running?."]
     #[inline(always)]
     pub const fn set_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
-impl Default for Proc0ctrl {
+impl Default for Proc0Ctrl {
     #[inline(always)]
-    fn default() -> Proc0ctrl {
-        Proc0ctrl(0)
+    fn default() -> Proc0Ctrl {
+        Proc0Ctrl(0)
     }
 }
-impl core::fmt::Debug for Proc0ctrl {
+impl core::fmt::Debug for Proc0Ctrl {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Proc0ctrl")
+        f.debug_struct("Proc0Ctrl")
             .field("enable", &self.enable())
             .field("running", &self.running())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Proc0ctrl {
+impl defmt::Format for Proc0Ctrl {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Proc0ctrl {{ enable: {=bool:?}, running: {=bool:?} }}",
+            "Proc0Ctrl {{ enable: {=bool:?}, running: {=bool:?} }}",
             self.enable(),
             self.running()
         )
@@ -95,8 +95,8 @@ impl defmt::Format for Proc0ctrl {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Proc0cycles(pub u32);
-impl Proc0cycles {
+pub struct Proc0Cycles(pub u32);
+impl Proc0Cycles {
     #[doc = "Total number of clk_tick cycles before the next tick."]
     #[must_use]
     #[inline(always)]
@@ -110,33 +110,33 @@ impl Proc0cycles {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
-impl Default for Proc0cycles {
+impl Default for Proc0Cycles {
     #[inline(always)]
-    fn default() -> Proc0cycles {
-        Proc0cycles(0)
+    fn default() -> Proc0Cycles {
+        Proc0Cycles(0)
     }
 }
-impl core::fmt::Debug for Proc0cycles {
+impl core::fmt::Debug for Proc0Cycles {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Proc0cycles")
+        f.debug_struct("Proc0Cycles")
             .field("proc0_cycles", &self.proc0_cycles())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Proc0cycles {
+impl defmt::Format for Proc0Cycles {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Proc0cycles {{ proc0_cycles: {=u16:?} }}",
+            "Proc0Cycles {{ proc0_cycles: {=u16:?} }}",
             self.proc0_cycles()
         )
     }
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Proc1count(pub u32);
-impl Proc1count {
+pub struct Proc1Count(pub u32);
+impl Proc1Count {
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
     #[must_use]
     #[inline(always)]
@@ -150,79 +150,79 @@ impl Proc1count {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
-impl Default for Proc1count {
+impl Default for Proc1Count {
     #[inline(always)]
-    fn default() -> Proc1count {
-        Proc1count(0)
+    fn default() -> Proc1Count {
+        Proc1Count(0)
     }
 }
-impl core::fmt::Debug for Proc1count {
+impl core::fmt::Debug for Proc1Count {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Proc1count")
+        f.debug_struct("Proc1Count")
             .field("proc1_count", &self.proc1_count())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Proc1count {
+impl defmt::Format for Proc1Count {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Proc1count {{ proc1_count: {=u16:?} }}",
+            "Proc1Count {{ proc1_count: {=u16:?} }}",
             self.proc1_count()
         )
     }
 }
-#[doc = "Controls the tick generator"]
+#[doc = "Controls the tick generator."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Proc1ctrl(pub u32);
-impl Proc1ctrl {
-    #[doc = "start / stop tick generation"]
+pub struct Proc1Ctrl(pub u32);
+impl Proc1Ctrl {
+    #[doc = "start / stop tick generation."]
     #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "start / stop tick generation"]
+    #[doc = "start / stop tick generation."]
     #[inline(always)]
     pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Is the tick generator running?"]
+    #[doc = "Is the tick generator running?."]
     #[must_use]
     #[inline(always)]
     pub const fn running(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Is the tick generator running?"]
+    #[doc = "Is the tick generator running?."]
     #[inline(always)]
     pub const fn set_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
-impl Default for Proc1ctrl {
+impl Default for Proc1Ctrl {
     #[inline(always)]
-    fn default() -> Proc1ctrl {
-        Proc1ctrl(0)
+    fn default() -> Proc1Ctrl {
+        Proc1Ctrl(0)
     }
 }
-impl core::fmt::Debug for Proc1ctrl {
+impl core::fmt::Debug for Proc1Ctrl {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Proc1ctrl")
+        f.debug_struct("Proc1Ctrl")
             .field("enable", &self.enable())
             .field("running", &self.running())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Proc1ctrl {
+impl defmt::Format for Proc1Ctrl {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Proc1ctrl {{ enable: {=bool:?}, running: {=bool:?} }}",
+            "Proc1Ctrl {{ enable: {=bool:?}, running: {=bool:?} }}",
             self.enable(),
             self.running()
         )
@@ -230,8 +230,8 @@ impl defmt::Format for Proc1ctrl {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Proc1cycles(pub u32);
-impl Proc1cycles {
+pub struct Proc1Cycles(pub u32);
+impl Proc1Cycles {
     #[doc = "Total number of clk_tick cycles before the next tick."]
     #[must_use]
     #[inline(always)]
@@ -245,25 +245,25 @@ impl Proc1cycles {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
-impl Default for Proc1cycles {
+impl Default for Proc1Cycles {
     #[inline(always)]
-    fn default() -> Proc1cycles {
-        Proc1cycles(0)
+    fn default() -> Proc1Cycles {
+        Proc1Cycles(0)
     }
 }
-impl core::fmt::Debug for Proc1cycles {
+impl core::fmt::Debug for Proc1Cycles {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Proc1cycles")
+        f.debug_struct("Proc1Cycles")
             .field("proc1_cycles", &self.proc1_cycles())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Proc1cycles {
+impl defmt::Format for Proc1Cycles {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Proc1cycles {{ proc1_cycles: {=u16:?} }}",
+            "Proc1Cycles {{ proc1_cycles: {=u16:?} }}",
             self.proc1_cycles()
         )
     }
@@ -308,31 +308,31 @@ impl defmt::Format for RiscvCount {
         )
     }
 }
-#[doc = "Controls the tick generator"]
+#[doc = "Controls the tick generator."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct RiscvCtrl(pub u32);
 impl RiscvCtrl {
-    #[doc = "start / stop tick generation"]
+    #[doc = "start / stop tick generation."]
     #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "start / stop tick generation"]
+    #[doc = "start / stop tick generation."]
     #[inline(always)]
     pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Is the tick generator running?"]
+    #[doc = "Is the tick generator running?."]
     #[must_use]
     #[inline(always)]
     pub const fn running(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Is the tick generator running?"]
+    #[doc = "Is the tick generator running?."]
     #[inline(always)]
     pub const fn set_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
@@ -405,8 +405,8 @@ impl defmt::Format for RiscvCycles {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Timer0count(pub u32);
-impl Timer0count {
+pub struct Timer0Count(pub u32);
+impl Timer0Count {
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
     #[must_use]
     #[inline(always)]
@@ -420,79 +420,79 @@ impl Timer0count {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
-impl Default for Timer0count {
+impl Default for Timer0Count {
     #[inline(always)]
-    fn default() -> Timer0count {
-        Timer0count(0)
+    fn default() -> Timer0Count {
+        Timer0Count(0)
     }
 }
-impl core::fmt::Debug for Timer0count {
+impl core::fmt::Debug for Timer0Count {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Timer0count")
+        f.debug_struct("Timer0Count")
             .field("timer0_count", &self.timer0_count())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Timer0count {
+impl defmt::Format for Timer0Count {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Timer0count {{ timer0_count: {=u16:?} }}",
+            "Timer0Count {{ timer0_count: {=u16:?} }}",
             self.timer0_count()
         )
     }
 }
-#[doc = "Controls the tick generator"]
+#[doc = "Controls the tick generator."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Timer0ctrl(pub u32);
-impl Timer0ctrl {
-    #[doc = "start / stop tick generation"]
+pub struct Timer0Ctrl(pub u32);
+impl Timer0Ctrl {
+    #[doc = "start / stop tick generation."]
     #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "start / stop tick generation"]
+    #[doc = "start / stop tick generation."]
     #[inline(always)]
     pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Is the tick generator running?"]
+    #[doc = "Is the tick generator running?."]
     #[must_use]
     #[inline(always)]
     pub const fn running(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Is the tick generator running?"]
+    #[doc = "Is the tick generator running?."]
     #[inline(always)]
     pub const fn set_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
-impl Default for Timer0ctrl {
+impl Default for Timer0Ctrl {
     #[inline(always)]
-    fn default() -> Timer0ctrl {
-        Timer0ctrl(0)
+    fn default() -> Timer0Ctrl {
+        Timer0Ctrl(0)
     }
 }
-impl core::fmt::Debug for Timer0ctrl {
+impl core::fmt::Debug for Timer0Ctrl {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Timer0ctrl")
+        f.debug_struct("Timer0Ctrl")
             .field("enable", &self.enable())
             .field("running", &self.running())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Timer0ctrl {
+impl defmt::Format for Timer0Ctrl {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Timer0ctrl {{ enable: {=bool:?}, running: {=bool:?} }}",
+            "Timer0Ctrl {{ enable: {=bool:?}, running: {=bool:?} }}",
             self.enable(),
             self.running()
         )
@@ -500,8 +500,8 @@ impl defmt::Format for Timer0ctrl {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Timer0cycles(pub u32);
-impl Timer0cycles {
+pub struct Timer0Cycles(pub u32);
+impl Timer0Cycles {
     #[doc = "Total number of clk_tick cycles before the next tick."]
     #[must_use]
     #[inline(always)]
@@ -515,33 +515,33 @@ impl Timer0cycles {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
-impl Default for Timer0cycles {
+impl Default for Timer0Cycles {
     #[inline(always)]
-    fn default() -> Timer0cycles {
-        Timer0cycles(0)
+    fn default() -> Timer0Cycles {
+        Timer0Cycles(0)
     }
 }
-impl core::fmt::Debug for Timer0cycles {
+impl core::fmt::Debug for Timer0Cycles {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Timer0cycles")
+        f.debug_struct("Timer0Cycles")
             .field("timer0_cycles", &self.timer0_cycles())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Timer0cycles {
+impl defmt::Format for Timer0Cycles {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Timer0cycles {{ timer0_cycles: {=u16:?} }}",
+            "Timer0Cycles {{ timer0_cycles: {=u16:?} }}",
             self.timer0_cycles()
         )
     }
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Timer1count(pub u32);
-impl Timer1count {
+pub struct Timer1Count(pub u32);
+impl Timer1Count {
     #[doc = "Count down timer: the remaining number clk_tick cycles before the next tick is generated."]
     #[must_use]
     #[inline(always)]
@@ -555,79 +555,79 @@ impl Timer1count {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
-impl Default for Timer1count {
+impl Default for Timer1Count {
     #[inline(always)]
-    fn default() -> Timer1count {
-        Timer1count(0)
+    fn default() -> Timer1Count {
+        Timer1Count(0)
     }
 }
-impl core::fmt::Debug for Timer1count {
+impl core::fmt::Debug for Timer1Count {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Timer1count")
+        f.debug_struct("Timer1Count")
             .field("timer1_count", &self.timer1_count())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Timer1count {
+impl defmt::Format for Timer1Count {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Timer1count {{ timer1_count: {=u16:?} }}",
+            "Timer1Count {{ timer1_count: {=u16:?} }}",
             self.timer1_count()
         )
     }
 }
-#[doc = "Controls the tick generator"]
+#[doc = "Controls the tick generator."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Timer1ctrl(pub u32);
-impl Timer1ctrl {
-    #[doc = "start / stop tick generation"]
+pub struct Timer1Ctrl(pub u32);
+impl Timer1Ctrl {
+    #[doc = "start / stop tick generation."]
     #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "start / stop tick generation"]
+    #[doc = "start / stop tick generation."]
     #[inline(always)]
     pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Is the tick generator running?"]
+    #[doc = "Is the tick generator running?."]
     #[must_use]
     #[inline(always)]
     pub const fn running(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Is the tick generator running?"]
+    #[doc = "Is the tick generator running?."]
     #[inline(always)]
     pub const fn set_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
 }
-impl Default for Timer1ctrl {
+impl Default for Timer1Ctrl {
     #[inline(always)]
-    fn default() -> Timer1ctrl {
-        Timer1ctrl(0)
+    fn default() -> Timer1Ctrl {
+        Timer1Ctrl(0)
     }
 }
-impl core::fmt::Debug for Timer1ctrl {
+impl core::fmt::Debug for Timer1Ctrl {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Timer1ctrl")
+        f.debug_struct("Timer1Ctrl")
             .field("enable", &self.enable())
             .field("running", &self.running())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Timer1ctrl {
+impl defmt::Format for Timer1Ctrl {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Timer1ctrl {{ enable: {=bool:?}, running: {=bool:?} }}",
+            "Timer1Ctrl {{ enable: {=bool:?}, running: {=bool:?} }}",
             self.enable(),
             self.running()
         )
@@ -635,8 +635,8 @@ impl defmt::Format for Timer1ctrl {
 }
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Timer1cycles(pub u32);
-impl Timer1cycles {
+pub struct Timer1Cycles(pub u32);
+impl Timer1Cycles {
     #[doc = "Total number of clk_tick cycles before the next tick."]
     #[must_use]
     #[inline(always)]
@@ -650,25 +650,25 @@ impl Timer1cycles {
         self.0 = (self.0 & !(0x01ff << 0usize)) | (((val as u32) & 0x01ff) << 0usize);
     }
 }
-impl Default for Timer1cycles {
+impl Default for Timer1Cycles {
     #[inline(always)]
-    fn default() -> Timer1cycles {
-        Timer1cycles(0)
+    fn default() -> Timer1Cycles {
+        Timer1Cycles(0)
     }
 }
-impl core::fmt::Debug for Timer1cycles {
+impl core::fmt::Debug for Timer1Cycles {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Timer1cycles")
+        f.debug_struct("Timer1Cycles")
             .field("timer1_cycles", &self.timer1_cycles())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Timer1cycles {
+impl defmt::Format for Timer1Cycles {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Timer1cycles {{ timer1_cycles: {=u16:?} }}",
+            "Timer1Cycles {{ timer1_cycles: {=u16:?} }}",
             self.timer1_cycles()
         )
     }
@@ -713,31 +713,31 @@ impl defmt::Format for WatchdogCount {
         )
     }
 }
-#[doc = "Controls the tick generator"]
+#[doc = "Controls the tick generator."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct WatchdogCtrl(pub u32);
 impl WatchdogCtrl {
-    #[doc = "start / stop tick generation"]
+    #[doc = "start / stop tick generation."]
     #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "start / stop tick generation"]
+    #[doc = "start / stop tick generation."]
     #[inline(always)]
     pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Is the tick generator running?"]
+    #[doc = "Is the tick generator running?."]
     #[must_use]
     #[inline(always)]
     pub const fn running(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Is the tick generator running?"]
+    #[doc = "Is the tick generator running?."]
     #[inline(always)]
     pub const fn set_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);

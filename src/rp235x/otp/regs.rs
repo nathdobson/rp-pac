@@ -108,7 +108,7 @@ impl defmt::Format for ArchselStatus {
         )
     }
 }
-#[doc = "During BIST, count address locations that have at least one leaky bit"]
+#[doc = "During BIST, count address locations that have at least one leaky bit."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Bist(pub u32);
@@ -125,50 +125,50 @@ impl Bist {
     pub const fn set_cnt(&mut self, val: u16) {
         self.0 = (self.0 & !(0x1fff << 0usize)) | (((val as u32) & 0x1fff) << 0usize);
     }
-    #[doc = "The cnt_fail flag will be set if the number of leaky locations exceeds this number"]
+    #[doc = "The cnt_fail flag will be set if the number of leaky locations exceeds this number."]
     #[must_use]
     #[inline(always)]
     pub const fn cnt_max(&self) -> u16 {
         let val = (self.0 >> 16usize) & 0x0fff;
         val as u16
     }
-    #[doc = "The cnt_fail flag will be set if the number of leaky locations exceeds this number"]
+    #[doc = "The cnt_fail flag will be set if the number of leaky locations exceeds this number."]
     #[inline(always)]
     pub const fn set_cnt_max(&mut self, val: u16) {
         self.0 = (self.0 & !(0x0fff << 16usize)) | (((val as u32) & 0x0fff) << 16usize);
     }
-    #[doc = "Enable the counter before the BIST function is initiated"]
+    #[doc = "Enable the counter before the BIST function is initiated."]
     #[must_use]
     #[inline(always)]
     pub const fn cnt_ena(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
         val != 0
     }
-    #[doc = "Enable the counter before the BIST function is initiated"]
+    #[doc = "Enable the counter before the BIST function is initiated."]
     #[inline(always)]
     pub const fn set_cnt_ena(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
     }
-    #[doc = "Clear counter before use"]
+    #[doc = "Clear counter before use."]
     #[must_use]
     #[inline(always)]
     pub const fn cnt_clr(&self) -> bool {
         let val = (self.0 >> 29usize) & 0x01;
         val != 0
     }
-    #[doc = "Clear counter before use"]
+    #[doc = "Clear counter before use."]
     #[inline(always)]
     pub const fn set_cnt_clr(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 29usize)) | (((val as u32) & 0x01) << 29usize);
     }
-    #[doc = "Flag if the count of address locations with at least one leaky bit exceeds cnt_max"]
+    #[doc = "Flag if the count of address locations with at least one leaky bit exceeds cnt_max."]
     #[must_use]
     #[inline(always)]
     pub const fn cnt_fail(&self) -> bool {
         let val = (self.0 >> 30usize) & 0x01;
         val != 0
     }
-    #[doc = "Flag if the count of address locations with at least one leaky bit exceeds cnt_max"]
+    #[doc = "Flag if the count of address locations with at least one leaky bit exceeds cnt_max."]
     #[inline(always)]
     pub const fn set_cnt_fail(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 30usize)) | (((val as u32) & 0x01) << 30usize);
@@ -252,7 +252,7 @@ impl defmt::Format for Bootdis {
         )
     }
 }
-#[doc = "Quickly check values of critical flags read during boot up"]
+#[doc = "Quickly check values of critical flags read during boot up."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Critical(pub u32);
@@ -364,79 +364,79 @@ impl defmt::Format for Critical {
         defmt :: write ! (f , "Critical {{ secure_boot_enable: {=bool:?}, secure_debug_disable: {=bool:?}, debug_disable: {=bool:?}, default_archsel: {=bool:?}, glitch_detector_enable: {=bool:?}, glitch_detector_sens: {=u8:?}, arm_disable: {=bool:?}, riscv_disable: {=bool:?} }}" , self . secure_boot_enable () , self . secure_debug_disable () , self . debug_disable () , self . default_archsel () , self . glitch_detector_enable () , self . glitch_detector_sens () , self . arm_disable () , self . riscv_disable ())
     }
 }
-#[doc = "Debug for OTP power-on state machine"]
+#[doc = "Debug for OTP power-on state machine."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Dbg(pub u32);
 impl Dbg {
-    #[doc = "PSM done status flag"]
+    #[doc = "PSM done status flag."]
     #[must_use]
     #[inline(always)]
     pub const fn psm_done(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "PSM done status flag"]
+    #[doc = "PSM done status flag."]
     #[inline(always)]
     pub const fn set_psm_done(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "PSM boot done status flag"]
+    #[doc = "PSM boot done status flag."]
     #[must_use]
     #[inline(always)]
     pub const fn boot_done(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "PSM boot done status flag"]
+    #[doc = "PSM boot done status flag."]
     #[inline(always)]
     pub const fn set_boot_done(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Ring oscillator was seen up and running"]
+    #[doc = "Ring oscillator was seen up and running."]
     #[must_use]
     #[inline(always)]
     pub const fn rosc_up_seen(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "Ring oscillator was seen up and running"]
+    #[doc = "Ring oscillator was seen up and running."]
     #[inline(always)]
     pub const fn set_rosc_up_seen(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "Ring oscillator is up and running"]
+    #[doc = "Ring oscillator is up and running."]
     #[must_use]
     #[inline(always)]
     pub const fn rosc_up(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
-    #[doc = "Ring oscillator is up and running"]
+    #[doc = "Ring oscillator is up and running."]
     #[inline(always)]
     pub const fn set_rosc_up(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
-    #[doc = "Monitor the PSM FSM's state"]
+    #[doc = "Monitor the PSM FSM's state."]
     #[must_use]
     #[inline(always)]
     pub const fn psm_state(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x0f;
         val as u8
     }
-    #[doc = "Monitor the PSM FSM's state"]
+    #[doc = "Monitor the PSM FSM's state."]
     #[inline(always)]
     pub const fn set_psm_state(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
     }
-    #[doc = "The chip is in RMA mode"]
+    #[doc = "The chip is in RMA mode."]
     #[must_use]
     #[inline(always)]
     pub const fn customer_rma_flag(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "The chip is in RMA mode"]
+    #[doc = "The chip is in RMA mode."]
     #[inline(always)]
     pub const fn set_customer_rma_flag(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
@@ -644,7 +644,7 @@ impl defmt::Format for DebugenLock {
         defmt :: write ! (f , "DebugenLock {{ proc0: {=bool:?}, proc0_secure: {=bool:?}, proc1: {=bool:?}, proc1_secure: {=bool:?}, misc: {=bool:?} }}" , self . proc0 () , self . proc0_secure () , self . proc1 () , self . proc1_secure () , self . misc ())
     }
 }
-#[doc = "Interrupt Enable"]
+#[doc = "Interrupt Enable."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
@@ -723,7 +723,7 @@ impl defmt::Format for Int {
         defmt :: write ! (f , "Int {{ sbpi_flag_n: {=bool:?}, sbpi_wr_fail: {=bool:?}, apb_dctrl_fail: {=bool:?}, apb_rd_sec_fail: {=bool:?}, apb_rd_nsec_fail: {=bool:?} }}" , self . sbpi_flag_n () , self . sbpi_wr_fail () , self . apb_dctrl_fail () , self . apb_rd_sec_fail () , self . apb_rd_nsec_fail ())
     }
 }
-#[doc = "Which keys were valid (enrolled) at boot time"]
+#[doc = "Which keys were valid (enrolled) at boot time."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct KeyValid(pub u32);
@@ -763,14 +763,14 @@ impl defmt::Format for KeyValid {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SbpiInstr(pub u32);
 impl SbpiInstr {
-    #[doc = "wdata to be used only when payload_size_m1=0"]
+    #[doc = "wdata to be used only when payload_size_m1=0."]
     #[must_use]
     #[inline(always)]
     pub const fn short_wdata(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
         val as u8
     }
-    #[doc = "wdata to be used only when payload_size_m1=0"]
+    #[doc = "wdata to be used only when payload_size_m1=0."]
     #[inline(always)]
     pub const fn set_short_wdata(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -785,62 +785,62 @@ impl SbpiInstr {
     pub const fn set_cmd(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
     }
-    #[doc = "Instruction target, it can be PMC (0x3a) or DAP (0x02)"]
+    #[doc = "Instruction target, it can be PMC (0x3a) or DAP (0x02)."]
     #[must_use]
     #[inline(always)]
     pub const fn target(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0xff;
         val as u8
     }
-    #[doc = "Instruction target, it can be PMC (0x3a) or DAP (0x02)"]
+    #[doc = "Instruction target, it can be PMC (0x3a) or DAP (0x02)."]
     #[inline(always)]
     pub const fn set_target(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
     }
-    #[doc = "Instruction payload size in bytes minus 1"]
+    #[doc = "Instruction payload size in bytes minus 1."]
     #[must_use]
     #[inline(always)]
     pub const fn payload_size_m1(&self) -> u8 {
         let val = (self.0 >> 24usize) & 0x0f;
         val as u8
     }
-    #[doc = "Instruction payload size in bytes minus 1"]
+    #[doc = "Instruction payload size in bytes minus 1."]
     #[inline(always)]
     pub const fn set_payload_size_m1(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 24usize)) | (((val as u32) & 0x0f) << 24usize);
     }
-    #[doc = "Instruction has payload (data to be written or to be read)"]
+    #[doc = "Instruction has payload (data to be written or to be read)."]
     #[must_use]
     #[inline(always)]
     pub const fn has_payload(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
         val != 0
     }
-    #[doc = "Instruction has payload (data to be written or to be read)"]
+    #[doc = "Instruction has payload (data to be written or to be read)."]
     #[inline(always)]
     pub const fn set_has_payload(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
     }
-    #[doc = "Payload type is write"]
+    #[doc = "Payload type is write."]
     #[must_use]
     #[inline(always)]
     pub const fn is_wr(&self) -> bool {
         let val = (self.0 >> 29usize) & 0x01;
         val != 0
     }
-    #[doc = "Payload type is write"]
+    #[doc = "Payload type is write."]
     #[inline(always)]
     pub const fn set_is_wr(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 29usize)) | (((val as u32) & 0x01) << 29usize);
     }
-    #[doc = "Execute instruction"]
+    #[doc = "Execute instruction."]
     #[must_use]
     #[inline(always)]
     pub const fn exec(&self) -> bool {
         let val = (self.0 >> 30usize) & 0x01;
         val != 0
     }
-    #[doc = "Execute instruction"]
+    #[doc = "Execute instruction."]
     #[inline(always)]
     pub const fn set_exec(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 30usize)) | (((val as u32) & 0x01) << 30usize);
@@ -875,62 +875,62 @@ impl defmt::Format for SbpiInstr {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SbpiStatus(pub u32);
 impl SbpiStatus {
-    #[doc = "Read command has returned data"]
+    #[doc = "Read command has returned data."]
     #[must_use]
     #[inline(always)]
     pub const fn rdata_vld(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Read command has returned data"]
+    #[doc = "Read command has returned data."]
     #[inline(always)]
     pub const fn set_rdata_vld(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Last instruction done"]
+    #[doc = "Last instruction done."]
     #[must_use]
     #[inline(always)]
     pub const fn instr_done(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "Last instruction done"]
+    #[doc = "Last instruction done."]
     #[inline(always)]
     pub const fn set_instr_done(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "Last instruction missed (dropped), as the previous has not finished running"]
+    #[doc = "Last instruction missed (dropped), as the previous has not finished running."]
     #[must_use]
     #[inline(always)]
     pub const fn instr_miss(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "Last instruction missed (dropped), as the previous has not finished running"]
+    #[doc = "Last instruction missed (dropped), as the previous has not finished running."]
     #[inline(always)]
     pub const fn set_instr_miss(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "SBPI flag"]
+    #[doc = "SBPI flag."]
     #[must_use]
     #[inline(always)]
     pub const fn flag(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "SBPI flag"]
+    #[doc = "SBPI flag."]
     #[inline(always)]
     pub const fn set_flag(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
-    #[doc = "SBPI MISO (master in - slave out): response from SBPI"]
+    #[doc = "SBPI MISO (master in - slave out): response from SBPI."]
     #[must_use]
     #[inline(always)]
     pub const fn miso(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0xff;
         val as u8
     }
-    #[doc = "SBPI MISO (master in - slave out): response from SBPI"]
+    #[doc = "SBPI MISO (master in - slave out): response from SBPI."]
     #[inline(always)]
     pub const fn set_miso(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
@@ -1014,7 +1014,7 @@ impl defmt::Format for SwLock {
         )
     }
 }
-#[doc = "Controls for APB data read interface (USER interface)"]
+#[doc = "Controls for APB data read interface (USER interface)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Usr(pub u32);

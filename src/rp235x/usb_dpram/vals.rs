@@ -33,10 +33,10 @@ impl From<EpBufferControlDoubleBufferIsoOffset> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum EpControlEndpointType {
-    CONTROL = 0x0,
-    ISOCHRONOUS = 0x01,
-    BULK = 0x02,
-    INTERRUPT = 0x03,
+    Control = 0x0,
+    Isochronous = 0x01,
+    Bulk = 0x02,
+    Interrupt = 0x03,
 }
 impl EpControlEndpointType {
     #[inline(always)]

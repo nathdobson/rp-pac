@@ -2,8 +2,8 @@
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Direction {
-    LOW_FALLING = 0x0,
-    HIGH_RISING = 0x01,
+    LowFalling = 0x0,
+    HighRising = 0x01,
 }
 impl Direction {
     #[inline(always)]
@@ -31,8 +31,8 @@ impl From<Direction> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Mode {
-    LEVEL = 0x0,
-    EDGE = 0x01,
+    Level = 0x0,
+    Edge = 0x01,
 }
 impl Mode {
     #[inline(always)]

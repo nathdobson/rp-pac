@@ -33,31 +33,31 @@ impl defmt::Format for Armed {
         defmt::write!(f, "Armed {{ armed: {=u8:?} }}", self.armed())
     }
 }
-#[doc = "Set bits high to enable pause when the corresponding debug ports are active"]
+#[doc = "Set bits high to enable pause when the corresponding debug ports are active."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Dbgpause(pub u32);
 impl Dbgpause {
-    #[doc = "Pause when processor 0 is in debug mode"]
+    #[doc = "Pause when processor 0 is in debug mode."]
     #[must_use]
     #[inline(always)]
     pub const fn dbg0(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Pause when processor 0 is in debug mode"]
+    #[doc = "Pause when processor 0 is in debug mode."]
     #[inline(always)]
     pub const fn set_dbg0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Pause when processor 1 is in debug mode"]
+    #[doc = "Pause when processor 1 is in debug mode."]
     #[must_use]
     #[inline(always)]
     pub const fn dbg1(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "Pause when processor 1 is in debug mode"]
+    #[doc = "Pause when processor 1 is in debug mode."]
     #[inline(always)]
     pub const fn set_dbg1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
@@ -88,7 +88,7 @@ impl defmt::Format for Dbgpause {
         )
     }
 }
-#[doc = "Interrupt Enable"]
+#[doc = "Interrupt Enable."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
@@ -130,7 +130,7 @@ impl defmt::Format for Int {
         defmt :: write ! (f , "Int {{ alarm[0]: {=bool:?}, alarm[1]: {=bool:?}, alarm[2]: {=bool:?}, alarm[3]: {=bool:?} }}" , self . alarm (0usize) , self . alarm (1usize) , self . alarm (2usize) , self . alarm (3usize))
     }
 }
-#[doc = "Set locked bit to disable write access to timer Once set, cannot be cleared (without a reset)"]
+#[doc = "Set locked bit to disable write access to timer Once set, cannot be cleared (without a reset)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Locked(pub u32);
@@ -165,7 +165,7 @@ impl defmt::Format for Locked {
         defmt::write!(f, "Locked {{ locked: {=bool:?} }}", self.locked())
     }
 }
-#[doc = "Set high to pause the timer"]
+#[doc = "Set high to pause the timer."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Pause(pub u32);

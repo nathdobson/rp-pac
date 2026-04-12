@@ -2,11 +2,11 @@
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum AddrWidth {
-    #[doc = "Single width"]
+    #[doc = "Single width."]
     S = 0x0,
-    #[doc = "Dual width"]
+    #[doc = "Dual width."]
     D = 0x01,
-    #[doc = "Quad width"]
+    #[doc = "Quad width."]
     Q = 0x02,
     _RESERVED_3 = 0x03,
 }
@@ -36,11 +36,11 @@ impl From<AddrWidth> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum DataWidth {
-    #[doc = "Single width"]
+    #[doc = "Single width."]
     S = 0x0,
-    #[doc = "Dual width"]
+    #[doc = "Dual width."]
     D = 0x01,
-    #[doc = "Quad width"]
+    #[doc = "Quad width."]
     Q = 0x02,
     _RESERVED_3 = 0x03,
 }
@@ -70,21 +70,21 @@ impl From<DataWidth> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum DummyLen {
-    #[doc = "No dummy phase"]
-    NONE = 0x0,
-    #[doc = "4 dummy bits"]
+    #[doc = "No dummy phase."]
+    None = 0x0,
+    #[doc = "4 dummy bits."]
     _4 = 0x01,
-    #[doc = "8 dummy bits"]
+    #[doc = "8 dummy bits."]
     _8 = 0x02,
-    #[doc = "12 dummy bits"]
+    #[doc = "12 dummy bits."]
     _12 = 0x03,
-    #[doc = "16 dummy bits"]
+    #[doc = "16 dummy bits."]
     _16 = 0x04,
-    #[doc = "20 dummy bits"]
+    #[doc = "20 dummy bits."]
     _20 = 0x05,
-    #[doc = "24 dummy bits"]
+    #[doc = "24 dummy bits."]
     _24 = 0x06,
-    #[doc = "28 dummy bits"]
+    #[doc = "28 dummy bits."]
     _28 = 0x07,
 }
 impl DummyLen {
@@ -113,11 +113,11 @@ impl From<DummyLen> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum DummyWidth {
-    #[doc = "Single width"]
+    #[doc = "Single width."]
     S = 0x0,
-    #[doc = "Dual width"]
+    #[doc = "Dual width."]
     D = 0x01,
-    #[doc = "Quad width"]
+    #[doc = "Quad width."]
     Q = 0x02,
     _RESERVED_3 = 0x03,
 }
@@ -147,11 +147,11 @@ impl From<DummyWidth> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Iwidth {
-    #[doc = "Single width"]
+    #[doc = "Single width."]
     S = 0x0,
-    #[doc = "Dual width"]
+    #[doc = "Dual width."]
     D = 0x01,
-    #[doc = "Quad width"]
+    #[doc = "Quad width."]
     Q = 0x02,
     _RESERVED_3 = 0x03,
 }
@@ -181,13 +181,13 @@ impl From<Iwidth> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Pagebreak {
-    #[doc = "No page boundary is enforced"]
-    NONE = 0x0,
-    #[doc = "Break bursts crossing a 256-byte page boundary"]
+    #[doc = "No page boundary is enforced."]
+    None = 0x0,
+    #[doc = "Break bursts crossing a 256-byte page boundary."]
     _256 = 0x01,
-    #[doc = "Break bursts crossing a 1024-byte quad-page boundary"]
+    #[doc = "Break bursts crossing a 1024-byte quad-page boundary."]
     _1024 = 0x02,
-    #[doc = "Break bursts crossing a 4096-byte sector boundary"]
+    #[doc = "Break bursts crossing a 4096-byte sector boundary."]
     _4096 = 0x03,
 }
 impl Pagebreak {
@@ -216,9 +216,9 @@ impl From<Pagebreak> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum PrefixLen {
-    #[doc = "No prefix"]
-    NONE = 0x0,
-    #[doc = "8-bit prefix"]
+    #[doc = "No prefix."]
+    None = 0x0,
+    #[doc = "8-bit prefix."]
     _8 = 0x01,
 }
 impl PrefixLen {
@@ -247,11 +247,11 @@ impl From<PrefixLen> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum PrefixWidth {
-    #[doc = "Single width"]
+    #[doc = "Single width."]
     S = 0x0,
-    #[doc = "Dual width"]
+    #[doc = "Dual width."]
     D = 0x01,
-    #[doc = "Quad width"]
+    #[doc = "Quad width."]
     Q = 0x02,
     _RESERVED_3 = 0x03,
 }
@@ -281,10 +281,10 @@ impl From<PrefixWidth> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum SuffixLen {
-    #[doc = "No suffix"]
-    NONE = 0x0,
+    #[doc = "No suffix."]
+    None = 0x0,
     _RESERVED_1 = 0x01,
-    #[doc = "8-bit suffix"]
+    #[doc = "8-bit suffix."]
     _8 = 0x02,
     _RESERVED_3 = 0x03,
 }
@@ -314,11 +314,11 @@ impl From<SuffixLen> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum SuffixWidth {
-    #[doc = "Single width"]
+    #[doc = "Single width."]
     S = 0x0,
-    #[doc = "Dual width"]
+    #[doc = "Dual width."]
     D = 0x01,
-    #[doc = "Quad width"]
+    #[doc = "Quad width."]
     Q = 0x02,
     _RESERVED_3 = 0x03,
 }

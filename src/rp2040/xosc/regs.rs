@@ -33,7 +33,7 @@ impl defmt::Format for Count {
         defmt::write!(f, "Count {{ count: {=u8:?} }}", self.count())
     }
 }
-#[doc = "Crystal Oscillator Control"]
+#[doc = "Crystal Oscillator Control."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Ctrl(pub u32);
@@ -88,19 +88,19 @@ impl defmt::Format for Ctrl {
         )
     }
 }
-#[doc = "Crystal Oscillator pause control"]
+#[doc = "Crystal Oscillator pause control."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Dormant(pub u32);
 impl Dormant {
-    #[doc = "This is used to save power by pausing the XOSC On power-up this field is initialised to WAKE An invalid write will also select WAKE Warning: stop the PLLs before selecting dormant mode Warning: setup the irq before selecting dormant mode"]
+    #[doc = "This is used to save power by pausing the XOSC On power-up this field is initialised to WAKE An invalid write will also select WAKE Warning: stop the PLLs before selecting dormant mode Warning: setup the irq before selecting dormant mode."]
     #[must_use]
     #[inline(always)]
     pub const fn dormant(&self) -> super::vals::Dormant {
         let val = (self.0 >> 0usize) & 0xffff_ffff;
         super::vals::Dormant::from_bits(val as u32)
     }
-    #[doc = "This is used to save power by pausing the XOSC On power-up this field is initialised to WAKE An invalid write will also select WAKE Warning: stop the PLLs before selecting dormant mode Warning: setup the irq before selecting dormant mode"]
+    #[doc = "This is used to save power by pausing the XOSC On power-up this field is initialised to WAKE An invalid write will also select WAKE Warning: stop the PLLs before selecting dormant mode Warning: setup the irq before selecting dormant mode."]
     #[inline(always)]
     pub const fn set_dormant(&mut self, val: super::vals::Dormant) {
         self.0 = (self.0 & !(0xffff_ffff << 0usize))
@@ -126,7 +126,7 @@ impl defmt::Format for Dormant {
         defmt::write!(f, "Dormant {{ dormant: {:?} }}", self.dormant())
     }
 }
-#[doc = "Controls the startup delay"]
+#[doc = "Controls the startup delay."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Startup(pub u32);
@@ -181,55 +181,55 @@ impl defmt::Format for Startup {
         )
     }
 }
-#[doc = "Crystal Oscillator Status"]
+#[doc = "Crystal Oscillator Status."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Status(pub u32);
 impl Status {
-    #[doc = "The current frequency range setting, always reads 0"]
+    #[doc = "The current frequency range setting, always reads 0."]
     #[must_use]
     #[inline(always)]
     pub const fn freq_range(&self) -> super::vals::StatusFreqRange {
         let val = (self.0 >> 0usize) & 0x03;
         super::vals::StatusFreqRange::from_bits(val as u8)
     }
-    #[doc = "The current frequency range setting, always reads 0"]
+    #[doc = "The current frequency range setting, always reads 0."]
     #[inline(always)]
     pub const fn set_freq_range(&mut self, val: super::vals::StatusFreqRange) {
         self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
     }
-    #[doc = "Oscillator is enabled but not necessarily running and stable, resets to 0"]
+    #[doc = "Oscillator is enabled but not necessarily running and stable, resets to 0."]
     #[must_use]
     #[inline(always)]
     pub const fn enabled(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "Oscillator is enabled but not necessarily running and stable, resets to 0"]
+    #[doc = "Oscillator is enabled but not necessarily running and stable, resets to 0."]
     #[inline(always)]
     pub const fn set_enabled(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
-    #[doc = "An invalid value has been written to CTRL_ENABLE or CTRL_FREQ_RANGE or DORMANT"]
+    #[doc = "An invalid value has been written to CTRL_ENABLE or CTRL_FREQ_RANGE or DORMANT."]
     #[must_use]
     #[inline(always)]
     pub const fn badwrite(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
         val != 0
     }
-    #[doc = "An invalid value has been written to CTRL_ENABLE or CTRL_FREQ_RANGE or DORMANT"]
+    #[doc = "An invalid value has been written to CTRL_ENABLE or CTRL_FREQ_RANGE or DORMANT."]
     #[inline(always)]
     pub const fn set_badwrite(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
-    #[doc = "Oscillator is running and stable"]
+    #[doc = "Oscillator is running and stable."]
     #[must_use]
     #[inline(always)]
     pub const fn stable(&self) -> bool {
         let val = (self.0 >> 31usize) & 0x01;
         val != 0
     }
-    #[doc = "Oscillator is running and stable"]
+    #[doc = "Oscillator is running and stable."]
     #[inline(always)]
     pub const fn set_stable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);

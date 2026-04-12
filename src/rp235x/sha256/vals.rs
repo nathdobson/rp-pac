@@ -2,9 +2,9 @@
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum DmaSize {
-    _8BIT = 0x0,
-    _16BIT = 0x01,
-    _32BIT = 0x02,
+    _8bit = 0x0,
+    _16bit = 0x01,
+    _32bit = 0x02,
     _RESERVED_3 = 0x03,
 }
 impl DmaSize {

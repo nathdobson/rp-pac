@@ -1,4 +1,4 @@
-#[doc = "Device address and endpoint control"]
+#[doc = "Device address and endpoint control."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct AddrEndp(pub u32);
@@ -58,50 +58,50 @@ impl defmt::Format for AddrEndp {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct AddrEndpX(pub u32);
 impl AddrEndpX {
-    #[doc = "Device address"]
+    #[doc = "Device address."]
     #[must_use]
     #[inline(always)]
     pub const fn address(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x7f;
         val as u8
     }
-    #[doc = "Device address"]
+    #[doc = "Device address."]
     #[inline(always)]
     pub const fn set_address(&mut self, val: u8) {
         self.0 = (self.0 & !(0x7f << 0usize)) | (((val as u32) & 0x7f) << 0usize);
     }
-    #[doc = "Endpoint number of the interrupt endpoint"]
+    #[doc = "Endpoint number of the interrupt endpoint."]
     #[must_use]
     #[inline(always)]
     pub const fn endpoint(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x0f;
         val as u8
     }
-    #[doc = "Endpoint number of the interrupt endpoint"]
+    #[doc = "Endpoint number of the interrupt endpoint."]
     #[inline(always)]
     pub const fn set_endpoint(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
     }
-    #[doc = "Direction of the interrupt endpoint. In=0, Out=1"]
+    #[doc = "Direction of the interrupt endpoint. In=0, Out=1."]
     #[must_use]
     #[inline(always)]
     pub const fn intep_dir(&self) -> bool {
         let val = (self.0 >> 25usize) & 0x01;
         val != 0
     }
-    #[doc = "Direction of the interrupt endpoint. In=0, Out=1"]
+    #[doc = "Direction of the interrupt endpoint. In=0, Out=1."]
     #[inline(always)]
     pub const fn set_intep_dir(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
     }
-    #[doc = "Interrupt EP requires preamble (is a low speed device on a full speed hub)"]
+    #[doc = "Interrupt EP requires preamble (is a low speed device on a full speed hub)."]
     #[must_use]
     #[inline(always)]
     pub const fn intep_preamble(&self) -> bool {
         let val = (self.0 >> 26usize) & 0x01;
         val != 0
     }
-    #[doc = "Interrupt EP requires preamble (is a low speed device on a full speed hub)"]
+    #[doc = "Interrupt EP requires preamble (is a low speed device on a full speed hub)."]
     #[inline(always)]
     pub const fn set_intep_preamble(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
@@ -600,43 +600,43 @@ impl defmt::Format for EpStatusStallNak {
         defmt :: write ! (f , "EpStatusStallNak {{ ep_in[0]: {=bool:?}, ep_in[1]: {=bool:?}, ep_in[2]: {=bool:?}, ep_in[3]: {=bool:?}, ep_in[4]: {=bool:?}, ep_in[5]: {=bool:?}, ep_in[6]: {=bool:?}, ep_in[7]: {=bool:?}, ep_in[8]: {=bool:?}, ep_in[9]: {=bool:?}, ep_in[10]: {=bool:?}, ep_in[11]: {=bool:?}, ep_in[12]: {=bool:?}, ep_in[13]: {=bool:?}, ep_in[14]: {=bool:?}, ep_in[15]: {=bool:?}, ep_out[0]: {=bool:?}, ep_out[1]: {=bool:?}, ep_out[2]: {=bool:?}, ep_out[3]: {=bool:?}, ep_out[4]: {=bool:?}, ep_out[5]: {=bool:?}, ep_out[6]: {=bool:?}, ep_out[7]: {=bool:?}, ep_out[8]: {=bool:?}, ep_out[9]: {=bool:?}, ep_out[10]: {=bool:?}, ep_out[11]: {=bool:?}, ep_out[12]: {=bool:?}, ep_out[13]: {=bool:?}, ep_out[14]: {=bool:?}, ep_out[15]: {=bool:?} }}" , self . ep_in (0usize) , self . ep_in (1usize) , self . ep_in (2usize) , self . ep_in (3usize) , self . ep_in (4usize) , self . ep_in (5usize) , self . ep_in (6usize) , self . ep_in (7usize) , self . ep_in (8usize) , self . ep_in (9usize) , self . ep_in (10usize) , self . ep_in (11usize) , self . ep_in (12usize) , self . ep_in (13usize) , self . ep_in (14usize) , self . ep_in (15usize) , self . ep_out (0usize) , self . ep_out (1usize) , self . ep_out (2usize) , self . ep_out (3usize) , self . ep_out (4usize) , self . ep_out (5usize) , self . ep_out (6usize) , self . ep_out (7usize) , self . ep_out (8usize) , self . ep_out (9usize) , self . ep_out (10usize) , self . ep_out (11usize) , self . ep_out (12usize) , self . ep_out (13usize) , self . ep_out (14usize) , self . ep_out (15usize))
     }
 }
-#[doc = "Interrupt Enable"]
+#[doc = "Interrupt Enable."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
 impl Int {
-    #[doc = "Host: raised when a device is connected or disconnected (i.e. when SIE_STATUS.SPEED changes). Cleared by writing to SIE_STATUS.SPEED"]
+    #[doc = "Host: raised when a device is connected or disconnected (i.e. when SIE_STATUS.SPEED changes). Cleared by writing to SIE_STATUS.SPEED."]
     #[must_use]
     #[inline(always)]
     pub const fn host_conn_dis(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: raised when a device is connected or disconnected (i.e. when SIE_STATUS.SPEED changes). Cleared by writing to SIE_STATUS.SPEED"]
+    #[doc = "Host: raised when a device is connected or disconnected (i.e. when SIE_STATUS.SPEED changes). Cleared by writing to SIE_STATUS.SPEED."]
     #[inline(always)]
     pub const fn set_host_conn_dis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Host: raised when a device wakes up the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE"]
+    #[doc = "Host: raised when a device wakes up the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE."]
     #[must_use]
     #[inline(always)]
     pub const fn host_resume(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: raised when a device wakes up the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE"]
+    #[doc = "Host: raised when a device wakes up the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE."]
     #[inline(always)]
     pub const fn set_host_resume(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Host: raised every time the host sends a SOF (Start of Frame). Cleared by reading SOF_RD"]
+    #[doc = "Host: raised every time the host sends a SOF (Start of Frame). Cleared by reading SOF_RD."]
     #[must_use]
     #[inline(always)]
     pub const fn host_sof(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: raised every time the host sends a SOF (Start of Frame). Cleared by reading SOF_RD"]
+    #[doc = "Host: raised every time the host sends a SOF (Start of Frame). Cleared by reading SOF_RD."]
     #[inline(always)]
     pub const fn set_host_sof(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
@@ -665,158 +665,158 @@ impl Int {
     pub const fn set_buff_status(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "Source: SIE_STATUS.DATA_SEQ_ERROR"]
+    #[doc = "Source: SIE_STATUS.DATA_SEQ_ERROR."]
     #[must_use]
     #[inline(always)]
     pub const fn error_data_seq(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
-    #[doc = "Source: SIE_STATUS.DATA_SEQ_ERROR"]
+    #[doc = "Source: SIE_STATUS.DATA_SEQ_ERROR."]
     #[inline(always)]
     pub const fn set_error_data_seq(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
-    #[doc = "Source: SIE_STATUS.RX_TIMEOUT"]
+    #[doc = "Source: SIE_STATUS.RX_TIMEOUT."]
     #[must_use]
     #[inline(always)]
     pub const fn error_rx_timeout(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
-    #[doc = "Source: SIE_STATUS.RX_TIMEOUT"]
+    #[doc = "Source: SIE_STATUS.RX_TIMEOUT."]
     #[inline(always)]
     pub const fn set_error_rx_timeout(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
-    #[doc = "Source: SIE_STATUS.RX_OVERFLOW"]
+    #[doc = "Source: SIE_STATUS.RX_OVERFLOW."]
     #[must_use]
     #[inline(always)]
     pub const fn error_rx_overflow(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
-    #[doc = "Source: SIE_STATUS.RX_OVERFLOW"]
+    #[doc = "Source: SIE_STATUS.RX_OVERFLOW."]
     #[inline(always)]
     pub const fn set_error_rx_overflow(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
-    #[doc = "Source: SIE_STATUS.BIT_STUFF_ERROR"]
+    #[doc = "Source: SIE_STATUS.BIT_STUFF_ERROR."]
     #[must_use]
     #[inline(always)]
     pub const fn error_bit_stuff(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "Source: SIE_STATUS.BIT_STUFF_ERROR"]
+    #[doc = "Source: SIE_STATUS.BIT_STUFF_ERROR."]
     #[inline(always)]
     pub const fn set_error_bit_stuff(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "Source: SIE_STATUS.CRC_ERROR"]
+    #[doc = "Source: SIE_STATUS.CRC_ERROR."]
     #[must_use]
     #[inline(always)]
     pub const fn error_crc(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
-    #[doc = "Source: SIE_STATUS.CRC_ERROR"]
+    #[doc = "Source: SIE_STATUS.CRC_ERROR."]
     #[inline(always)]
     pub const fn set_error_crc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
-    #[doc = "Source: SIE_STATUS.STALL_REC"]
+    #[doc = "Source: SIE_STATUS.STALL_REC."]
     #[must_use]
     #[inline(always)]
     pub const fn stall(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "Source: SIE_STATUS.STALL_REC"]
+    #[doc = "Source: SIE_STATUS.STALL_REC."]
     #[inline(always)]
     pub const fn set_stall(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
-    #[doc = "Source: SIE_STATUS.VBUS_DETECT"]
+    #[doc = "Source: SIE_STATUS.VBUS_DETECT."]
     #[must_use]
     #[inline(always)]
     pub const fn vbus_detect(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
-    #[doc = "Source: SIE_STATUS.VBUS_DETECT"]
+    #[doc = "Source: SIE_STATUS.VBUS_DETECT."]
     #[inline(always)]
     pub const fn set_vbus_detect(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
-    #[doc = "Source: SIE_STATUS.BUS_RESET"]
+    #[doc = "Source: SIE_STATUS.BUS_RESET."]
     #[must_use]
     #[inline(always)]
     pub const fn bus_reset(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "Source: SIE_STATUS.BUS_RESET"]
+    #[doc = "Source: SIE_STATUS.BUS_RESET."]
     #[inline(always)]
     pub const fn set_bus_reset(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
-    #[doc = "Set when the device connection state changes. Cleared by writing to SIE_STATUS.CONNECTED"]
+    #[doc = "Set when the device connection state changes. Cleared by writing to SIE_STATUS.CONNECTED."]
     #[must_use]
     #[inline(always)]
     pub const fn dev_conn_dis(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
         val != 0
     }
-    #[doc = "Set when the device connection state changes. Cleared by writing to SIE_STATUS.CONNECTED"]
+    #[doc = "Set when the device connection state changes. Cleared by writing to SIE_STATUS.CONNECTED."]
     #[inline(always)]
     pub const fn set_dev_conn_dis(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
-    #[doc = "Set when the device suspend state changes. Cleared by writing to SIE_STATUS.SUSPENDED"]
+    #[doc = "Set when the device suspend state changes. Cleared by writing to SIE_STATUS.SUSPENDED."]
     #[must_use]
     #[inline(always)]
     pub const fn dev_suspend(&self) -> bool {
         let val = (self.0 >> 14usize) & 0x01;
         val != 0
     }
-    #[doc = "Set when the device suspend state changes. Cleared by writing to SIE_STATUS.SUSPENDED"]
+    #[doc = "Set when the device suspend state changes. Cleared by writing to SIE_STATUS.SUSPENDED."]
     #[inline(always)]
     pub const fn set_dev_suspend(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
     }
-    #[doc = "Set when the device receives a resume from the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE"]
+    #[doc = "Set when the device receives a resume from the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE."]
     #[must_use]
     #[inline(always)]
     pub const fn dev_resume_from_host(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
-    #[doc = "Set when the device receives a resume from the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE"]
+    #[doc = "Set when the device receives a resume from the host. Cleared by writing to SIE_STATUS.RESUME_REMOTE."]
     #[inline(always)]
     pub const fn set_dev_resume_from_host(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
-    #[doc = "Device. Source: SIE_STATUS.SETUP_REC"]
+    #[doc = "Device. Source: SIE_STATUS.SETUP_REC."]
     #[must_use]
     #[inline(always)]
     pub const fn setup_req(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "Device. Source: SIE_STATUS.SETUP_REC"]
+    #[doc = "Device. Source: SIE_STATUS.SETUP_REC."]
     #[inline(always)]
     pub const fn set_setup_req(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
-    #[doc = "Set every time the device receives a SOF (Start of Frame) packet. Cleared by reading SOF_RD"]
+    #[doc = "Set every time the device receives a SOF (Start of Frame) packet. Cleared by reading SOF_RD."]
     #[must_use]
     #[inline(always)]
     pub const fn dev_sof(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
-    #[doc = "Set every time the device receives a SOF (Start of Frame) packet. Cleared by reading SOF_RD"]
+    #[doc = "Set every time the device receives a SOF (Start of Frame) packet. Cleared by reading SOF_RD."]
     #[inline(always)]
     pub const fn set_dev_sof(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
@@ -884,19 +884,19 @@ impl defmt::Format for Int {
         defmt :: write ! (f , "Int {{ host_conn_dis: {=bool:?}, host_resume: {=bool:?}, host_sof: {=bool:?}, trans_complete: {=bool:?}, buff_status: {=bool:?}, error_data_seq: {=bool:?}, error_rx_timeout: {=bool:?}, error_rx_overflow: {=bool:?}, error_bit_stuff: {=bool:?}, error_crc: {=bool:?}, stall: {=bool:?}, vbus_detect: {=bool:?}, bus_reset: {=bool:?}, dev_conn_dis: {=bool:?}, dev_suspend: {=bool:?}, dev_resume_from_host: {=bool:?}, setup_req: {=bool:?}, dev_sof: {=bool:?}, abort_done: {=bool:?}, ep_stall_nak: {=bool:?} }}" , self . host_conn_dis () , self . host_resume () , self . host_sof () , self . trans_complete () , self . buff_status () , self . error_data_seq () , self . error_rx_timeout () , self . error_rx_overflow () , self . error_bit_stuff () , self . error_crc () , self . stall () , self . vbus_detect () , self . bus_reset () , self . dev_conn_dis () , self . dev_suspend () , self . dev_resume_from_host () , self . setup_req () , self . dev_sof () , self . abort_done () , self . ep_stall_nak ())
     }
 }
-#[doc = "interrupt endpoint control register"]
+#[doc = "interrupt endpoint control register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct IntEpCtrl(pub u32);
 impl IntEpCtrl {
-    #[doc = "Host: Enable interrupt endpoint 1 => 15"]
+    #[doc = "Host: Enable interrupt endpoint 1 => 15."]
     #[must_use]
     #[inline(always)]
     pub const fn int_ep_active(&self) -> u16 {
         let val = (self.0 >> 1usize) & 0x7fff;
         val as u16
     }
-    #[doc = "Host: Enable interrupt endpoint 1 => 15"]
+    #[doc = "Host: Enable interrupt endpoint 1 => 15."]
     #[inline(always)]
     pub const fn set_int_ep_active(&mut self, val: u16) {
         self.0 = (self.0 & !(0x7fff << 1usize)) | (((val as u32) & 0x7fff) << 1usize);
@@ -925,43 +925,43 @@ impl defmt::Format for IntEpCtrl {
         )
     }
 }
-#[doc = "Main control register"]
+#[doc = "Main control register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct MainCtrl(pub u32);
 impl MainCtrl {
-    #[doc = "Enable controller"]
+    #[doc = "Enable controller."]
     #[must_use]
     #[inline(always)]
     pub const fn controller_en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Enable controller"]
+    #[doc = "Enable controller."]
     #[inline(always)]
     pub const fn set_controller_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Device mode = 0, Host mode = 1"]
+    #[doc = "Device mode = 0, Host mode = 1."]
     #[must_use]
     #[inline(always)]
     pub const fn host_ndevice(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Device mode = 0, Host mode = 1"]
+    #[doc = "Device mode = 0, Host mode = 1."]
     #[inline(always)]
     pub const fn set_host_ndevice(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Reduced timings for simulation"]
+    #[doc = "Reduced timings for simulation."]
     #[must_use]
     #[inline(always)]
     pub const fn sim_timing(&self) -> bool {
         let val = (self.0 >> 31usize) & 0x01;
         val != 0
     }
-    #[doc = "Reduced timings for simulation"]
+    #[doc = "Reduced timings for simulation."]
     #[inline(always)]
     pub const fn set_sim_timing(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
@@ -993,26 +993,26 @@ impl defmt::Format for MainCtrl {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct NakPoll(pub u32);
 impl NakPoll {
-    #[doc = "NAK polling interval for a low speed device"]
+    #[doc = "NAK polling interval for a low speed device."]
     #[must_use]
     #[inline(always)]
     pub const fn delay_ls(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x03ff;
         val as u16
     }
-    #[doc = "NAK polling interval for a low speed device"]
+    #[doc = "NAK polling interval for a low speed device."]
     #[inline(always)]
     pub const fn set_delay_ls(&mut self, val: u16) {
         self.0 = (self.0 & !(0x03ff << 0usize)) | (((val as u32) & 0x03ff) << 0usize);
     }
-    #[doc = "NAK polling interval for a full speed device"]
+    #[doc = "NAK polling interval for a full speed device."]
     #[must_use]
     #[inline(always)]
     pub const fn delay_fs(&self) -> u16 {
         let val = (self.0 >> 16usize) & 0x03ff;
         val as u16
     }
-    #[doc = "NAK polling interval for a full speed device"]
+    #[doc = "NAK polling interval for a full speed device."]
     #[inline(always)]
     pub const fn set_delay_fs(&mut self, val: u16) {
         self.0 = (self.0 & !(0x03ff << 16usize)) | (((val as u32) & 0x03ff) << 16usize);
@@ -1043,127 +1043,127 @@ impl defmt::Format for NakPoll {
         )
     }
 }
-#[doc = "SIE control register"]
+#[doc = "SIE control register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SieCtrl(pub u32);
 impl SieCtrl {
-    #[doc = "Host: Start transaction"]
+    #[doc = "Host: Start transaction."]
     #[must_use]
     #[inline(always)]
     pub const fn start_trans(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: Start transaction"]
+    #[doc = "Host: Start transaction."]
     #[inline(always)]
     pub const fn set_start_trans(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Host: Send Setup packet"]
+    #[doc = "Host: Send Setup packet."]
     #[must_use]
     #[inline(always)]
     pub const fn send_setup(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: Send Setup packet"]
+    #[doc = "Host: Send Setup packet."]
     #[inline(always)]
     pub const fn set_send_setup(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Host: Send transaction (OUT from host)"]
+    #[doc = "Host: Send transaction (OUT from host)."]
     #[must_use]
     #[inline(always)]
     pub const fn send_data(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: Send transaction (OUT from host)"]
+    #[doc = "Host: Send transaction (OUT from host)."]
     #[inline(always)]
     pub const fn set_send_data(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "Host: Receive transaction (IN to host)"]
+    #[doc = "Host: Receive transaction (IN to host)."]
     #[must_use]
     #[inline(always)]
     pub const fn receive_data(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: Receive transaction (IN to host)"]
+    #[doc = "Host: Receive transaction (IN to host)."]
     #[inline(always)]
     pub const fn set_receive_data(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
-    #[doc = "Host: Stop transaction"]
+    #[doc = "Host: Stop transaction."]
     #[must_use]
     #[inline(always)]
     pub const fn stop_trans(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: Stop transaction"]
+    #[doc = "Host: Stop transaction."]
     #[inline(always)]
     pub const fn set_stop_trans(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "Host: Preable enable for LS device on FS hub"]
+    #[doc = "Host: Preable enable for LS device on FS hub."]
     #[must_use]
     #[inline(always)]
     pub const fn preamble_en(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: Preable enable for LS device on FS hub"]
+    #[doc = "Host: Preable enable for LS device on FS hub."]
     #[inline(always)]
     pub const fn set_preamble_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
-    #[doc = "Host: Delay packet(s) until after SOF"]
+    #[doc = "Host: Delay packet(s) until after SOF."]
     #[must_use]
     #[inline(always)]
     pub const fn sof_sync(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: Delay packet(s) until after SOF"]
+    #[doc = "Host: Delay packet(s) until after SOF."]
     #[inline(always)]
     pub const fn set_sof_sync(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "Host: Enable SOF generation (for full speed bus)"]
+    #[doc = "Host: Enable SOF generation (for full speed bus)."]
     #[must_use]
     #[inline(always)]
     pub const fn sof_en(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: Enable SOF generation (for full speed bus)"]
+    #[doc = "Host: Enable SOF generation (for full speed bus)."]
     #[inline(always)]
     pub const fn set_sof_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
-    #[doc = "Host: Enable keep alive packet (for low speed bus)"]
+    #[doc = "Host: Enable keep alive packet (for low speed bus)."]
     #[must_use]
     #[inline(always)]
     pub const fn keep_alive_en(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: Enable keep alive packet (for low speed bus)"]
+    #[doc = "Host: Enable keep alive packet (for low speed bus)."]
     #[inline(always)]
     pub const fn set_keep_alive_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
-    #[doc = "Host: Enable VBUS"]
+    #[doc = "Host: Enable VBUS."]
     #[must_use]
     #[inline(always)]
     pub const fn vbus_en(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: Enable VBUS"]
+    #[doc = "Host: Enable VBUS."]
     #[inline(always)]
     pub const fn set_vbus_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
@@ -1180,158 +1180,158 @@ impl SieCtrl {
     pub const fn set_resume(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
-    #[doc = "Host: Reset bus"]
+    #[doc = "Host: Reset bus."]
     #[must_use]
     #[inline(always)]
     pub const fn reset_bus(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: Reset bus"]
+    #[doc = "Host: Reset bus."]
     #[inline(always)]
     pub const fn set_reset_bus(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
-    #[doc = "Host: Enable pull down resistors"]
+    #[doc = "Host: Enable pull down resistors."]
     #[must_use]
     #[inline(always)]
     pub const fn pulldown_en(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: Enable pull down resistors"]
+    #[doc = "Host: Enable pull down resistors."]
     #[inline(always)]
     pub const fn set_pulldown_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
-    #[doc = "Device: Enable pull up resistor"]
+    #[doc = "Device: Enable pull up resistor."]
     #[must_use]
     #[inline(always)]
     pub const fn pullup_en(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "Device: Enable pull up resistor"]
+    #[doc = "Device: Enable pull up resistor."]
     #[inline(always)]
     pub const fn set_pullup_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
-    #[doc = "Device: Pull-up strength (0=1K2, 1=2k3)"]
+    #[doc = "Device: Pull-up strength (0=1K2, 1=2k3)."]
     #[must_use]
     #[inline(always)]
     pub const fn rpu_opt(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
-    #[doc = "Device: Pull-up strength (0=1K2, 1=2k3)"]
+    #[doc = "Device: Pull-up strength (0=1K2, 1=2k3)."]
     #[inline(always)]
     pub const fn set_rpu_opt(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
-    #[doc = "Power down bus transceiver"]
+    #[doc = "Power down bus transceiver."]
     #[must_use]
     #[inline(always)]
     pub const fn transceiver_pd(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
         val != 0
     }
-    #[doc = "Power down bus transceiver"]
+    #[doc = "Power down bus transceiver."]
     #[inline(always)]
     pub const fn set_transceiver_pd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
-    #[doc = "Direct control of DM"]
+    #[doc = "Direct control of DM."]
     #[must_use]
     #[inline(always)]
     pub const fn direct_dm(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
         val != 0
     }
-    #[doc = "Direct control of DM"]
+    #[doc = "Direct control of DM."]
     #[inline(always)]
     pub const fn set_direct_dm(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
-    #[doc = "Direct control of DP"]
+    #[doc = "Direct control of DP."]
     #[must_use]
     #[inline(always)]
     pub const fn direct_dp(&self) -> bool {
         let val = (self.0 >> 25usize) & 0x01;
         val != 0
     }
-    #[doc = "Direct control of DP"]
+    #[doc = "Direct control of DP."]
     #[inline(always)]
     pub const fn set_direct_dp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
     }
-    #[doc = "Direct bus drive enable"]
+    #[doc = "Direct bus drive enable."]
     #[must_use]
     #[inline(always)]
     pub const fn direct_en(&self) -> bool {
         let val = (self.0 >> 26usize) & 0x01;
         val != 0
     }
-    #[doc = "Direct bus drive enable"]
+    #[doc = "Direct bus drive enable."]
     #[inline(always)]
     pub const fn set_direct_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
     }
-    #[doc = "Device: Set bit in EP_STATUS_STALL_NAK when EP0 sends a NAK"]
+    #[doc = "Device: Set bit in EP_STATUS_STALL_NAK when EP0 sends a NAK."]
     #[must_use]
     #[inline(always)]
     pub const fn ep0_int_nak(&self) -> bool {
         let val = (self.0 >> 27usize) & 0x01;
         val != 0
     }
-    #[doc = "Device: Set bit in EP_STATUS_STALL_NAK when EP0 sends a NAK"]
+    #[doc = "Device: Set bit in EP_STATUS_STALL_NAK when EP0 sends a NAK."]
     #[inline(always)]
     pub const fn set_ep0_int_nak(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 27usize)) | (((val as u32) & 0x01) << 27usize);
     }
-    #[doc = "Device: Set bit in BUFF_STATUS for every 2 buffers completed on EP0"]
+    #[doc = "Device: Set bit in BUFF_STATUS for every 2 buffers completed on EP0."]
     #[must_use]
     #[inline(always)]
     pub const fn ep0_int_2buf(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
         val != 0
     }
-    #[doc = "Device: Set bit in BUFF_STATUS for every 2 buffers completed on EP0"]
+    #[doc = "Device: Set bit in BUFF_STATUS for every 2 buffers completed on EP0."]
     #[inline(always)]
     pub const fn set_ep0_int_2buf(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
     }
-    #[doc = "Device: Set bit in BUFF_STATUS for every buffer completed on EP0"]
+    #[doc = "Device: Set bit in BUFF_STATUS for every buffer completed on EP0."]
     #[must_use]
     #[inline(always)]
     pub const fn ep0_int_1buf(&self) -> bool {
         let val = (self.0 >> 29usize) & 0x01;
         val != 0
     }
-    #[doc = "Device: Set bit in BUFF_STATUS for every buffer completed on EP0"]
+    #[doc = "Device: Set bit in BUFF_STATUS for every buffer completed on EP0."]
     #[inline(always)]
     pub const fn set_ep0_int_1buf(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 29usize)) | (((val as u32) & 0x01) << 29usize);
     }
-    #[doc = "Device: EP0 single buffered = 0, double buffered = 1"]
+    #[doc = "Device: EP0 single buffered = 0, double buffered = 1."]
     #[must_use]
     #[inline(always)]
     pub const fn ep0_double_buf(&self) -> bool {
         let val = (self.0 >> 30usize) & 0x01;
         val != 0
     }
-    #[doc = "Device: EP0 single buffered = 0, double buffered = 1"]
+    #[doc = "Device: EP0 single buffered = 0, double buffered = 1."]
     #[inline(always)]
     pub const fn set_ep0_double_buf(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 30usize)) | (((val as u32) & 0x01) << 30usize);
     }
-    #[doc = "Device: Set bit in EP_STATUS_STALL_NAK when EP0 sends a STALL"]
+    #[doc = "Device: Set bit in EP_STATUS_STALL_NAK when EP0 sends a STALL."]
     #[must_use]
     #[inline(always)]
     pub const fn ep0_int_stall(&self) -> bool {
         let val = (self.0 >> 31usize) & 0x01;
         val != 0
     }
-    #[doc = "Device: Set bit in EP_STATUS_STALL_NAK when EP0 sends a STALL"]
+    #[doc = "Device: Set bit in EP_STATUS_STALL_NAK when EP0 sends a STALL."]
     #[inline(always)]
     pub const fn set_ep0_int_stall(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
@@ -1379,31 +1379,31 @@ impl defmt::Format for SieCtrl {
         defmt :: write ! (f , "SieCtrl {{ start_trans: {=bool:?}, send_setup: {=bool:?}, send_data: {=bool:?}, receive_data: {=bool:?}, stop_trans: {=bool:?}, preamble_en: {=bool:?}, sof_sync: {=bool:?}, sof_en: {=bool:?}, keep_alive_en: {=bool:?}, vbus_en: {=bool:?}, resume: {=bool:?}, reset_bus: {=bool:?}, pulldown_en: {=bool:?}, pullup_en: {=bool:?}, rpu_opt: {=bool:?}, transceiver_pd: {=bool:?}, direct_dm: {=bool:?}, direct_dp: {=bool:?}, direct_en: {=bool:?}, ep0_int_nak: {=bool:?}, ep0_int_2buf: {=bool:?}, ep0_int_1buf: {=bool:?}, ep0_double_buf: {=bool:?}, ep0_int_stall: {=bool:?} }}" , self . start_trans () , self . send_setup () , self . send_data () , self . receive_data () , self . stop_trans () , self . preamble_en () , self . sof_sync () , self . sof_en () , self . keep_alive_en () , self . vbus_en () , self . resume () , self . reset_bus () , self . pulldown_en () , self . pullup_en () , self . rpu_opt () , self . transceiver_pd () , self . direct_dm () , self . direct_dp () , self . direct_en () , self . ep0_int_nak () , self . ep0_int_2buf () , self . ep0_int_1buf () , self . ep0_double_buf () , self . ep0_int_stall ())
     }
 }
-#[doc = "SIE status register"]
+#[doc = "SIE status register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SieStatus(pub u32);
 impl SieStatus {
-    #[doc = "Device: VBUS Detected"]
+    #[doc = "Device: VBUS Detected."]
     #[must_use]
     #[inline(always)]
     pub const fn vbus_detected(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Device: VBUS Detected"]
+    #[doc = "Device: VBUS Detected."]
     #[inline(always)]
     pub const fn set_vbus_detected(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "USB bus line state"]
+    #[doc = "USB bus line state."]
     #[must_use]
     #[inline(always)]
     pub const fn line_state(&self) -> u8 {
         let val = (self.0 >> 2usize) & 0x03;
         val as u8
     }
-    #[doc = "USB bus line state"]
+    #[doc = "USB bus line state."]
     #[inline(always)]
     pub const fn set_line_state(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 2usize)) | (((val as u32) & 0x03) << 2usize);
@@ -1420,26 +1420,26 @@ impl SieStatus {
     pub const fn set_suspended(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "Host: device speed. Disconnected = 00, LS = 01, FS = 10"]
+    #[doc = "Host: device speed. Disconnected = 00, LS = 01, FS = 10."]
     #[must_use]
     #[inline(always)]
     pub const fn speed(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x03;
         val as u8
     }
-    #[doc = "Host: device speed. Disconnected = 00, LS = 01, FS = 10"]
+    #[doc = "Host: device speed. Disconnected = 00, LS = 01, FS = 10."]
     #[inline(always)]
     pub const fn set_speed(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 8usize)) | (((val as u32) & 0x03) << 8usize);
     }
-    #[doc = "VBUS over current detected"]
+    #[doc = "VBUS over current detected."]
     #[must_use]
     #[inline(always)]
     pub const fn vbus_over_curr(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "VBUS over current detected"]
+    #[doc = "VBUS over current detected."]
     #[inline(always)]
     pub const fn set_vbus_over_curr(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
@@ -1456,50 +1456,50 @@ impl SieStatus {
     pub const fn set_resume(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
-    #[doc = "Device: connected"]
+    #[doc = "Device: connected."]
     #[must_use]
     #[inline(always)]
     pub const fn connected(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "Device: connected"]
+    #[doc = "Device: connected."]
     #[inline(always)]
     pub const fn set_connected(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
-    #[doc = "Device: Setup packet received"]
+    #[doc = "Device: Setup packet received."]
     #[must_use]
     #[inline(always)]
     pub const fn setup_rec(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
-    #[doc = "Device: Setup packet received"]
+    #[doc = "Device: Setup packet received."]
     #[inline(always)]
     pub const fn set_setup_rec(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
-    #[doc = "Transaction complete. Raised by device if: * An IN or OUT packet is sent with the `LAST_BUFF` bit set in the buffer control register Raised by host if: * A setup packet is sent when no data in or data out transaction follows * An IN packet is received and the `LAST_BUFF` bit is set in the buffer control register * An IN packet is received with zero length * An OUT packet is sent and the `LAST_BUFF` bit is set"]
+    #[doc = "Transaction complete. Raised by device if: * An IN or OUT packet is sent with the `LAST_BUFF` bit set in the buffer control register Raised by host if: * A setup packet is sent when no data in or data out transaction follows * An IN packet is received and the `LAST_BUFF` bit is set in the buffer control register * An IN packet is received with zero length * An OUT packet is sent and the `LAST_BUFF` bit is set."]
     #[must_use]
     #[inline(always)]
     pub const fn trans_complete(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
         val != 0
     }
-    #[doc = "Transaction complete. Raised by device if: * An IN or OUT packet is sent with the `LAST_BUFF` bit set in the buffer control register Raised by host if: * A setup packet is sent when no data in or data out transaction follows * An IN packet is received and the `LAST_BUFF` bit is set in the buffer control register * An IN packet is received with zero length * An OUT packet is sent and the `LAST_BUFF` bit is set"]
+    #[doc = "Transaction complete. Raised by device if: * An IN or OUT packet is sent with the `LAST_BUFF` bit set in the buffer control register Raised by host if: * A setup packet is sent when no data in or data out transaction follows * An IN packet is received and the `LAST_BUFF` bit is set in the buffer control register * An IN packet is received with zero length * An OUT packet is sent and the `LAST_BUFF` bit is set."]
     #[inline(always)]
     pub const fn set_trans_complete(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
-    #[doc = "Device: bus reset received"]
+    #[doc = "Device: bus reset received."]
     #[must_use]
     #[inline(always)]
     pub const fn bus_reset(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
         val != 0
     }
-    #[doc = "Device: bus reset received"]
+    #[doc = "Device: bus reset received."]
     #[inline(always)]
     pub const fn set_bus_reset(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
@@ -1552,26 +1552,26 @@ impl SieStatus {
     pub const fn set_rx_timeout(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 27usize)) | (((val as u32) & 0x01) << 27usize);
     }
-    #[doc = "Host: NAK received"]
+    #[doc = "Host: NAK received."]
     #[must_use]
     #[inline(always)]
     pub const fn nak_rec(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: NAK received"]
+    #[doc = "Host: NAK received."]
     #[inline(always)]
     pub const fn set_nak_rec(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
     }
-    #[doc = "Host: STALL received"]
+    #[doc = "Host: STALL received."]
     #[must_use]
     #[inline(always)]
     pub const fn stall_rec(&self) -> bool {
         let val = (self.0 >> 29usize) & 0x01;
         val != 0
     }
-    #[doc = "Host: STALL received"]
+    #[doc = "Host: STALL received."]
     #[inline(always)]
     pub const fn set_stall_rec(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 29usize)) | (((val as u32) & 0x01) << 29usize);
@@ -1588,14 +1588,14 @@ impl SieStatus {
     pub const fn set_ack_rec(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 30usize)) | (((val as u32) & 0x01) << 30usize);
     }
-    #[doc = "Data Sequence Error. The device can raise a sequence error in the following conditions: * A SETUP packet is received followed by a DATA1 packet (data phase should always be DATA0) * An OUT packet is received from the host but doesn't match the data pid in the buffer control register read from DPSRAM The host can raise a data sequence error in the following conditions: * An IN packet from the device has the wrong data PID"]
+    #[doc = "Data Sequence Error. The device can raise a sequence error in the following conditions: * A SETUP packet is received followed by a DATA1 packet (data phase should always be DATA0) * An OUT packet is received from the host but doesn't match the data pid in the buffer control register read from DPSRAM The host can raise a data sequence error in the following conditions: * An IN packet from the device has the wrong data PID."]
     #[must_use]
     #[inline(always)]
     pub const fn data_seq_error(&self) -> bool {
         let val = (self.0 >> 31usize) & 0x01;
         val != 0
     }
-    #[doc = "Data Sequence Error. The device can raise a sequence error in the following conditions: * A SETUP packet is received followed by a DATA1 packet (data phase should always be DATA0) * An OUT packet is received from the host but doesn't match the data pid in the buffer control register read from DPSRAM The host can raise a data sequence error in the following conditions: * An IN packet from the device has the wrong data PID"]
+    #[doc = "Data Sequence Error. The device can raise a sequence error in the following conditions: * A SETUP packet is received followed by a DATA1 packet (data phase should always be DATA0) * An OUT packet is received from the host but doesn't match the data pid in the buffer control register read from DPSRAM The host can raise a data sequence error in the following conditions: * An IN packet from the device has the wrong data PID."]
     #[inline(always)]
     pub const fn set_data_seq_error(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
@@ -1865,127 +1865,127 @@ impl defmt::Format for UsbPwr {
         defmt :: write ! (f , "UsbPwr {{ vbus_en: {=bool:?}, vbus_en_override_en: {=bool:?}, vbus_detect: {=bool:?}, vbus_detect_override_en: {=bool:?}, overcurr_detect: {=bool:?}, overcurr_detect_en: {=bool:?} }}" , self . vbus_en () , self . vbus_en_override_en () , self . vbus_detect () , self . vbus_detect_override_en () , self . overcurr_detect () , self . overcurr_detect_en ())
     }
 }
-#[doc = "Note that most functions are driven directly from usb_fsls controller. This register allows more detailed control/status from the USB PHY. Useful for debug but not expected to be used in normal operation Use in conjunction with usbphy_direct_override register"]
+#[doc = "Note that most functions are driven directly from usb_fsls controller. This register allows more detailed control/status from the USB PHY. Useful for debug but not expected to be used in normal operation Use in conjunction with usbphy_direct_override register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct UsbphyDirect(pub u32);
 impl UsbphyDirect {
-    #[doc = "when dp_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
+    #[doc = "when dp_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2."]
     #[must_use]
     #[inline(always)]
     pub const fn dp_pullup_hisel(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "when dp_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
+    #[doc = "when dp_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2."]
     #[inline(always)]
     pub const fn set_dp_pullup_hisel(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller."]
     #[must_use]
     #[inline(always)]
     pub const fn dp_pullup_en(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller."]
     #[inline(always)]
     pub const fn set_dp_pullup_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPP"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPP."]
     #[must_use]
     #[inline(always)]
     pub const fn dp_pulldn_en(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPP"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPP."]
     #[inline(always)]
     pub const fn set_dp_pulldn_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "when dm_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
+    #[doc = "when dm_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2."]
     #[must_use]
     #[inline(always)]
     pub const fn dm_pullup_hisel(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "when dm_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2"]
+    #[doc = "when dm_pullup_en is set high, this enables second resistor. 0 - Pull = Rpu2; 1 - Pull = Rpu1 + Rpu2."]
     #[inline(always)]
     pub const fn set_dm_pullup_hisel(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpu on DPM"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpu on DPM."]
     #[must_use]
     #[inline(always)]
     pub const fn dm_pullup_en(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpu on DPM"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpu on DPM."]
     #[inline(always)]
     pub const fn set_dm_pullup_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPM"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPM."]
     #[must_use]
     #[inline(always)]
     pub const fn dm_pulldn_en(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPM"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller 1 - Enable Rpd on DPM."]
     #[inline(always)]
     pub const fn set_dm_pulldn_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, OE for DPP/DPM diff pair. 0 - DPP/DPM in Hi-Z state; 1 - DPP/DPM driving TX_SEMODE=1, OE for DPP only. 0 - DPP in Hi-Z state; 1 - DPP driving"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, OE for DPP/DPM diff pair. 0 - DPP/DPM in Hi-Z state; 1 - DPP/DPM driving TX_SEMODE=1, OE for DPP only. 0 - DPP in Hi-Z state; 1 - DPP driving."]
     #[must_use]
     #[inline(always)]
     pub const fn tx_dp_oe(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, OE for DPP/DPM diff pair. 0 - DPP/DPM in Hi-Z state; 1 - DPP/DPM driving TX_SEMODE=1, OE for DPP only. 0 - DPP in Hi-Z state; 1 - DPP driving"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, OE for DPP/DPM diff pair. 0 - DPP/DPM in Hi-Z state; 1 - DPP/DPM driving TX_SEMODE=1, OE for DPP only. 0 - DPP in Hi-Z state; 1 - DPP driving."]
     #[inline(always)]
     pub const fn set_tx_dp_oe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored. TX_SEMODE=1, OE for DPM only. 0 - DPM in Hi-Z state; 1 - DPM driving"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored. TX_SEMODE=1, OE for DPM only. 0 - DPM in Hi-Z state; 1 - DPM driving."]
     #[must_use]
     #[inline(always)]
     pub const fn tx_dm_oe(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored. TX_SEMODE=1, OE for DPM only. 0 - DPM in Hi-Z state; 1 - DPM driving"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored. TX_SEMODE=1, OE for DPM only. 0 - DPM in Hi-Z state; 1 - DPM driving."]
     #[inline(always)]
     pub const fn set_tx_dm_oe(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Drives DPP/DPM diff pair. TX_DP_OE=1 to enable drive. DPP=TX_DP, DPM=~TX_DP TX_SEMODE=1, Drives DPP only. TX_DP_OE=1 to enable drive. DPP=TX_DP"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Drives DPP/DPM diff pair. TX_DP_OE=1 to enable drive. DPP=TX_DP, DPM=~TX_DP TX_SEMODE=1, Drives DPP only. TX_DP_OE=1 to enable drive. DPP=TX_DP."]
     #[must_use]
     #[inline(always)]
     pub const fn tx_dp(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Drives DPP/DPM diff pair. TX_DP_OE=1 to enable drive. DPP=TX_DP, DPM=~TX_DP TX_SEMODE=1, Drives DPP only. TX_DP_OE=1 to enable drive. DPP=TX_DP"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Drives DPP/DPM diff pair. TX_DP_OE=1 to enable drive. DPP=TX_DP, DPM=~TX_DP TX_SEMODE=1, Drives DPP only. TX_DP_OE=1 to enable drive. DPP=TX_DP."]
     #[inline(always)]
     pub const fn set_tx_dp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored TX_SEMODE=1, Drives DPM only. TX_DM_OE=1 to enable drive. DPM=TX_DM"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored TX_SEMODE=1, Drives DPM only. TX_DM_OE=1 to enable drive. DPM=TX_DM."]
     #[must_use]
     #[inline(always)]
     pub const fn tx_dm(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
-    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored TX_SEMODE=1, Drives DPM only. TX_DM_OE=1 to enable drive. DPM=TX_DM"]
+    #[doc = "Value to drive to USB PHY when override enable is set (which will override the default value or value driven from USB controller TX_SEMODE=0, Ignored TX_SEMODE=1, Drives DPM only. TX_DM_OE=1 to enable drive. DPM=TX_DM."]
     #[inline(always)]
     pub const fn set_tx_dm(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
@@ -2030,86 +2030,86 @@ impl UsbphyDirect {
     pub const fn set_tx_diffmode(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
-    #[doc = "Status bit from USB PHY RX Diff data"]
+    #[doc = "Status bit from USB PHY RX Diff data."]
     #[must_use]
     #[inline(always)]
     pub const fn rx_dd(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "Status bit from USB PHY RX Diff data"]
+    #[doc = "Status bit from USB PHY RX Diff data."]
     #[inline(always)]
     pub const fn set_rx_dd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
-    #[doc = "Status bit from USB PHY DPP pin state"]
+    #[doc = "Status bit from USB PHY DPP pin state."]
     #[must_use]
     #[inline(always)]
     pub const fn rx_dp(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
-    #[doc = "Status bit from USB PHY DPP pin state"]
+    #[doc = "Status bit from USB PHY DPP pin state."]
     #[inline(always)]
     pub const fn set_rx_dp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
-    #[doc = "Status bit from USB PHY DPM pin state"]
+    #[doc = "Status bit from USB PHY DPM pin state."]
     #[must_use]
     #[inline(always)]
     pub const fn rx_dm(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
         val != 0
     }
-    #[doc = "Status bit from USB PHY DPM pin state"]
+    #[doc = "Status bit from USB PHY DPM pin state."]
     #[inline(always)]
     pub const fn set_rx_dm(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
-    #[doc = "Status bit from USB PHY"]
+    #[doc = "Status bit from USB PHY."]
     #[must_use]
     #[inline(always)]
     pub const fn dp_ovcn(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
         val != 0
     }
-    #[doc = "Status bit from USB PHY"]
+    #[doc = "Status bit from USB PHY."]
     #[inline(always)]
     pub const fn set_dp_ovcn(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
     }
-    #[doc = "Status bit from USB PHY"]
+    #[doc = "Status bit from USB PHY."]
     #[must_use]
     #[inline(always)]
     pub const fn dm_ovcn(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
         val != 0
     }
-    #[doc = "Status bit from USB PHY"]
+    #[doc = "Status bit from USB PHY."]
     #[inline(always)]
     pub const fn set_dm_ovcn(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
-    #[doc = "Status bit from USB PHY"]
+    #[doc = "Status bit from USB PHY."]
     #[must_use]
     #[inline(always)]
     pub const fn dp_ovv(&self) -> bool {
         let val = (self.0 >> 21usize) & 0x01;
         val != 0
     }
-    #[doc = "Status bit from USB PHY"]
+    #[doc = "Status bit from USB PHY."]
     #[inline(always)]
     pub const fn set_dp_ovv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
     }
-    #[doc = "Status bit from USB PHY"]
+    #[doc = "Status bit from USB PHY."]
     #[must_use]
     #[inline(always)]
     pub const fn dm_ovv(&self) -> bool {
         let val = (self.0 >> 22usize) & 0x01;
         val != 0
     }
-    #[doc = "Status bit from USB PHY"]
+    #[doc = "Status bit from USB PHY."]
     #[inline(always)]
     pub const fn set_dm_ovv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
@@ -2178,86 +2178,86 @@ impl UsbphyDirectOverride {
     pub const fn set_dm_pullup_hisel_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[must_use]
     #[inline(always)]
     pub const fn dp_pullup_en_override_en(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[inline(always)]
     pub const fn set_dp_pullup_en_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[must_use]
     #[inline(always)]
     pub const fn dp_pulldn_en_override_en(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[inline(always)]
     pub const fn set_dp_pulldn_en_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[must_use]
     #[inline(always)]
     pub const fn dm_pulldn_en_override_en(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[inline(always)]
     pub const fn set_dm_pulldn_en_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[must_use]
     #[inline(always)]
     pub const fn tx_dp_oe_override_en(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[inline(always)]
     pub const fn set_tx_dp_oe_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[must_use]
     #[inline(always)]
     pub const fn tx_dm_oe_override_en(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[inline(always)]
     pub const fn set_tx_dm_oe_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[must_use]
     #[inline(always)]
     pub const fn tx_dp_override_en(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[inline(always)]
     pub const fn set_tx_dp_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[must_use]
     #[inline(always)]
     pub const fn tx_dm_override_en(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "Override default value or value driven from USB Controller to PHY"]
+    #[doc = "Override default value or value driven from USB Controller to PHY."]
     #[inline(always)]
     pub const fn set_tx_dm_override_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
@@ -2351,31 +2351,31 @@ impl defmt::Format for UsbphyDirectOverride {
         defmt :: write ! (f , "UsbphyDirectOverride {{ dp_pullup_hisel_override_en: {=bool:?}, dm_pullup_hisel_override_en: {=bool:?}, dp_pullup_en_override_en: {=bool:?}, dp_pulldn_en_override_en: {=bool:?}, dm_pulldn_en_override_en: {=bool:?}, tx_dp_oe_override_en: {=bool:?}, tx_dm_oe_override_en: {=bool:?}, tx_dp_override_en: {=bool:?}, tx_dm_override_en: {=bool:?}, rx_pd_override_en: {=bool:?}, tx_pd_override_en: {=bool:?}, tx_fsslew_override_en: {=bool:?}, dm_pullup_override_en: {=bool:?}, tx_diffmode_override_en: {=bool:?} }}" , self . dp_pullup_hisel_override_en () , self . dm_pullup_hisel_override_en () , self . dp_pullup_en_override_en () , self . dp_pulldn_en_override_en () , self . dm_pulldn_en_override_en () , self . tx_dp_oe_override_en () , self . tx_dm_oe_override_en () , self . tx_dp_override_en () , self . tx_dm_override_en () , self . rx_pd_override_en () , self . tx_pd_override_en () , self . tx_fsslew_override_en () , self . dm_pullup_override_en () , self . tx_diffmode_override_en ())
     }
 }
-#[doc = "Note that most functions are driven directly from usb_fsls controller. This register allows more detailed control/status from the USB PHY. Useful for debug but not expected to be used in normal operation"]
+#[doc = "Note that most functions are driven directly from usb_fsls controller. This register allows more detailed control/status from the USB PHY. Useful for debug but not expected to be used in normal operation."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct UsbphyTrim(pub u32);
 impl UsbphyTrim {
-    #[doc = "Value to drive to USB PHY DP pulldown resistor trim control Experimental data suggests that the reset value will work, but this register allows adjustment if required"]
+    #[doc = "Value to drive to USB PHY DP pulldown resistor trim control Experimental data suggests that the reset value will work, but this register allows adjustment if required."]
     #[must_use]
     #[inline(always)]
     pub const fn dp_pulldn_trim(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x1f;
         val as u8
     }
-    #[doc = "Value to drive to USB PHY DP pulldown resistor trim control Experimental data suggests that the reset value will work, but this register allows adjustment if required"]
+    #[doc = "Value to drive to USB PHY DP pulldown resistor trim control Experimental data suggests that the reset value will work, but this register allows adjustment if required."]
     #[inline(always)]
     pub const fn set_dp_pulldn_trim(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
     }
-    #[doc = "Value to drive to USB PHY DM pulldown resistor trim control Experimental data suggests that the reset value will work, but this register allows adjustment if required"]
+    #[doc = "Value to drive to USB PHY DM pulldown resistor trim control Experimental data suggests that the reset value will work, but this register allows adjustment if required."]
     #[must_use]
     #[inline(always)]
     pub const fn dm_pulldn_trim(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x1f;
         val as u8
     }
-    #[doc = "Value to drive to USB PHY DM pulldown resistor trim control Experimental data suggests that the reset value will work, but this register allows adjustment if required"]
+    #[doc = "Value to drive to USB PHY DM pulldown resistor trim control Experimental data suggests that the reset value will work, but this register allows adjustment if required."]
     #[inline(always)]
     pub const fn set_dm_pulldn_trim(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 8usize)) | (((val as u32) & 0x1f) << 8usize);

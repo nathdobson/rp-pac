@@ -1,17 +1,17 @@
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio0ctrlFuncsel {
-    JTAG_TCK = 0x0,
-    SPI0_RX = 0x01,
-    UART0_TX = 0x02,
-    I2C0_SDA = 0x03,
-    PWM_A_0 = 0x04,
-    SIO_0 = 0x05,
-    PIO0_0 = 0x06,
-    PIO1_0 = 0x07,
+pub enum Gpio0CtrlFuncsel {
+    JtagTck = 0x0,
+    Spi0Rx = 0x01,
+    Uart0Tx = 0x02,
+    I2c0Sda = 0x03,
+    PwmA0 = 0x04,
+    Sio0 = 0x05,
+    Pio00 = 0x06,
+    Pio10 = 0x07,
     _RESERVED_8 = 0x08,
-    USB_MUXING_OVERCURR_DETECT = 0x09,
+    UsbMuxingOvercurrDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -33,11 +33,11 @@ pub enum Gpio0ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio0ctrlFuncsel {
+impl Gpio0CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio0ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio0CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -45,32 +45,32 @@ impl Gpio0ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio0ctrlFuncsel {
+impl From<u8> for Gpio0CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio0ctrlFuncsel {
-        Gpio0ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio0CtrlFuncsel {
+        Gpio0CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio0ctrlFuncsel> for u8 {
+impl From<Gpio0CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio0ctrlFuncsel) -> u8 {
-        Gpio0ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio0CtrlFuncsel) -> u8 {
+        Gpio0CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio10ctrlFuncsel {
+pub enum Gpio10CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_SCLK = 0x01,
-    UART1_CTS = 0x02,
-    I2C1_SDA = 0x03,
-    PWM_A_5 = 0x04,
-    SIO_10 = 0x05,
-    PIO0_10 = 0x06,
-    PIO1_10 = 0x07,
-    USB_MUXING_EXTPHY_VM = 0x08,
-    USB_MUXING_VBUS_DETECT = 0x09,
+    Spi1Sclk = 0x01,
+    Uart1Cts = 0x02,
+    I2c1Sda = 0x03,
+    PwmA5 = 0x04,
+    Sio10 = 0x05,
+    Pio010 = 0x06,
+    Pio110 = 0x07,
+    UsbMuxingExtphyVm = 0x08,
+    UsbMuxingVbusDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -92,11 +92,11 @@ pub enum Gpio10ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio10ctrlFuncsel {
+impl Gpio10CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio10ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio10CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -104,32 +104,32 @@ impl Gpio10ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio10ctrlFuncsel {
+impl From<u8> for Gpio10CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio10ctrlFuncsel {
-        Gpio10ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio10CtrlFuncsel {
+        Gpio10CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio10ctrlFuncsel> for u8 {
+impl From<Gpio10CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio10ctrlFuncsel) -> u8 {
-        Gpio10ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio10CtrlFuncsel) -> u8 {
+        Gpio10CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio11ctrlFuncsel {
+pub enum Gpio11CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_TX = 0x01,
-    UART1_RTS = 0x02,
-    I2C1_SCL = 0x03,
-    PWM_B_5 = 0x04,
-    SIO_11 = 0x05,
-    PIO0_11 = 0x06,
-    PIO1_11 = 0x07,
-    USB_MUXING_EXTPHY_SUSPND = 0x08,
-    USB_MUXING_VBUS_EN = 0x09,
+    Spi1Tx = 0x01,
+    Uart1Rts = 0x02,
+    I2c1Scl = 0x03,
+    PwmB5 = 0x04,
+    Sio11 = 0x05,
+    Pio011 = 0x06,
+    Pio111 = 0x07,
+    UsbMuxingExtphySuspnd = 0x08,
+    UsbMuxingVbusEn = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -151,11 +151,11 @@ pub enum Gpio11ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio11ctrlFuncsel {
+impl Gpio11CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio11ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio11CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -163,32 +163,32 @@ impl Gpio11ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio11ctrlFuncsel {
+impl From<u8> for Gpio11CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio11ctrlFuncsel {
-        Gpio11ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio11CtrlFuncsel {
+        Gpio11CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio11ctrlFuncsel> for u8 {
+impl From<Gpio11CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio11ctrlFuncsel) -> u8 {
-        Gpio11ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio11CtrlFuncsel) -> u8 {
+        Gpio11CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio12ctrlFuncsel {
+pub enum Gpio12CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_RX = 0x01,
-    UART0_TX = 0x02,
-    I2C0_SDA = 0x03,
-    PWM_A_6 = 0x04,
-    SIO_12 = 0x05,
-    PIO0_12 = 0x06,
-    PIO1_12 = 0x07,
-    USB_MUXING_EXTPHY_SPEED = 0x08,
-    USB_MUXING_OVERCURR_DETECT = 0x09,
+    Spi1Rx = 0x01,
+    Uart0Tx = 0x02,
+    I2c0Sda = 0x03,
+    PwmA6 = 0x04,
+    Sio12 = 0x05,
+    Pio012 = 0x06,
+    Pio112 = 0x07,
+    UsbMuxingExtphySpeed = 0x08,
+    UsbMuxingOvercurrDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -210,11 +210,11 @@ pub enum Gpio12ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio12ctrlFuncsel {
+impl Gpio12CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio12ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio12CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -222,32 +222,32 @@ impl Gpio12ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio12ctrlFuncsel {
+impl From<u8> for Gpio12CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio12ctrlFuncsel {
-        Gpio12ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio12CtrlFuncsel {
+        Gpio12CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio12ctrlFuncsel> for u8 {
+impl From<Gpio12CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio12ctrlFuncsel) -> u8 {
-        Gpio12ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio12CtrlFuncsel) -> u8 {
+        Gpio12CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio13ctrlFuncsel {
+pub enum Gpio13CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_SS_N = 0x01,
-    UART0_RX = 0x02,
-    I2C0_SCL = 0x03,
-    PWM_B_6 = 0x04,
-    SIO_13 = 0x05,
-    PIO0_13 = 0x06,
-    PIO1_13 = 0x07,
-    USB_MUXING_EXTPHY_VPO = 0x08,
-    USB_MUXING_VBUS_DETECT = 0x09,
+    Spi1SsN = 0x01,
+    Uart0Rx = 0x02,
+    I2c0Scl = 0x03,
+    PwmB6 = 0x04,
+    Sio13 = 0x05,
+    Pio013 = 0x06,
+    Pio113 = 0x07,
+    UsbMuxingExtphyVpo = 0x08,
+    UsbMuxingVbusDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -269,11 +269,11 @@ pub enum Gpio13ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio13ctrlFuncsel {
+impl Gpio13CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio13ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio13CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -281,32 +281,32 @@ impl Gpio13ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio13ctrlFuncsel {
+impl From<u8> for Gpio13CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio13ctrlFuncsel {
-        Gpio13ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio13CtrlFuncsel {
+        Gpio13CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio13ctrlFuncsel> for u8 {
+impl From<Gpio13CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio13ctrlFuncsel) -> u8 {
-        Gpio13ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio13CtrlFuncsel) -> u8 {
+        Gpio13CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio14ctrlFuncsel {
+pub enum Gpio14CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_SCLK = 0x01,
-    UART0_CTS = 0x02,
-    I2C1_SDA = 0x03,
-    PWM_A_7 = 0x04,
-    SIO_14 = 0x05,
-    PIO0_14 = 0x06,
-    PIO1_14 = 0x07,
-    USB_MUXING_EXTPHY_VMO = 0x08,
-    USB_MUXING_VBUS_EN = 0x09,
+    Spi1Sclk = 0x01,
+    Uart0Cts = 0x02,
+    I2c1Sda = 0x03,
+    PwmA7 = 0x04,
+    Sio14 = 0x05,
+    Pio014 = 0x06,
+    Pio114 = 0x07,
+    UsbMuxingExtphyVmo = 0x08,
+    UsbMuxingVbusEn = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -328,11 +328,11 @@ pub enum Gpio14ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio14ctrlFuncsel {
+impl Gpio14CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio14ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio14CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -340,32 +340,32 @@ impl Gpio14ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio14ctrlFuncsel {
+impl From<u8> for Gpio14CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio14ctrlFuncsel {
-        Gpio14ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio14CtrlFuncsel {
+        Gpio14CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio14ctrlFuncsel> for u8 {
+impl From<Gpio14CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio14ctrlFuncsel) -> u8 {
-        Gpio14ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio14CtrlFuncsel) -> u8 {
+        Gpio14CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio15ctrlFuncsel {
+pub enum Gpio15CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_TX = 0x01,
-    UART0_RTS = 0x02,
-    I2C1_SCL = 0x03,
-    PWM_B_7 = 0x04,
-    SIO_15 = 0x05,
-    PIO0_15 = 0x06,
-    PIO1_15 = 0x07,
-    USB_MUXING_DIGITAL_DP = 0x08,
-    USB_MUXING_OVERCURR_DETECT = 0x09,
+    Spi1Tx = 0x01,
+    Uart0Rts = 0x02,
+    I2c1Scl = 0x03,
+    PwmB7 = 0x04,
+    Sio15 = 0x05,
+    Pio015 = 0x06,
+    Pio115 = 0x07,
+    UsbMuxingDigitalDp = 0x08,
+    UsbMuxingOvercurrDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -387,11 +387,11 @@ pub enum Gpio15ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio15ctrlFuncsel {
+impl Gpio15CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio15ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio15CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -399,32 +399,32 @@ impl Gpio15ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio15ctrlFuncsel {
+impl From<u8> for Gpio15CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio15ctrlFuncsel {
-        Gpio15ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio15CtrlFuncsel {
+        Gpio15CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio15ctrlFuncsel> for u8 {
+impl From<Gpio15CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio15ctrlFuncsel) -> u8 {
-        Gpio15ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio15CtrlFuncsel) -> u8 {
+        Gpio15CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio16ctrlFuncsel {
+pub enum Gpio16CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI0_RX = 0x01,
-    UART0_TX = 0x02,
-    I2C0_SDA = 0x03,
-    PWM_A_0 = 0x04,
-    SIO_16 = 0x05,
-    PIO0_16 = 0x06,
-    PIO1_16 = 0x07,
-    USB_MUXING_DIGITAL_DM = 0x08,
-    USB_MUXING_VBUS_DETECT = 0x09,
+    Spi0Rx = 0x01,
+    Uart0Tx = 0x02,
+    I2c0Sda = 0x03,
+    PwmA0 = 0x04,
+    Sio16 = 0x05,
+    Pio016 = 0x06,
+    Pio116 = 0x07,
+    UsbMuxingDigitalDm = 0x08,
+    UsbMuxingVbusDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -446,11 +446,11 @@ pub enum Gpio16ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio16ctrlFuncsel {
+impl Gpio16CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio16ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio16CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -458,32 +458,32 @@ impl Gpio16ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio16ctrlFuncsel {
+impl From<u8> for Gpio16CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio16ctrlFuncsel {
-        Gpio16ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio16CtrlFuncsel {
+        Gpio16CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio16ctrlFuncsel> for u8 {
+impl From<Gpio16CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio16ctrlFuncsel) -> u8 {
-        Gpio16ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio16CtrlFuncsel) -> u8 {
+        Gpio16CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio17ctrlFuncsel {
+pub enum Gpio17CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI0_SS_N = 0x01,
-    UART0_RX = 0x02,
-    I2C0_SCL = 0x03,
-    PWM_B_0 = 0x04,
-    SIO_17 = 0x05,
-    PIO0_17 = 0x06,
-    PIO1_17 = 0x07,
+    Spi0SsN = 0x01,
+    Uart0Rx = 0x02,
+    I2c0Scl = 0x03,
+    PwmB0 = 0x04,
+    Sio17 = 0x05,
+    Pio017 = 0x06,
+    Pio117 = 0x07,
     _RESERVED_8 = 0x08,
-    USB_MUXING_VBUS_EN = 0x09,
+    UsbMuxingVbusEn = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -505,11 +505,11 @@ pub enum Gpio17ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio17ctrlFuncsel {
+impl Gpio17CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio17ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio17CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -517,32 +517,32 @@ impl Gpio17ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio17ctrlFuncsel {
+impl From<u8> for Gpio17CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio17ctrlFuncsel {
-        Gpio17ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio17CtrlFuncsel {
+        Gpio17CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio17ctrlFuncsel> for u8 {
+impl From<Gpio17CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio17ctrlFuncsel) -> u8 {
-        Gpio17ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio17CtrlFuncsel) -> u8 {
+        Gpio17CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio18ctrlFuncsel {
+pub enum Gpio18CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI0_SCLK = 0x01,
-    UART0_CTS = 0x02,
-    I2C1_SDA = 0x03,
-    PWM_A_1 = 0x04,
-    SIO_18 = 0x05,
-    PIO0_18 = 0x06,
-    PIO1_18 = 0x07,
+    Spi0Sclk = 0x01,
+    Uart0Cts = 0x02,
+    I2c1Sda = 0x03,
+    PwmA1 = 0x04,
+    Sio18 = 0x05,
+    Pio018 = 0x06,
+    Pio118 = 0x07,
     _RESERVED_8 = 0x08,
-    USB_MUXING_OVERCURR_DETECT = 0x09,
+    UsbMuxingOvercurrDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -564,11 +564,11 @@ pub enum Gpio18ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio18ctrlFuncsel {
+impl Gpio18CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio18ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio18CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -576,32 +576,32 @@ impl Gpio18ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio18ctrlFuncsel {
+impl From<u8> for Gpio18CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio18ctrlFuncsel {
-        Gpio18ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio18CtrlFuncsel {
+        Gpio18CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio18ctrlFuncsel> for u8 {
+impl From<Gpio18CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio18ctrlFuncsel) -> u8 {
-        Gpio18ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio18CtrlFuncsel) -> u8 {
+        Gpio18CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio19ctrlFuncsel {
+pub enum Gpio19CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI0_TX = 0x01,
-    UART0_RTS = 0x02,
-    I2C1_SCL = 0x03,
-    PWM_B_1 = 0x04,
-    SIO_19 = 0x05,
-    PIO0_19 = 0x06,
-    PIO1_19 = 0x07,
+    Spi0Tx = 0x01,
+    Uart0Rts = 0x02,
+    I2c1Scl = 0x03,
+    PwmB1 = 0x04,
+    Sio19 = 0x05,
+    Pio019 = 0x06,
+    Pio119 = 0x07,
     _RESERVED_8 = 0x08,
-    USB_MUXING_VBUS_DETECT = 0x09,
+    UsbMuxingVbusDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -623,11 +623,11 @@ pub enum Gpio19ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio19ctrlFuncsel {
+impl Gpio19CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio19ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio19CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -635,32 +635,32 @@ impl Gpio19ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio19ctrlFuncsel {
+impl From<u8> for Gpio19CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio19ctrlFuncsel {
-        Gpio19ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio19CtrlFuncsel {
+        Gpio19CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio19ctrlFuncsel> for u8 {
+impl From<Gpio19CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio19ctrlFuncsel) -> u8 {
-        Gpio19ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio19CtrlFuncsel) -> u8 {
+        Gpio19CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio1ctrlFuncsel {
-    JTAG_TMS = 0x0,
-    SPI0_SS_N = 0x01,
-    UART0_RX = 0x02,
-    I2C0_SCL = 0x03,
-    PWM_B_0 = 0x04,
-    SIO_1 = 0x05,
-    PIO0_1 = 0x06,
-    PIO1_1 = 0x07,
+pub enum Gpio1CtrlFuncsel {
+    JtagTms = 0x0,
+    Spi0SsN = 0x01,
+    Uart0Rx = 0x02,
+    I2c0Scl = 0x03,
+    PwmB0 = 0x04,
+    Sio1 = 0x05,
+    Pio01 = 0x06,
+    Pio11 = 0x07,
     _RESERVED_8 = 0x08,
-    USB_MUXING_VBUS_DETECT = 0x09,
+    UsbMuxingVbusDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -682,11 +682,11 @@ pub enum Gpio1ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio1ctrlFuncsel {
+impl Gpio1CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio1ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio1CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -694,32 +694,32 @@ impl Gpio1ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio1ctrlFuncsel {
+impl From<u8> for Gpio1CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio1ctrlFuncsel {
-        Gpio1ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio1CtrlFuncsel {
+        Gpio1CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio1ctrlFuncsel> for u8 {
+impl From<Gpio1CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio1ctrlFuncsel) -> u8 {
-        Gpio1ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio1CtrlFuncsel) -> u8 {
+        Gpio1CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio20ctrlFuncsel {
+pub enum Gpio20CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI0_RX = 0x01,
-    UART1_TX = 0x02,
-    I2C0_SDA = 0x03,
-    PWM_A_2 = 0x04,
-    SIO_20 = 0x05,
-    PIO0_20 = 0x06,
-    PIO1_20 = 0x07,
-    CLOCKS_GPIN_0 = 0x08,
-    USB_MUXING_VBUS_EN = 0x09,
+    Spi0Rx = 0x01,
+    Uart1Tx = 0x02,
+    I2c0Sda = 0x03,
+    PwmA2 = 0x04,
+    Sio20 = 0x05,
+    Pio020 = 0x06,
+    Pio120 = 0x07,
+    ClocksGpin0 = 0x08,
+    UsbMuxingVbusEn = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -741,11 +741,11 @@ pub enum Gpio20ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio20ctrlFuncsel {
+impl Gpio20CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio20ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio20CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -753,32 +753,32 @@ impl Gpio20ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio20ctrlFuncsel {
+impl From<u8> for Gpio20CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio20ctrlFuncsel {
-        Gpio20ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio20CtrlFuncsel {
+        Gpio20CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio20ctrlFuncsel> for u8 {
+impl From<Gpio20CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio20ctrlFuncsel) -> u8 {
-        Gpio20ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio20CtrlFuncsel) -> u8 {
+        Gpio20CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio21ctrlFuncsel {
+pub enum Gpio21CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI0_SS_N = 0x01,
-    UART1_RX = 0x02,
-    I2C0_SCL = 0x03,
-    PWM_B_2 = 0x04,
-    SIO_21 = 0x05,
-    PIO0_21 = 0x06,
-    PIO1_21 = 0x07,
-    CLOCKS_GPOUT_0 = 0x08,
-    USB_MUXING_OVERCURR_DETECT = 0x09,
+    Spi0SsN = 0x01,
+    Uart1Rx = 0x02,
+    I2c0Scl = 0x03,
+    PwmB2 = 0x04,
+    Sio21 = 0x05,
+    Pio021 = 0x06,
+    Pio121 = 0x07,
+    ClocksGpout0 = 0x08,
+    UsbMuxingOvercurrDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -800,11 +800,11 @@ pub enum Gpio21ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio21ctrlFuncsel {
+impl Gpio21CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio21ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio21CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -812,32 +812,32 @@ impl Gpio21ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio21ctrlFuncsel {
+impl From<u8> for Gpio21CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio21ctrlFuncsel {
-        Gpio21ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio21CtrlFuncsel {
+        Gpio21CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio21ctrlFuncsel> for u8 {
+impl From<Gpio21CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio21ctrlFuncsel) -> u8 {
-        Gpio21ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio21CtrlFuncsel) -> u8 {
+        Gpio21CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio22ctrlFuncsel {
+pub enum Gpio22CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI0_SCLK = 0x01,
-    UART1_CTS = 0x02,
-    I2C1_SDA = 0x03,
-    PWM_A_3 = 0x04,
-    SIO_22 = 0x05,
-    PIO0_22 = 0x06,
-    PIO1_22 = 0x07,
-    CLOCKS_GPIN_1 = 0x08,
-    USB_MUXING_VBUS_DETECT = 0x09,
+    Spi0Sclk = 0x01,
+    Uart1Cts = 0x02,
+    I2c1Sda = 0x03,
+    PwmA3 = 0x04,
+    Sio22 = 0x05,
+    Pio022 = 0x06,
+    Pio122 = 0x07,
+    ClocksGpin1 = 0x08,
+    UsbMuxingVbusDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -859,11 +859,11 @@ pub enum Gpio22ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio22ctrlFuncsel {
+impl Gpio22CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio22ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio22CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -871,32 +871,32 @@ impl Gpio22ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio22ctrlFuncsel {
+impl From<u8> for Gpio22CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio22ctrlFuncsel {
-        Gpio22ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio22CtrlFuncsel {
+        Gpio22CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio22ctrlFuncsel> for u8 {
+impl From<Gpio22CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio22ctrlFuncsel) -> u8 {
-        Gpio22ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio22CtrlFuncsel) -> u8 {
+        Gpio22CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio23ctrlFuncsel {
+pub enum Gpio23CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI0_TX = 0x01,
-    UART1_RTS = 0x02,
-    I2C1_SCL = 0x03,
-    PWM_B_3 = 0x04,
-    SIO_23 = 0x05,
-    PIO0_23 = 0x06,
-    PIO1_23 = 0x07,
-    CLOCKS_GPOUT_1 = 0x08,
-    USB_MUXING_VBUS_EN = 0x09,
+    Spi0Tx = 0x01,
+    Uart1Rts = 0x02,
+    I2c1Scl = 0x03,
+    PwmB3 = 0x04,
+    Sio23 = 0x05,
+    Pio023 = 0x06,
+    Pio123 = 0x07,
+    ClocksGpout1 = 0x08,
+    UsbMuxingVbusEn = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -918,11 +918,11 @@ pub enum Gpio23ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio23ctrlFuncsel {
+impl Gpio23CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio23ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio23CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -930,32 +930,32 @@ impl Gpio23ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio23ctrlFuncsel {
+impl From<u8> for Gpio23CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio23ctrlFuncsel {
-        Gpio23ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio23CtrlFuncsel {
+        Gpio23CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio23ctrlFuncsel> for u8 {
+impl From<Gpio23CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio23ctrlFuncsel) -> u8 {
-        Gpio23ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio23CtrlFuncsel) -> u8 {
+        Gpio23CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio24ctrlFuncsel {
+pub enum Gpio24CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_RX = 0x01,
-    UART1_TX = 0x02,
-    I2C0_SDA = 0x03,
-    PWM_A_4 = 0x04,
-    SIO_24 = 0x05,
-    PIO0_24 = 0x06,
-    PIO1_24 = 0x07,
-    CLOCKS_GPOUT_2 = 0x08,
-    USB_MUXING_OVERCURR_DETECT = 0x09,
+    Spi1Rx = 0x01,
+    Uart1Tx = 0x02,
+    I2c0Sda = 0x03,
+    PwmA4 = 0x04,
+    Sio24 = 0x05,
+    Pio024 = 0x06,
+    Pio124 = 0x07,
+    ClocksGpout2 = 0x08,
+    UsbMuxingOvercurrDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -977,11 +977,11 @@ pub enum Gpio24ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio24ctrlFuncsel {
+impl Gpio24CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio24ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio24CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -989,32 +989,32 @@ impl Gpio24ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio24ctrlFuncsel {
+impl From<u8> for Gpio24CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio24ctrlFuncsel {
-        Gpio24ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio24CtrlFuncsel {
+        Gpio24CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio24ctrlFuncsel> for u8 {
+impl From<Gpio24CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio24ctrlFuncsel) -> u8 {
-        Gpio24ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio24CtrlFuncsel) -> u8 {
+        Gpio24CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio25ctrlFuncsel {
+pub enum Gpio25CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_SS_N = 0x01,
-    UART1_RX = 0x02,
-    I2C0_SCL = 0x03,
-    PWM_B_4 = 0x04,
-    SIO_25 = 0x05,
-    PIO0_25 = 0x06,
-    PIO1_25 = 0x07,
-    CLOCKS_GPOUT_3 = 0x08,
-    USB_MUXING_VBUS_DETECT = 0x09,
+    Spi1SsN = 0x01,
+    Uart1Rx = 0x02,
+    I2c0Scl = 0x03,
+    PwmB4 = 0x04,
+    Sio25 = 0x05,
+    Pio025 = 0x06,
+    Pio125 = 0x07,
+    ClocksGpout3 = 0x08,
+    UsbMuxingVbusDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -1036,11 +1036,11 @@ pub enum Gpio25ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio25ctrlFuncsel {
+impl Gpio25CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio25ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio25CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -1048,32 +1048,32 @@ impl Gpio25ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio25ctrlFuncsel {
+impl From<u8> for Gpio25CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio25ctrlFuncsel {
-        Gpio25ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio25CtrlFuncsel {
+        Gpio25CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio25ctrlFuncsel> for u8 {
+impl From<Gpio25CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio25ctrlFuncsel) -> u8 {
-        Gpio25ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio25CtrlFuncsel) -> u8 {
+        Gpio25CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio26ctrlFuncsel {
+pub enum Gpio26CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_SCLK = 0x01,
-    UART1_CTS = 0x02,
-    I2C1_SDA = 0x03,
-    PWM_A_5 = 0x04,
-    SIO_26 = 0x05,
-    PIO0_26 = 0x06,
-    PIO1_26 = 0x07,
+    Spi1Sclk = 0x01,
+    Uart1Cts = 0x02,
+    I2c1Sda = 0x03,
+    PwmA5 = 0x04,
+    Sio26 = 0x05,
+    Pio026 = 0x06,
+    Pio126 = 0x07,
     _RESERVED_8 = 0x08,
-    USB_MUXING_VBUS_EN = 0x09,
+    UsbMuxingVbusEn = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -1095,11 +1095,11 @@ pub enum Gpio26ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio26ctrlFuncsel {
+impl Gpio26CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio26ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio26CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -1107,32 +1107,32 @@ impl Gpio26ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio26ctrlFuncsel {
+impl From<u8> for Gpio26CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio26ctrlFuncsel {
-        Gpio26ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio26CtrlFuncsel {
+        Gpio26CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio26ctrlFuncsel> for u8 {
+impl From<Gpio26CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio26ctrlFuncsel) -> u8 {
-        Gpio26ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio26CtrlFuncsel) -> u8 {
+        Gpio26CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio27ctrlFuncsel {
+pub enum Gpio27CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_TX = 0x01,
-    UART1_RTS = 0x02,
-    I2C1_SCL = 0x03,
-    PWM_B_5 = 0x04,
-    SIO_27 = 0x05,
-    PIO0_27 = 0x06,
-    PIO1_27 = 0x07,
+    Spi1Tx = 0x01,
+    Uart1Rts = 0x02,
+    I2c1Scl = 0x03,
+    PwmB5 = 0x04,
+    Sio27 = 0x05,
+    Pio027 = 0x06,
+    Pio127 = 0x07,
     _RESERVED_8 = 0x08,
-    USB_MUXING_OVERCURR_DETECT = 0x09,
+    UsbMuxingOvercurrDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -1154,11 +1154,11 @@ pub enum Gpio27ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio27ctrlFuncsel {
+impl Gpio27CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio27ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio27CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -1166,32 +1166,32 @@ impl Gpio27ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio27ctrlFuncsel {
+impl From<u8> for Gpio27CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio27ctrlFuncsel {
-        Gpio27ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio27CtrlFuncsel {
+        Gpio27CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio27ctrlFuncsel> for u8 {
+impl From<Gpio27CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio27ctrlFuncsel) -> u8 {
-        Gpio27ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio27CtrlFuncsel) -> u8 {
+        Gpio27CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio28ctrlFuncsel {
+pub enum Gpio28CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_RX = 0x01,
-    UART0_TX = 0x02,
-    I2C0_SDA = 0x03,
-    PWM_A_6 = 0x04,
-    SIO_28 = 0x05,
-    PIO0_28 = 0x06,
-    PIO1_28 = 0x07,
+    Spi1Rx = 0x01,
+    Uart0Tx = 0x02,
+    I2c0Sda = 0x03,
+    PwmA6 = 0x04,
+    Sio28 = 0x05,
+    Pio028 = 0x06,
+    Pio128 = 0x07,
     _RESERVED_8 = 0x08,
-    USB_MUXING_VBUS_DETECT = 0x09,
+    UsbMuxingVbusDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -1213,11 +1213,11 @@ pub enum Gpio28ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio28ctrlFuncsel {
+impl Gpio28CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio28ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio28CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -1225,32 +1225,32 @@ impl Gpio28ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio28ctrlFuncsel {
+impl From<u8> for Gpio28CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio28ctrlFuncsel {
-        Gpio28ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio28CtrlFuncsel {
+        Gpio28CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio28ctrlFuncsel> for u8 {
+impl From<Gpio28CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio28ctrlFuncsel) -> u8 {
-        Gpio28ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio28CtrlFuncsel) -> u8 {
+        Gpio28CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio29ctrlFuncsel {
+pub enum Gpio29CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_SS_N = 0x01,
-    UART0_RX = 0x02,
-    I2C0_SCL = 0x03,
-    PWM_B_6 = 0x04,
-    SIO_29 = 0x05,
-    PIO0_29 = 0x06,
-    PIO1_29 = 0x07,
+    Spi1SsN = 0x01,
+    Uart0Rx = 0x02,
+    I2c0Scl = 0x03,
+    PwmB6 = 0x04,
+    Sio29 = 0x05,
+    Pio029 = 0x06,
+    Pio129 = 0x07,
     _RESERVED_8 = 0x08,
-    USB_MUXING_VBUS_EN = 0x09,
+    UsbMuxingVbusEn = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -1272,11 +1272,11 @@ pub enum Gpio29ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio29ctrlFuncsel {
+impl Gpio29CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio29ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio29CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -1284,32 +1284,32 @@ impl Gpio29ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio29ctrlFuncsel {
+impl From<u8> for Gpio29CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio29ctrlFuncsel {
-        Gpio29ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio29CtrlFuncsel {
+        Gpio29CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio29ctrlFuncsel> for u8 {
+impl From<Gpio29CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio29ctrlFuncsel) -> u8 {
-        Gpio29ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio29CtrlFuncsel) -> u8 {
+        Gpio29CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio2ctrlFuncsel {
-    JTAG_TDI = 0x0,
-    SPI0_SCLK = 0x01,
-    UART0_CTS = 0x02,
-    I2C1_SDA = 0x03,
-    PWM_A_1 = 0x04,
-    SIO_2 = 0x05,
-    PIO0_2 = 0x06,
-    PIO1_2 = 0x07,
+pub enum Gpio2CtrlFuncsel {
+    JtagTdi = 0x0,
+    Spi0Sclk = 0x01,
+    Uart0Cts = 0x02,
+    I2c1Sda = 0x03,
+    PwmA1 = 0x04,
+    Sio2 = 0x05,
+    Pio02 = 0x06,
+    Pio12 = 0x07,
     _RESERVED_8 = 0x08,
-    USB_MUXING_VBUS_EN = 0x09,
+    UsbMuxingVbusEn = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -1331,11 +1331,11 @@ pub enum Gpio2ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio2ctrlFuncsel {
+impl Gpio2CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio2ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio2CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -1343,32 +1343,32 @@ impl Gpio2ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio2ctrlFuncsel {
+impl From<u8> for Gpio2CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio2ctrlFuncsel {
-        Gpio2ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio2CtrlFuncsel {
+        Gpio2CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio2ctrlFuncsel> for u8 {
+impl From<Gpio2CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio2ctrlFuncsel) -> u8 {
-        Gpio2ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio2CtrlFuncsel) -> u8 {
+        Gpio2CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio3ctrlFuncsel {
-    JTAG_TDO = 0x0,
-    SPI0_TX = 0x01,
-    UART0_RTS = 0x02,
-    I2C1_SCL = 0x03,
-    PWM_B_1 = 0x04,
-    SIO_3 = 0x05,
-    PIO0_3 = 0x06,
-    PIO1_3 = 0x07,
+pub enum Gpio3CtrlFuncsel {
+    JtagTdo = 0x0,
+    Spi0Tx = 0x01,
+    Uart0Rts = 0x02,
+    I2c1Scl = 0x03,
+    PwmB1 = 0x04,
+    Sio3 = 0x05,
+    Pio03 = 0x06,
+    Pio13 = 0x07,
     _RESERVED_8 = 0x08,
-    USB_MUXING_OVERCURR_DETECT = 0x09,
+    UsbMuxingOvercurrDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -1390,11 +1390,11 @@ pub enum Gpio3ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio3ctrlFuncsel {
+impl Gpio3CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio3ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio3CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -1402,32 +1402,32 @@ impl Gpio3ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio3ctrlFuncsel {
+impl From<u8> for Gpio3CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio3ctrlFuncsel {
-        Gpio3ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio3CtrlFuncsel {
+        Gpio3CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio3ctrlFuncsel> for u8 {
+impl From<Gpio3CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio3ctrlFuncsel) -> u8 {
-        Gpio3ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio3CtrlFuncsel) -> u8 {
+        Gpio3CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio4ctrlFuncsel {
+pub enum Gpio4CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI0_RX = 0x01,
-    UART1_TX = 0x02,
-    I2C0_SDA = 0x03,
-    PWM_A_2 = 0x04,
-    SIO_4 = 0x05,
-    PIO0_4 = 0x06,
-    PIO1_4 = 0x07,
+    Spi0Rx = 0x01,
+    Uart1Tx = 0x02,
+    I2c0Sda = 0x03,
+    PwmA2 = 0x04,
+    Sio4 = 0x05,
+    Pio04 = 0x06,
+    Pio14 = 0x07,
     _RESERVED_8 = 0x08,
-    USB_MUXING_VBUS_DETECT = 0x09,
+    UsbMuxingVbusDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -1449,11 +1449,11 @@ pub enum Gpio4ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio4ctrlFuncsel {
+impl Gpio4CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio4ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio4CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -1461,32 +1461,32 @@ impl Gpio4ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio4ctrlFuncsel {
+impl From<u8> for Gpio4CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio4ctrlFuncsel {
-        Gpio4ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio4CtrlFuncsel {
+        Gpio4CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio4ctrlFuncsel> for u8 {
+impl From<Gpio4CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio4ctrlFuncsel) -> u8 {
-        Gpio4ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio4CtrlFuncsel) -> u8 {
+        Gpio4CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio5ctrlFuncsel {
+pub enum Gpio5CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI0_SS_N = 0x01,
-    UART1_RX = 0x02,
-    I2C0_SCL = 0x03,
-    PWM_B_2 = 0x04,
-    SIO_5 = 0x05,
-    PIO0_5 = 0x06,
-    PIO1_5 = 0x07,
+    Spi0SsN = 0x01,
+    Uart1Rx = 0x02,
+    I2c0Scl = 0x03,
+    PwmB2 = 0x04,
+    Sio5 = 0x05,
+    Pio05 = 0x06,
+    Pio15 = 0x07,
     _RESERVED_8 = 0x08,
-    USB_MUXING_VBUS_EN = 0x09,
+    UsbMuxingVbusEn = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -1508,11 +1508,11 @@ pub enum Gpio5ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio5ctrlFuncsel {
+impl Gpio5CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio5ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio5CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -1520,32 +1520,32 @@ impl Gpio5ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio5ctrlFuncsel {
+impl From<u8> for Gpio5CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio5ctrlFuncsel {
-        Gpio5ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio5CtrlFuncsel {
+        Gpio5CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio5ctrlFuncsel> for u8 {
+impl From<Gpio5CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio5ctrlFuncsel) -> u8 {
-        Gpio5ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio5CtrlFuncsel) -> u8 {
+        Gpio5CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio6ctrlFuncsel {
+pub enum Gpio6CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI0_SCLK = 0x01,
-    UART1_CTS = 0x02,
-    I2C1_SDA = 0x03,
-    PWM_A_3 = 0x04,
-    SIO_6 = 0x05,
-    PIO0_6 = 0x06,
-    PIO1_6 = 0x07,
-    USB_MUXING_EXTPHY_SOFTCON = 0x08,
-    USB_MUXING_OVERCURR_DETECT = 0x09,
+    Spi0Sclk = 0x01,
+    Uart1Cts = 0x02,
+    I2c1Sda = 0x03,
+    PwmA3 = 0x04,
+    Sio6 = 0x05,
+    Pio06 = 0x06,
+    Pio16 = 0x07,
+    UsbMuxingExtphySoftcon = 0x08,
+    UsbMuxingOvercurrDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -1567,11 +1567,11 @@ pub enum Gpio6ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio6ctrlFuncsel {
+impl Gpio6CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio6ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio6CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -1579,32 +1579,32 @@ impl Gpio6ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio6ctrlFuncsel {
+impl From<u8> for Gpio6CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio6ctrlFuncsel {
-        Gpio6ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio6CtrlFuncsel {
+        Gpio6CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio6ctrlFuncsel> for u8 {
+impl From<Gpio6CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio6ctrlFuncsel) -> u8 {
-        Gpio6ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio6CtrlFuncsel) -> u8 {
+        Gpio6CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio7ctrlFuncsel {
+pub enum Gpio7CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI0_TX = 0x01,
-    UART1_RTS = 0x02,
-    I2C1_SCL = 0x03,
-    PWM_B_3 = 0x04,
-    SIO_7 = 0x05,
-    PIO0_7 = 0x06,
-    PIO1_7 = 0x07,
-    USB_MUXING_EXTPHY_OE_N = 0x08,
-    USB_MUXING_VBUS_DETECT = 0x09,
+    Spi0Tx = 0x01,
+    Uart1Rts = 0x02,
+    I2c1Scl = 0x03,
+    PwmB3 = 0x04,
+    Sio7 = 0x05,
+    Pio07 = 0x06,
+    Pio17 = 0x07,
+    UsbMuxingExtphyOeN = 0x08,
+    UsbMuxingVbusDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -1626,11 +1626,11 @@ pub enum Gpio7ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio7ctrlFuncsel {
+impl Gpio7CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio7ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio7CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -1638,32 +1638,32 @@ impl Gpio7ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio7ctrlFuncsel {
+impl From<u8> for Gpio7CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio7ctrlFuncsel {
-        Gpio7ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio7CtrlFuncsel {
+        Gpio7CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio7ctrlFuncsel> for u8 {
+impl From<Gpio7CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio7ctrlFuncsel) -> u8 {
-        Gpio7ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio7CtrlFuncsel) -> u8 {
+        Gpio7CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio8ctrlFuncsel {
+pub enum Gpio8CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_RX = 0x01,
-    UART1_TX = 0x02,
-    I2C0_SDA = 0x03,
-    PWM_A_4 = 0x04,
-    SIO_8 = 0x05,
-    PIO0_8 = 0x06,
-    PIO1_8 = 0x07,
-    USB_MUXING_EXTPHY_RCV = 0x08,
-    USB_MUXING_VBUS_EN = 0x09,
+    Spi1Rx = 0x01,
+    Uart1Tx = 0x02,
+    I2c0Sda = 0x03,
+    PwmA4 = 0x04,
+    Sio8 = 0x05,
+    Pio08 = 0x06,
+    Pio18 = 0x07,
+    UsbMuxingExtphyRcv = 0x08,
+    UsbMuxingVbusEn = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -1685,11 +1685,11 @@ pub enum Gpio8ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio8ctrlFuncsel {
+impl Gpio8CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio8ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio8CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -1697,32 +1697,32 @@ impl Gpio8ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio8ctrlFuncsel {
+impl From<u8> for Gpio8CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio8ctrlFuncsel {
-        Gpio8ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio8CtrlFuncsel {
+        Gpio8CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio8ctrlFuncsel> for u8 {
+impl From<Gpio8CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio8ctrlFuncsel) -> u8 {
-        Gpio8ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio8CtrlFuncsel) -> u8 {
+        Gpio8CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Gpio9ctrlFuncsel {
+pub enum Gpio9CtrlFuncsel {
     _RESERVED_0 = 0x0,
-    SPI1_SS_N = 0x01,
-    UART1_RX = 0x02,
-    I2C0_SCL = 0x03,
-    PWM_B_4 = 0x04,
-    SIO_9 = 0x05,
-    PIO0_9 = 0x06,
-    PIO1_9 = 0x07,
-    USB_MUXING_EXTPHY_VP = 0x08,
-    USB_MUXING_OVERCURR_DETECT = 0x09,
+    Spi1SsN = 0x01,
+    Uart1Rx = 0x02,
+    I2c0Scl = 0x03,
+    PwmB4 = 0x04,
+    Sio9 = 0x05,
+    Pio09 = 0x06,
+    Pio19 = 0x07,
+    UsbMuxingExtphyVp = 0x08,
+    UsbMuxingOvercurrDetect = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
     _RESERVED_c = 0x0c,
@@ -1744,11 +1744,11 @@ pub enum Gpio9ctrlFuncsel {
     _RESERVED_1c = 0x1c,
     _RESERVED_1d = 0x1d,
     _RESERVED_1e = 0x1e,
-    NULL = 0x1f,
+    Null = 0x1f,
 }
-impl Gpio9ctrlFuncsel {
+impl Gpio9CtrlFuncsel {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Gpio9ctrlFuncsel {
+    pub const fn from_bits(val: u8) -> Gpio9CtrlFuncsel {
         unsafe { core::mem::transmute(val & 0x1f) }
     }
     #[inline(always)]
@@ -1756,30 +1756,30 @@ impl Gpio9ctrlFuncsel {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Gpio9ctrlFuncsel {
+impl From<u8> for Gpio9CtrlFuncsel {
     #[inline(always)]
-    fn from(val: u8) -> Gpio9ctrlFuncsel {
-        Gpio9ctrlFuncsel::from_bits(val)
+    fn from(val: u8) -> Gpio9CtrlFuncsel {
+        Gpio9CtrlFuncsel::from_bits(val)
     }
 }
-impl From<Gpio9ctrlFuncsel> for u8 {
+impl From<Gpio9CtrlFuncsel> for u8 {
     #[inline(always)]
-    fn from(val: Gpio9ctrlFuncsel) -> u8 {
-        Gpio9ctrlFuncsel::to_bits(val)
+    fn from(val: Gpio9CtrlFuncsel) -> u8 {
+        Gpio9CtrlFuncsel::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Inover {
-    #[doc = "don't invert the peri input"]
-    NORMAL = 0x0,
-    #[doc = "invert the peri input"]
-    INVERT = 0x01,
-    #[doc = "drive peri input low"]
-    LOW = 0x02,
-    #[doc = "drive peri input high"]
-    HIGH = 0x03,
+    #[doc = "don't invert the peri input."]
+    Normal = 0x0,
+    #[doc = "invert the peri input."]
+    Invert = 0x01,
+    #[doc = "drive peri input low."]
+    Low = 0x02,
+    #[doc = "drive peri input high."]
+    High = 0x03,
 }
 impl Inover {
     #[inline(always)]
@@ -1807,14 +1807,14 @@ impl From<Inover> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Irqover {
-    #[doc = "don't invert the interrupt"]
-    NORMAL = 0x0,
-    #[doc = "invert the interrupt"]
-    INVERT = 0x01,
-    #[doc = "drive interrupt low"]
-    LOW = 0x02,
-    #[doc = "drive interrupt high"]
-    HIGH = 0x03,
+    #[doc = "don't invert the interrupt."]
+    Normal = 0x0,
+    #[doc = "invert the interrupt."]
+    Invert = 0x01,
+    #[doc = "drive interrupt low."]
+    Low = 0x02,
+    #[doc = "drive interrupt high."]
+    High = 0x03,
 }
 impl Irqover {
     #[inline(always)]
@@ -1842,14 +1842,14 @@ impl From<Irqover> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Oeover {
-    #[doc = "drive output enable from peripheral signal selected by funcsel"]
-    NORMAL = 0x0,
-    #[doc = "drive output enable from inverse of peripheral signal selected by funcsel"]
-    INVERT = 0x01,
-    #[doc = "disable output"]
-    DISABLE = 0x02,
-    #[doc = "enable output"]
-    ENABLE = 0x03,
+    #[doc = "drive output enable from peripheral signal selected by funcsel."]
+    Normal = 0x0,
+    #[doc = "drive output enable from inverse of peripheral signal selected by funcsel."]
+    Invert = 0x01,
+    #[doc = "disable output."]
+    Disable = 0x02,
+    #[doc = "enable output."]
+    Enable = 0x03,
 }
 impl Oeover {
     #[inline(always)]
@@ -1877,14 +1877,14 @@ impl From<Oeover> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Outover {
-    #[doc = "drive output from peripheral signal selected by funcsel"]
-    NORMAL = 0x0,
-    #[doc = "drive output from inverse of peripheral signal selected by funcsel"]
-    INVERT = 0x01,
-    #[doc = "drive output low"]
-    LOW = 0x02,
-    #[doc = "drive output high"]
-    HIGH = 0x03,
+    #[doc = "drive output from peripheral signal selected by funcsel."]
+    Normal = 0x0,
+    #[doc = "drive output from inverse of peripheral signal selected by funcsel."]
+    Invert = 0x01,
+    #[doc = "drive output low."]
+    Low = 0x02,
+    #[doc = "drive output high."]
+    High = 0x03,
 }
 impl Outover {
     #[inline(always)]

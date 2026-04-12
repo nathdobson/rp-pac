@@ -1,4 +1,4 @@
-#[doc = "Read from the QMI direct-mode RX FIFO (fast bus access to QMI_DIRECT_RX)"]
+#[doc = "Read from the QMI direct-mode RX FIFO (fast bus access to QMI_DIRECT_RX)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct QmiDirectRx(pub u32);
@@ -39,7 +39,7 @@ impl defmt::Format for QmiDirectRx {
         )
     }
 }
-#[doc = "Write to the QMI direct-mode TX FIFO (fast bus access to QMI_DIRECT_TX)"]
+#[doc = "Write to the QMI direct-mode TX FIFO (fast bus access to QMI_DIRECT_TX)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct QmiDirectTx(pub u32);

@@ -1,4 +1,4 @@
-#[doc = "QSPI flash execute-in-place block"]
+#[doc = "QSPI flash execute-in-place block."]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct XipCtrl {
     ptr: *mut u8,
@@ -14,45 +14,45 @@ impl XipCtrl {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Cache control"]
+    #[doc = "Cache control."]
     #[inline(always)]
     pub const fn ctrl(self) -> crate::common::Reg<regs::Ctrl, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
     }
-    #[doc = "Cache Flush control"]
+    #[doc = "Cache Flush control."]
     #[inline(always)]
     pub const fn flush(self) -> crate::common::Reg<regs::Flush, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
     }
-    #[doc = "Cache Status"]
+    #[doc = "Cache Status."]
     #[inline(always)]
     pub const fn stat(self) -> crate::common::Reg<regs::Stat, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
     }
-    #[doc = "Cache Hit counter"]
+    #[doc = "Cache Hit counter."]
     #[inline(always)]
     pub const fn ctr_hit(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0cusize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
     }
-    #[doc = "Cache Access counter"]
+    #[doc = "Cache Access counter."]
     #[inline(always)]
     pub const fn ctr_acc(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x10usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
     }
-    #[doc = "FIFO stream address"]
+    #[doc = "FIFO stream address."]
     #[inline(always)]
     pub const fn stream_addr(self) -> crate::common::Reg<regs::StreamAddr, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x14usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
     }
-    #[doc = "FIFO stream control"]
+    #[doc = "FIFO stream control."]
     #[inline(always)]
     pub const fn stream_ctr(self) -> crate::common::Reg<regs::StreamCtr, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x18usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x18usize) as _) }
     }
-    #[doc = "FIFO stream data"]
+    #[doc = "FIFO stream data."]
     #[inline(always)]
     pub const fn stream_fifo(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x1cusize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
     }
 }
 pub mod regs;

@@ -3,12 +3,12 @@
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Speed {
     _RESERVED_0 = 0x0,
-    #[doc = "Standard Speed mode of operation"]
-    STANDARD = 0x01,
-    #[doc = "Fast or Fast Plus mode of operation"]
-    FAST = 0x02,
-    #[doc = "High Speed mode of operation"]
-    HIGH = 0x03,
+    #[doc = "Standard Speed mode of operation."]
+    Standard = 0x01,
+    #[doc = "Fast or Fast Plus mode of operation."]
+    Fast = 0x02,
+    #[doc = "High Speed mode of operation."]
+    High = 0x03,
 }
 impl Speed {
     #[inline(always)]

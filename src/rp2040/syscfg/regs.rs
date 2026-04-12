@@ -1,4 +1,4 @@
-#[doc = "Directly control the SWD debug port of either processor"]
+#[doc = "Directly control the SWD debug port of either processor."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Dbgforce(pub u32);
@@ -15,26 +15,26 @@ impl Dbgforce {
     pub const fn set_proc0_swdo(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Directly drive processor 0 SWDIO input, if PROC0_ATTACH is set"]
+    #[doc = "Directly drive processor 0 SWDIO input, if PROC0_ATTACH is set."]
     #[must_use]
     #[inline(always)]
     pub const fn proc0_swdi(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Directly drive processor 0 SWDIO input, if PROC0_ATTACH is set"]
+    #[doc = "Directly drive processor 0 SWDIO input, if PROC0_ATTACH is set."]
     #[inline(always)]
     pub const fn set_proc0_swdi(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Directly drive processor 0 SWCLK, if PROC0_ATTACH is set"]
+    #[doc = "Directly drive processor 0 SWCLK, if PROC0_ATTACH is set."]
     #[must_use]
     #[inline(always)]
     pub const fn proc0_swclk(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "Directly drive processor 0 SWCLK, if PROC0_ATTACH is set"]
+    #[doc = "Directly drive processor 0 SWCLK, if PROC0_ATTACH is set."]
     #[inline(always)]
     pub const fn set_proc0_swclk(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
@@ -63,26 +63,26 @@ impl Dbgforce {
     pub const fn set_proc1_swdo(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "Directly drive processor 1 SWDIO input, if PROC1_ATTACH is set"]
+    #[doc = "Directly drive processor 1 SWDIO input, if PROC1_ATTACH is set."]
     #[must_use]
     #[inline(always)]
     pub const fn proc1_swdi(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
-    #[doc = "Directly drive processor 1 SWDIO input, if PROC1_ATTACH is set"]
+    #[doc = "Directly drive processor 1 SWDIO input, if PROC1_ATTACH is set."]
     #[inline(always)]
     pub const fn set_proc1_swdi(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
-    #[doc = "Directly drive processor 1 SWCLK, if PROC1_ATTACH is set"]
+    #[doc = "Directly drive processor 1 SWCLK, if PROC1_ATTACH is set."]
     #[must_use]
     #[inline(always)]
     pub const fn proc1_swclk(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
-    #[doc = "Directly drive processor 1 SWCLK, if PROC1_ATTACH is set"]
+    #[doc = "Directly drive processor 1 SWCLK, if PROC1_ATTACH is set."]
     #[inline(always)]
     pub const fn set_proc1_swclk(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
@@ -126,7 +126,7 @@ impl defmt::Format for Dbgforce {
         defmt :: write ! (f , "Dbgforce {{ proc0_swdo: {=bool:?}, proc0_swdi: {=bool:?}, proc0_swclk: {=bool:?}, proc0_attach: {=bool:?}, proc1_swdo: {=bool:?}, proc1_swdi: {=bool:?}, proc1_swclk: {=bool:?}, proc1_attach: {=bool:?} }}" , self . proc0_swdo () , self . proc0_swdi () , self . proc0_swclk () , self . proc0_attach () , self . proc1_swdo () , self . proc1_swdi () , self . proc1_swclk () , self . proc1_attach ())
     }
 }
-#[doc = "Control power downs to memories. Set high to power down memories. Use with extreme caution"]
+#[doc = "Control power downs to memories. Set high to power down memories. Use with extreme caution."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Mempowerdown(pub u32);
@@ -238,55 +238,55 @@ impl defmt::Format for Mempowerdown {
         defmt :: write ! (f , "Mempowerdown {{ sram0: {=bool:?}, sram1: {=bool:?}, sram2: {=bool:?}, sram3: {=bool:?}, sram4: {=bool:?}, sram5: {=bool:?}, usb: {=bool:?}, rom: {=bool:?} }}" , self . sram0 () , self . sram1 () , self . sram2 () , self . sram3 () , self . sram4 () , self . sram5 () , self . usb () , self . rom ())
     }
 }
-#[doc = "Configuration for processors"]
+#[doc = "Configuration for processors."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ProcConfig(pub u32);
 impl ProcConfig {
-    #[doc = "Indication that proc0 has halted"]
+    #[doc = "Indication that proc0 has halted."]
     #[must_use]
     #[inline(always)]
     pub const fn proc0_halted(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Indication that proc0 has halted"]
+    #[doc = "Indication that proc0 has halted."]
     #[inline(always)]
     pub const fn set_proc0_halted(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Indication that proc1 has halted"]
+    #[doc = "Indication that proc1 has halted."]
     #[must_use]
     #[inline(always)]
     pub const fn proc1_halted(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Indication that proc1 has halted"]
+    #[doc = "Indication that proc1 has halted."]
     #[inline(always)]
     pub const fn set_proc1_halted(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Configure proc0 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
+    #[doc = "Configure proc0 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP."]
     #[must_use]
     #[inline(always)]
     pub const fn proc0_dap_instid(&self) -> u8 {
         let val = (self.0 >> 24usize) & 0x0f;
         val as u8
     }
-    #[doc = "Configure proc0 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
+    #[doc = "Configure proc0 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP."]
     #[inline(always)]
     pub const fn set_proc0_dap_instid(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 24usize)) | (((val as u32) & 0x0f) << 24usize);
     }
-    #[doc = "Configure proc1 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
+    #[doc = "Configure proc1 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP."]
     #[must_use]
     #[inline(always)]
     pub const fn proc1_dap_instid(&self) -> u8 {
         let val = (self.0 >> 28usize) & 0x0f;
         val as u8
     }
-    #[doc = "Configure proc1 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP"]
+    #[doc = "Configure proc1 DAP instance ID. Recommend that this is NOT changed until you require debug access in multi-chip environment WARNING: do not set to 15 as this is reserved for RescueDP."]
     #[inline(always)]
     pub const fn set_proc1_dap_instid(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 28usize)) | (((val as u32) & 0x0f) << 28usize);

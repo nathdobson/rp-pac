@@ -1,4 +1,4 @@
-#[doc = "Coresight block - RP specific registers"]
+#[doc = "Coresight block - RP specific registers."]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct CoresightTrace {
     ptr: *mut u8,
@@ -14,15 +14,15 @@ impl CoresightTrace {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Control and status register"]
+    #[doc = "Control and status register."]
     #[inline(always)]
     pub const fn ctrl_status(self) -> crate::common::Reg<regs::CtrlStatus, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
     }
-    #[doc = "FIFO for trace data captured from the TPIU"]
+    #[doc = "FIFO for trace data captured from the TPIU."]
     #[inline(always)]
     pub const fn trace_capture_fifo(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
     }
 }
 pub mod regs;

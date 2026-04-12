@@ -2,8 +2,8 @@
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum ClkSys {
-    TICK = 0x0,
-    CLK_SYS = 0x01,
+    Tick = 0x0,
+    ClkSys = 0x01,
 }
 impl ClkSys {
     #[inline(always)]

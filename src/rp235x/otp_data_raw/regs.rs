@@ -1,4 +1,4 @@
-#[doc = "Disable/Enable boot paths/features in the RP2350 mask ROM. Disables always supersede enables. Enables are provided where there are other configurations in OTP that must be valid. (RBIT-3)"]
+#[doc = "Disable/Enable boot paths/features in the RP2350 mask ROM. Disables always supersede enables. Enables are provided where there are other configurations in OTP that must be valid. (RBIT-3)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct BootFlags0(pub u32);
@@ -13,14 +13,14 @@ impl BootFlags0 {
     pub const fn set_disable_bootsel_exec2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Enable bootloader activity LED. If set, bootsel_led_cfg is assumed to be valid"]
+    #[doc = "Enable bootloader activity LED. If set, bootsel_led_cfg is assumed to be valid."]
     #[must_use]
     #[inline(always)]
     pub const fn enable_bootsel_led(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Enable bootloader activity LED. If set, bootsel_led_cfg is assumed to be valid"]
+    #[doc = "Enable bootloader activity LED. If set, bootsel_led_cfg is assumed to be valid."]
     #[inline(always)]
     pub const fn set_enable_bootsel_led(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
@@ -37,26 +37,26 @@ impl BootFlags0 {
     pub const fn set_enable_bootsel_non_default_pll_xosc_cfg(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "If 1, configure the QSPI pads for 1.8 V operation when accessing flash for the first time from the bootrom, using the VOLTAGE_SELECT register for the QSPI pads bank. This slightly improves the input timing of the pads at low voltages, but does not affect their output characteristics. If 0, leave VOLTAGE_SELECT in its reset state (suitable for operation at and above 2.5 V)"]
+    #[doc = "If 1, configure the QSPI pads for 1.8 V operation when accessing flash for the first time from the bootrom, using the VOLTAGE_SELECT register for the QSPI pads bank. This slightly improves the input timing of the pads at low voltages, but does not affect their output characteristics. If 0, leave VOLTAGE_SELECT in its reset state (suitable for operation at and above 2.5 V)."]
     #[must_use]
     #[inline(always)]
     pub const fn flash_io_voltage_1v8(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
-    #[doc = "If 1, configure the QSPI pads for 1.8 V operation when accessing flash for the first time from the bootrom, using the VOLTAGE_SELECT register for the QSPI pads bank. This slightly improves the input timing of the pads at low voltages, but does not affect their output characteristics. If 0, leave VOLTAGE_SELECT in its reset state (suitable for operation at and above 2.5 V)"]
+    #[doc = "If 1, configure the QSPI pads for 1.8 V operation when accessing flash for the first time from the bootrom, using the VOLTAGE_SELECT register for the QSPI pads bank. This slightly improves the input timing of the pads at low voltages, but does not affect their output characteristics. If 0, leave VOLTAGE_SELECT in its reset state (suitable for operation at and above 2.5 V)."]
     #[inline(always)]
     pub const fn set_flash_io_voltage_1v8(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
-    #[doc = "Enable quartering of ROSC divisor during signature check, to reduce secure boot time"]
+    #[doc = "Enable quartering of ROSC divisor during signature check, to reduce secure boot time."]
     #[must_use]
     #[inline(always)]
     pub const fn fast_sigcheck_rosc_div(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "Enable quartering of ROSC divisor during signature check, to reduce secure boot time"]
+    #[doc = "Enable quartering of ROSC divisor during signature check, to reduce secure boot time."]
     #[inline(always)]
     pub const fn set_fast_sigcheck_rosc_div(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
@@ -73,62 +73,62 @@ impl BootFlags0 {
     pub const fn set_flash_devinfo_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
-    #[doc = "Override the limit for default flash metadata scanning. The value is specified in FLASH_PARTITION_SLOT_SIZE. Make sure FLASH_PARTITION_SLOT_SIZE is valid before setting this bit"]
+    #[doc = "Override the limit for default flash metadata scanning. The value is specified in FLASH_PARTITION_SLOT_SIZE. Make sure FLASH_PARTITION_SLOT_SIZE is valid before setting this bit."]
     #[must_use]
     #[inline(always)]
     pub const fn override_flash_partition_slot_size(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
-    #[doc = "Override the limit for default flash metadata scanning. The value is specified in FLASH_PARTITION_SLOT_SIZE. Make sure FLASH_PARTITION_SLOT_SIZE is valid before setting this bit"]
+    #[doc = "Override the limit for default flash metadata scanning. The value is specified in FLASH_PARTITION_SLOT_SIZE. Make sure FLASH_PARTITION_SLOT_SIZE is valid before setting this bit."]
     #[inline(always)]
     pub const fn set_override_flash_partition_slot_size(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
-    #[doc = "Restrict flash boot path to use of a single binary at the start of flash"]
+    #[doc = "Restrict flash boot path to use of a single binary at the start of flash."]
     #[must_use]
     #[inline(always)]
     pub const fn single_flash_binary(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
-    #[doc = "Restrict flash boot path to use of a single binary at the start of flash"]
+    #[doc = "Restrict flash boot path to use of a single binary at the start of flash."]
     #[inline(always)]
     pub const fn set_single_flash_binary(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
-    #[doc = "Disable auto-switch of CPU architecture on boot when the (only) binary to be booted is for the other Arm/RISC-V architecture and both architectures are enabled"]
+    #[doc = "Disable auto-switch of CPU architecture on boot when the (only) binary to be booted is for the other Arm/RISC-V architecture and both architectures are enabled."]
     #[must_use]
     #[inline(always)]
     pub const fn disable_auto_switch_arch(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "Disable auto-switch of CPU architecture on boot when the (only) binary to be booted is for the other Arm/RISC-V architecture and both architectures are enabled"]
+    #[doc = "Disable auto-switch of CPU architecture on boot when the (only) binary to be booted is for the other Arm/RISC-V architecture and both architectures are enabled."]
     #[inline(always)]
     pub const fn set_disable_auto_switch_arch(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "Require a partition table to be signed"]
+    #[doc = "Require a partition table to be signed."]
     #[must_use]
     #[inline(always)]
     pub const fn secure_partition_table(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
-    #[doc = "Require a partition table to be signed"]
+    #[doc = "Require a partition table to be signed."]
     #[inline(always)]
     pub const fn set_secure_partition_table(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
-    #[doc = "Require a partition table to be hashed (if not signed)"]
+    #[doc = "Require a partition table to be hashed (if not signed)."]
     #[must_use]
     #[inline(always)]
     pub const fn hashed_partition_table(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "Require a partition table to be hashed (if not signed)"]
+    #[doc = "Require a partition table to be hashed (if not signed)."]
     #[inline(always)]
     pub const fn set_hashed_partition_table(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
@@ -310,7 +310,7 @@ impl defmt::Format for BootFlags0 {
         defmt :: write ! (f , "BootFlags0 {{ disable_bootsel_exec2: {=bool:?}, enable_bootsel_led: {=bool:?}, enable_bootsel_non_default_pll_xosc_cfg: {=bool:?}, flash_io_voltage_1v8: {=bool:?}, fast_sigcheck_rosc_div: {=bool:?}, flash_devinfo_enable: {=bool:?}, override_flash_partition_slot_size: {=bool:?}, single_flash_binary: {=bool:?}, disable_auto_switch_arch: {=bool:?}, secure_partition_table: {=bool:?}, hashed_partition_table: {=bool:?}, rollback_required: {=bool:?}, disable_flash_boot: {=bool:?}, disable_otp_boot: {=bool:?}, enable_otp_boot: {=bool:?}, disable_power_scratch: {=bool:?}, disable_watchdog_scratch: {=bool:?}, disable_bootsel_usb_msd_ifc: {=bool:?}, disable_bootsel_usb_picoboot_ifc: {=bool:?}, disable_bootsel_uart_boot: {=bool:?}, disable_xip_access_on_sram_entry: {=bool:?}, disable_sram_window_boot: {=bool:?} }}" , self . disable_bootsel_exec2 () , self . enable_bootsel_led () , self . enable_bootsel_non_default_pll_xosc_cfg () , self . flash_io_voltage_1v8 () , self . fast_sigcheck_rosc_div () , self . flash_devinfo_enable () , self . override_flash_partition_slot_size () , self . single_flash_binary () , self . disable_auto_switch_arch () , self . secure_partition_table () , self . hashed_partition_table () , self . rollback_required () , self . disable_flash_boot () , self . disable_otp_boot () , self . enable_otp_boot () , self . disable_power_scratch () , self . disable_watchdog_scratch () , self . disable_bootsel_usb_msd_ifc () , self . disable_bootsel_usb_picoboot_ifc () , self . disable_bootsel_uart_boot () , self . disable_xip_access_on_sram_entry () , self . disable_sram_window_boot ())
     }
 }
-#[doc = "Disable/Enable boot paths/features in the RP2350 mask ROM. Disables always supersede enables. Enables are provided where there are other configurations in OTP that must be valid. (RBIT-3)"]
+#[doc = "Disable/Enable boot paths/features in the RP2350 mask ROM. Disables always supersede enables. Enables are provided where there are other configurations in OTP that must be valid. (RBIT-3)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct BootFlags1(pub u32);
@@ -403,14 +403,14 @@ impl BootselLedCfg {
     pub const fn set_pin(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
     }
-    #[doc = "LED is active-low. (Default: active-high.)"]
+    #[doc = "LED is active-low. (Default: active-high.)."]
     #[must_use]
     #[inline(always)]
     pub const fn activelow(&self) -> u16 {
         let val = (self.0 >> 8usize) & 0xffff;
         val as u16
     }
-    #[doc = "LED is active-low. (Default: active-high.)"]
+    #[doc = "LED is active-low. (Default: active-high.)."]
     #[inline(always)]
     pub const fn set_activelow(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 8usize)) | (((val as u32) & 0xffff) << 8usize);
@@ -482,14 +482,14 @@ impl BootselPllCfg {
     pub const fn set_postdiv2(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 12usize)) | (((val as u32) & 0x07) << 12usize);
     }
-    #[doc = "PLL reference divisor, minus one. Programming a value of 0 means a reference divisor of 1. Programming a value of 1 means a reference divisor of 2 (for exceptionally fast XIN inputs)"]
+    #[doc = "PLL reference divisor, minus one. Programming a value of 0 means a reference divisor of 1. Programming a value of 1 means a reference divisor of 2 (for exceptionally fast XIN inputs)."]
     #[must_use]
     #[inline(always)]
     pub const fn refdiv(&self) -> u16 {
         let val = (self.0 >> 15usize) & 0x01ff;
         val as u16
     }
-    #[doc = "PLL reference divisor, minus one. Programming a value of 0 means a reference divisor of 1. Programming a value of 1 means a reference divisor of 2 (for exceptionally fast XIN inputs)"]
+    #[doc = "PLL reference divisor, minus one. Programming a value of 0 means a reference divisor of 1. Programming a value of 1 means a reference divisor of 2 (for exceptionally fast XIN inputs)."]
     #[inline(always)]
     pub const fn set_refdiv(&mut self, val: u16) {
         self.0 = (self.0 & !(0x01ff << 15usize)) | (((val as u32) & 0x01ff) << 15usize);
@@ -522,14 +522,14 @@ impl defmt::Format for BootselPllCfg {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct BootselXoscCfg(pub u32);
 impl BootselXoscCfg {
-    #[doc = "Value of the XOSC_STARTUP register"]
+    #[doc = "Value of the XOSC_STARTUP register."]
     #[must_use]
     #[inline(always)]
     pub const fn startup(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x3fff;
         val as u16
     }
-    #[doc = "Value of the XOSC_STARTUP register"]
+    #[doc = "Value of the XOSC_STARTUP register."]
     #[inline(always)]
     pub const fn set_startup(&mut self, val: u16) {
         self.0 = (self.0 & !(0x3fff << 0usize)) | (((val as u32) & 0x3fff) << 0usize);
@@ -572,31 +572,31 @@ impl defmt::Format for BootselXoscCfg {
         )
     }
 }
-#[doc = "Page 0 critical boot flags (RBIT-8)"]
+#[doc = "Page 0 critical boot flags (RBIT-8)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Crit0(pub u32);
 impl Crit0 {
-    #[doc = "Permanently disable ARM processors (Cortex-M33)"]
+    #[doc = "Permanently disable ARM processors (Cortex-M33)."]
     #[must_use]
     #[inline(always)]
     pub const fn arm_disable(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Permanently disable ARM processors (Cortex-M33)"]
+    #[doc = "Permanently disable ARM processors (Cortex-M33)."]
     #[inline(always)]
     pub const fn set_arm_disable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Permanently disable RISC-V processors (Hazard3)"]
+    #[doc = "Permanently disable RISC-V processors (Hazard3)."]
     #[must_use]
     #[inline(always)]
     pub const fn riscv_disable(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Permanently disable RISC-V processors (Hazard3)"]
+    #[doc = "Permanently disable RISC-V processors (Hazard3)."]
     #[inline(always)]
     pub const fn set_riscv_disable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
@@ -627,7 +627,7 @@ impl defmt::Format for Crit0 {
         )
     }
 }
-#[doc = "Page 1 critical boot flags (RBIT-8)"]
+#[doc = "Page 1 critical boot flags (RBIT-8)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Crit1(pub u32);
@@ -644,26 +644,26 @@ impl Crit1 {
     pub const fn set_secure_boot_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Disable Secure debug access"]
+    #[doc = "Disable Secure debug access."]
     #[must_use]
     #[inline(always)]
     pub const fn secure_debug_disable(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Disable Secure debug access"]
+    #[doc = "Disable Secure debug access."]
     #[inline(always)]
     pub const fn set_secure_debug_disable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Disable all debug access"]
+    #[doc = "Disable all debug access."]
     #[must_use]
     #[inline(always)]
     pub const fn debug_disable(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "Disable all debug access"]
+    #[doc = "Disable all debug access."]
     #[inline(always)]
     pub const fn set_debug_disable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
@@ -761,25 +761,25 @@ impl FlashDevinfo {
     #[doc = "The size of the flash/PSRAM device on chip select 0 (addressable at 0x10000000 through 0x10ffffff). A value of zero is decoded as a size of zero (no device). Nonzero values are decoded as 4kiB << CS0_SIZE. For example, four megabytes is encoded with a CS0_SIZE value of 10, and 16 megabytes is encoded with a CS0_SIZE value of 12. When BOOT_FLAGS0_FLASH_DEVINFO_ENABLE is not set, a default of 12 (16 MiB) is used."]
     #[must_use]
     #[inline(always)]
-    pub const fn cs0_size(&self) -> super::vals::Cs0size {
+    pub const fn cs0_size(&self) -> super::vals::Cs0Size {
         let val = (self.0 >> 8usize) & 0x0f;
-        super::vals::Cs0size::from_bits(val as u8)
+        super::vals::Cs0Size::from_bits(val as u8)
     }
     #[doc = "The size of the flash/PSRAM device on chip select 0 (addressable at 0x10000000 through 0x10ffffff). A value of zero is decoded as a size of zero (no device). Nonzero values are decoded as 4kiB << CS0_SIZE. For example, four megabytes is encoded with a CS0_SIZE value of 10, and 16 megabytes is encoded with a CS0_SIZE value of 12. When BOOT_FLAGS0_FLASH_DEVINFO_ENABLE is not set, a default of 12 (16 MiB) is used."]
     #[inline(always)]
-    pub const fn set_cs0_size(&mut self, val: super::vals::Cs0size) {
+    pub const fn set_cs0_size(&mut self, val: super::vals::Cs0Size) {
         self.0 = (self.0 & !(0x0f << 8usize)) | (((val.to_bits() as u32) & 0x0f) << 8usize);
     }
     #[doc = "The size of the flash/PSRAM device on chip select 1 (addressable at 0x11000000 through 0x11ffffff). A value of zero is decoded as a size of zero (no device). Nonzero values are decoded as 4kiB << CS1_SIZE. For example, four megabytes is encoded with a CS1_SIZE value of 10, and 16 megabytes is encoded with a CS1_SIZE value of 12. When BOOT_FLAGS0_FLASH_DEVINFO_ENABLE is not set, a default of zero is used."]
     #[must_use]
     #[inline(always)]
-    pub const fn cs1_size(&self) -> super::vals::Cs1size {
+    pub const fn cs1_size(&self) -> super::vals::Cs1Size {
         let val = (self.0 >> 12usize) & 0x0fff;
-        super::vals::Cs1size::from_bits(val as u16)
+        super::vals::Cs1Size::from_bits(val as u16)
     }
     #[doc = "The size of the flash/PSRAM device on chip select 1 (addressable at 0x11000000 through 0x11ffffff). A value of zero is decoded as a size of zero (no device). Nonzero values are decoded as 4kiB << CS1_SIZE. For example, four megabytes is encoded with a CS1_SIZE value of 10, and 16 megabytes is encoded with a CS1_SIZE value of 12. When BOOT_FLAGS0_FLASH_DEVINFO_ENABLE is not set, a default of zero is used."]
     #[inline(always)]
-    pub const fn set_cs1_size(&mut self, val: super::vals::Cs1size) {
+    pub const fn set_cs1_size(&mut self, val: super::vals::Cs1Size) {
         self.0 = (self.0 & !(0x0fff << 12usize)) | (((val.to_bits() as u32) & 0x0fff) << 12usize);
     }
 }
@@ -820,26 +820,26 @@ impl KeyValid {
     pub const fn set_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Redundant copy of VALID, with 3-way majority vote"]
+    #[doc = "Redundant copy of VALID, with 3-way majority vote."]
     #[must_use]
     #[inline(always)]
     pub const fn valid_r1(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "Redundant copy of VALID, with 3-way majority vote"]
+    #[doc = "Redundant copy of VALID, with 3-way majority vote."]
     #[inline(always)]
     pub const fn set_valid_r1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "Redundant copy of VALID, with 3-way majority vote"]
+    #[doc = "Redundant copy of VALID, with 3-way majority vote."]
     #[must_use]
     #[inline(always)]
     pub const fn valid_r2(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "Redundant copy of VALID, with 3-way majority vote"]
+    #[doc = "Redundant copy of VALID, with 3-way majority vote."]
     #[inline(always)]
     pub const fn set_valid_r2(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
@@ -925,26 +925,26 @@ impl PageLock0 {
     pub const fn set_rma(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
-    #[doc = "Redundant copy of bits 7:0"]
+    #[doc = "Redundant copy of bits 7:0."]
     #[must_use]
     #[inline(always)]
     pub const fn r1(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0xff;
         val as u8
     }
-    #[doc = "Redundant copy of bits 7:0"]
+    #[doc = "Redundant copy of bits 7:0."]
     #[inline(always)]
     pub const fn set_r1(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
     }
-    #[doc = "Redundant copy of bits 7:0"]
+    #[doc = "Redundant copy of bits 7:0."]
     #[must_use]
     #[inline(always)]
     pub const fn r2(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0xff;
         val as u8
     }
-    #[doc = "Redundant copy of bits 7:0"]
+    #[doc = "Redundant copy of bits 7:0."]
     #[inline(always)]
     pub const fn set_r2(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
@@ -1015,26 +1015,26 @@ impl PageLock1 {
     pub const fn set_lock_bl(&mut self, val: super::vals::PageLock) {
         self.0 = (self.0 & !(0x03 << 4usize)) | (((val.to_bits() as u32) & 0x03) << 4usize);
     }
-    #[doc = "Redundant copy of bits 7:0"]
+    #[doc = "Redundant copy of bits 7:0."]
     #[must_use]
     #[inline(always)]
     pub const fn r1(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0xff;
         val as u8
     }
-    #[doc = "Redundant copy of bits 7:0"]
+    #[doc = "Redundant copy of bits 7:0."]
     #[inline(always)]
     pub const fn set_r1(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
     }
-    #[doc = "Redundant copy of bits 7:0"]
+    #[doc = "Redundant copy of bits 7:0."]
     #[must_use]
     #[inline(always)]
     pub const fn r2(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0xff;
         val as u8
     }
-    #[doc = "Redundant copy of bits 7:0"]
+    #[doc = "Redundant copy of bits 7:0."]
     #[inline(always)]
     pub const fn set_r2(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
@@ -1071,211 +1071,211 @@ impl defmt::Format for PageLock1 {
         )
     }
 }
-#[doc = "USB boot specific feature flags (RBIT-3)"]
+#[doc = "USB boot specific feature flags (RBIT-3)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct UsbBootFlags(pub u32);
 impl UsbBootFlags {
-    #[doc = "valid flag for USB_DEVICE_VID_VALUE entry of the USB_WHITE_LABEL struct (index 0)"]
+    #[doc = "valid flag for USB_DEVICE_VID_VALUE entry of the USB_WHITE_LABEL struct (index 0)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_usb_device_vid_value_valid(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for USB_DEVICE_VID_VALUE entry of the USB_WHITE_LABEL struct (index 0)"]
+    #[doc = "valid flag for USB_DEVICE_VID_VALUE entry of the USB_WHITE_LABEL struct (index 0)."]
     #[inline(always)]
     pub const fn set_wl_usb_device_vid_value_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "valid flag for USB_DEVICE_PID_VALUE entry of the USB_WHITE_LABEL struct (index 1)"]
+    #[doc = "valid flag for USB_DEVICE_PID_VALUE entry of the USB_WHITE_LABEL struct (index 1)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_usb_device_pid_value_valid(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for USB_DEVICE_PID_VALUE entry of the USB_WHITE_LABEL struct (index 1)"]
+    #[doc = "valid flag for USB_DEVICE_PID_VALUE entry of the USB_WHITE_LABEL struct (index 1)."]
     #[inline(always)]
     pub const fn set_wl_usb_device_pid_value_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "valid flag for USB_DEVICE_BCD_DEVICEVALUE entry of the USB_WHITE_LABEL struct (index 2)"]
+    #[doc = "valid flag for USB_DEVICE_BCD_DEVICEVALUE entry of the USB_WHITE_LABEL struct (index 2)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_usb_device_serial_number_value_valid(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for USB_DEVICE_BCD_DEVICEVALUE entry of the USB_WHITE_LABEL struct (index 2)"]
+    #[doc = "valid flag for USB_DEVICE_BCD_DEVICEVALUE entry of the USB_WHITE_LABEL struct (index 2)."]
     #[inline(always)]
     pub const fn set_wl_usb_device_serial_number_value_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "valid flag for USB_DEVICE_LANG_ID_VALUE entry of the USB_WHITE_LABEL struct (index 3)"]
+    #[doc = "valid flag for USB_DEVICE_LANG_ID_VALUE entry of the USB_WHITE_LABEL struct (index 3)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_usb_device_lang_id_value_valid(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for USB_DEVICE_LANG_ID_VALUE entry of the USB_WHITE_LABEL struct (index 3)"]
+    #[doc = "valid flag for USB_DEVICE_LANG_ID_VALUE entry of the USB_WHITE_LABEL struct (index 3)."]
     #[inline(always)]
     pub const fn set_wl_usb_device_lang_id_value_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
-    #[doc = "valid flag for USB_DEVICE_MANUFACTURER_STRDEF entry of the USB_WHITE_LABEL struct (index 4)"]
+    #[doc = "valid flag for USB_DEVICE_MANUFACTURER_STRDEF entry of the USB_WHITE_LABEL struct (index 4)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_usb_device_manufacturer_strdef_valid(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for USB_DEVICE_MANUFACTURER_STRDEF entry of the USB_WHITE_LABEL struct (index 4)"]
+    #[doc = "valid flag for USB_DEVICE_MANUFACTURER_STRDEF entry of the USB_WHITE_LABEL struct (index 4)."]
     #[inline(always)]
     pub const fn set_wl_usb_device_manufacturer_strdef_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "valid flag for USB_DEVICE_PRODUCT_STRDEF entry of the USB_WHITE_LABEL struct (index 5)"]
+    #[doc = "valid flag for USB_DEVICE_PRODUCT_STRDEF entry of the USB_WHITE_LABEL struct (index 5)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_usb_device_product_strdef_valid(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for USB_DEVICE_PRODUCT_STRDEF entry of the USB_WHITE_LABEL struct (index 5)"]
+    #[doc = "valid flag for USB_DEVICE_PRODUCT_STRDEF entry of the USB_WHITE_LABEL struct (index 5)."]
     #[inline(always)]
     pub const fn set_wl_usb_device_product_strdef_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
-    #[doc = "valid flag for USB_DEVICE_SERIAL_NUMBER_STRDEF entry of the USB_WHITE_LABEL struct (index 6)"]
+    #[doc = "valid flag for USB_DEVICE_SERIAL_NUMBER_STRDEF entry of the USB_WHITE_LABEL struct (index 6)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_usb_device_serial_number_strdef_valid(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for USB_DEVICE_SERIAL_NUMBER_STRDEF entry of the USB_WHITE_LABEL struct (index 6)"]
+    #[doc = "valid flag for USB_DEVICE_SERIAL_NUMBER_STRDEF entry of the USB_WHITE_LABEL struct (index 6)."]
     #[inline(always)]
     pub const fn set_wl_usb_device_serial_number_strdef_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
-    #[doc = "valid flag for USB_CONFIG_ATTRIBUTES_MAX_POWER_VALUES entry of the USB_WHITE_LABEL struct (index 7)"]
+    #[doc = "valid flag for USB_CONFIG_ATTRIBUTES_MAX_POWER_VALUES entry of the USB_WHITE_LABEL struct (index 7)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_usb_config_attributes_max_power_values_valid(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for USB_CONFIG_ATTRIBUTES_MAX_POWER_VALUES entry of the USB_WHITE_LABEL struct (index 7)"]
+    #[doc = "valid flag for USB_CONFIG_ATTRIBUTES_MAX_POWER_VALUES entry of the USB_WHITE_LABEL struct (index 7)."]
     #[inline(always)]
     pub const fn set_wl_usb_config_attributes_max_power_values_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
-    #[doc = "valid flag for VOLUME_LABEL_STRDEF entry of the USB_WHITE_LABEL struct (index 8)"]
+    #[doc = "valid flag for VOLUME_LABEL_STRDEF entry of the USB_WHITE_LABEL struct (index 8)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_volume_label_strdef_valid(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for VOLUME_LABEL_STRDEF entry of the USB_WHITE_LABEL struct (index 8)"]
+    #[doc = "valid flag for VOLUME_LABEL_STRDEF entry of the USB_WHITE_LABEL struct (index 8)."]
     #[inline(always)]
     pub const fn set_wl_volume_label_strdef_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "valid flag for SCSI_INQUIRY_VENDOR_STRDEF entry of the USB_WHITE_LABEL struct (index 9)"]
+    #[doc = "valid flag for SCSI_INQUIRY_VENDOR_STRDEF entry of the USB_WHITE_LABEL struct (index 9)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_scsi_inquiry_vendor_strdef_valid(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for SCSI_INQUIRY_VENDOR_STRDEF entry of the USB_WHITE_LABEL struct (index 9)"]
+    #[doc = "valid flag for SCSI_INQUIRY_VENDOR_STRDEF entry of the USB_WHITE_LABEL struct (index 9)."]
     #[inline(always)]
     pub const fn set_wl_scsi_inquiry_vendor_strdef_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
-    #[doc = "valid flag for SCSI_INQUIRY_PRODUCT_STRDEF entry of the USB_WHITE_LABEL struct (index 10)"]
+    #[doc = "valid flag for SCSI_INQUIRY_PRODUCT_STRDEF entry of the USB_WHITE_LABEL struct (index 10)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_scsi_inquiry_product_strdef_valid(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for SCSI_INQUIRY_PRODUCT_STRDEF entry of the USB_WHITE_LABEL struct (index 10)"]
+    #[doc = "valid flag for SCSI_INQUIRY_PRODUCT_STRDEF entry of the USB_WHITE_LABEL struct (index 10)."]
     #[inline(always)]
     pub const fn set_wl_scsi_inquiry_product_strdef_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
-    #[doc = "valid flag for SCSI_INQUIRY_VERSION_STRDEF entry of the USB_WHITE_LABEL struct (index 11)"]
+    #[doc = "valid flag for SCSI_INQUIRY_VERSION_STRDEF entry of the USB_WHITE_LABEL struct (index 11)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_scsi_inquiry_version_strdef_valid(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for SCSI_INQUIRY_VERSION_STRDEF entry of the USB_WHITE_LABEL struct (index 11)"]
+    #[doc = "valid flag for SCSI_INQUIRY_VERSION_STRDEF entry of the USB_WHITE_LABEL struct (index 11)."]
     #[inline(always)]
     pub const fn set_wl_scsi_inquiry_version_strdef_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
-    #[doc = "valid flag for INDEX_HTM_REDIRECT_URL_STRDEF entry of the USB_WHITE_LABEL struct (index 12)"]
+    #[doc = "valid flag for INDEX_HTM_REDIRECT_URL_STRDEF entry of the USB_WHITE_LABEL struct (index 12)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_index_htm_redirect_url_strdef_valid(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for INDEX_HTM_REDIRECT_URL_STRDEF entry of the USB_WHITE_LABEL struct (index 12)"]
+    #[doc = "valid flag for INDEX_HTM_REDIRECT_URL_STRDEF entry of the USB_WHITE_LABEL struct (index 12)."]
     #[inline(always)]
     pub const fn set_wl_index_htm_redirect_url_strdef_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
-    #[doc = "valid flag for INDEX_HTM_REDIRECT_NAME_STRDEF entry of the USB_WHITE_LABEL struct (index 13)"]
+    #[doc = "valid flag for INDEX_HTM_REDIRECT_NAME_STRDEF entry of the USB_WHITE_LABEL struct (index 13)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_index_htm_redirect_name_strdef_valid(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for INDEX_HTM_REDIRECT_NAME_STRDEF entry of the USB_WHITE_LABEL struct (index 13)"]
+    #[doc = "valid flag for INDEX_HTM_REDIRECT_NAME_STRDEF entry of the USB_WHITE_LABEL struct (index 13)."]
     #[inline(always)]
     pub const fn set_wl_index_htm_redirect_name_strdef_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
-    #[doc = "valid flag for INFO_UF2_TXT_MODEL_STRDEF entry of the USB_WHITE_LABEL struct (index 14)"]
+    #[doc = "valid flag for INFO_UF2_TXT_MODEL_STRDEF entry of the USB_WHITE_LABEL struct (index 14)."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_info_uf2_txt_model_strdef_valid(&self) -> bool {
         let val = (self.0 >> 14usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for INFO_UF2_TXT_MODEL_STRDEF entry of the USB_WHITE_LABEL struct (index 14)"]
+    #[doc = "valid flag for INFO_UF2_TXT_MODEL_STRDEF entry of the USB_WHITE_LABEL struct (index 14)."]
     #[inline(always)]
     pub const fn set_wl_info_uf2_txt_model_strdef_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
     }
-    #[doc = "valid flag for the USB_WHITE_LABEL_ADDR field"]
+    #[doc = "valid flag for the USB_WHITE_LABEL_ADDR field."]
     #[must_use]
     #[inline(always)]
     pub const fn wl_info_uf2_txt_board_id_strdef_valid(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for the USB_WHITE_LABEL_ADDR field"]
+    #[doc = "valid flag for the USB_WHITE_LABEL_ADDR field."]
     #[inline(always)]
     pub const fn set_wl_info_uf2_txt_board_id_strdef_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
-    #[doc = "valid flag for INFO_UF2_TXT_BOARD_ID_STRDEF entry of the USB_WHITE_LABEL struct (index 15)"]
+    #[doc = "valid flag for INFO_UF2_TXT_BOARD_ID_STRDEF entry of the USB_WHITE_LABEL struct (index 15)."]
     #[must_use]
     #[inline(always)]
     pub const fn white_label_addr_valid(&self) -> bool {
         let val = (self.0 >> 22usize) & 0x01;
         val != 0
     }
-    #[doc = "valid flag for INFO_UF2_TXT_BOARD_ID_STRDEF entry of the USB_WHITE_LABEL struct (index 15)"]
+    #[doc = "valid flag for INFO_UF2_TXT_BOARD_ID_STRDEF entry of the USB_WHITE_LABEL struct (index 15)."]
     #[inline(always)]
     pub const fn set_white_label_addr_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
@@ -1377,7 +1377,7 @@ impl defmt::Format for UsbBootFlags {
         defmt :: write ! (f , "UsbBootFlags {{ wl_usb_device_vid_value_valid: {=bool:?}, wl_usb_device_pid_value_valid: {=bool:?}, wl_usb_device_serial_number_value_valid: {=bool:?}, wl_usb_device_lang_id_value_valid: {=bool:?}, wl_usb_device_manufacturer_strdef_valid: {=bool:?}, wl_usb_device_product_strdef_valid: {=bool:?}, wl_usb_device_serial_number_strdef_valid: {=bool:?}, wl_usb_config_attributes_max_power_values_valid: {=bool:?}, wl_volume_label_strdef_valid: {=bool:?}, wl_scsi_inquiry_vendor_strdef_valid: {=bool:?}, wl_scsi_inquiry_product_strdef_valid: {=bool:?}, wl_scsi_inquiry_version_strdef_valid: {=bool:?}, wl_index_htm_redirect_url_strdef_valid: {=bool:?}, wl_index_htm_redirect_name_strdef_valid: {=bool:?}, wl_info_uf2_txt_model_strdef_valid: {=bool:?}, wl_info_uf2_txt_board_id_strdef_valid: {=bool:?}, white_label_addr_valid: {=bool:?}, dp_dm_swap: {=bool:?} }}" , self . wl_usb_device_vid_value_valid () , self . wl_usb_device_pid_value_valid () , self . wl_usb_device_serial_number_value_valid () , self . wl_usb_device_lang_id_value_valid () , self . wl_usb_device_manufacturer_strdef_valid () , self . wl_usb_device_product_strdef_valid () , self . wl_usb_device_serial_number_strdef_valid () , self . wl_usb_config_attributes_max_power_values_valid () , self . wl_volume_label_strdef_valid () , self . wl_scsi_inquiry_vendor_strdef_valid () , self . wl_scsi_inquiry_product_strdef_valid () , self . wl_scsi_inquiry_version_strdef_valid () , self . wl_index_htm_redirect_url_strdef_valid () , self . wl_index_htm_redirect_name_strdef_valid () , self . wl_info_uf2_txt_model_strdef_valid () , self . wl_info_uf2_txt_board_id_strdef_valid () , self . white_label_addr_valid () , self . dp_dm_swap ())
     }
 }
-#[doc = "Row index of the USB_WHITE_LABEL structure within OTP (ECC) The table has 16 rows, each of which are also ECC and marked valid by the corresponding valid bit in USB_BOOT_FLAGS (ECC). The entries are either _VALUEs where the 16 bit value is used as is, or _STRDEFs which acts as a pointers to a string value. The value stored in a _STRDEF is two separate bytes: The low seven bits of the first (LSB) byte indicates the number of characters in the string, and the top bit of the first (LSB) byte if set to indicate that each character in the string is two bytes (Unicode) versus one byte if unset. The second (MSB) byte represents the location of the string data, and is encoded as the number of rows from this USB_WHITE_LABEL_ADDR; i.e. the row of the start of the string is USB_WHITE_LABEL_ADDR value + msb_byte. In each case, the corresponding valid bit enables replacing the default value for the corresponding item provided by the boot rom. Note that Unicode _STRDEFs are only supported for USB_DEVICE_PRODUCT_STRDEF, USB_DEVICE_SERIAL_NUMBER_STRDEF and USB_DEVICE_MANUFACTURER_STRDEF. Unicode values will be ignored if specified for other fields, and non-unicode values for these three items will be converted to Unicode characters by setting the upper 8 bits to zero. Note that if the USB_WHITE_LABEL structure or the corresponding strings are not readable by BOOTSEL mode based on OTP permissions, or if alignment requirements are not met, then the corresponding default values are used. The index values indicate where each field is located (row USB_WHITE_LABEL_ADDR value + index):"]
+#[doc = "Row index of the USB_WHITE_LABEL structure within OTP (ECC) The table has 16 rows, each of which are also ECC and marked valid by the corresponding valid bit in USB_BOOT_FLAGS (ECC). The entries are either _VALUEs where the 16 bit value is used as is, or _STRDEFs which acts as a pointers to a string value. The value stored in a _STRDEF is two separate bytes: The low seven bits of the first (LSB) byte indicates the number of characters in the string, and the top bit of the first (LSB) byte if set to indicate that each character in the string is two bytes (Unicode) versus one byte if unset. The second (MSB) byte represents the location of the string data, and is encoded as the number of rows from this USB_WHITE_LABEL_ADDR; i.e. the row of the start of the string is USB_WHITE_LABEL_ADDR value + msb_byte. In each case, the corresponding valid bit enables replacing the default value for the corresponding item provided by the boot rom. Note that Unicode _STRDEFs are only supported for USB_DEVICE_PRODUCT_STRDEF, USB_DEVICE_SERIAL_NUMBER_STRDEF and USB_DEVICE_MANUFACTURER_STRDEF. Unicode values will be ignored if specified for other fields, and non-unicode values for these three items will be converted to Unicode characters by setting the upper 8 bits to zero. Note that if the USB_WHITE_LABEL structure or the corresponding strings are not readable by BOOTSEL mode based on OTP permissions, or if alignment requirements are not met, then the corresponding default values are used. The index values indicate where each field is located (row USB_WHITE_LABEL_ADDR value + index):."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct UsbWhiteLabelAddr(pub u32);

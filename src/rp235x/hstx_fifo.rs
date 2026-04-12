@@ -1,4 +1,4 @@
-#[doc = "FIFO status and write access for HSTX"]
+#[doc = "FIFO status and write access for HSTX."]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct HstxFifo {
     ptr: *mut u8,
@@ -14,15 +14,15 @@ impl HstxFifo {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "FIFO status"]
+    #[doc = "FIFO status."]
     #[inline(always)]
     pub const fn stat(self) -> crate::common::Reg<regs::Stat, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
     }
-    #[doc = "Write access to FIFO"]
+    #[doc = "Write access to FIFO."]
     #[inline(always)]
     pub const fn fifo(self) -> crate::common::Reg<u32, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
     }
 }
 pub mod regs;

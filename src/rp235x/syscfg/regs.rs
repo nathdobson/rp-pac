@@ -1,4 +1,4 @@
-#[doc = "Auxiliary system control register"]
+#[doc = "Auxiliary system control register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Auxctrl(pub u32);
@@ -35,7 +35,7 @@ impl defmt::Format for Auxctrl {
         defmt::write!(f, "Auxctrl {{ auxctrl: {=u8:?} }}", self.auxctrl())
     }
 }
-#[doc = "Directly control the chip SWD debug port"]
+#[doc = "Directly control the chip SWD debug port."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Dbgforce(pub u32);
@@ -52,26 +52,26 @@ impl Dbgforce {
     pub const fn set_swdo(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Directly drive SWDIO input, if ATTACH is set"]
+    #[doc = "Directly drive SWDIO input, if ATTACH is set."]
     #[must_use]
     #[inline(always)]
     pub const fn swdi(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Directly drive SWDIO input, if ATTACH is set"]
+    #[doc = "Directly drive SWDIO input, if ATTACH is set."]
     #[inline(always)]
     pub const fn set_swdi(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Directly drive SWCLK, if ATTACH is set"]
+    #[doc = "Directly drive SWCLK, if ATTACH is set."]
     #[must_use]
     #[inline(always)]
     pub const fn swclk(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "Directly drive SWCLK, if ATTACH is set"]
+    #[doc = "Directly drive SWCLK, if ATTACH is set."]
     #[inline(always)]
     pub const fn set_swclk(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
@@ -118,7 +118,7 @@ impl defmt::Format for Dbgforce {
         )
     }
 }
-#[doc = "Control PD pins to memories. Set high to put memories to a low power state. In this state the memories will retain contents but not be accessible Use with caution"]
+#[doc = "Control PD pins to memories. Set high to put memories to a low power state. In this state the memories will retain contents but not be accessible Use with caution."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Mempowerdown(pub u32);
@@ -285,31 +285,31 @@ impl defmt::Format for Mempowerdown {
         defmt :: write ! (f , "Mempowerdown {{ sram0: {=bool:?}, sram1: {=bool:?}, sram2: {=bool:?}, sram3: {=bool:?}, sram4: {=bool:?}, sram5: {=bool:?}, sram6: {=bool:?}, sram7: {=bool:?}, sram8: {=bool:?}, sram9: {=bool:?}, usb: {=bool:?}, rom: {=bool:?}, bootram: {=bool:?} }}" , self . sram0 () , self . sram1 () , self . sram2 () , self . sram3 () , self . sram4 () , self . sram5 () , self . sram6 () , self . sram7 () , self . sram8 () , self . sram9 () , self . usb () , self . rom () , self . bootram ())
     }
 }
-#[doc = "Configuration for processors"]
+#[doc = "Configuration for processors."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ProcConfig(pub u32);
 impl ProcConfig {
-    #[doc = "Indication that proc0 has halted"]
+    #[doc = "Indication that proc0 has halted."]
     #[must_use]
     #[inline(always)]
     pub const fn proc0_halted(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Indication that proc0 has halted"]
+    #[doc = "Indication that proc0 has halted."]
     #[inline(always)]
     pub const fn set_proc0_halted(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Indication that proc1 has halted"]
+    #[doc = "Indication that proc1 has halted."]
     #[must_use]
     #[inline(always)]
     pub const fn proc1_halted(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Indication that proc1 has halted"]
+    #[doc = "Indication that proc1 has halted."]
     #[inline(always)]
     pub const fn set_proc1_halted(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
@@ -340,7 +340,7 @@ impl defmt::Format for ProcConfig {
         )
     }
 }
-#[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 32...47. USB GPIO 56..57 QSPI GPIO 58..63"]
+#[doc = "For each bit, if 1, bypass the input synchronizer between that GPIO and the GPIO input register in the SIO. The input synchronizers should generally be unbypassed, to avoid injecting metastabilities into processors. If you're feeling brave, you can bypass to save two cycles of input latency. This register applies to GPIO 32...47. USB GPIO 56..57 QSPI GPIO 58..63."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ProcInSyncBypassHi(pub u32);

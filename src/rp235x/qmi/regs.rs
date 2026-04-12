@@ -70,14 +70,14 @@ impl DirectCsr {
     pub const fn set_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Direct mode busy flag. If 1, data is currently being shifted in/out (or would be if the interface were not stalled on the RX FIFO), and the chip select must not yet be deasserted. The busy flag will also be set to 1 if a memory-mapped transfer is still in progress when direct mode is enabled. Direct mode blocks new memory-mapped transfers, but can't halt a transfer that is already in progress. If there is a chance that memory-mapped transfers may be in progress, the busy flag should be polled for 0 before asserting the chip select. (In practice you will usually discover this timing condition through other means, because any subsequent memory-mapped transfers when direct mode is enabled will return bus errors, which are difficult to ignore.)"]
+    #[doc = "Direct mode busy flag. If 1, data is currently being shifted in/out (or would be if the interface were not stalled on the RX FIFO), and the chip select must not yet be deasserted. The busy flag will also be set to 1 if a memory-mapped transfer is still in progress when direct mode is enabled. Direct mode blocks new memory-mapped transfers, but can't halt a transfer that is already in progress. If there is a chance that memory-mapped transfers may be in progress, the busy flag should be polled for 0 before asserting the chip select. (In practice you will usually discover this timing condition through other means, because any subsequent memory-mapped transfers when direct mode is enabled will return bus errors, which are difficult to ignore.)."]
     #[must_use]
     #[inline(always)]
     pub const fn busy(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Direct mode busy flag. If 1, data is currently being shifted in/out (or would be if the interface were not stalled on the RX FIFO), and the chip select must not yet be deasserted. The busy flag will also be set to 1 if a memory-mapped transfer is still in progress when direct mode is enabled. Direct mode blocks new memory-mapped transfers, but can't halt a transfer that is already in progress. If there is a chance that memory-mapped transfers may be in progress, the busy flag should be polled for 0 before asserting the chip select. (In practice you will usually discover this timing condition through other means, because any subsequent memory-mapped transfers when direct mode is enabled will return bus errors, which are difficult to ignore.)"]
+    #[doc = "Direct mode busy flag. If 1, data is currently being shifted in/out (or would be if the interface were not stalled on the RX FIFO), and the chip select must not yet be deasserted. The busy flag will also be set to 1 if a memory-mapped transfer is still in progress when direct mode is enabled. Direct mode blocks new memory-mapped transfers, but can't halt a transfer that is already in progress. If there is a chance that memory-mapped transfers may be in progress, the busy flag should be polled for 0 before asserting the chip select. (In practice you will usually discover this timing condition through other means, because any subsequent memory-mapped transfers when direct mode is enabled will return bus errors, which are difficult to ignore.)."]
     #[inline(always)]
     pub const fn set_busy(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
@@ -154,14 +154,14 @@ impl DirectCsr {
     pub const fn set_txempty(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
-    #[doc = "Current level of DIRECT_TX FIFO"]
+    #[doc = "Current level of DIRECT_TX FIFO."]
     #[must_use]
     #[inline(always)]
     pub const fn txlevel(&self) -> u8 {
         let val = (self.0 >> 12usize) & 0x07;
         val as u8
     }
-    #[doc = "Current level of DIRECT_TX FIFO"]
+    #[doc = "Current level of DIRECT_TX FIFO."]
     #[inline(always)]
     pub const fn set_txlevel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 12usize)) | (((val as u32) & 0x07) << 12usize);
@@ -190,14 +190,14 @@ impl DirectCsr {
     pub const fn set_rxfull(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
-    #[doc = "Current level of DIRECT_RX FIFO"]
+    #[doc = "Current level of DIRECT_RX FIFO."]
     #[must_use]
     #[inline(always)]
     pub const fn rxlevel(&self) -> u8 {
         let val = (self.0 >> 18usize) & 0x07;
         val as u8
     }
-    #[doc = "Current level of DIRECT_RX FIFO"]
+    #[doc = "Current level of DIRECT_RX FIFO."]
     #[inline(always)]
     pub const fn set_rxlevel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 18usize)) | (((val as u32) & 0x07) << 18usize);
@@ -214,14 +214,14 @@ impl DirectCsr {
     pub const fn set_clkdiv(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 22usize)) | (((val as u32) & 0xff) << 22usize);
     }
-    #[doc = "Delay the read data sample timing, in units of one half of a system clock cycle. (Not necessarily half of an SCK cycle.)"]
+    #[doc = "Delay the read data sample timing, in units of one half of a system clock cycle. (Not necessarily half of an SCK cycle.)."]
     #[must_use]
     #[inline(always)]
     pub const fn rxdelay(&self) -> u8 {
         let val = (self.0 >> 30usize) & 0x03;
         val as u8
     }
-    #[doc = "Delay the read data sample timing, in units of one half of a system clock cycle. (Not necessarily half of an SCK cycle.)"]
+    #[doc = "Delay the read data sample timing, in units of one half of a system clock cycle. (Not necessarily half of an SCK cycle.)."]
     #[inline(always)]
     pub const fn set_rxdelay(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 30usize)) | (((val as u32) & 0x03) << 30usize);
@@ -259,7 +259,7 @@ impl defmt::Format for DirectCsr {
         defmt :: write ! (f , "DirectCsr {{ en: {=bool:?}, busy: {=bool:?}, assert_cs0n: {=bool:?}, assert_cs1n: {=bool:?}, auto_cs0n: {=bool:?}, auto_cs1n: {=bool:?}, txfull: {=bool:?}, txempty: {=bool:?}, txlevel: {=u8:?}, rxempty: {=bool:?}, rxfull: {=bool:?}, rxlevel: {=u8:?}, clkdiv: {=u8:?}, rxdelay: {=u8:?} }}" , self . en () , self . busy () , self . assert_cs0n () , self . assert_cs1n () , self . auto_cs0n () , self . auto_cs1n () , self . txfull () , self . txempty () , self . txlevel () , self . rxempty () , self . rxfull () , self . rxlevel () , self . clkdiv () , self . rxdelay ())
     }
 }
-#[doc = "Receive FIFO for direct mode"]
+#[doc = "Receive FIFO for direct mode."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct DirectRx(pub u32);
@@ -296,7 +296,7 @@ impl defmt::Format for DirectRx {
         defmt::write!(f, "DirectRx {{ direct_rx: {=u16:?} }}", self.direct_rx())
     }
 }
-#[doc = "Transmit FIFO for direct mode"]
+#[doc = "Transmit FIFO for direct mode."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct DirectTx(pub u32);
@@ -445,14 +445,14 @@ impl defmt::Format for Rcmd {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Rfmt(pub u32);
 impl Rfmt {
-    #[doc = "The transfer width used for the command prefix, if any"]
+    #[doc = "The transfer width used for the command prefix, if any."]
     #[must_use]
     #[inline(always)]
     pub const fn prefix_width(&self) -> super::vals::PrefixWidth {
         let val = (self.0 >> 0usize) & 0x03;
         super::vals::PrefixWidth::from_bits(val as u8)
     }
-    #[doc = "The transfer width used for the command prefix, if any"]
+    #[doc = "The transfer width used for the command prefix, if any."]
     #[inline(always)]
     pub const fn set_prefix_width(&mut self, val: super::vals::PrefixWidth) {
         self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
@@ -469,14 +469,14 @@ impl Rfmt {
     pub const fn set_addr_width(&mut self, val: super::vals::AddrWidth) {
         self.0 = (self.0 & !(0x03 << 2usize)) | (((val.to_bits() as u32) & 0x03) << 2usize);
     }
-    #[doc = "The width used for the post-address command suffix, if any"]
+    #[doc = "The width used for the post-address command suffix, if any."]
     #[must_use]
     #[inline(always)]
     pub const fn suffix_width(&self) -> super::vals::SuffixWidth {
         let val = (self.0 >> 4usize) & 0x03;
         super::vals::SuffixWidth::from_bits(val as u8)
     }
-    #[doc = "The width used for the post-address command suffix, if any"]
+    #[doc = "The width used for the post-address command suffix, if any."]
     #[inline(always)]
     pub const fn set_suffix_width(&mut self, val: super::vals::SuffixWidth) {
         self.0 = (self.0 & !(0x03 << 4usize)) | (((val.to_bits() as u32) & 0x03) << 4usize);
@@ -493,26 +493,26 @@ impl Rfmt {
     pub const fn set_dummy_width(&mut self, val: super::vals::DummyWidth) {
         self.0 = (self.0 & !(0x03 << 6usize)) | (((val.to_bits() as u32) & 0x03) << 6usize);
     }
-    #[doc = "The width used for the data transfer"]
+    #[doc = "The width used for the data transfer."]
     #[must_use]
     #[inline(always)]
     pub const fn data_width(&self) -> super::vals::DataWidth {
         let val = (self.0 >> 8usize) & 0x03;
         super::vals::DataWidth::from_bits(val as u8)
     }
-    #[doc = "The width used for the data transfer"]
+    #[doc = "The width used for the data transfer."]
     #[inline(always)]
     pub const fn set_data_width(&mut self, val: super::vals::DataWidth) {
         self.0 = (self.0 & !(0x03 << 8usize)) | (((val.to_bits() as u32) & 0x03) << 8usize);
     }
-    #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)"]
+    #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)."]
     #[must_use]
     #[inline(always)]
     pub const fn prefix_len(&self) -> super::vals::PrefixLen {
         let val = (self.0 >> 12usize) & 0x01;
         super::vals::PrefixLen::from_bits(val as u8)
     }
-    #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)"]
+    #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)."]
     #[inline(always)]
     pub const fn set_prefix_len(&mut self, val: super::vals::PrefixLen) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val.to_bits() as u32) & 0x01) << 12usize);
@@ -529,14 +529,14 @@ impl Rfmt {
     pub const fn set_suffix_len(&mut self, val: super::vals::SuffixLen) {
         self.0 = (self.0 & !(0x03 << 14usize)) | (((val.to_bits() as u32) & 0x03) << 14usize);
     }
-    #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)"]
+    #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)."]
     #[must_use]
     #[inline(always)]
     pub const fn dummy_len(&self) -> super::vals::DummyLen {
         let val = (self.0 >> 16usize) & 0x07;
         super::vals::DummyLen::from_bits(val as u8)
     }
-    #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)"]
+    #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)."]
     #[inline(always)]
     pub const fn set_dummy_len(&mut self, val: super::vals::DummyLen) {
         self.0 = (self.0 & !(0x07 << 16usize)) | (((val.to_bits() as u32) & 0x07) << 16usize);
@@ -769,14 +769,14 @@ impl defmt::Format for Wcmd {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Wfmt(pub u32);
 impl Wfmt {
-    #[doc = "The transfer width used for the command prefix, if any"]
+    #[doc = "The transfer width used for the command prefix, if any."]
     #[must_use]
     #[inline(always)]
     pub const fn prefix_width(&self) -> super::vals::PrefixWidth {
         let val = (self.0 >> 0usize) & 0x03;
         super::vals::PrefixWidth::from_bits(val as u8)
     }
-    #[doc = "The transfer width used for the command prefix, if any"]
+    #[doc = "The transfer width used for the command prefix, if any."]
     #[inline(always)]
     pub const fn set_prefix_width(&mut self, val: super::vals::PrefixWidth) {
         self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
@@ -793,14 +793,14 @@ impl Wfmt {
     pub const fn set_addr_width(&mut self, val: super::vals::AddrWidth) {
         self.0 = (self.0 & !(0x03 << 2usize)) | (((val.to_bits() as u32) & 0x03) << 2usize);
     }
-    #[doc = "The width used for the post-address command suffix, if any"]
+    #[doc = "The width used for the post-address command suffix, if any."]
     #[must_use]
     #[inline(always)]
     pub const fn suffix_width(&self) -> super::vals::SuffixWidth {
         let val = (self.0 >> 4usize) & 0x03;
         super::vals::SuffixWidth::from_bits(val as u8)
     }
-    #[doc = "The width used for the post-address command suffix, if any"]
+    #[doc = "The width used for the post-address command suffix, if any."]
     #[inline(always)]
     pub const fn set_suffix_width(&mut self, val: super::vals::SuffixWidth) {
         self.0 = (self.0 & !(0x03 << 4usize)) | (((val.to_bits() as u32) & 0x03) << 4usize);
@@ -817,26 +817,26 @@ impl Wfmt {
     pub const fn set_dummy_width(&mut self, val: super::vals::DummyWidth) {
         self.0 = (self.0 & !(0x03 << 6usize)) | (((val.to_bits() as u32) & 0x03) << 6usize);
     }
-    #[doc = "The width used for the data transfer"]
+    #[doc = "The width used for the data transfer."]
     #[must_use]
     #[inline(always)]
     pub const fn data_width(&self) -> super::vals::DataWidth {
         let val = (self.0 >> 8usize) & 0x03;
         super::vals::DataWidth::from_bits(val as u8)
     }
-    #[doc = "The width used for the data transfer"]
+    #[doc = "The width used for the data transfer."]
     #[inline(always)]
     pub const fn set_data_width(&mut self, val: super::vals::DataWidth) {
         self.0 = (self.0 & !(0x03 << 8usize)) | (((val.to_bits() as u32) & 0x03) << 8usize);
     }
-    #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)"]
+    #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)."]
     #[must_use]
     #[inline(always)]
     pub const fn prefix_len(&self) -> super::vals::PrefixLen {
         let val = (self.0 >> 12usize) & 0x01;
         super::vals::PrefixLen::from_bits(val as u8)
     }
-    #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)"]
+    #[doc = "Length of command prefix, in units of 8 bits. (i.e. 2 cycles for quad width, 4 for dual, 8 for single)."]
     #[inline(always)]
     pub const fn set_prefix_len(&mut self, val: super::vals::PrefixLen) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val.to_bits() as u32) & 0x01) << 12usize);
@@ -853,14 +853,14 @@ impl Wfmt {
     pub const fn set_suffix_len(&mut self, val: super::vals::SuffixLen) {
         self.0 = (self.0 & !(0x03 << 14usize)) | (((val.to_bits() as u32) & 0x03) << 14usize);
     }
-    #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)"]
+    #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)."]
     #[must_use]
     #[inline(always)]
     pub const fn dummy_len(&self) -> super::vals::DummyLen {
         let val = (self.0 >> 16usize) & 0x07;
         super::vals::DummyLen::from_bits(val as u8)
     }
-    #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)"]
+    #[doc = "Length of dummy phase between command suffix and data phase, in units of 4 bits. (i.e. 1 cycle for quad width, 2 for dual, 4 for single)."]
     #[inline(always)]
     pub const fn set_dummy_len(&mut self, val: super::vals::DummyLen) {
         self.0 = (self.0 & !(0x07 << 16usize)) | (((val.to_bits() as u32) & 0x07) << 16usize);

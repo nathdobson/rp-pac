@@ -1,4 +1,4 @@
-#[doc = "Control Register, UARTCR"]
+#[doc = "Control Register, UARTCR."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartcr(pub u32);
@@ -178,7 +178,7 @@ impl defmt::Format for Uartcr {
         defmt :: write ! (f , "Uartcr {{ uarten: {=bool:?}, siren: {=bool:?}, sirlp: {=bool:?}, lbe: {=bool:?}, txe: {=bool:?}, rxe: {=bool:?}, dtr: {=bool:?}, rts: {=bool:?}, out1: {=bool:?}, out2: {=bool:?}, rtsen: {=bool:?}, ctsen: {=bool:?} }}" , self . uarten () , self . siren () , self . sirlp () , self . lbe () , self . txe () , self . rxe () , self . dtr () , self . rts () , self . out1 () , self . out2 () , self . rtsen () , self . ctsen ())
     }
 }
-#[doc = "DMA Control Register, UARTDMACR"]
+#[doc = "DMA Control Register, UARTDMACR."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartdmacr(pub u32);
@@ -247,7 +247,7 @@ impl defmt::Format for Uartdmacr {
         )
     }
 }
-#[doc = "Data Register, UARTDR"]
+#[doc = "Data Register, UARTDR."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartdr(pub u32);
@@ -336,7 +336,7 @@ impl defmt::Format for Uartdr {
         defmt :: write ! (f , "Uartdr {{ data: {=u8:?}, fe: {=bool:?}, pe: {=bool:?}, be: {=bool:?}, oe: {=bool:?} }}" , self . data () , self . fe () , self . pe () , self . be () , self . oe ())
     }
 }
-#[doc = "Fractional Baud Rate Register, UARTFBRD"]
+#[doc = "Fractional Baud Rate Register, UARTFBRD."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartfbrd(pub u32);
@@ -377,7 +377,7 @@ impl defmt::Format for Uartfbrd {
         )
     }
 }
-#[doc = "Flag Register, UARTFR"]
+#[doc = "Flag Register, UARTFR."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartfr(pub u32);
@@ -518,7 +518,7 @@ impl defmt::Format for Uartfr {
         defmt :: write ! (f , "Uartfr {{ cts: {=bool:?}, dsr: {=bool:?}, dcd: {=bool:?}, busy: {=bool:?}, rxfe: {=bool:?}, txff: {=bool:?}, rxff: {=bool:?}, txfe: {=bool:?}, ri: {=bool:?} }}" , self . cts () , self . dsr () , self . dcd () , self . busy () , self . rxfe () , self . txff () , self . rxff () , self . txfe () , self . ri ())
     }
 }
-#[doc = "Integer Baud Rate Register, UARTIBRD"]
+#[doc = "Integer Baud Rate Register, UARTIBRD."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartibrd(pub u32);
@@ -559,7 +559,7 @@ impl defmt::Format for Uartibrd {
         )
     }
 }
-#[doc = "Interrupt Clear Register, UARTICR"]
+#[doc = "Interrupt Clear Register, UARTICR."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uarticr(pub u32);
@@ -726,7 +726,7 @@ impl defmt::Format for Uarticr {
         defmt :: write ! (f , "Uarticr {{ rimic: {=bool:?}, ctsmic: {=bool:?}, dcdmic: {=bool:?}, dsrmic: {=bool:?}, rxic: {=bool:?}, txic: {=bool:?}, rtic: {=bool:?}, feic: {=bool:?}, peic: {=bool:?}, beic: {=bool:?}, oeic: {=bool:?} }}" , self . rimic () , self . ctsmic () , self . dcdmic () , self . dsrmic () , self . rxic () , self . txic () , self . rtic () , self . feic () , self . peic () , self . beic () , self . oeic ())
     }
 }
-#[doc = "Interrupt FIFO Level Select Register, UARTIFLS"]
+#[doc = "Interrupt FIFO Level Select Register, UARTIFLS."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartifls(pub u32);
@@ -781,7 +781,7 @@ impl defmt::Format for Uartifls {
         )
     }
 }
-#[doc = "IrDA Low-Power Counter Register, UARTILPR"]
+#[doc = "IrDA Low-Power Counter Register, UARTILPR."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartilpr(pub u32);
@@ -818,7 +818,7 @@ impl defmt::Format for Uartilpr {
         defmt::write!(f, "Uartilpr {{ ilpdvsr: {=u8:?} }}", self.ilpdvsr())
     }
 }
-#[doc = "Interrupt Mask Set/Clear Register, UARTIMSC"]
+#[doc = "Interrupt Mask Set/Clear Register, UARTIMSC."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartimsc(pub u32);
@@ -985,7 +985,7 @@ impl defmt::Format for Uartimsc {
         defmt :: write ! (f , "Uartimsc {{ rimim: {=bool:?}, ctsmim: {=bool:?}, dcdmim: {=bool:?}, dsrmim: {=bool:?}, rxim: {=bool:?}, txim: {=bool:?}, rtim: {=bool:?}, feim: {=bool:?}, peim: {=bool:?}, beim: {=bool:?}, oeim: {=bool:?} }}" , self . rimim () , self . ctsmim () , self . dcdmim () , self . dsrmim () , self . rxim () , self . txim () , self . rtim () , self . feim () , self . peim () , self . beim () , self . oeim ())
     }
 }
-#[doc = "Line Control Register, UARTLCR_H"]
+#[doc = "Line Control Register, UARTLCR_H."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct UartlcrH(pub u32);
@@ -1100,7 +1100,7 @@ impl defmt::Format for UartlcrH {
         defmt :: write ! (f , "UartlcrH {{ brk: {=bool:?}, pen: {=bool:?}, eps: {=bool:?}, stp2: {=bool:?}, fen: {=bool:?}, wlen: {=u8:?}, sps: {=bool:?} }}" , self . brk () , self . pen () , self . eps () , self . stp2 () , self . fen () , self . wlen () , self . sps ())
     }
 }
-#[doc = "Masked Interrupt Status Register, UARTMIS"]
+#[doc = "Masked Interrupt Status Register, UARTMIS."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartmis(pub u32);
@@ -1267,19 +1267,19 @@ impl defmt::Format for Uartmis {
         defmt :: write ! (f , "Uartmis {{ rimmis: {=bool:?}, ctsmmis: {=bool:?}, dcdmmis: {=bool:?}, dsrmmis: {=bool:?}, rxmis: {=bool:?}, txmis: {=bool:?}, rtmis: {=bool:?}, femis: {=bool:?}, pemis: {=bool:?}, bemis: {=bool:?}, oemis: {=bool:?} }}" , self . rimmis () , self . ctsmmis () , self . dcdmmis () , self . dsrmmis () , self . rxmis () , self . txmis () , self . rtmis () , self . femis () , self . pemis () , self . bemis () , self . oemis ())
     }
 }
-#[doc = "UARTPCellID0 Register"]
+#[doc = "UARTPCellID0 Register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartpcellid0(pub u32);
 impl Uartpcellid0 {
-    #[doc = "These bits read back as 0x0D"]
+    #[doc = "These bits read back as 0x0D."]
     #[must_use]
     #[inline(always)]
     pub const fn uartpcellid0(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
         val as u8
     }
-    #[doc = "These bits read back as 0x0D"]
+    #[doc = "These bits read back as 0x0D."]
     #[inline(always)]
     pub const fn set_uartpcellid0(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -1308,19 +1308,19 @@ impl defmt::Format for Uartpcellid0 {
         )
     }
 }
-#[doc = "UARTPCellID1 Register"]
+#[doc = "UARTPCellID1 Register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartpcellid1(pub u32);
 impl Uartpcellid1 {
-    #[doc = "These bits read back as 0xF0"]
+    #[doc = "These bits read back as 0xF0."]
     #[must_use]
     #[inline(always)]
     pub const fn uartpcellid1(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
         val as u8
     }
-    #[doc = "These bits read back as 0xF0"]
+    #[doc = "These bits read back as 0xF0."]
     #[inline(always)]
     pub const fn set_uartpcellid1(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -1349,19 +1349,19 @@ impl defmt::Format for Uartpcellid1 {
         )
     }
 }
-#[doc = "UARTPCellID2 Register"]
+#[doc = "UARTPCellID2 Register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartpcellid2(pub u32);
 impl Uartpcellid2 {
-    #[doc = "These bits read back as 0x05"]
+    #[doc = "These bits read back as 0x05."]
     #[must_use]
     #[inline(always)]
     pub const fn uartpcellid2(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
         val as u8
     }
-    #[doc = "These bits read back as 0x05"]
+    #[doc = "These bits read back as 0x05."]
     #[inline(always)]
     pub const fn set_uartpcellid2(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -1390,19 +1390,19 @@ impl defmt::Format for Uartpcellid2 {
         )
     }
 }
-#[doc = "UARTPCellID3 Register"]
+#[doc = "UARTPCellID3 Register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartpcellid3(pub u32);
 impl Uartpcellid3 {
-    #[doc = "These bits read back as 0xB1"]
+    #[doc = "These bits read back as 0xB1."]
     #[must_use]
     #[inline(always)]
     pub const fn uartpcellid3(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
         val as u8
     }
-    #[doc = "These bits read back as 0xB1"]
+    #[doc = "These bits read back as 0xB1."]
     #[inline(always)]
     pub const fn set_uartpcellid3(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -1431,19 +1431,19 @@ impl defmt::Format for Uartpcellid3 {
         )
     }
 }
-#[doc = "UARTPeriphID0 Register"]
+#[doc = "UARTPeriphID0 Register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartperiphid0(pub u32);
 impl Uartperiphid0 {
-    #[doc = "These bits read back as 0x11"]
+    #[doc = "These bits read back as 0x11."]
     #[must_use]
     #[inline(always)]
     pub const fn partnumber0(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
         val as u8
     }
-    #[doc = "These bits read back as 0x11"]
+    #[doc = "These bits read back as 0x11."]
     #[inline(always)]
     pub const fn set_partnumber0(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -1472,31 +1472,31 @@ impl defmt::Format for Uartperiphid0 {
         )
     }
 }
-#[doc = "UARTPeriphID1 Register"]
+#[doc = "UARTPeriphID1 Register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartperiphid1(pub u32);
 impl Uartperiphid1 {
-    #[doc = "These bits read back as 0x0"]
+    #[doc = "These bits read back as 0x0."]
     #[must_use]
     #[inline(always)]
     pub const fn partnumber1(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x0f;
         val as u8
     }
-    #[doc = "These bits read back as 0x0"]
+    #[doc = "These bits read back as 0x0."]
     #[inline(always)]
     pub const fn set_partnumber1(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
     }
-    #[doc = "These bits read back as 0x1"]
+    #[doc = "These bits read back as 0x1."]
     #[must_use]
     #[inline(always)]
     pub const fn designer0(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x0f;
         val as u8
     }
-    #[doc = "These bits read back as 0x1"]
+    #[doc = "These bits read back as 0x1."]
     #[inline(always)]
     pub const fn set_designer0(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
@@ -1527,31 +1527,31 @@ impl defmt::Format for Uartperiphid1 {
         )
     }
 }
-#[doc = "UARTPeriphID2 Register"]
+#[doc = "UARTPeriphID2 Register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartperiphid2(pub u32);
 impl Uartperiphid2 {
-    #[doc = "These bits read back as 0x4"]
+    #[doc = "These bits read back as 0x4."]
     #[must_use]
     #[inline(always)]
     pub const fn designer1(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x0f;
         val as u8
     }
-    #[doc = "These bits read back as 0x4"]
+    #[doc = "These bits read back as 0x4."]
     #[inline(always)]
     pub const fn set_designer1(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
     }
-    #[doc = "This field depends on the revision of the UART: r1p0 0x0 r1p1 0x1 r1p3 0x2 r1p4 0x2 r1p5 0x3"]
+    #[doc = "This field depends on the revision of the UART: r1p0 0x0 r1p1 0x1 r1p3 0x2 r1p4 0x2 r1p5 0x3."]
     #[must_use]
     #[inline(always)]
     pub const fn revision(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x0f;
         val as u8
     }
-    #[doc = "This field depends on the revision of the UART: r1p0 0x0 r1p1 0x1 r1p3 0x2 r1p4 0x2 r1p5 0x3"]
+    #[doc = "This field depends on the revision of the UART: r1p0 0x0 r1p1 0x1 r1p3 0x2 r1p4 0x2 r1p5 0x3."]
     #[inline(always)]
     pub const fn set_revision(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
@@ -1582,19 +1582,19 @@ impl defmt::Format for Uartperiphid2 {
         )
     }
 }
-#[doc = "UARTPeriphID3 Register"]
+#[doc = "UARTPeriphID3 Register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartperiphid3(pub u32);
 impl Uartperiphid3 {
-    #[doc = "These bits read back as 0x00"]
+    #[doc = "These bits read back as 0x00."]
     #[must_use]
     #[inline(always)]
     pub const fn configuration(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
         val as u8
     }
-    #[doc = "These bits read back as 0x00"]
+    #[doc = "These bits read back as 0x00."]
     #[inline(always)]
     pub const fn set_configuration(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
@@ -1623,7 +1623,7 @@ impl defmt::Format for Uartperiphid3 {
         )
     }
 }
-#[doc = "Raw Interrupt Status Register, UARTRIS"]
+#[doc = "Raw Interrupt Status Register, UARTRIS."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartris(pub u32);
@@ -1700,14 +1700,14 @@ impl Uartris {
     pub const fn set_txris(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
-    #[doc = "Receive timeout interrupt status. Returns the raw interrupt state of the UARTRTINTR interrupt. a"]
+    #[doc = "Receive timeout interrupt status. Returns the raw interrupt state of the UARTRTINTR interrupt. a."]
     #[must_use]
     #[inline(always)]
     pub const fn rtris(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
-    #[doc = "Receive timeout interrupt status. Returns the raw interrupt state of the UARTRTINTR interrupt. a"]
+    #[doc = "Receive timeout interrupt status. Returns the raw interrupt state of the UARTRTINTR interrupt. a."]
     #[inline(always)]
     pub const fn set_rtris(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
@@ -1790,7 +1790,7 @@ impl defmt::Format for Uartris {
         defmt :: write ! (f , "Uartris {{ rirmis: {=bool:?}, ctsrmis: {=bool:?}, dcdrmis: {=bool:?}, dsrrmis: {=bool:?}, rxris: {=bool:?}, txris: {=bool:?}, rtris: {=bool:?}, feris: {=bool:?}, peris: {=bool:?}, beris: {=bool:?}, oeris: {=bool:?} }}" , self . rirmis () , self . ctsrmis () , self . dcdrmis () , self . dsrrmis () , self . rxris () , self . txris () , self . rtris () , self . feris () , self . peris () , self . beris () , self . oeris ())
     }
 }
-#[doc = "Receive Status Register/Error Clear Register, UARTRSR/UARTECR"]
+#[doc = "Receive Status Register/Error Clear Register, UARTRSR/UARTECR."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Uartrsr(pub u32);

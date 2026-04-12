@@ -2,14 +2,14 @@
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct AlarmTime15to0(pub u32);
 impl AlarmTime15to0 {
-    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0"]
+    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0."]
     #[must_use]
     #[inline(always)]
     pub const fn alarm_time_15to0(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0"]
+    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0."]
     #[inline(always)]
     pub const fn set_alarm_time_15to0(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
@@ -42,14 +42,14 @@ impl defmt::Format for AlarmTime15to0 {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct AlarmTime31to16(pub u32);
 impl AlarmTime31to16 {
-    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0"]
+    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0."]
     #[must_use]
     #[inline(always)]
     pub const fn alarm_time_31to16(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0"]
+    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0."]
     #[inline(always)]
     pub const fn set_alarm_time_31to16(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
@@ -82,14 +82,14 @@ impl defmt::Format for AlarmTime31to16 {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct AlarmTime47to32(pub u32);
 impl AlarmTime47to32 {
-    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0"]
+    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0."]
     #[must_use]
     #[inline(always)]
     pub const fn alarm_time_47to32(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0"]
+    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0."]
     #[inline(always)]
     pub const fn set_alarm_time_47to32(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
@@ -122,14 +122,14 @@ impl defmt::Format for AlarmTime47to32 {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct AlarmTime63to48(pub u32);
 impl AlarmTime63to48 {
-    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0"]
+    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0."]
     #[must_use]
     #[inline(always)]
     pub const fn alarm_time_63to48(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0"]
+    #[doc = "This field must only be written when POWMAN_ALARM_ENAB=0."]
     #[inline(always)]
     pub const fn set_alarm_time_63to48(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
@@ -158,7 +158,7 @@ impl defmt::Format for AlarmTime63to48 {
         )
     }
 }
-#[doc = "Indicates a bad password has been used"]
+#[doc = "Indicates a bad password has been used."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Badpasswd(pub u32);
@@ -193,31 +193,31 @@ impl defmt::Format for Badpasswd {
         defmt::write!(f, "Badpasswd {{ badpasswd: {=bool:?} }}", self.badpasswd())
     }
 }
-#[doc = "Brown-out Detection Settings"]
+#[doc = "Brown-out Detection Settings."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Bod(pub u32);
 impl Bod {
-    #[doc = "enable brown-out detection 0=not enabled, 1=enabled"]
+    #[doc = "enable brown-out detection 0=not enabled, 1=enabled."]
     #[must_use]
     #[inline(always)]
     pub const fn en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "enable brown-out detection 0=not enabled, 1=enabled"]
+    #[doc = "enable brown-out detection 0=not enabled, 1=enabled."]
     #[inline(always)]
     pub const fn set_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "threshold select 00000 - 0.473V 00001 - 0.516V 00010 - 0.559V 00011 - 0.602V 00100 - 0.645VS 00101 - 0.688V 00110 - 0.731V 00111 - 0.774V 01000 - 0.817V 01001 - 0.860V (default) 01010 - 0.903V 01011 - 0.946V 01100 - 0.989V 01101 - 1.032V 01110 - 1.075V 01111 - 1.118V 10000 - 1.161 10001 - 1.204V"]
+    #[doc = "threshold select 00000 - 0.473V 00001 - 0.516V 00010 - 0.559V 00011 - 0.602V 00100 - 0.645VS 00101 - 0.688V 00110 - 0.731V 00111 - 0.774V 01000 - 0.817V 01001 - 0.860V (default) 01010 - 0.903V 01011 - 0.946V 01100 - 0.989V 01101 - 1.032V 01110 - 1.075V 01111 - 1.118V 10000 - 1.161 10001 - 1.204V."]
     #[must_use]
     #[inline(always)]
     pub const fn vsel(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x1f;
         val as u8
     }
-    #[doc = "threshold select 00000 - 0.473V 00001 - 0.516V 00010 - 0.559V 00011 - 0.602V 00100 - 0.645VS 00101 - 0.688V 00110 - 0.731V 00111 - 0.774V 01000 - 0.817V 01001 - 0.860V (default) 01010 - 0.903V 01011 - 0.946V 01100 - 0.989V 01101 - 1.032V 01110 - 1.075V 01111 - 1.118V 10000 - 1.161 10001 - 1.204V"]
+    #[doc = "threshold select 00000 - 0.473V 00001 - 0.516V 00010 - 0.559V 00011 - 0.602V 00100 - 0.645VS 00101 - 0.688V 00110 - 0.731V 00111 - 0.774V 01000 - 0.817V 01001 - 0.860V (default) 01010 - 0.903V 01011 - 0.946V 01100 - 0.989V 01101 - 1.032V 01110 - 1.075V 01111 - 1.118V 10000 - 1.161 10001 - 1.204V."]
     #[inline(always)]
     pub const fn set_vsel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 4usize)) | (((val as u32) & 0x1f) << 4usize);
@@ -248,19 +248,19 @@ impl defmt::Format for Bod {
         )
     }
 }
-#[doc = "Brown-out Detection Control"]
+#[doc = "Brown-out Detection Control."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct BodCtrl(pub u32);
 impl BodCtrl {
-    #[doc = "isolates the brown-out detection control interface 0 - not isolated (default) 1 - isolated"]
+    #[doc = "isolates the brown-out detection control interface 0 - not isolated (default) 1 - isolated."]
     #[must_use]
     #[inline(always)]
     pub const fn isolate(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "isolates the brown-out detection control interface 0 - not isolated (default) 1 - isolated"]
+    #[doc = "isolates the brown-out detection control interface 0 - not isolated (default) 1 - isolated."]
     #[inline(always)]
     pub const fn set_isolate(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
@@ -285,31 +285,31 @@ impl defmt::Format for BodCtrl {
         defmt::write!(f, "BodCtrl {{ isolate: {=bool:?} }}", self.isolate())
     }
 }
-#[doc = "Brown-out Detection Low Power Entry Settings"]
+#[doc = "Brown-out Detection Low Power Entry Settings."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct BodLpEntry(pub u32);
 impl BodLpEntry {
-    #[doc = "enable brown-out detection 0=not enabled, 1=enabled"]
+    #[doc = "enable brown-out detection 0=not enabled, 1=enabled."]
     #[must_use]
     #[inline(always)]
     pub const fn en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "enable brown-out detection 0=not enabled, 1=enabled"]
+    #[doc = "enable brown-out detection 0=not enabled, 1=enabled."]
     #[inline(always)]
     pub const fn set_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "threshold select 00000 - 0.473V 00001 - 0.516V 00010 - 0.559V 00011 - 0.602V 00100 - 0.645VS 00101 - 0.688V 00110 - 0.731V 00111 - 0.774V 01000 - 0.817V 01001 - 0.860V (default) 01010 - 0.903V 01011 - 0.946V 01100 - 0.989V 01101 - 1.032V 01110 - 1.075V 01111 - 1.118V 10000 - 1.161 10001 - 1.204V"]
+    #[doc = "threshold select 00000 - 0.473V 00001 - 0.516V 00010 - 0.559V 00011 - 0.602V 00100 - 0.645VS 00101 - 0.688V 00110 - 0.731V 00111 - 0.774V 01000 - 0.817V 01001 - 0.860V (default) 01010 - 0.903V 01011 - 0.946V 01100 - 0.989V 01101 - 1.032V 01110 - 1.075V 01111 - 1.118V 10000 - 1.161 10001 - 1.204V."]
     #[must_use]
     #[inline(always)]
     pub const fn vsel(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x1f;
         val as u8
     }
-    #[doc = "threshold select 00000 - 0.473V 00001 - 0.516V 00010 - 0.559V 00011 - 0.602V 00100 - 0.645VS 00101 - 0.688V 00110 - 0.731V 00111 - 0.774V 01000 - 0.817V 01001 - 0.860V (default) 01010 - 0.903V 01011 - 0.946V 01100 - 0.989V 01101 - 1.032V 01110 - 1.075V 01111 - 1.118V 10000 - 1.161 10001 - 1.204V"]
+    #[doc = "threshold select 00000 - 0.473V 00001 - 0.516V 00010 - 0.559V 00011 - 0.602V 00100 - 0.645VS 00101 - 0.688V 00110 - 0.731V 00111 - 0.774V 01000 - 0.817V 01001 - 0.860V (default) 01010 - 0.903V 01011 - 0.946V 01100 - 0.989V 01101 - 1.032V 01110 - 1.075V 01111 - 1.118V 10000 - 1.161 10001 - 1.204V."]
     #[inline(always)]
     pub const fn set_vsel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 4usize)) | (((val as u32) & 0x1f) << 4usize);
@@ -340,31 +340,31 @@ impl defmt::Format for BodLpEntry {
         )
     }
 }
-#[doc = "Brown-out Detection Low Power Exit Settings"]
+#[doc = "Brown-out Detection Low Power Exit Settings."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct BodLpExit(pub u32);
 impl BodLpExit {
-    #[doc = "enable brown-out detection 0=not enabled, 1=enabled"]
+    #[doc = "enable brown-out detection 0=not enabled, 1=enabled."]
     #[must_use]
     #[inline(always)]
     pub const fn en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "enable brown-out detection 0=not enabled, 1=enabled"]
+    #[doc = "enable brown-out detection 0=not enabled, 1=enabled."]
     #[inline(always)]
     pub const fn set_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "threshold select 00000 - 0.473V 00001 - 0.516V 00010 - 0.559V 00011 - 0.602V 00100 - 0.645VS 00101 - 0.688V 00110 - 0.731V 00111 - 0.774V 01000 - 0.817V 01001 - 0.860V (default) 01010 - 0.903V 01011 - 0.946V 01100 - 0.989V 01101 - 1.032V 01110 - 1.075V 01111 - 1.118V 10000 - 1.161 10001 - 1.204V"]
+    #[doc = "threshold select 00000 - 0.473V 00001 - 0.516V 00010 - 0.559V 00011 - 0.602V 00100 - 0.645VS 00101 - 0.688V 00110 - 0.731V 00111 - 0.774V 01000 - 0.817V 01001 - 0.860V (default) 01010 - 0.903V 01011 - 0.946V 01100 - 0.989V 01101 - 1.032V 01110 - 1.075V 01111 - 1.118V 10000 - 1.161 10001 - 1.204V."]
     #[must_use]
     #[inline(always)]
     pub const fn vsel(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x1f;
         val as u8
     }
-    #[doc = "threshold select 00000 - 0.473V 00001 - 0.516V 00010 - 0.559V 00011 - 0.602V 00100 - 0.645VS 00101 - 0.688V 00110 - 0.731V 00111 - 0.774V 01000 - 0.817V 01001 - 0.860V (default) 01010 - 0.903V 01011 - 0.946V 01100 - 0.989V 01101 - 1.032V 01110 - 1.075V 01111 - 1.118V 10000 - 1.161 10001 - 1.204V"]
+    #[doc = "threshold select 00000 - 0.473V 00001 - 0.516V 00010 - 0.559V 00011 - 0.602V 00100 - 0.645VS 00101 - 0.688V 00110 - 0.731V 00111 - 0.774V 01000 - 0.817V 01001 - 0.860V (default) 01010 - 0.903V 01011 - 0.946V 01100 - 0.989V 01101 - 1.032V 01110 - 1.075V 01111 - 1.118V 10000 - 1.161 10001 - 1.204V."]
     #[inline(always)]
     pub const fn set_vsel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 4usize)) | (((val as u32) & 0x1f) << 4usize);
@@ -450,7 +450,7 @@ impl defmt::Format for Bootdis {
         )
     }
 }
-#[doc = "Chip reset control and status"]
+#[doc = "Chip reset control and status."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChipReset(pub u32);
@@ -479,146 +479,146 @@ impl ChipReset {
     pub const fn set_rescue_flag(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "Last reset was from the power-on reset This resets: double_tap flag yes DP yes RPAP yes rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was from the power-on reset This resets: double_tap flag yes DP yes RPAP yes rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[must_use]
     #[inline(always)]
     pub const fn had_por(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "Last reset was from the power-on reset This resets: double_tap flag yes DP yes RPAP yes rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was from the power-on reset This resets: double_tap flag yes DP yes RPAP yes rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[inline(always)]
     pub const fn set_had_por(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
-    #[doc = "Last reset was from the brown-out detection block This resets: double_tap flag yes DP yes RPAP yes rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was from the brown-out detection block This resets: double_tap flag yes DP yes RPAP yes rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[must_use]
     #[inline(always)]
     pub const fn had_bor(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
-    #[doc = "Last reset was from the brown-out detection block This resets: double_tap flag yes DP yes RPAP yes rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was from the brown-out detection block This resets: double_tap flag yes DP yes RPAP yes rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[inline(always)]
     pub const fn set_had_bor(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
-    #[doc = "Last reset was from the RUN pin This resets: double_tap flag no DP yes RPAP yes rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was from the RUN pin This resets: double_tap flag no DP yes RPAP yes rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[must_use]
     #[inline(always)]
     pub const fn had_run_low(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
         val != 0
     }
-    #[doc = "Last reset was from the RUN pin This resets: double_tap flag no DP yes RPAP yes rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was from the RUN pin This resets: double_tap flag no DP yes RPAP yes rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[inline(always)]
     pub const fn set_had_run_low(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
-    #[doc = "Last reset was an reset request from the arm debugger This resets: double_tap flag no DP no RPAP no rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was an reset request from the arm debugger This resets: double_tap flag no DP no RPAP no rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[must_use]
     #[inline(always)]
     pub const fn had_dp_reset_req(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
         val != 0
     }
-    #[doc = "Last reset was an reset request from the arm debugger This resets: double_tap flag no DP no RPAP no rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was an reset request from the arm debugger This resets: double_tap flag no DP no RPAP no rescue_flag yes timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[inline(always)]
     pub const fn set_had_dp_reset_req(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
     }
-    #[doc = "Last reset was a rescue reset from the debugger This resets: double_tap flag no DP no RPAP no rescue_flag no, it sets this flag timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was a rescue reset from the debugger This resets: double_tap flag no DP no RPAP no rescue_flag no, it sets this flag timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[must_use]
     #[inline(always)]
     pub const fn had_rescue(&self) -> bool {
         let val = (self.0 >> 21usize) & 0x01;
         val != 0
     }
-    #[doc = "Last reset was a rescue reset from the debugger This resets: double_tap flag no DP no RPAP no rescue_flag no, it sets this flag timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was a rescue reset from the debugger This resets: double_tap flag no DP no RPAP no rescue_flag no, it sets this flag timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[inline(always)]
     pub const fn set_had_rescue(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 21usize)) | (((val as u32) & 0x01) << 21usize);
     }
-    #[doc = "Last reset was a watchdog timeout which was configured to reset the power manager asynchronously This resets: double_tap flag no DP no RPAP no rescue_flag no timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was a watchdog timeout which was configured to reset the power manager asynchronously This resets: double_tap flag no DP no RPAP no rescue_flag no timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[must_use]
     #[inline(always)]
     pub const fn had_watchdog_reset_powman_async(&self) -> bool {
         let val = (self.0 >> 22usize) & 0x01;
         val != 0
     }
-    #[doc = "Last reset was a watchdog timeout which was configured to reset the power manager asynchronously This resets: double_tap flag no DP no RPAP no rescue_flag no timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was a watchdog timeout which was configured to reset the power manager asynchronously This resets: double_tap flag no DP no RPAP no rescue_flag no timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[inline(always)]
     pub const fn set_had_watchdog_reset_powman_async(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
     }
-    #[doc = "Last reset was a watchdog timeout which was configured to reset the power manager This resets: double_tap flag no DP no RPAP no rescue_flag no timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was a watchdog timeout which was configured to reset the power manager This resets: double_tap flag no DP no RPAP no rescue_flag no timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[must_use]
     #[inline(always)]
     pub const fn had_watchdog_reset_powman(&self) -> bool {
         let val = (self.0 >> 23usize) & 0x01;
         val != 0
     }
-    #[doc = "Last reset was a watchdog timeout which was configured to reset the power manager This resets: double_tap flag no DP no RPAP no rescue_flag no timer yes powman yes swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was a watchdog timeout which was configured to reset the power manager This resets: double_tap flag no DP no RPAP no rescue_flag no timer yes powman yes swcore yes psm yes then starts the power sequencer."]
     #[inline(always)]
     pub const fn set_had_watchdog_reset_powman(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 23usize)) | (((val as u32) & 0x01) << 23usize);
     }
-    #[doc = "Last reset was a watchdog timeout which was configured to reset the switched-core This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was a watchdog timeout which was configured to reset the switched-core This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore yes psm yes then starts the power sequencer."]
     #[must_use]
     #[inline(always)]
     pub const fn had_watchdog_reset_swcore(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
         val != 0
     }
-    #[doc = "Last reset was a watchdog timeout which was configured to reset the switched-core This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was a watchdog timeout which was configured to reset the switched-core This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore yes psm yes then starts the power sequencer."]
     #[inline(always)]
     pub const fn set_had_watchdog_reset_swcore(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
-    #[doc = "Last reset was a switched core powerdown This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was a switched core powerdown This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore yes psm yes then starts the power sequencer."]
     #[must_use]
     #[inline(always)]
     pub const fn had_swcore_pd(&self) -> bool {
         let val = (self.0 >> 25usize) & 0x01;
         val != 0
     }
-    #[doc = "Last reset was a switched core powerdown This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore yes psm yes then starts the power sequencer"]
+    #[doc = "Last reset was a switched core powerdown This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore yes psm yes then starts the power sequencer."]
     #[inline(always)]
     pub const fn set_had_swcore_pd(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
     }
-    #[doc = "Last reset was due to a power supply glitch This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore no psm yes and does not change the power state"]
+    #[doc = "Last reset was due to a power supply glitch This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore no psm yes and does not change the power state."]
     #[must_use]
     #[inline(always)]
     pub const fn had_glitch_detect(&self) -> bool {
         let val = (self.0 >> 26usize) & 0x01;
         val != 0
     }
-    #[doc = "Last reset was due to a power supply glitch This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore no psm yes and does not change the power state"]
+    #[doc = "Last reset was due to a power supply glitch This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore no psm yes and does not change the power state."]
     #[inline(always)]
     pub const fn set_had_glitch_detect(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 26usize)) | (((val as u32) & 0x01) << 26usize);
     }
-    #[doc = "Last reset was a system reset from the hazard debugger This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore no psm yes and does not change the power state"]
+    #[doc = "Last reset was a system reset from the hazard debugger This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore no psm yes and does not change the power state."]
     #[must_use]
     #[inline(always)]
     pub const fn had_hzd_sys_reset_req(&self) -> bool {
         let val = (self.0 >> 27usize) & 0x01;
         val != 0
     }
-    #[doc = "Last reset was a system reset from the hazard debugger This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore no psm yes and does not change the power state"]
+    #[doc = "Last reset was a system reset from the hazard debugger This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore no psm yes and does not change the power state."]
     #[inline(always)]
     pub const fn set_had_hzd_sys_reset_req(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 27usize)) | (((val as u32) & 0x01) << 27usize);
     }
-    #[doc = "Last reset was a watchdog timeout which was configured to reset the power-on state machine This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore no psm yes and does not change the power state"]
+    #[doc = "Last reset was a watchdog timeout which was configured to reset the power-on state machine This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore no psm yes and does not change the power state."]
     #[must_use]
     #[inline(always)]
     pub const fn had_watchdog_reset_rsm(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
         val != 0
     }
-    #[doc = "Last reset was a watchdog timeout which was configured to reset the power-on state machine This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore no psm yes and does not change the power state"]
+    #[doc = "Last reset was a watchdog timeout which was configured to reset the power-on state machine This resets: double_tap flag no DP no RPAP no rescue_flag no timer no powman no swcore no psm yes and does not change the power state."]
     #[inline(always)]
     pub const fn set_had_watchdog_reset_rsm(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
@@ -665,7 +665,7 @@ impl defmt::Format for ChipReset {
         defmt :: write ! (f , "ChipReset {{ double_tap: {=bool:?}, rescue_flag: {=bool:?}, had_por: {=bool:?}, had_bor: {=bool:?}, had_run_low: {=bool:?}, had_dp_reset_req: {=bool:?}, had_rescue: {=bool:?}, had_watchdog_reset_powman_async: {=bool:?}, had_watchdog_reset_powman: {=bool:?}, had_watchdog_reset_swcore: {=bool:?}, had_swcore_pd: {=bool:?}, had_glitch_detect: {=bool:?}, had_hzd_sys_reset_req: {=bool:?}, had_watchdog_reset_rsm: {=bool:?} }}" , self . double_tap () , self . rescue_flag () , self . had_por () , self . had_bor () , self . had_run_low () , self . had_dp_reset_req () , self . had_rescue () , self . had_watchdog_reset_powman_async () , self . had_watchdog_reset_powman () , self . had_watchdog_reset_swcore () , self . had_swcore_pd () , self . had_glitch_detect () , self . had_hzd_sys_reset_req () , self . had_watchdog_reset_rsm ())
     }
 }
-#[doc = "Indicates current powerup request state pwrup events can be cleared by removing the enable from the pwrup register. The alarm pwrup req can be cleared by clearing timer.alarm_enab 0 = chip reset, for the source of the last reset see POWMAN_CHIP_RESET 1 = pwrup0 2 = pwrup1 3 = pwrup2 4 = pwrup3 5 = coresight_pwrup 6 = alarm_pwrup"]
+#[doc = "Indicates current powerup request state pwrup events can be cleared by removing the enable from the pwrup register. The alarm pwrup req can be cleared by clearing timer.alarm_enab 0 = chip reset, for the source of the last reset see POWMAN_CHIP_RESET 1 = pwrup0 2 = pwrup1 3 = pwrup2 4 = pwrup3 5 = coresight_pwrup 6 = alarm_pwrup."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct CurrentPwrupReq(pub u32);
@@ -708,14 +708,14 @@ impl defmt::Format for CurrentPwrupReq {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct DbgPwrcfg(pub u32);
 impl DbgPwrcfg {
-    #[doc = "Ignore pwrup req from debugger. If pwrup req is asserted then this will prevent power down and set powerdown blocked. Set ignore to stop paying attention to pwrup_req"]
+    #[doc = "Ignore pwrup req from debugger. If pwrup req is asserted then this will prevent power down and set powerdown blocked. Set ignore to stop paying attention to pwrup_req."]
     #[must_use]
     #[inline(always)]
     pub const fn ignore(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Ignore pwrup req from debugger. If pwrup req is asserted then this will prevent power down and set powerdown blocked. Set ignore to stop paying attention to pwrup_req"]
+    #[doc = "Ignore pwrup req from debugger. If pwrup req is asserted then this will prevent power down and set powerdown blocked. Set ignore to stop paying attention to pwrup_req."]
     #[inline(always)]
     pub const fn set_ignore(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -744,14 +744,14 @@ impl defmt::Format for DbgPwrcfg {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Dbgconfig(pub u32);
 impl Dbgconfig {
-    #[doc = "Configure DP instance ID for SWD multidrop selection. Recommend that this is NOT changed until you require debug access in multi-chip environment"]
+    #[doc = "Configure DP instance ID for SWD multidrop selection. Recommend that this is NOT changed until you require debug access in multi-chip environment."]
     #[must_use]
     #[inline(always)]
     pub const fn dp_instid(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x0f;
         val as u8
     }
-    #[doc = "Configure DP instance ID for SWD multidrop selection. Recommend that this is NOT changed until you require debug access in multi-chip environment"]
+    #[doc = "Configure DP instance ID for SWD multidrop selection. Recommend that this is NOT changed until you require debug access in multi-chip environment."]
     #[inline(always)]
     pub const fn set_dp_instid(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
@@ -776,19 +776,19 @@ impl defmt::Format for Dbgconfig {
         defmt::write!(f, "Dbgconfig {{ dp_instid: {=u8:?} }}", self.dp_instid())
     }
 }
-#[doc = "Configures a gpio as a power mode aware control output"]
+#[doc = "Configures a gpio as a power mode aware control output."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ExtCtrl(pub u32);
 impl ExtCtrl {
-    #[doc = "selects from gpio 0->30 set to 31 to disable this feature"]
+    #[doc = "selects from gpio 0->30 set to 31 to disable this feature."]
     #[must_use]
     #[inline(always)]
     pub const fn gpio_select(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x3f;
         val as u8
     }
-    #[doc = "selects from gpio 0->30 set to 31 to disable this feature"]
+    #[doc = "selects from gpio 0->30 set to 31 to disable this feature."]
     #[inline(always)]
     pub const fn set_gpio_select(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
@@ -813,26 +813,26 @@ impl ExtCtrl {
     pub const fn set_init_state(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
-    #[doc = "output level when entering the low power state"]
+    #[doc = "output level when entering the low power state."]
     #[must_use]
     #[inline(always)]
     pub const fn lp_entry_state(&self) -> bool {
         let val = (self.0 >> 13usize) & 0x01;
         val != 0
     }
-    #[doc = "output level when entering the low power state"]
+    #[doc = "output level when entering the low power state."]
     #[inline(always)]
     pub const fn set_lp_entry_state(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
-    #[doc = "output level when exiting the low power state"]
+    #[doc = "output level when exiting the low power state."]
     #[must_use]
     #[inline(always)]
     pub const fn lp_exit_state(&self) -> bool {
         let val = (self.0 >> 14usize) & 0x01;
         val != 0
     }
-    #[doc = "output level when exiting the low power state"]
+    #[doc = "output level when exiting the low power state."]
     #[inline(always)]
     pub const fn set_lp_exit_state(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u32) & 0x01) << 14usize);
@@ -866,26 +866,26 @@ impl defmt::Format for ExtCtrl {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ExtTimeRef(pub u32);
 impl ExtTimeRef {
-    #[doc = "0 -> gpio12 1 -> gpio20 2 -> gpio14 3 -> gpio22"]
+    #[doc = "0 -> gpio12 1 -> gpio20 2 -> gpio14 3 -> gpio22."]
     #[must_use]
     #[inline(always)]
     pub const fn source_sel(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x03;
         val as u8
     }
-    #[doc = "0 -> gpio12 1 -> gpio20 2 -> gpio14 3 -> gpio22"]
+    #[doc = "0 -> gpio12 1 -> gpio20 2 -> gpio14 3 -> gpio22."]
     #[inline(always)]
     pub const fn set_source_sel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 0usize)) | (((val as u32) & 0x03) << 0usize);
     }
-    #[doc = "Use the selected GPIO to drive the 32kHz low power clock, in place of LPOSC. This field must only be written when POWMAN_TIMER_RUN=0"]
+    #[doc = "Use the selected GPIO to drive the 32kHz low power clock, in place of LPOSC. This field must only be written when POWMAN_TIMER_RUN=0."]
     #[must_use]
     #[inline(always)]
     pub const fn drive_lpck(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "Use the selected GPIO to drive the 32kHz low power clock, in place of LPOSC. This field must only be written when POWMAN_TIMER_RUN=0"]
+    #[doc = "Use the selected GPIO to drive the 32kHz low power clock, in place of LPOSC. This field must only be written when POWMAN_TIMER_RUN=0."]
     #[inline(always)]
     pub const fn set_drive_lpck(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
@@ -916,7 +916,7 @@ impl defmt::Format for ExtTimeRef {
         )
     }
 }
-#[doc = "Interrupt Enable"]
+#[doc = "Interrupt Enable."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
@@ -941,26 +941,26 @@ impl Int {
     pub const fn set_timer(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Source is state.req_ignored"]
+    #[doc = "Source is state.req_ignored."]
     #[must_use]
     #[inline(always)]
     pub const fn state_req_ignored(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "Source is state.req_ignored"]
+    #[doc = "Source is state.req_ignored."]
     #[inline(always)]
     pub const fn set_state_req_ignored(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "Source is state.pwrup_while_waiting"]
+    #[doc = "Source is state.pwrup_while_waiting."]
     #[must_use]
     #[inline(always)]
     pub const fn pwrup_while_waiting(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
-    #[doc = "Source is state.pwrup_while_waiting"]
+    #[doc = "Source is state.pwrup_while_waiting."]
     #[inline(always)]
     pub const fn set_pwrup_while_waiting(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
@@ -988,7 +988,7 @@ impl defmt::Format for Int {
         defmt :: write ! (f , "Int {{ vreg_output_low: {=bool:?}, timer: {=bool:?}, state_req_ignored: {=bool:?}, pwrup_while_waiting: {=bool:?} }}" , self . vreg_output_low () , self . timer () , self . state_req_ignored () , self . pwrup_while_waiting ())
     }
 }
-#[doc = "Indicates which pwrup source triggered the last switched-core power up 0 = chip reset, for the source of the last reset see POWMAN_CHIP_RESET 1 = pwrup0 2 = pwrup1 3 = pwrup2 4 = pwrup3 5 = coresight_pwrup 6 = alarm_pwrup"]
+#[doc = "Indicates which pwrup source triggered the last switched-core power up 0 = chip reset, for the source of the last reset see POWMAN_CHIP_RESET 1 = pwrup0 2 = pwrup1 3 = pwrup2 4 = pwrup3 5 = coresight_pwrup 6 = alarm_pwrup."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct LastSwcorePwrup(pub u32);
@@ -1032,26 +1032,26 @@ impl defmt::Format for LastSwcorePwrup {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Lposc(pub u32);
 impl Lposc {
-    #[doc = "This feature has been removed"]
+    #[doc = "This feature has been removed."]
     #[must_use]
     #[inline(always)]
     pub const fn mode(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x03;
         val as u8
     }
-    #[doc = "This feature has been removed"]
+    #[doc = "This feature has been removed."]
     #[inline(always)]
     pub const fn set_mode(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 0usize)) | (((val as u32) & 0x03) << 0usize);
     }
-    #[doc = "Frequency trim - the trim step is typically 1% of the reset frequency, but can be up to 3%"]
+    #[doc = "Frequency trim - the trim step is typically 1% of the reset frequency, but can be up to 3%."]
     #[must_use]
     #[inline(always)]
     pub const fn trim(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x3f;
         val as u8
     }
-    #[doc = "Frequency trim - the trim step is typically 1% of the reset frequency, but can be up to 3%"]
+    #[doc = "Frequency trim - the trim step is typically 1% of the reset frequency, but can be up to 3%."]
     #[inline(always)]
     pub const fn set_trim(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 4usize)) | (((val as u32) & 0x3f) << 4usize);
@@ -1087,14 +1087,14 @@ impl defmt::Format for Lposc {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct LposcFreqKhzFrac(pub u32);
 impl LposcFreqKhzFrac {
-    #[doc = "Fractional component of the LPOSC or GPIO clock source frequency in kHz. Default = 0.768 This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=1"]
+    #[doc = "Fractional component of the LPOSC or GPIO clock source frequency in kHz. Default = 0.768 This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=1."]
     #[must_use]
     #[inline(always)]
     pub const fn lposc_freq_khz_frac(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "Fractional component of the LPOSC or GPIO clock source frequency in kHz. Default = 0.768 This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=1"]
+    #[doc = "Fractional component of the LPOSC or GPIO clock source frequency in kHz. Default = 0.768 This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=1."]
     #[inline(always)]
     pub const fn set_lposc_freq_khz_frac(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
@@ -1128,14 +1128,14 @@ impl defmt::Format for LposcFreqKhzFrac {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct LposcFreqKhzInt(pub u32);
 impl LposcFreqKhzInt {
-    #[doc = "Integer component of the LPOSC or GPIO clock source frequency in kHz. Default = 32 This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=1"]
+    #[doc = "Integer component of the LPOSC or GPIO clock source frequency in kHz. Default = 32 This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=1."]
     #[must_use]
     #[inline(always)]
     pub const fn lposc_freq_khz_int(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x3f;
         val as u8
     }
-    #[doc = "Integer component of the LPOSC or GPIO clock source frequency in kHz. Default = 32 This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=1"]
+    #[doc = "Integer component of the LPOSC or GPIO clock source frequency in kHz. Default = 32 This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=1."]
     #[inline(always)]
     pub const fn set_lposc_freq_khz_int(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 0usize)) | (((val as u32) & 0x3f) << 0usize);
@@ -1164,43 +1164,43 @@ impl defmt::Format for LposcFreqKhzInt {
         )
     }
 }
-#[doc = "power state machine delays"]
+#[doc = "power state machine delays."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct PowDelay(pub u32);
 impl PowDelay {
-    #[doc = "timing between the swcore power state machine steps measured in units of the lposc period, 0 gives a delay of 1 unit"]
+    #[doc = "timing between the swcore power state machine steps measured in units of the lposc period, 0 gives a delay of 1 unit."]
     #[must_use]
     #[inline(always)]
     pub const fn swcore_step(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x0f;
         val as u8
     }
-    #[doc = "timing between the swcore power state machine steps measured in units of the lposc period, 0 gives a delay of 1 unit"]
+    #[doc = "timing between the swcore power state machine steps measured in units of the lposc period, 0 gives a delay of 1 unit."]
     #[inline(always)]
     pub const fn set_swcore_step(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
     }
-    #[doc = "timing between the xip power state machine steps measured in units of the lposc period, 0 gives a delay of 1 unit"]
+    #[doc = "timing between the xip power state machine steps measured in units of the lposc period, 0 gives a delay of 1 unit."]
     #[must_use]
     #[inline(always)]
     pub const fn xip_step(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x0f;
         val as u8
     }
-    #[doc = "timing between the xip power state machine steps measured in units of the lposc period, 0 gives a delay of 1 unit"]
+    #[doc = "timing between the xip power state machine steps measured in units of the lposc period, 0 gives a delay of 1 unit."]
     #[inline(always)]
     pub const fn set_xip_step(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 4usize)) | (((val as u32) & 0x0f) << 4usize);
     }
-    #[doc = "timing between the sram0 and sram1 power state machine steps measured in units of the powman tick period (>=1us), 0 gives a delay of 1 unit"]
+    #[doc = "timing between the sram0 and sram1 power state machine steps measured in units of the powman tick period (>=1us), 0 gives a delay of 1 unit."]
     #[must_use]
     #[inline(always)]
     pub const fn sram_step(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0xff;
         val as u8
     }
-    #[doc = "timing between the sram0 and sram1 power state machine steps measured in units of the powman tick period (>=1us), 0 gives a delay of 1 unit"]
+    #[doc = "timing between the sram0 and sram1 power state machine steps measured in units of the powman tick period (>=1us), 0 gives a delay of 1 unit."]
     #[inline(always)]
     pub const fn set_sram_step(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
@@ -1237,14 +1237,14 @@ impl defmt::Format for PowDelay {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct PowFastdiv(pub u32);
 impl PowFastdiv {
-    #[doc = "divides the POWMAN clock to provide a tick for the delay module and state machines when clk_pow is running from the slow clock it is not divided when clk_pow is running from the fast clock it is divided by tick_div"]
+    #[doc = "divides the POWMAN clock to provide a tick for the delay module and state machines when clk_pow is running from the slow clock it is not divided when clk_pow is running from the fast clock it is divided by tick_div."]
     #[must_use]
     #[inline(always)]
     pub const fn pow_fastdiv(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x07ff;
         val as u16
     }
-    #[doc = "divides the POWMAN clock to provide a tick for the delay module and state machines when clk_pow is running from the slow clock it is not divided when clk_pow is running from the fast clock it is divided by tick_div"]
+    #[doc = "divides the POWMAN clock to provide a tick for the delay module and state machines when clk_pow is running from the slow clock it is not divided when clk_pow is running from the fast clock it is divided by tick_div."]
     #[inline(always)]
     pub const fn set_pow_fastdiv(&mut self, val: u16) {
         self.0 = (self.0 & !(0x07ff << 0usize)) | (((val as u32) & 0x07ff) << 0usize);
@@ -1273,7 +1273,7 @@ impl defmt::Format for PowFastdiv {
         )
     }
 }
-#[doc = "4 GPIO powerup events can be configured to wake the chip up from a low power state. The pwrups are level/edge sensitive and can be set to trigger on a high/rising or low/falling event The number of gpios available depends on the package option. An invalid selection will be ignored source = 0 selects gpio0 . . source = 47 selects gpio47 source = 48 selects qspi_ss source = 49 selects qspi_sd0 source = 50 selects qspi_sd1 source = 51 selects qspi_sd2 source = 52 selects qspi_sd3 source = 53 selects qspi_sclk level = 0 triggers the pwrup when the source is low level = 1 triggers the pwrup when the source is high"]
+#[doc = "4 GPIO powerup events can be configured to wake the chip up from a low power state. The pwrups are level/edge sensitive and can be set to trigger on a high/rising or low/falling event The number of gpios available depends on the package option. An invalid selection will be ignored source = 0 selects gpio0 . . source = 47 selects gpio47 source = 48 selects qspi_ss source = 49 selects qspi_sd0 source = 50 selects qspi_sd1 source = 51 selects qspi_sd2 source = 52 selects qspi_sd3 source = 53 selects qspi_sclk level = 0 triggers the pwrup when the source is low level = 1 triggers the pwrup when the source is high."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Pwrup(pub u32);
@@ -1334,14 +1334,14 @@ impl Pwrup {
     pub const fn set_status(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
-    #[doc = "Value of selected gpio pin (only if enable == 1)"]
+    #[doc = "Value of selected gpio pin (only if enable == 1)."]
     #[must_use]
     #[inline(always)]
     pub const fn raw_status(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "Value of selected gpio pin (only if enable == 1)"]
+    #[doc = "Value of selected gpio pin (only if enable == 1)."]
     #[inline(always)]
     pub const fn set_raw_status(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
@@ -1371,139 +1371,139 @@ impl defmt::Format for Pwrup {
         defmt :: write ! (f , "Pwrup {{ source: {=u8:?}, enable: {=bool:?}, direction: {:?}, mode: {:?}, status: {=bool:?}, raw_status: {=bool:?} }}" , self . source () , self . enable () , self . direction () , self . mode () , self . status () , self . raw_status ())
     }
 }
-#[doc = "For configuration of the power sequencer Writes are ignored while POWMAN_STATE_CHANGING=1"]
+#[doc = "For configuration of the power sequencer Writes are ignored while POWMAN_STATE_CHANGING=1."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SeqCfg(pub u32);
 impl SeqCfg {
-    #[doc = "Specifies the power state of SRAM1 when powering up swcore from a low power state (P1.xxx) to a high power state (P0.0xx). 0=power-up 1=no change"]
+    #[doc = "Specifies the power state of SRAM1 when powering up swcore from a low power state (P1.xxx) to a high power state (P0.0xx). 0=power-up 1=no change."]
     #[must_use]
     #[inline(always)]
     pub const fn hw_pwrup_sram1(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Specifies the power state of SRAM1 when powering up swcore from a low power state (P1.xxx) to a high power state (P0.0xx). 0=power-up 1=no change"]
+    #[doc = "Specifies the power state of SRAM1 when powering up swcore from a low power state (P1.xxx) to a high power state (P0.0xx). 0=power-up 1=no change."]
     #[inline(always)]
     pub const fn set_hw_pwrup_sram1(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Specifies the power state of SRAM0 when powering up swcore from a low power state (P1.xxx) to a high power state (P0.0xx). 0=power-up 1=no change"]
+    #[doc = "Specifies the power state of SRAM0 when powering up swcore from a low power state (P1.xxx) to a high power state (P0.0xx). 0=power-up 1=no change."]
     #[must_use]
     #[inline(always)]
     pub const fn hw_pwrup_sram0(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Specifies the power state of SRAM0 when powering up swcore from a low power state (P1.xxx) to a high power state (P0.0xx). 0=power-up 1=no change"]
+    #[doc = "Specifies the power state of SRAM0 when powering up swcore from a low power state (P1.xxx) to a high power state (P0.0xx). 0=power-up 1=no change."]
     #[inline(always)]
     pub const fn set_hw_pwrup_sram0(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Set to 0 to prevent automatic switching to vreg low power mode when switched-core is powered down This setting takes effect when the swcore is next powered down"]
+    #[doc = "Set to 0 to prevent automatic switching to vreg low power mode when switched-core is powered down This setting takes effect when the swcore is next powered down."]
     #[must_use]
     #[inline(always)]
     pub const fn use_vreg_lp(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "Set to 0 to prevent automatic switching to vreg low power mode when switched-core is powered down This setting takes effect when the swcore is next powered down"]
+    #[doc = "Set to 0 to prevent automatic switching to vreg low power mode when switched-core is powered down This setting takes effect when the swcore is next powered down."]
     #[inline(always)]
     pub const fn set_use_vreg_lp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "Set to 0 to prevent automatic switching to vreg high power mode when switched-core is powered up This setting takes effect when the swcore is next powered up"]
+    #[doc = "Set to 0 to prevent automatic switching to vreg high power mode when switched-core is powered up This setting takes effect when the swcore is next powered up."]
     #[must_use]
     #[inline(always)]
     pub const fn use_vreg_hp(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
-    #[doc = "Set to 0 to prevent automatic switching to vreg high power mode when switched-core is powered up This setting takes effect when the swcore is next powered up"]
+    #[doc = "Set to 0 to prevent automatic switching to vreg high power mode when switched-core is powered up This setting takes effect when the swcore is next powered up."]
     #[inline(always)]
     pub const fn set_use_vreg_hp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
-    #[doc = "Set to 0 to prevent automatic switching to bod low power mode when switched-core is powered down This setting takes effect when the swcore is next powered down"]
+    #[doc = "Set to 0 to prevent automatic switching to bod low power mode when switched-core is powered down This setting takes effect when the swcore is next powered down."]
     #[must_use]
     #[inline(always)]
     pub const fn use_bod_lp(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
-    #[doc = "Set to 0 to prevent automatic switching to bod low power mode when switched-core is powered down This setting takes effect when the swcore is next powered down"]
+    #[doc = "Set to 0 to prevent automatic switching to bod low power mode when switched-core is powered down This setting takes effect when the swcore is next powered down."]
     #[inline(always)]
     pub const fn set_use_bod_lp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
-    #[doc = "Set to 0 to prevent automatic switching to bod high power mode when switched-core is powered up This setting takes effect when the swcore is next powered up"]
+    #[doc = "Set to 0 to prevent automatic switching to bod high power mode when switched-core is powered up This setting takes effect when the swcore is next powered up."]
     #[must_use]
     #[inline(always)]
     pub const fn use_bod_hp(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
-    #[doc = "Set to 0 to prevent automatic switching to bod high power mode when switched-core is powered up This setting takes effect when the swcore is next powered up"]
+    #[doc = "Set to 0 to prevent automatic switching to bod high power mode when switched-core is powered up This setting takes effect when the swcore is next powered up."]
     #[inline(always)]
     pub const fn set_use_bod_hp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
-    #[doc = "Set to 0 to stop the low power osc when the switched-core is powered down, which is unwise if using it to clock the timer This setting takes effect when the swcore is next powered down"]
+    #[doc = "Set to 0 to stop the low power osc when the switched-core is powered down, which is unwise if using it to clock the timer This setting takes effect when the swcore is next powered down."]
     #[must_use]
     #[inline(always)]
     pub const fn run_lposc_in_lp(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "Set to 0 to stop the low power osc when the switched-core is powered down, which is unwise if using it to clock the timer This setting takes effect when the swcore is next powered down"]
+    #[doc = "Set to 0 to stop the low power osc when the switched-core is powered down, which is unwise if using it to clock the timer This setting takes effect when the swcore is next powered down."]
     #[inline(always)]
     pub const fn set_run_lposc_in_lp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "selects the reference clock (clk_ref) as the source of the POWMAN clock when switched-core is powered. The POWMAN clock always switches to the slow clock (lposc) when switched-core is powered down because the fast clock stops running. 0 always run the POWMAN clock from the slow clock (lposc) 1 run the POWMAN clock from the fast clock when available This setting takes effect when a power up sequence is next run"]
+    #[doc = "selects the reference clock (clk_ref) as the source of the POWMAN clock when switched-core is powered. The POWMAN clock always switches to the slow clock (lposc) when switched-core is powered down because the fast clock stops running. 0 always run the POWMAN clock from the slow clock (lposc) 1 run the POWMAN clock from the fast clock when available This setting takes effect when a power up sequence is next run."]
     #[must_use]
     #[inline(always)]
     pub const fn use_fast_powck(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "selects the reference clock (clk_ref) as the source of the POWMAN clock when switched-core is powered. The POWMAN clock always switches to the slow clock (lposc) when switched-core is powered down because the fast clock stops running. 0 always run the POWMAN clock from the slow clock (lposc) 1 run the POWMAN clock from the fast clock when available This setting takes effect when a power up sequence is next run"]
+    #[doc = "selects the reference clock (clk_ref) as the source of the POWMAN clock when switched-core is powered. The POWMAN clock always switches to the slow clock (lposc) when switched-core is powered down because the fast clock stops running. 0 always run the POWMAN clock from the slow clock (lposc) 1 run the POWMAN clock from the fast clock when available This setting takes effect when a power up sequence is next run."]
     #[inline(always)]
     pub const fn set_use_fast_powck(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
-    #[doc = "Indicates the voltage regulator (VREG) mode 0 = VREG high power mode which is the default 1 = VREG low power mode"]
+    #[doc = "Indicates the voltage regulator (VREG) mode 0 = VREG high power mode which is the default 1 = VREG low power mode."]
     #[must_use]
     #[inline(always)]
     pub const fn using_vreg_lp(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "Indicates the voltage regulator (VREG) mode 0 = VREG high power mode which is the default 1 = VREG low power mode"]
+    #[doc = "Indicates the voltage regulator (VREG) mode 0 = VREG high power mode which is the default 1 = VREG low power mode."]
     #[inline(always)]
     pub const fn set_using_vreg_lp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
-    #[doc = "Indicates the brown-out detector (BOD) mode 0 = BOD high power mode which is the default 1 = BOD low power mode"]
+    #[doc = "Indicates the brown-out detector (BOD) mode 0 = BOD high power mode which is the default 1 = BOD low power mode."]
     #[must_use]
     #[inline(always)]
     pub const fn using_bod_lp(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
-    #[doc = "Indicates the brown-out detector (BOD) mode 0 = BOD high power mode which is the default 1 = BOD low power mode"]
+    #[doc = "Indicates the brown-out detector (BOD) mode 0 = BOD high power mode which is the default 1 = BOD low power mode."]
     #[inline(always)]
     pub const fn set_using_bod_lp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
-    #[doc = "0 indicates the POWMAN clock is running from the low power oscillator (32kHz) 1 indicates the POWMAN clock is running from the reference clock (2-50MHz)"]
+    #[doc = "0 indicates the POWMAN clock is running from the low power oscillator (32kHz) 1 indicates the POWMAN clock is running from the reference clock (2-50MHz)."]
     #[must_use]
     #[inline(always)]
     pub const fn using_fast_powck(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
         val != 0
     }
-    #[doc = "0 indicates the POWMAN clock is running from the low power oscillator (32kHz) 1 indicates the POWMAN clock is running from the reference clock (2-50MHz)"]
+    #[doc = "0 indicates the POWMAN clock is running from the low power oscillator (32kHz) 1 indicates the POWMAN clock is running from the reference clock (2-50MHz)."]
     #[inline(always)]
     pub const fn set_using_fast_powck(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
@@ -1542,14 +1542,14 @@ impl defmt::Format for SeqCfg {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SetTime15to0(pub u32);
 impl SetTime15to0 {
-    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0"]
+    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0."]
     #[must_use]
     #[inline(always)]
     pub const fn set_time_15to0(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0"]
+    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0."]
     #[inline(always)]
     pub const fn set_set_time_15to0(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
@@ -1582,14 +1582,14 @@ impl defmt::Format for SetTime15to0 {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SetTime31to16(pub u32);
 impl SetTime31to16 {
-    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0"]
+    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0."]
     #[must_use]
     #[inline(always)]
     pub const fn set_time_31to16(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0"]
+    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0."]
     #[inline(always)]
     pub const fn set_set_time_31to16(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
@@ -1622,14 +1622,14 @@ impl defmt::Format for SetTime31to16 {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SetTime47to32(pub u32);
 impl SetTime47to32 {
-    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0"]
+    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0."]
     #[must_use]
     #[inline(always)]
     pub const fn set_time_47to32(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0"]
+    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0."]
     #[inline(always)]
     pub const fn set_set_time_47to32(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
@@ -1662,14 +1662,14 @@ impl defmt::Format for SetTime47to32 {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SetTime63to48(pub u32);
 impl SetTime63to48 {
-    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0"]
+    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0."]
     #[must_use]
     #[inline(always)]
     pub const fn set_time_63to48(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0"]
+    #[doc = "For setting the time, do not use for reading the time, use POWMAN_READ_TIME_UPPER and POWMAN_READ_TIME_LOWER. This field must only be written when POWMAN_TIMER_RUN=0."]
     #[inline(always)]
     pub const fn set_set_time_63to48(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
@@ -1757,14 +1757,14 @@ impl State {
     pub const fn set_bad_sw_req(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
-    #[doc = "Bad hardware initiated state request. Went back to state 0 (i.e. everything powered up)"]
+    #[doc = "Bad hardware initiated state request. Went back to state 0 (i.e. everything powered up)."]
     #[must_use]
     #[inline(always)]
     pub const fn bad_hw_req(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
-    #[doc = "Bad hardware initiated state request. Went back to state 0 (i.e. everything powered up)"]
+    #[doc = "Bad hardware initiated state request. Went back to state 0 (i.e. everything powered up)."]
     #[inline(always)]
     pub const fn set_bad_hw_req(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
@@ -1832,14 +1832,14 @@ impl Timer {
     pub const fn set_nonsec_write(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Timer enable. Setting this bit causes the timer to begin counting up from its current value. Clearing this bit stops the timer from counting. Before enabling the timer, set the POWMAN_LPOSC_FREQ* and POWMAN_XOSC_FREQ* registers to configure the count rate, and initialise the current time by writing to SET_TIME_63TO48 through SET_TIME_15TO0. You must not write to the SET_TIME_x registers when the timer is running. Once configured, start the timer by setting POWMAN_TIMER_RUN=1. This will start the timer running from the LPOSC. When the XOSC is available switch the reference clock to XOSC then select it as the timer clock by setting POWMAN_TIMER_USE_XOSC=1"]
+    #[doc = "Timer enable. Setting this bit causes the timer to begin counting up from its current value. Clearing this bit stops the timer from counting. Before enabling the timer, set the POWMAN_LPOSC_FREQ* and POWMAN_XOSC_FREQ* registers to configure the count rate, and initialise the current time by writing to SET_TIME_63TO48 through SET_TIME_15TO0. You must not write to the SET_TIME_x registers when the timer is running. Once configured, start the timer by setting POWMAN_TIMER_RUN=1. This will start the timer running from the LPOSC. When the XOSC is available switch the reference clock to XOSC then select it as the timer clock by setting POWMAN_TIMER_USE_XOSC=1."]
     #[must_use]
     #[inline(always)]
     pub const fn run(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Timer enable. Setting this bit causes the timer to begin counting up from its current value. Clearing this bit stops the timer from counting. Before enabling the timer, set the POWMAN_LPOSC_FREQ* and POWMAN_XOSC_FREQ* registers to configure the count rate, and initialise the current time by writing to SET_TIME_63TO48 through SET_TIME_15TO0. You must not write to the SET_TIME_x registers when the timer is running. Once configured, start the timer by setting POWMAN_TIMER_RUN=1. This will start the timer running from the LPOSC. When the XOSC is available switch the reference clock to XOSC then select it as the timer clock by setting POWMAN_TIMER_USE_XOSC=1"]
+    #[doc = "Timer enable. Setting this bit causes the timer to begin counting up from its current value. Clearing this bit stops the timer from counting. Before enabling the timer, set the POWMAN_LPOSC_FREQ* and POWMAN_XOSC_FREQ* registers to configure the count rate, and initialise the current time by writing to SET_TIME_63TO48 through SET_TIME_15TO0. You must not write to the SET_TIME_x registers when the timer is running. Once configured, start the timer by setting POWMAN_TIMER_RUN=1. This will start the timer running from the LPOSC. When the XOSC is available switch the reference clock to XOSC then select it as the timer clock by setting POWMAN_TIMER_USE_XOSC=1."]
     #[inline(always)]
     pub const fn set_run(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
@@ -1868,14 +1868,14 @@ impl Timer {
     pub const fn set_alarm_enab(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "Alarm wakes the chip from low power mode"]
+    #[doc = "Alarm wakes the chip from low power mode."]
     #[must_use]
     #[inline(always)]
     pub const fn pwrup_on_alarm(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
-    #[doc = "Alarm wakes the chip from low power mode"]
+    #[doc = "Alarm wakes the chip from low power mode."]
     #[inline(always)]
     pub const fn set_pwrup_on_alarm(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
@@ -1892,38 +1892,38 @@ impl Timer {
     pub const fn set_alarm(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
-    #[doc = "Switch to lposc as the source of the 1kHz timer tick"]
+    #[doc = "Switch to lposc as the source of the 1kHz timer tick."]
     #[must_use]
     #[inline(always)]
     pub const fn use_lposc(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "Switch to lposc as the source of the 1kHz timer tick"]
+    #[doc = "Switch to lposc as the source of the 1kHz timer tick."]
     #[inline(always)]
     pub const fn set_use_lposc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "switch to xosc as the source of the 1kHz timer tick"]
+    #[doc = "switch to xosc as the source of the 1kHz timer tick."]
     #[must_use]
     #[inline(always)]
     pub const fn use_xosc(&self) -> bool {
         let val = (self.0 >> 9usize) & 0x01;
         val != 0
     }
-    #[doc = "switch to xosc as the source of the 1kHz timer tick"]
+    #[doc = "switch to xosc as the source of the 1kHz timer tick."]
     #[inline(always)]
     pub const fn set_use_xosc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u32) & 0x01) << 9usize);
     }
-    #[doc = "switch to gpio as the source of the 1kHz timer tick"]
+    #[doc = "switch to gpio as the source of the 1kHz timer tick."]
     #[must_use]
     #[inline(always)]
     pub const fn use_gpio_1khz(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "switch to gpio as the source of the 1kHz timer tick"]
+    #[doc = "switch to gpio as the source of the 1kHz timer tick."]
     #[inline(always)]
     pub const fn set_use_gpio_1khz(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
@@ -1940,50 +1940,50 @@ impl Timer {
     pub const fn set_use_gpio_1hz(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
-    #[doc = "Timer is running from xosc"]
+    #[doc = "Timer is running from xosc."]
     #[must_use]
     #[inline(always)]
     pub const fn using_xosc(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "Timer is running from xosc"]
+    #[doc = "Timer is running from xosc."]
     #[inline(always)]
     pub const fn set_using_xosc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
-    #[doc = "Timer is running from lposc"]
+    #[doc = "Timer is running from lposc."]
     #[must_use]
     #[inline(always)]
     pub const fn using_lposc(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
-    #[doc = "Timer is running from lposc"]
+    #[doc = "Timer is running from lposc."]
     #[inline(always)]
     pub const fn set_using_lposc(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
-    #[doc = "Timer is running from a 1khz gpio source"]
+    #[doc = "Timer is running from a 1khz gpio source."]
     #[must_use]
     #[inline(always)]
     pub const fn using_gpio_1khz(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
         val != 0
     }
-    #[doc = "Timer is running from a 1khz gpio source"]
+    #[doc = "Timer is running from a 1khz gpio source."]
     #[inline(always)]
     pub const fn set_using_gpio_1khz(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
-    #[doc = "Timer is synchronised to a 1hz gpio source"]
+    #[doc = "Timer is synchronised to a 1hz gpio source."]
     #[must_use]
     #[inline(always)]
     pub const fn using_gpio_1hz(&self) -> bool {
         let val = (self.0 >> 19usize) & 0x01;
         val != 0
     }
-    #[doc = "Timer is synchronised to a 1hz gpio source"]
+    #[doc = "Timer is synchronised to a 1hz gpio source."]
     #[inline(always)]
     pub const fn set_using_gpio_1hz(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 19usize)) | (((val as u32) & 0x01) << 19usize);
@@ -2021,43 +2021,43 @@ impl defmt::Format for Timer {
         defmt :: write ! (f , "Timer {{ nonsec_write: {=bool:?}, run: {=bool:?}, clear: {=bool:?}, alarm_enab: {=bool:?}, pwrup_on_alarm: {=bool:?}, alarm: {=bool:?}, use_lposc: {=bool:?}, use_xosc: {=bool:?}, use_gpio_1khz: {=bool:?}, use_gpio_1hz: {=bool:?}, using_xosc: {=bool:?}, using_lposc: {=bool:?}, using_gpio_1khz: {=bool:?}, using_gpio_1hz: {=bool:?} }}" , self . nonsec_write () , self . run () , self . clear () , self . alarm_enab () , self . pwrup_on_alarm () , self . alarm () , self . use_lposc () , self . use_xosc () , self . use_gpio_1khz () , self . use_gpio_1hz () , self . using_xosc () , self . using_lposc () , self . using_gpio_1khz () , self . using_gpio_1hz ())
     }
 }
-#[doc = "Voltage Regulator Settings"]
+#[doc = "Voltage Regulator Settings."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Vreg(pub u32);
 impl Vreg {
-    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode"]
+    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode."]
     #[must_use]
     #[inline(always)]
     pub const fn hiz(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode"]
+    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode."]
     #[inline(always)]
     pub const fn set_hiz(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "output voltage select the regulator output voltage is limited to 1.3V unless the voltage limit is disabled using the disable_voltage_limit field in the vreg_ctrl register 00000 - 0.55V 00001 - 0.60V 00010 - 0.65V 00011 - 0.70V 00100 - 0.75V 00101 - 0.80V 00110 - 0.85V 00111 - 0.90V 01000 - 0.95V 01001 - 1.00V 01010 - 1.05V 01011 - 1.10V (default) 01100 - 1.15V 01101 - 1.20V 01110 - 1.25V 01111 - 1.30V 10000 - 1.35V 10001 - 1.40V 10010 - 1.50V 10011 - 1.60V 10100 - 1.65V 10101 - 1.70V 10110 - 1.80V 10111 - 1.90V 11000 - 2.00V 11001 - 2.35V 11010 - 2.50V 11011 - 2.65V 11100 - 2.80V 11101 - 3.00V 11110 - 3.15V 11111 - 3.30V"]
+    #[doc = "output voltage select the regulator output voltage is limited to 1.3V unless the voltage limit is disabled using the disable_voltage_limit field in the vreg_ctrl register 00000 - 0.55V 00001 - 0.60V 00010 - 0.65V 00011 - 0.70V 00100 - 0.75V 00101 - 0.80V 00110 - 0.85V 00111 - 0.90V 01000 - 0.95V 01001 - 1.00V 01010 - 1.05V 01011 - 1.10V (default) 01100 - 1.15V 01101 - 1.20V 01110 - 1.25V 01111 - 1.30V 10000 - 1.35V 10001 - 1.40V 10010 - 1.50V 10011 - 1.60V 10100 - 1.65V 10101 - 1.70V 10110 - 1.80V 10111 - 1.90V 11000 - 2.00V 11001 - 2.35V 11010 - 2.50V 11011 - 2.65V 11100 - 2.80V 11101 - 3.00V 11110 - 3.15V 11111 - 3.30V."]
     #[must_use]
     #[inline(always)]
     pub const fn vsel(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x1f;
         val as u8
     }
-    #[doc = "output voltage select the regulator output voltage is limited to 1.3V unless the voltage limit is disabled using the disable_voltage_limit field in the vreg_ctrl register 00000 - 0.55V 00001 - 0.60V 00010 - 0.65V 00011 - 0.70V 00100 - 0.75V 00101 - 0.80V 00110 - 0.85V 00111 - 0.90V 01000 - 0.95V 01001 - 1.00V 01010 - 1.05V 01011 - 1.10V (default) 01100 - 1.15V 01101 - 1.20V 01110 - 1.25V 01111 - 1.30V 10000 - 1.35V 10001 - 1.40V 10010 - 1.50V 10011 - 1.60V 10100 - 1.65V 10101 - 1.70V 10110 - 1.80V 10111 - 1.90V 11000 - 2.00V 11001 - 2.35V 11010 - 2.50V 11011 - 2.65V 11100 - 2.80V 11101 - 3.00V 11110 - 3.15V 11111 - 3.30V"]
+    #[doc = "output voltage select the regulator output voltage is limited to 1.3V unless the voltage limit is disabled using the disable_voltage_limit field in the vreg_ctrl register 00000 - 0.55V 00001 - 0.60V 00010 - 0.65V 00011 - 0.70V 00100 - 0.75V 00101 - 0.80V 00110 - 0.85V 00111 - 0.90V 01000 - 0.95V 01001 - 1.00V 01010 - 1.05V 01011 - 1.10V (default) 01100 - 1.15V 01101 - 1.20V 01110 - 1.25V 01111 - 1.30V 10000 - 1.35V 10001 - 1.40V 10010 - 1.50V 10011 - 1.60V 10100 - 1.65V 10101 - 1.70V 10110 - 1.80V 10111 - 1.90V 11000 - 2.00V 11001 - 2.35V 11010 - 2.50V 11011 - 2.65V 11100 - 2.80V 11101 - 3.00V 11110 - 3.15V 11111 - 3.30V."]
     #[inline(always)]
     pub const fn set_vsel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 4usize)) | (((val as u32) & 0x1f) << 4usize);
     }
-    #[doc = "regulator state is being updated writes to the vreg register will be ignored when this field is set"]
+    #[doc = "regulator state is being updated writes to the vreg register will be ignored when this field is set."]
     #[must_use]
     #[inline(always)]
     pub const fn update_in_progress(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
-    #[doc = "regulator state is being updated writes to the vreg register will be ignored when this field is set"]
+    #[doc = "regulator state is being updated writes to the vreg register will be ignored when this field is set."]
     #[inline(always)]
     pub const fn set_update_in_progress(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
@@ -2090,43 +2090,43 @@ impl defmt::Format for Vreg {
         )
     }
 }
-#[doc = "Voltage Regulator Control"]
+#[doc = "Voltage Regulator Control."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct VregCtrl(pub u32);
 impl VregCtrl {
-    #[doc = "high temperature protection threshold regulator power transistors are disabled when junction temperature exceeds threshold 000 - 100C 001 - 105C 010 - 110C 011 - 115C 100 - 120C 101 - 125C 110 - 135C 111 - 150C"]
+    #[doc = "high temperature protection threshold regulator power transistors are disabled when junction temperature exceeds threshold 000 - 100C 001 - 105C 010 - 110C 011 - 115C 100 - 120C 101 - 125C 110 - 135C 111 - 150C."]
     #[must_use]
     #[inline(always)]
     pub const fn ht_th(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x07;
         val as u8
     }
-    #[doc = "high temperature protection threshold regulator power transistors are disabled when junction temperature exceeds threshold 000 - 100C 001 - 105C 010 - 110C 011 - 115C 100 - 120C 101 - 125C 110 - 135C 111 - 150C"]
+    #[doc = "high temperature protection threshold regulator power transistors are disabled when junction temperature exceeds threshold 000 - 100C 001 - 105C 010 - 110C 011 - 115C 100 - 120C 101 - 125C 110 - 135C 111 - 150C."]
     #[inline(always)]
     pub const fn set_ht_th(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 4usize)) | (((val as u32) & 0x07) << 4usize);
     }
-    #[doc = "0=not disabled, 1=enabled"]
+    #[doc = "0=not disabled, 1=enabled."]
     #[must_use]
     #[inline(always)]
     pub const fn disable_voltage_limit(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "0=not disabled, 1=enabled"]
+    #[doc = "0=not disabled, 1=enabled."]
     #[inline(always)]
     pub const fn set_disable_voltage_limit(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "isolates the VREG control interface 0 - not isolated (default) 1 - isolated"]
+    #[doc = "isolates the VREG control interface 0 - not isolated (default) 1 - isolated."]
     #[must_use]
     #[inline(always)]
     pub const fn isolate(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "isolates the VREG control interface 0 - not isolated (default) 1 - isolated"]
+    #[doc = "isolates the VREG control interface 0 - not isolated (default) 1 - isolated."]
     #[inline(always)]
     pub const fn set_isolate(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
@@ -2143,14 +2143,14 @@ impl VregCtrl {
     pub const fn set_unlock(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u32) & 0x01) << 13usize);
     }
-    #[doc = "returns the regulator to its startup settings 0 - reset 1 - not reset (default)"]
+    #[doc = "returns the regulator to its startup settings 0 - reset 1 - not reset (default)."]
     #[must_use]
     #[inline(always)]
     pub const fn rst_n(&self) -> bool {
         let val = (self.0 >> 15usize) & 0x01;
         val != 0
     }
-    #[doc = "returns the regulator to its startup settings 0 - reset 1 - not reset (default)"]
+    #[doc = "returns the regulator to its startup settings 0 - reset 1 - not reset (default)."]
     #[inline(always)]
     pub const fn set_rst_n(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
@@ -2179,43 +2179,43 @@ impl defmt::Format for VregCtrl {
         defmt :: write ! (f , "VregCtrl {{ ht_th: {=u8:?}, disable_voltage_limit: {=bool:?}, isolate: {=bool:?}, unlock: {=bool:?}, rst_n: {=bool:?} }}" , self . ht_th () , self . disable_voltage_limit () , self . isolate () , self . unlock () , self . rst_n ())
     }
 }
-#[doc = "Voltage Regulator Low Power Entry Settings"]
+#[doc = "Voltage Regulator Low Power Entry Settings."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct VregLpEntry(pub u32);
 impl VregLpEntry {
-    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode"]
+    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode."]
     #[must_use]
     #[inline(always)]
     pub const fn hiz(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode"]
+    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode."]
     #[inline(always)]
     pub const fn set_hiz(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "selects either normal (switching) mode or low power (linear) mode low power mode can only be selected for output voltages up to 1.3V 0 = normal mode (switching) 1 = low power mode (linear)"]
+    #[doc = "selects either normal (switching) mode or low power (linear) mode low power mode can only be selected for output voltages up to 1.3V 0 = normal mode (switching) 1 = low power mode (linear)."]
     #[must_use]
     #[inline(always)]
     pub const fn mode(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "selects either normal (switching) mode or low power (linear) mode low power mode can only be selected for output voltages up to 1.3V 0 = normal mode (switching) 1 = low power mode (linear)"]
+    #[doc = "selects either normal (switching) mode or low power (linear) mode low power mode can only be selected for output voltages up to 1.3V 0 = normal mode (switching) 1 = low power mode (linear)."]
     #[inline(always)]
     pub const fn set_mode(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "output voltage select the regulator output voltage is limited to 1.3V unless the voltage limit is disabled using the disable_voltage_limit field in the vreg_ctrl register 00000 - 0.55V 00001 - 0.60V 00010 - 0.65V 00011 - 0.70V 00100 - 0.75V 00101 - 0.80V 00110 - 0.85V 00111 - 0.90V 01000 - 0.95V 01001 - 1.00V 01010 - 1.05V 01011 - 1.10V (default) 01100 - 1.15V 01101 - 1.20V 01110 - 1.25V 01111 - 1.30V 10000 - 1.35V 10001 - 1.40V 10010 - 1.50V 10011 - 1.60V 10100 - 1.65V 10101 - 1.70V 10110 - 1.80V 10111 - 1.90V 11000 - 2.00V 11001 - 2.35V 11010 - 2.50V 11011 - 2.65V 11100 - 2.80V 11101 - 3.00V 11110 - 3.15V 11111 - 3.30V"]
+    #[doc = "output voltage select the regulator output voltage is limited to 1.3V unless the voltage limit is disabled using the disable_voltage_limit field in the vreg_ctrl register 00000 - 0.55V 00001 - 0.60V 00010 - 0.65V 00011 - 0.70V 00100 - 0.75V 00101 - 0.80V 00110 - 0.85V 00111 - 0.90V 01000 - 0.95V 01001 - 1.00V 01010 - 1.05V 01011 - 1.10V (default) 01100 - 1.15V 01101 - 1.20V 01110 - 1.25V 01111 - 1.30V 10000 - 1.35V 10001 - 1.40V 10010 - 1.50V 10011 - 1.60V 10100 - 1.65V 10101 - 1.70V 10110 - 1.80V 10111 - 1.90V 11000 - 2.00V 11001 - 2.35V 11010 - 2.50V 11011 - 2.65V 11100 - 2.80V 11101 - 3.00V 11110 - 3.15V 11111 - 3.30V."]
     #[must_use]
     #[inline(always)]
     pub const fn vsel(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x1f;
         val as u8
     }
-    #[doc = "output voltage select the regulator output voltage is limited to 1.3V unless the voltage limit is disabled using the disable_voltage_limit field in the vreg_ctrl register 00000 - 0.55V 00001 - 0.60V 00010 - 0.65V 00011 - 0.70V 00100 - 0.75V 00101 - 0.80V 00110 - 0.85V 00111 - 0.90V 01000 - 0.95V 01001 - 1.00V 01010 - 1.05V 01011 - 1.10V (default) 01100 - 1.15V 01101 - 1.20V 01110 - 1.25V 01111 - 1.30V 10000 - 1.35V 10001 - 1.40V 10010 - 1.50V 10011 - 1.60V 10100 - 1.65V 10101 - 1.70V 10110 - 1.80V 10111 - 1.90V 11000 - 2.00V 11001 - 2.35V 11010 - 2.50V 11011 - 2.65V 11100 - 2.80V 11101 - 3.00V 11110 - 3.15V 11111 - 3.30V"]
+    #[doc = "output voltage select the regulator output voltage is limited to 1.3V unless the voltage limit is disabled using the disable_voltage_limit field in the vreg_ctrl register 00000 - 0.55V 00001 - 0.60V 00010 - 0.65V 00011 - 0.70V 00100 - 0.75V 00101 - 0.80V 00110 - 0.85V 00111 - 0.90V 01000 - 0.95V 01001 - 1.00V 01010 - 1.05V 01011 - 1.10V (default) 01100 - 1.15V 01101 - 1.20V 01110 - 1.25V 01111 - 1.30V 10000 - 1.35V 10001 - 1.40V 10010 - 1.50V 10011 - 1.60V 10100 - 1.65V 10101 - 1.70V 10110 - 1.80V 10111 - 1.90V 11000 - 2.00V 11001 - 2.35V 11010 - 2.50V 11011 - 2.65V 11100 - 2.80V 11101 - 3.00V 11110 - 3.15V 11111 - 3.30V."]
     #[inline(always)]
     pub const fn set_vsel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 4usize)) | (((val as u32) & 0x1f) << 4usize);
@@ -2248,43 +2248,43 @@ impl defmt::Format for VregLpEntry {
         )
     }
 }
-#[doc = "Voltage Regulator Low Power Exit Settings"]
+#[doc = "Voltage Regulator Low Power Exit Settings."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct VregLpExit(pub u32);
 impl VregLpExit {
-    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode"]
+    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode."]
     #[must_use]
     #[inline(always)]
     pub const fn hiz(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode"]
+    #[doc = "high impedance mode select 0=not in high impedance mode, 1=in high impedance mode."]
     #[inline(always)]
     pub const fn set_hiz(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "selects either normal (switching) mode or low power (linear) mode low power mode can only be selected for output voltages up to 1.3V 0 = normal mode (switching) 1 = low power mode (linear)"]
+    #[doc = "selects either normal (switching) mode or low power (linear) mode low power mode can only be selected for output voltages up to 1.3V 0 = normal mode (switching) 1 = low power mode (linear)."]
     #[must_use]
     #[inline(always)]
     pub const fn mode(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "selects either normal (switching) mode or low power (linear) mode low power mode can only be selected for output voltages up to 1.3V 0 = normal mode (switching) 1 = low power mode (linear)"]
+    #[doc = "selects either normal (switching) mode or low power (linear) mode low power mode can only be selected for output voltages up to 1.3V 0 = normal mode (switching) 1 = low power mode (linear)."]
     #[inline(always)]
     pub const fn set_mode(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "output voltage select the regulator output voltage is limited to 1.3V unless the voltage limit is disabled using the disable_voltage_limit field in the vreg_ctrl register 00000 - 0.55V 00001 - 0.60V 00010 - 0.65V 00011 - 0.70V 00100 - 0.75V 00101 - 0.80V 00110 - 0.85V 00111 - 0.90V 01000 - 0.95V 01001 - 1.00V 01010 - 1.05V 01011 - 1.10V (default) 01100 - 1.15V 01101 - 1.20V 01110 - 1.25V 01111 - 1.30V 10000 - 1.35V 10001 - 1.40V 10010 - 1.50V 10011 - 1.60V 10100 - 1.65V 10101 - 1.70V 10110 - 1.80V 10111 - 1.90V 11000 - 2.00V 11001 - 2.35V 11010 - 2.50V 11011 - 2.65V 11100 - 2.80V 11101 - 3.00V 11110 - 3.15V 11111 - 3.30V"]
+    #[doc = "output voltage select the regulator output voltage is limited to 1.3V unless the voltage limit is disabled using the disable_voltage_limit field in the vreg_ctrl register 00000 - 0.55V 00001 - 0.60V 00010 - 0.65V 00011 - 0.70V 00100 - 0.75V 00101 - 0.80V 00110 - 0.85V 00111 - 0.90V 01000 - 0.95V 01001 - 1.00V 01010 - 1.05V 01011 - 1.10V (default) 01100 - 1.15V 01101 - 1.20V 01110 - 1.25V 01111 - 1.30V 10000 - 1.35V 10001 - 1.40V 10010 - 1.50V 10011 - 1.60V 10100 - 1.65V 10101 - 1.70V 10110 - 1.80V 10111 - 1.90V 11000 - 2.00V 11001 - 2.35V 11010 - 2.50V 11011 - 2.65V 11100 - 2.80V 11101 - 3.00V 11110 - 3.15V 11111 - 3.30V."]
     #[must_use]
     #[inline(always)]
     pub const fn vsel(&self) -> u8 {
         let val = (self.0 >> 4usize) & 0x1f;
         val as u8
     }
-    #[doc = "output voltage select the regulator output voltage is limited to 1.3V unless the voltage limit is disabled using the disable_voltage_limit field in the vreg_ctrl register 00000 - 0.55V 00001 - 0.60V 00010 - 0.65V 00011 - 0.70V 00100 - 0.75V 00101 - 0.80V 00110 - 0.85V 00111 - 0.90V 01000 - 0.95V 01001 - 1.00V 01010 - 1.05V 01011 - 1.10V (default) 01100 - 1.15V 01101 - 1.20V 01110 - 1.25V 01111 - 1.30V 10000 - 1.35V 10001 - 1.40V 10010 - 1.50V 10011 - 1.60V 10100 - 1.65V 10101 - 1.70V 10110 - 1.80V 10111 - 1.90V 11000 - 2.00V 11001 - 2.35V 11010 - 2.50V 11011 - 2.65V 11100 - 2.80V 11101 - 3.00V 11110 - 3.15V 11111 - 3.30V"]
+    #[doc = "output voltage select the regulator output voltage is limited to 1.3V unless the voltage limit is disabled using the disable_voltage_limit field in the vreg_ctrl register 00000 - 0.55V 00001 - 0.60V 00010 - 0.65V 00011 - 0.70V 00100 - 0.75V 00101 - 0.80V 00110 - 0.85V 00111 - 0.90V 01000 - 0.95V 01001 - 1.00V 01010 - 1.05V 01011 - 1.10V (default) 01100 - 1.15V 01101 - 1.20V 01110 - 1.25V 01111 - 1.30V 10000 - 1.35V 10001 - 1.40V 10010 - 1.50V 10011 - 1.60V 10100 - 1.65V 10101 - 1.70V 10110 - 1.80V 10111 - 1.90V 11000 - 2.00V 11001 - 2.35V 11010 - 2.50V 11011 - 2.65V 11100 - 2.80V 11101 - 3.00V 11110 - 3.15V 11111 - 3.30V."]
     #[inline(always)]
     pub const fn set_vsel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 4usize)) | (((val as u32) & 0x1f) << 4usize);
@@ -2317,31 +2317,31 @@ impl defmt::Format for VregLpExit {
         )
     }
 }
-#[doc = "Voltage Regulator Status"]
+#[doc = "Voltage Regulator Status."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct VregSts(pub u32);
 impl VregSts {
-    #[doc = "startup status 0=startup complete, 1=starting up"]
+    #[doc = "startup status 0=startup complete, 1=starting up."]
     #[must_use]
     #[inline(always)]
     pub const fn startup(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "startup status 0=startup complete, 1=starting up"]
+    #[doc = "startup status 0=startup complete, 1=starting up."]
     #[inline(always)]
     pub const fn set_startup(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "output regulation status 0=not in regulation, 1=in regulation"]
+    #[doc = "output regulation status 0=not in regulation, 1=in regulation."]
     #[must_use]
     #[inline(always)]
     pub const fn vout_ok(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "output regulation status 0=not in regulation, 1=in regulation"]
+    #[doc = "output regulation status 0=not in regulation, 1=in regulation."]
     #[inline(always)]
     pub const fn set_vout_ok(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
@@ -2377,50 +2377,50 @@ impl defmt::Format for VregSts {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Wdsel(pub u32);
 impl Wdsel {
-    #[doc = "If set to 1, a watchdog reset will restore powman defaults, reset the timer, reset the switched core domain and run the full power-on state machine (PSM) sequence This does not rely on clk_ref running"]
+    #[doc = "If set to 1, a watchdog reset will restore powman defaults, reset the timer, reset the switched core domain and run the full power-on state machine (PSM) sequence This does not rely on clk_ref running."]
     #[must_use]
     #[inline(always)]
     pub const fn reset_powman_async(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "If set to 1, a watchdog reset will restore powman defaults, reset the timer, reset the switched core domain and run the full power-on state machine (PSM) sequence This does not rely on clk_ref running"]
+    #[doc = "If set to 1, a watchdog reset will restore powman defaults, reset the timer, reset the switched core domain and run the full power-on state machine (PSM) sequence This does not rely on clk_ref running."]
     #[inline(always)]
     pub const fn set_reset_powman_async(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "If set to 1, a watchdog reset will restore powman defaults, reset the timer, reset the switched core power domain and run the full power-on state machine (PSM) sequence This relies on clk_ref running. Use reset_powman_async if that may not be true"]
+    #[doc = "If set to 1, a watchdog reset will restore powman defaults, reset the timer, reset the switched core power domain and run the full power-on state machine (PSM) sequence This relies on clk_ref running. Use reset_powman_async if that may not be true."]
     #[must_use]
     #[inline(always)]
     pub const fn reset_powman(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "If set to 1, a watchdog reset will restore powman defaults, reset the timer, reset the switched core power domain and run the full power-on state machine (PSM) sequence This relies on clk_ref running. Use reset_powman_async if that may not be true"]
+    #[doc = "If set to 1, a watchdog reset will restore powman defaults, reset the timer, reset the switched core power domain and run the full power-on state machine (PSM) sequence This relies on clk_ref running. Use reset_powman_async if that may not be true."]
     #[inline(always)]
     pub const fn set_reset_powman(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "If set to 1, a watchdog reset will reset the switched core power domain and run the full power-on state machine (PSM) sequence From a user perspective it is the same as setting RSM_WDSEL_PROC_COLD From a hardware debug perspective it has the same effect as a power-on reset for the switched core power domain"]
+    #[doc = "If set to 1, a watchdog reset will reset the switched core power domain and run the full power-on state machine (PSM) sequence From a user perspective it is the same as setting RSM_WDSEL_PROC_COLD From a hardware debug perspective it has the same effect as a power-on reset for the switched core power domain."]
     #[must_use]
     #[inline(always)]
     pub const fn reset_swcore(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "If set to 1, a watchdog reset will reset the switched core power domain and run the full power-on state machine (PSM) sequence From a user perspective it is the same as setting RSM_WDSEL_PROC_COLD From a hardware debug perspective it has the same effect as a power-on reset for the switched core power domain"]
+    #[doc = "If set to 1, a watchdog reset will reset the switched core power domain and run the full power-on state machine (PSM) sequence From a user perspective it is the same as setting RSM_WDSEL_PROC_COLD From a hardware debug perspective it has the same effect as a power-on reset for the switched core power domain."]
     #[inline(always)]
     pub const fn set_reset_swcore(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "If set to 1, a watchdog reset will run the full power-on state machine (PSM) sequence From a user perspective it is the same as setting RSM_WDSEL_PROC_COLD From a hardware debug perspective it has the same effect as a reset from a glitch detector"]
+    #[doc = "If set to 1, a watchdog reset will run the full power-on state machine (PSM) sequence From a user perspective it is the same as setting RSM_WDSEL_PROC_COLD From a hardware debug perspective it has the same effect as a reset from a glitch detector."]
     #[must_use]
     #[inline(always)]
     pub const fn reset_rsm(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "If set to 1, a watchdog reset will run the full power-on state machine (PSM) sequence From a user perspective it is the same as setting RSM_WDSEL_PROC_COLD From a hardware debug perspective it has the same effect as a reset from a glitch detector"]
+    #[doc = "If set to 1, a watchdog reset will run the full power-on state machine (PSM) sequence From a user perspective it is the same as setting RSM_WDSEL_PROC_COLD From a hardware debug perspective it has the same effect as a reset from a glitch detector."]
     #[inline(always)]
     pub const fn set_reset_rsm(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
@@ -2453,14 +2453,14 @@ impl defmt::Format for Wdsel {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct XoscFreqKhzFrac(pub u32);
 impl XoscFreqKhzFrac {
-    #[doc = "Fractional component of the XOSC frequency in kHz. This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=0"]
+    #[doc = "Fractional component of the XOSC frequency in kHz. This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=0."]
     #[must_use]
     #[inline(always)]
     pub const fn xosc_freq_khz_frac(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "Fractional component of the XOSC frequency in kHz. This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=0"]
+    #[doc = "Fractional component of the XOSC frequency in kHz. This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=0."]
     #[inline(always)]
     pub const fn set_xosc_freq_khz_frac(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
@@ -2494,14 +2494,14 @@ impl defmt::Format for XoscFreqKhzFrac {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct XoscFreqKhzInt(pub u32);
 impl XoscFreqKhzInt {
-    #[doc = "Integer component of the XOSC frequency in kHz. Default = 12000 Must be >1 This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=0"]
+    #[doc = "Integer component of the XOSC frequency in kHz. Default = 12000 Must be >1 This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=0."]
     #[must_use]
     #[inline(always)]
     pub const fn xosc_freq_khz_int(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "Integer component of the XOSC frequency in kHz. Default = 12000 Must be >1 This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=0"]
+    #[doc = "Integer component of the XOSC frequency in kHz. Default = 12000 Must be >1 This field must only be written when POWMAN_TIMER_RUN=0 or POWMAN_TIMER_USING_XOSC=0."]
     #[inline(always)]
     pub const fn set_xosc_freq_khz_int(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);

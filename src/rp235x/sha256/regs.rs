@@ -1,4 +1,4 @@
-#[doc = "Control and status register"]
+#[doc = "Control and status register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Csr(pub u32);

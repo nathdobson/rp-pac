@@ -33,7 +33,7 @@ impl defmt::Format for NmiMask1 {
         defmt::write!(f, "NmiMask1 {{ nmi_mask1: {=u32:?} }}", self.nmi_mask1())
     }
 }
-#[doc = "Nonstandard sleep control register"]
+#[doc = "Nonstandard sleep control register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Sleepctrl(pub u32);

@@ -1,4 +1,4 @@
-#[doc = "Abort an in-progress transfer sequence on one or more channels"]
+#[doc = "Abort an in-progress transfer sequence on one or more channels."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChanAbort(pub u32);
@@ -35,19 +35,19 @@ impl defmt::Format for ChanAbort {
         defmt::write!(f, "ChanAbort {{ chan_abort: {=u16:?} }}", self.chan_abort())
     }
 }
-#[doc = "DMA Channel 0 Control and Status"]
+#[doc = "DMA Channel 0 Control and Status."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Ctrl(pub u32);
 impl Ctrl {
-    #[doc = "DMA Channel Enable. When 1, the channel will respond to triggering events, which will cause it to become BUSY and start transferring data. When 0, the channel will ignore triggers, stop issuing transfers, and pause the current transfer sequence (i.e. BUSY will remain high if already high)"]
+    #[doc = "DMA Channel Enable. When 1, the channel will respond to triggering events, which will cause it to become BUSY and start transferring data. When 0, the channel will ignore triggers, stop issuing transfers, and pause the current transfer sequence (i.e. BUSY will remain high if already high)."]
     #[must_use]
     #[inline(always)]
     pub const fn en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "DMA Channel Enable. When 1, the channel will respond to triggering events, which will cause it to become BUSY and start transferring data. When 0, the channel will ignore triggers, stop issuing transfers, and pause the current transfer sequence (i.e. BUSY will remain high if already high)"]
+    #[doc = "DMA Channel Enable. When 1, the channel will respond to triggering events, which will cause it to become BUSY and start transferring data. When 0, the channel will ignore triggers, stop issuing transfers, and pause the current transfer sequence (i.e. BUSY will remain high if already high)."]
     #[inline(always)]
     pub const fn set_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -136,14 +136,14 @@ impl Ctrl {
     pub const fn set_chain_to(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 11usize)) | (((val as u32) & 0x0f) << 11usize);
     }
-    #[doc = "Select a Transfer Request signal. The channel uses the transfer request signal to pace its data transfer rate. Sources for TREQ signals are internal (TIMERS) or external (DREQ, a Data Request from the system). 0x0 to 0x3a -> select DREQ n as TREQ"]
+    #[doc = "Select a Transfer Request signal. The channel uses the transfer request signal to pace its data transfer rate. Sources for TREQ signals are internal (TIMERS) or external (DREQ, a Data Request from the system). 0x0 to 0x3a -> select DREQ n as TREQ."]
     #[must_use]
     #[inline(always)]
     pub const fn treq_sel(&self) -> super::vals::TreqSel {
         let val = (self.0 >> 15usize) & 0x3f;
         super::vals::TreqSel::from_bits(val as u8)
     }
-    #[doc = "Select a Transfer Request signal. The channel uses the transfer request signal to pace its data transfer rate. Sources for TREQ signals are internal (TIMERS) or external (DREQ, a Data Request from the system). 0x0 to 0x3a -> select DREQ n as TREQ"]
+    #[doc = "Select a Transfer Request signal. The channel uses the transfer request signal to pace its data transfer rate. Sources for TREQ signals are internal (TIMERS) or external (DREQ, a Data Request from the system). 0x0 to 0x3a -> select DREQ n as TREQ."]
     #[inline(always)]
     pub const fn set_treq_sel(&mut self, val: super::vals::TreqSel) {
         self.0 = (self.0 & !(0x3f << 15usize)) | (((val.to_bits() as u32) & 0x3f) << 15usize);
@@ -196,26 +196,26 @@ impl Ctrl {
     pub const fn set_busy(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
-    #[doc = "If 1, the channel received a write bus error. Write one to clear. WRITE_ADDR shows the approximate address where the bus error was encountered (will not be earlier, or more than 5 transfers later)"]
+    #[doc = "If 1, the channel received a write bus error. Write one to clear. WRITE_ADDR shows the approximate address where the bus error was encountered (will not be earlier, or more than 5 transfers later)."]
     #[must_use]
     #[inline(always)]
     pub const fn write_error(&self) -> bool {
         let val = (self.0 >> 29usize) & 0x01;
         val != 0
     }
-    #[doc = "If 1, the channel received a write bus error. Write one to clear. WRITE_ADDR shows the approximate address where the bus error was encountered (will not be earlier, or more than 5 transfers later)"]
+    #[doc = "If 1, the channel received a write bus error. Write one to clear. WRITE_ADDR shows the approximate address where the bus error was encountered (will not be earlier, or more than 5 transfers later)."]
     #[inline(always)]
     pub const fn set_write_error(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 29usize)) | (((val as u32) & 0x01) << 29usize);
     }
-    #[doc = "If 1, the channel received a read bus error. Write one to clear. READ_ADDR shows the approximate address where the bus error was encountered (will not be earlier, or more than 3 transfers later)"]
+    #[doc = "If 1, the channel received a read bus error. Write one to clear. READ_ADDR shows the approximate address where the bus error was encountered (will not be earlier, or more than 3 transfers later)."]
     #[must_use]
     #[inline(always)]
     pub const fn read_error(&self) -> bool {
         let val = (self.0 >> 30usize) & 0x01;
         val != 0
     }
-    #[doc = "If 1, the channel received a read bus error. Write one to clear. READ_ADDR shows the approximate address where the bus error was encountered (will not be earlier, or more than 3 transfers later)"]
+    #[doc = "If 1, the channel received a read bus error. Write one to clear. READ_ADDR shows the approximate address where the bus error was encountered (will not be earlier, or more than 3 transfers later)."]
     #[inline(always)]
     pub const fn set_read_error(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 30usize)) | (((val as u32) & 0x01) << 30usize);
@@ -302,43 +302,43 @@ impl defmt::Format for DbgCtdreq {
         defmt::write!(f, "DbgCtdreq {{ dbg_ctdreq: {=u8:?} }}", self.dbg_ctdreq())
     }
 }
-#[doc = "Debug RAF, WAF, TDF levels"]
+#[doc = "Debug RAF, WAF, TDF levels."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct FifoLevels(pub u32);
 impl FifoLevels {
-    #[doc = "Current Transfer-Data-FIFO fill level"]
+    #[doc = "Current Transfer-Data-FIFO fill level."]
     #[must_use]
     #[inline(always)]
     pub const fn tdf_lvl(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
         val as u8
     }
-    #[doc = "Current Transfer-Data-FIFO fill level"]
+    #[doc = "Current Transfer-Data-FIFO fill level."]
     #[inline(always)]
     pub const fn set_tdf_lvl(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
-    #[doc = "Current Write-Address-FIFO fill level"]
+    #[doc = "Current Write-Address-FIFO fill level."]
     #[must_use]
     #[inline(always)]
     pub const fn waf_lvl(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0xff;
         val as u8
     }
-    #[doc = "Current Write-Address-FIFO fill level"]
+    #[doc = "Current Write-Address-FIFO fill level."]
     #[inline(always)]
     pub const fn set_waf_lvl(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
     }
-    #[doc = "Current Read-Address-FIFO fill level"]
+    #[doc = "Current Read-Address-FIFO fill level."]
     #[must_use]
     #[inline(always)]
     pub const fn raf_lvl(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0xff;
         val as u8
     }
-    #[doc = "Current Read-Address-FIFO fill level"]
+    #[doc = "Current Read-Address-FIFO fill level."]
     #[inline(always)]
     pub const fn set_raf_lvl(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
@@ -371,7 +371,7 @@ impl defmt::Format for FifoLevels {
         )
     }
 }
-#[doc = "Trigger one or more channels simultaneously"]
+#[doc = "Trigger one or more channels simultaneously."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct MultiChanTrigger(pub u32);
@@ -415,8 +415,8 @@ impl defmt::Format for MultiChanTrigger {
 #[doc = "The number of channels this DMA instance is equipped with. This DMA supports up to 16 hardware channels, but can be configured with as few as one, to minimise silicon area."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Nchannels(pub u32);
-impl Nchannels {
+pub struct NChannels(pub u32);
+impl NChannels {
     #[must_use]
     #[inline(always)]
     pub const fn n_channels(&self) -> u8 {
@@ -428,50 +428,50 @@ impl Nchannels {
         self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
     }
 }
-impl Default for Nchannels {
+impl Default for NChannels {
     #[inline(always)]
-    fn default() -> Nchannels {
-        Nchannels(0)
+    fn default() -> NChannels {
+        NChannels(0)
     }
 }
-impl core::fmt::Debug for Nchannels {
+impl core::fmt::Debug for NChannels {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Nchannels")
+        f.debug_struct("NChannels")
             .field("n_channels", &self.n_channels())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Nchannels {
+impl defmt::Format for NChannels {
     fn format(&self, f: defmt::Formatter) {
-        defmt::write!(f, "Nchannels {{ n_channels: {=u8:?} }}", self.n_channels())
+        defmt::write!(f, "NChannels {{ n_channels: {=u8:?} }}", self.n_channels())
     }
 }
-#[doc = "Sniffer Control"]
+#[doc = "Sniffer Control."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SniffCtrl(pub u32);
 impl SniffCtrl {
-    #[doc = "Enable sniffer"]
+    #[doc = "Enable sniffer."]
     #[must_use]
     #[inline(always)]
     pub const fn en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Enable sniffer"]
+    #[doc = "Enable sniffer."]
     #[inline(always)]
     pub const fn set_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "DMA channel for Sniffer to observe"]
+    #[doc = "DMA channel for Sniffer to observe."]
     #[must_use]
     #[inline(always)]
     pub const fn dmach(&self) -> u8 {
         let val = (self.0 >> 1usize) & 0x0f;
         val as u8
     }
-    #[doc = "DMA channel for Sniffer to observe"]
+    #[doc = "DMA channel for Sniffer to observe."]
     #[inline(always)]
     pub const fn set_dmach(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 1usize)) | (((val as u32) & 0x0f) << 1usize);

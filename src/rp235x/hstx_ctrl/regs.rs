@@ -1,40 +1,40 @@
-#[doc = "Data control register for output bit 0"]
+#[doc = "Data control register for output bit 0."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Bit(pub u32);
 impl Bit {
-    #[doc = "Shift register data bit select for the first half of the HSTX clock cycle"]
+    #[doc = "Shift register data bit select for the first half of the HSTX clock cycle."]
     #[must_use]
     #[inline(always)]
     pub const fn sel_p(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x1f;
         val as u8
     }
-    #[doc = "Shift register data bit select for the first half of the HSTX clock cycle"]
+    #[doc = "Shift register data bit select for the first half of the HSTX clock cycle."]
     #[inline(always)]
     pub const fn set_sel_p(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
     }
-    #[doc = "Shift register data bit select for the second half of the HSTX clock cycle"]
+    #[doc = "Shift register data bit select for the second half of the HSTX clock cycle."]
     #[must_use]
     #[inline(always)]
     pub const fn sel_n(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x1f;
         val as u8
     }
-    #[doc = "Shift register data bit select for the second half of the HSTX clock cycle"]
+    #[doc = "Shift register data bit select for the second half of the HSTX clock cycle."]
     #[inline(always)]
     pub const fn set_sel_n(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 8usize)) | (((val as u32) & 0x1f) << 8usize);
     }
-    #[doc = "Invert this data output (logical NOT)"]
+    #[doc = "Invert this data output (logical NOT)."]
     #[must_use]
     #[inline(always)]
     pub const fn inv(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "Invert this data output (logical NOT)"]
+    #[doc = "Invert this data output (logical NOT)."]
     #[inline(always)]
     pub const fn set_inv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
@@ -208,7 +208,7 @@ impl defmt::Format for Csr {
         defmt :: write ! (f , "Csr {{ en: {=bool:?}, expand_en: {=bool:?}, coupled_mode: {=bool:?}, coupled_sel: {=u8:?}, shift: {=u8:?}, n_shifts: {=u8:?}, clkphase: {=u8:?}, clkdiv: {=u8:?} }}" , self . en () , self . expand_en () , self . coupled_mode () , self . coupled_sel () , self . shift () , self . n_shifts () , self . clkphase () , self . clkdiv ())
     }
 }
-#[doc = "Configure the optional shifter inside the command expander"]
+#[doc = "Configure the optional shifter inside the command expander."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ExpandShift(pub u32);
@@ -284,7 +284,7 @@ impl defmt::Format for ExpandShift {
         defmt :: write ! (f , "ExpandShift {{ raw_shift: {=u8:?}, raw_n_shifts: {=u8:?}, enc_shift: {=u8:?}, enc_n_shifts: {=u8:?} }}" , self . raw_shift () , self . raw_n_shifts () , self . enc_shift () , self . enc_n_shifts ())
     }
 }
-#[doc = "Configure the optional TMDS encoder inside the command expander"]
+#[doc = "Configure the optional TMDS encoder inside the command expander."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ExpandTmds(pub u32);

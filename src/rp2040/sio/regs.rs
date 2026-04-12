@@ -58,26 +58,26 @@ impl defmt::Format for DivCsr {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct FifoSt(pub u32);
 impl FifoSt {
-    #[doc = "Value is 1 if this core's RX FIFO is not empty (i.e. if FIFO_RD is valid)"]
+    #[doc = "Value is 1 if this core's RX FIFO is not empty (i.e. if FIFO_RD is valid)."]
     #[must_use]
     #[inline(always)]
     pub const fn vld(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Value is 1 if this core's RX FIFO is not empty (i.e. if FIFO_RD is valid)"]
+    #[doc = "Value is 1 if this core's RX FIFO is not empty (i.e. if FIFO_RD is valid)."]
     #[inline(always)]
     pub const fn set_vld(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Value is 1 if this core's TX FIFO is not full (i.e. if FIFO_WR is ready for more data)"]
+    #[doc = "Value is 1 if this core's TX FIFO is not full (i.e. if FIFO_WR is ready for more data)."]
     #[must_use]
     #[inline(always)]
     pub const fn rdy(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "Value is 1 if this core's TX FIFO is not full (i.e. if FIFO_WR is ready for more data)"]
+    #[doc = "Value is 1 if this core's TX FIFO is not full (i.e. if FIFO_WR is ready for more data)."]
     #[inline(always)]
     pub const fn set_rdy(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
@@ -139,8 +139,8 @@ impl defmt::Format for FifoSt {
 #[doc = "Values written here are atomically added to ACCUM0 Reading yields lane 0's raw shift and mask value (BASE0 not added)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Interp0accum0add(pub u32);
-impl Interp0accum0add {
+pub struct Interp0Accum0Add(pub u32);
+impl Interp0Accum0Add {
     #[must_use]
     #[inline(always)]
     pub const fn interp0_accum0_add(&self) -> u32 {
@@ -152,25 +152,25 @@ impl Interp0accum0add {
         self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
     }
 }
-impl Default for Interp0accum0add {
+impl Default for Interp0Accum0Add {
     #[inline(always)]
-    fn default() -> Interp0accum0add {
-        Interp0accum0add(0)
+    fn default() -> Interp0Accum0Add {
+        Interp0Accum0Add(0)
     }
 }
-impl core::fmt::Debug for Interp0accum0add {
+impl core::fmt::Debug for Interp0Accum0Add {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Interp0accum0add")
+        f.debug_struct("Interp0Accum0Add")
             .field("interp0_accum0_add", &self.interp0_accum0_add())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Interp0accum0add {
+impl defmt::Format for Interp0Accum0Add {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Interp0accum0add {{ interp0_accum0_add: {=u32:?} }}",
+            "Interp0Accum0Add {{ interp0_accum0_add: {=u32:?} }}",
             self.interp0_accum0_add()
         )
     }
@@ -178,8 +178,8 @@ impl defmt::Format for Interp0accum0add {
 #[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Interp0accum1add(pub u32);
-impl Interp0accum1add {
+pub struct Interp0Accum1Add(pub u32);
+impl Interp0Accum1Add {
     #[must_use]
     #[inline(always)]
     pub const fn interp0_accum1_add(&self) -> u32 {
@@ -191,66 +191,66 @@ impl Interp0accum1add {
         self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
     }
 }
-impl Default for Interp0accum1add {
+impl Default for Interp0Accum1Add {
     #[inline(always)]
-    fn default() -> Interp0accum1add {
-        Interp0accum1add(0)
+    fn default() -> Interp0Accum1Add {
+        Interp0Accum1Add(0)
     }
 }
-impl core::fmt::Debug for Interp0accum1add {
+impl core::fmt::Debug for Interp0Accum1Add {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Interp0accum1add")
+        f.debug_struct("Interp0Accum1Add")
             .field("interp0_accum1_add", &self.interp0_accum1_add())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Interp0accum1add {
+impl defmt::Format for Interp0Accum1Add {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Interp0accum1add {{ interp0_accum1_add: {=u32:?} }}",
+            "Interp0Accum1Add {{ interp0_accum1_add: {=u32:?} }}",
             self.interp0_accum1_add()
         )
     }
 }
-#[doc = "Control register for lane 0"]
+#[doc = "Control register for lane 0."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Interp0ctrlLane0(pub u32);
-impl Interp0ctrlLane0 {
-    #[doc = "Logical right-shift applied to accumulator before masking"]
+pub struct Interp0CtrlLane0(pub u32);
+impl Interp0CtrlLane0 {
+    #[doc = "Logical right-shift applied to accumulator before masking."]
     #[must_use]
     #[inline(always)]
     pub const fn shift(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x1f;
         val as u8
     }
-    #[doc = "Logical right-shift applied to accumulator before masking"]
+    #[doc = "Logical right-shift applied to accumulator before masking."]
     #[inline(always)]
     pub const fn set_shift(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
     }
-    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)"]
+    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)."]
     #[must_use]
     #[inline(always)]
     pub const fn mask_lsb(&self) -> u8 {
         let val = (self.0 >> 5usize) & 0x1f;
         val as u8
     }
-    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)"]
+    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)."]
     #[inline(always)]
     pub const fn set_mask_lsb(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 5usize)) | (((val as u32) & 0x1f) << 5usize);
     }
-    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out"]
+    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out."]
     #[must_use]
     #[inline(always)]
     pub const fn mask_msb(&self) -> u8 {
         let val = (self.0 >> 10usize) & 0x1f;
         val as u8
     }
-    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out"]
+    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out."]
     #[inline(always)]
     pub const fn set_mask_msb(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 10usize)) | (((val as u32) & 0x1f) << 10usize);
@@ -267,14 +267,14 @@ impl Interp0ctrlLane0 {
     pub const fn set_signed(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
-    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)"]
+    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)."]
     #[must_use]
     #[inline(always)]
     pub const fn cross_input(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)"]
+    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)."]
     #[inline(always)]
     pub const fn set_cross_input(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
@@ -364,15 +364,15 @@ impl Interp0ctrlLane0 {
         self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
     }
 }
-impl Default for Interp0ctrlLane0 {
+impl Default for Interp0CtrlLane0 {
     #[inline(always)]
-    fn default() -> Interp0ctrlLane0 {
-        Interp0ctrlLane0(0)
+    fn default() -> Interp0CtrlLane0 {
+        Interp0CtrlLane0(0)
     }
 }
-impl core::fmt::Debug for Interp0ctrlLane0 {
+impl core::fmt::Debug for Interp0CtrlLane0 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Interp0ctrlLane0")
+        f.debug_struct("Interp0CtrlLane0")
             .field("shift", &self.shift())
             .field("mask_lsb", &self.mask_lsb())
             .field("mask_msb", &self.mask_msb())
@@ -389,48 +389,48 @@ impl core::fmt::Debug for Interp0ctrlLane0 {
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Interp0ctrlLane0 {
+impl defmt::Format for Interp0CtrlLane0 {
     fn format(&self, f: defmt::Formatter) {
-        defmt :: write ! (f , "Interp0ctrlLane0 {{ shift: {=u8:?}, mask_lsb: {=u8:?}, mask_msb: {=u8:?}, signed: {=bool:?}, cross_input: {=bool:?}, cross_result: {=bool:?}, add_raw: {=bool:?}, force_msb: {=u8:?}, blend: {=bool:?}, overf0: {=bool:?}, overf1: {=bool:?}, overf: {=bool:?} }}" , self . shift () , self . mask_lsb () , self . mask_msb () , self . signed () , self . cross_input () , self . cross_result () , self . add_raw () , self . force_msb () , self . blend () , self . overf0 () , self . overf1 () , self . overf ())
+        defmt :: write ! (f , "Interp0CtrlLane0 {{ shift: {=u8:?}, mask_lsb: {=u8:?}, mask_msb: {=u8:?}, signed: {=bool:?}, cross_input: {=bool:?}, cross_result: {=bool:?}, add_raw: {=bool:?}, force_msb: {=u8:?}, blend: {=bool:?}, overf0: {=bool:?}, overf1: {=bool:?}, overf: {=bool:?} }}" , self . shift () , self . mask_lsb () , self . mask_msb () , self . signed () , self . cross_input () , self . cross_result () , self . add_raw () , self . force_msb () , self . blend () , self . overf0 () , self . overf1 () , self . overf ())
     }
 }
-#[doc = "Control register for lane 1"]
+#[doc = "Control register for lane 1."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Interp0ctrlLane1(pub u32);
-impl Interp0ctrlLane1 {
-    #[doc = "Logical right-shift applied to accumulator before masking"]
+pub struct Interp0CtrlLane1(pub u32);
+impl Interp0CtrlLane1 {
+    #[doc = "Logical right-shift applied to accumulator before masking."]
     #[must_use]
     #[inline(always)]
     pub const fn shift(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x1f;
         val as u8
     }
-    #[doc = "Logical right-shift applied to accumulator before masking"]
+    #[doc = "Logical right-shift applied to accumulator before masking."]
     #[inline(always)]
     pub const fn set_shift(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
     }
-    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)"]
+    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)."]
     #[must_use]
     #[inline(always)]
     pub const fn mask_lsb(&self) -> u8 {
         let val = (self.0 >> 5usize) & 0x1f;
         val as u8
     }
-    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)"]
+    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)."]
     #[inline(always)]
     pub const fn set_mask_lsb(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 5usize)) | (((val as u32) & 0x1f) << 5usize);
     }
-    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out"]
+    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out."]
     #[must_use]
     #[inline(always)]
     pub const fn mask_msb(&self) -> u8 {
         let val = (self.0 >> 10usize) & 0x1f;
         val as u8
     }
-    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out"]
+    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out."]
     #[inline(always)]
     pub const fn set_mask_msb(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 10usize)) | (((val as u32) & 0x1f) << 10usize);
@@ -447,14 +447,14 @@ impl Interp0ctrlLane1 {
     pub const fn set_signed(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
-    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)"]
+    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)."]
     #[must_use]
     #[inline(always)]
     pub const fn cross_input(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)"]
+    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)."]
     #[inline(always)]
     pub const fn set_cross_input(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
@@ -496,15 +496,15 @@ impl Interp0ctrlLane1 {
         self.0 = (self.0 & !(0x03 << 19usize)) | (((val as u32) & 0x03) << 19usize);
     }
 }
-impl Default for Interp0ctrlLane1 {
+impl Default for Interp0CtrlLane1 {
     #[inline(always)]
-    fn default() -> Interp0ctrlLane1 {
-        Interp0ctrlLane1(0)
+    fn default() -> Interp0CtrlLane1 {
+        Interp0CtrlLane1(0)
     }
 }
-impl core::fmt::Debug for Interp0ctrlLane1 {
+impl core::fmt::Debug for Interp0CtrlLane1 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Interp0ctrlLane1")
+        f.debug_struct("Interp0CtrlLane1")
             .field("shift", &self.shift())
             .field("mask_lsb", &self.mask_lsb())
             .field("mask_msb", &self.mask_msb())
@@ -517,16 +517,16 @@ impl core::fmt::Debug for Interp0ctrlLane1 {
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Interp0ctrlLane1 {
+impl defmt::Format for Interp0CtrlLane1 {
     fn format(&self, f: defmt::Formatter) {
-        defmt :: write ! (f , "Interp0ctrlLane1 {{ shift: {=u8:?}, mask_lsb: {=u8:?}, mask_msb: {=u8:?}, signed: {=bool:?}, cross_input: {=bool:?}, cross_result: {=bool:?}, add_raw: {=bool:?}, force_msb: {=u8:?} }}" , self . shift () , self . mask_lsb () , self . mask_msb () , self . signed () , self . cross_input () , self . cross_result () , self . add_raw () , self . force_msb ())
+        defmt :: write ! (f , "Interp0CtrlLane1 {{ shift: {=u8:?}, mask_lsb: {=u8:?}, mask_msb: {=u8:?}, signed: {=bool:?}, cross_input: {=bool:?}, cross_result: {=bool:?}, add_raw: {=bool:?}, force_msb: {=u8:?} }}" , self . shift () , self . mask_lsb () , self . mask_msb () , self . signed () , self . cross_input () , self . cross_result () , self . add_raw () , self . force_msb ())
     }
 }
 #[doc = "Values written here are atomically added to ACCUM0 Reading yields lane 0's raw shift and mask value (BASE0 not added)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Interp1accum0add(pub u32);
-impl Interp1accum0add {
+pub struct Interp1Accum0Add(pub u32);
+impl Interp1Accum0Add {
     #[must_use]
     #[inline(always)]
     pub const fn interp1_accum0_add(&self) -> u32 {
@@ -538,25 +538,25 @@ impl Interp1accum0add {
         self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
     }
 }
-impl Default for Interp1accum0add {
+impl Default for Interp1Accum0Add {
     #[inline(always)]
-    fn default() -> Interp1accum0add {
-        Interp1accum0add(0)
+    fn default() -> Interp1Accum0Add {
+        Interp1Accum0Add(0)
     }
 }
-impl core::fmt::Debug for Interp1accum0add {
+impl core::fmt::Debug for Interp1Accum0Add {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Interp1accum0add")
+        f.debug_struct("Interp1Accum0Add")
             .field("interp1_accum0_add", &self.interp1_accum0_add())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Interp1accum0add {
+impl defmt::Format for Interp1Accum0Add {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Interp1accum0add {{ interp1_accum0_add: {=u32:?} }}",
+            "Interp1Accum0Add {{ interp1_accum0_add: {=u32:?} }}",
             self.interp1_accum0_add()
         )
     }
@@ -564,8 +564,8 @@ impl defmt::Format for Interp1accum0add {
 #[doc = "Values written here are atomically added to ACCUM1 Reading yields lane 1's raw shift and mask value (BASE1 not added)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Interp1accum1add(pub u32);
-impl Interp1accum1add {
+pub struct Interp1Accum1Add(pub u32);
+impl Interp1Accum1Add {
     #[must_use]
     #[inline(always)]
     pub const fn interp1_accum1_add(&self) -> u32 {
@@ -577,66 +577,66 @@ impl Interp1accum1add {
         self.0 = (self.0 & !(0x00ff_ffff << 0usize)) | (((val as u32) & 0x00ff_ffff) << 0usize);
     }
 }
-impl Default for Interp1accum1add {
+impl Default for Interp1Accum1Add {
     #[inline(always)]
-    fn default() -> Interp1accum1add {
-        Interp1accum1add(0)
+    fn default() -> Interp1Accum1Add {
+        Interp1Accum1Add(0)
     }
 }
-impl core::fmt::Debug for Interp1accum1add {
+impl core::fmt::Debug for Interp1Accum1Add {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Interp1accum1add")
+        f.debug_struct("Interp1Accum1Add")
             .field("interp1_accum1_add", &self.interp1_accum1_add())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Interp1accum1add {
+impl defmt::Format for Interp1Accum1Add {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Interp1accum1add {{ interp1_accum1_add: {=u32:?} }}",
+            "Interp1Accum1Add {{ interp1_accum1_add: {=u32:?} }}",
             self.interp1_accum1_add()
         )
     }
 }
-#[doc = "Control register for lane 0"]
+#[doc = "Control register for lane 0."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Interp1ctrlLane0(pub u32);
-impl Interp1ctrlLane0 {
-    #[doc = "Logical right-shift applied to accumulator before masking"]
+pub struct Interp1CtrlLane0(pub u32);
+impl Interp1CtrlLane0 {
+    #[doc = "Logical right-shift applied to accumulator before masking."]
     #[must_use]
     #[inline(always)]
     pub const fn shift(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x1f;
         val as u8
     }
-    #[doc = "Logical right-shift applied to accumulator before masking"]
+    #[doc = "Logical right-shift applied to accumulator before masking."]
     #[inline(always)]
     pub const fn set_shift(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
     }
-    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)"]
+    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)."]
     #[must_use]
     #[inline(always)]
     pub const fn mask_lsb(&self) -> u8 {
         let val = (self.0 >> 5usize) & 0x1f;
         val as u8
     }
-    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)"]
+    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)."]
     #[inline(always)]
     pub const fn set_mask_lsb(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 5usize)) | (((val as u32) & 0x1f) << 5usize);
     }
-    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out"]
+    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out."]
     #[must_use]
     #[inline(always)]
     pub const fn mask_msb(&self) -> u8 {
         let val = (self.0 >> 10usize) & 0x1f;
         val as u8
     }
-    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out"]
+    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out."]
     #[inline(always)]
     pub const fn set_mask_msb(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 10usize)) | (((val as u32) & 0x1f) << 10usize);
@@ -653,14 +653,14 @@ impl Interp1ctrlLane0 {
     pub const fn set_signed(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
-    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)"]
+    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)."]
     #[must_use]
     #[inline(always)]
     pub const fn cross_input(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)"]
+    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)."]
     #[inline(always)]
     pub const fn set_cross_input(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
@@ -701,14 +701,14 @@ impl Interp1ctrlLane0 {
     pub const fn set_force_msb(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 19usize)) | (((val as u32) & 0x03) << 19usize);
     }
-    #[doc = "Only present on INTERP1 on each core. If CLAMP mode is enabled: - LANE0 result is shifted and masked ACCUM0, clamped by a lower bound of BASE0 and an upper bound of BASE1. - Signedness of these comparisons is determined by LANE0_CTRL_SIGNED"]
+    #[doc = "Only present on INTERP1 on each core. If CLAMP mode is enabled: - LANE0 result is shifted and masked ACCUM0, clamped by a lower bound of BASE0 and an upper bound of BASE1. - Signedness of these comparisons is determined by LANE0_CTRL_SIGNED."]
     #[must_use]
     #[inline(always)]
     pub const fn clamp(&self) -> bool {
         let val = (self.0 >> 22usize) & 0x01;
         val != 0
     }
-    #[doc = "Only present on INTERP1 on each core. If CLAMP mode is enabled: - LANE0 result is shifted and masked ACCUM0, clamped by a lower bound of BASE0 and an upper bound of BASE1. - Signedness of these comparisons is determined by LANE0_CTRL_SIGNED"]
+    #[doc = "Only present on INTERP1 on each core. If CLAMP mode is enabled: - LANE0 result is shifted and masked ACCUM0, clamped by a lower bound of BASE0 and an upper bound of BASE1. - Signedness of these comparisons is determined by LANE0_CTRL_SIGNED."]
     #[inline(always)]
     pub const fn set_clamp(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 22usize)) | (((val as u32) & 0x01) << 22usize);
@@ -750,15 +750,15 @@ impl Interp1ctrlLane0 {
         self.0 = (self.0 & !(0x01 << 25usize)) | (((val as u32) & 0x01) << 25usize);
     }
 }
-impl Default for Interp1ctrlLane0 {
+impl Default for Interp1CtrlLane0 {
     #[inline(always)]
-    fn default() -> Interp1ctrlLane0 {
-        Interp1ctrlLane0(0)
+    fn default() -> Interp1CtrlLane0 {
+        Interp1CtrlLane0(0)
     }
 }
-impl core::fmt::Debug for Interp1ctrlLane0 {
+impl core::fmt::Debug for Interp1CtrlLane0 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Interp1ctrlLane0")
+        f.debug_struct("Interp1CtrlLane0")
             .field("shift", &self.shift())
             .field("mask_lsb", &self.mask_lsb())
             .field("mask_msb", &self.mask_msb())
@@ -775,48 +775,48 @@ impl core::fmt::Debug for Interp1ctrlLane0 {
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Interp1ctrlLane0 {
+impl defmt::Format for Interp1CtrlLane0 {
     fn format(&self, f: defmt::Formatter) {
-        defmt :: write ! (f , "Interp1ctrlLane0 {{ shift: {=u8:?}, mask_lsb: {=u8:?}, mask_msb: {=u8:?}, signed: {=bool:?}, cross_input: {=bool:?}, cross_result: {=bool:?}, add_raw: {=bool:?}, force_msb: {=u8:?}, clamp: {=bool:?}, overf0: {=bool:?}, overf1: {=bool:?}, overf: {=bool:?} }}" , self . shift () , self . mask_lsb () , self . mask_msb () , self . signed () , self . cross_input () , self . cross_result () , self . add_raw () , self . force_msb () , self . clamp () , self . overf0 () , self . overf1 () , self . overf ())
+        defmt :: write ! (f , "Interp1CtrlLane0 {{ shift: {=u8:?}, mask_lsb: {=u8:?}, mask_msb: {=u8:?}, signed: {=bool:?}, cross_input: {=bool:?}, cross_result: {=bool:?}, add_raw: {=bool:?}, force_msb: {=u8:?}, clamp: {=bool:?}, overf0: {=bool:?}, overf1: {=bool:?}, overf: {=bool:?} }}" , self . shift () , self . mask_lsb () , self . mask_msb () , self . signed () , self . cross_input () , self . cross_result () , self . add_raw () , self . force_msb () , self . clamp () , self . overf0 () , self . overf1 () , self . overf ())
     }
 }
-#[doc = "Control register for lane 1"]
+#[doc = "Control register for lane 1."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Interp1ctrlLane1(pub u32);
-impl Interp1ctrlLane1 {
-    #[doc = "Logical right-shift applied to accumulator before masking"]
+pub struct Interp1CtrlLane1(pub u32);
+impl Interp1CtrlLane1 {
+    #[doc = "Logical right-shift applied to accumulator before masking."]
     #[must_use]
     #[inline(always)]
     pub const fn shift(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x1f;
         val as u8
     }
-    #[doc = "Logical right-shift applied to accumulator before masking"]
+    #[doc = "Logical right-shift applied to accumulator before masking."]
     #[inline(always)]
     pub const fn set_shift(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 0usize)) | (((val as u32) & 0x1f) << 0usize);
     }
-    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)"]
+    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)."]
     #[must_use]
     #[inline(always)]
     pub const fn mask_lsb(&self) -> u8 {
         let val = (self.0 >> 5usize) & 0x1f;
         val as u8
     }
-    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)"]
+    #[doc = "The least-significant bit allowed to pass by the mask (inclusive)."]
     #[inline(always)]
     pub const fn set_mask_lsb(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 5usize)) | (((val as u32) & 0x1f) << 5usize);
     }
-    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out"]
+    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out."]
     #[must_use]
     #[inline(always)]
     pub const fn mask_msb(&self) -> u8 {
         let val = (self.0 >> 10usize) & 0x1f;
         val as u8
     }
-    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out"]
+    #[doc = "The most-significant bit allowed to pass by the mask (inclusive) Setting MSB < LSB may cause chip to turn inside-out."]
     #[inline(always)]
     pub const fn set_mask_msb(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 10usize)) | (((val as u32) & 0x1f) << 10usize);
@@ -833,14 +833,14 @@ impl Interp1ctrlLane1 {
     pub const fn set_signed(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u32) & 0x01) << 15usize);
     }
-    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)"]
+    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)."]
     #[must_use]
     #[inline(always)]
     pub const fn cross_input(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)"]
+    #[doc = "If 1, feed the opposite lane's accumulator into this lane's shift + mask hardware. Takes effect even if ADD_RAW is set (the CROSS_INPUT mux is before the shift+mask bypass)."]
     #[inline(always)]
     pub const fn set_cross_input(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
@@ -882,15 +882,15 @@ impl Interp1ctrlLane1 {
         self.0 = (self.0 & !(0x03 << 19usize)) | (((val as u32) & 0x03) << 19usize);
     }
 }
-impl Default for Interp1ctrlLane1 {
+impl Default for Interp1CtrlLane1 {
     #[inline(always)]
-    fn default() -> Interp1ctrlLane1 {
-        Interp1ctrlLane1(0)
+    fn default() -> Interp1CtrlLane1 {
+        Interp1CtrlLane1(0)
     }
 }
-impl core::fmt::Debug for Interp1ctrlLane1 {
+impl core::fmt::Debug for Interp1CtrlLane1 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Interp1ctrlLane1")
+        f.debug_struct("Interp1CtrlLane1")
             .field("shift", &self.shift())
             .field("mask_lsb", &self.mask_lsb())
             .field("mask_msb", &self.mask_msb())
@@ -903,8 +903,8 @@ impl core::fmt::Debug for Interp1ctrlLane1 {
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Interp1ctrlLane1 {
+impl defmt::Format for Interp1CtrlLane1 {
     fn format(&self, f: defmt::Formatter) {
-        defmt :: write ! (f , "Interp1ctrlLane1 {{ shift: {=u8:?}, mask_lsb: {=u8:?}, mask_msb: {=u8:?}, signed: {=bool:?}, cross_input: {=bool:?}, cross_result: {=bool:?}, add_raw: {=bool:?}, force_msb: {=u8:?} }}" , self . shift () , self . mask_lsb () , self . mask_msb () , self . signed () , self . cross_input () , self . cross_result () , self . add_raw () , self . force_msb ())
+        defmt :: write ! (f , "Interp1CtrlLane1 {{ shift: {=u8:?}, mask_lsb: {=u8:?}, mask_msb: {=u8:?}, signed: {=bool:?}, cross_input: {=bool:?}, cross_result: {=bool:?}, add_raw: {=bool:?}, force_msb: {=u8:?} }}" , self . shift () , self . mask_lsb () , self . mask_msb () , self . signed () , self . cross_input () , self . cross_result () , self . add_raw () , self . force_msb ())
     }
 }

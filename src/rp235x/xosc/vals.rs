@@ -2,10 +2,10 @@
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct CtrlFreqRange(u16);
 impl CtrlFreqRange {
-    pub const _1_15MHZ: Self = Self(0x0aa0);
-    pub const _10_30MHZ: Self = Self(0x0aa1);
-    pub const _25_60MHZ: Self = Self(0x0aa2);
-    pub const _40_100MHZ: Self = Self(0x0aa3);
+    pub const _115mhz: Self = Self(0x0aa0);
+    pub const _1030mhz: Self = Self(0x0aa1);
+    pub const _2560mhz: Self = Self(0x0aa2);
+    pub const _40100mhz: Self = Self(0x0aa3);
 }
 impl CtrlFreqRange {
     pub const fn from_bits(val: u16) -> CtrlFreqRange {
@@ -18,10 +18,10 @@ impl CtrlFreqRange {
 impl core::fmt::Debug for CtrlFreqRange {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         match self.0 {
-            0x0aa0 => f.write_str("_1_15MHZ"),
-            0x0aa1 => f.write_str("_10_30MHZ"),
-            0x0aa2 => f.write_str("_25_60MHZ"),
-            0x0aa3 => f.write_str("_40_100MHZ"),
+            0x0aa0 => f.write_str("_115mhz"),
+            0x0aa1 => f.write_str("_1030mhz"),
+            0x0aa2 => f.write_str("_2560mhz"),
+            0x0aa3 => f.write_str("_40100mhz"),
             other => core::write!(f, "0x{:02X}", other),
         }
     }
@@ -30,10 +30,10 @@ impl core::fmt::Debug for CtrlFreqRange {
 impl defmt::Format for CtrlFreqRange {
     fn format(&self, f: defmt::Formatter) {
         match self.0 {
-            0x0aa0 => defmt::write!(f, "_1_15MHZ"),
-            0x0aa1 => defmt::write!(f, "_10_30MHZ"),
-            0x0aa2 => defmt::write!(f, "_25_60MHZ"),
-            0x0aa3 => defmt::write!(f, "_40_100MHZ"),
+            0x0aa0 => defmt::write!(f, "_115mhz"),
+            0x0aa1 => defmt::write!(f, "_1030mhz"),
+            0x0aa2 => defmt::write!(f, "_2560mhz"),
+            0x0aa3 => defmt::write!(f, "_40100mhz"),
             other => defmt::write!(f, "0x{:02X}", other),
         }
     }
@@ -54,8 +54,8 @@ impl From<CtrlFreqRange> for u16 {
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Dormant(u32);
 impl Dormant {
-    pub const DORMANT: Self = Self(0x636f_6d61);
-    pub const WAKE: Self = Self(0x7761_6b65);
+    pub const Dormant: Self = Self(0x636f_6d61);
+    pub const Wake: Self = Self(0x7761_6b65);
 }
 impl Dormant {
     pub const fn from_bits(val: u32) -> Dormant {
@@ -68,8 +68,8 @@ impl Dormant {
 impl core::fmt::Debug for Dormant {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         match self.0 {
-            0x636f_6d61 => f.write_str("DORMANT"),
-            0x7761_6b65 => f.write_str("WAKE"),
+            0x636f_6d61 => f.write_str("Dormant"),
+            0x7761_6b65 => f.write_str("Wake"),
             other => core::write!(f, "0x{:02X}", other),
         }
     }
@@ -78,8 +78,8 @@ impl core::fmt::Debug for Dormant {
 impl defmt::Format for Dormant {
     fn format(&self, f: defmt::Formatter) {
         match self.0 {
-            0x636f_6d61 => defmt::write!(f, "DORMANT"),
-            0x7761_6b65 => defmt::write!(f, "WAKE"),
+            0x636f_6d61 => defmt::write!(f, "Dormant"),
+            0x7761_6b65 => defmt::write!(f, "Wake"),
             other => defmt::write!(f, "0x{:02X}", other),
         }
     }
@@ -100,8 +100,8 @@ impl From<Dormant> for u32 {
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Enable(u16);
 impl Enable {
-    pub const DISABLE: Self = Self(0x0d1e);
-    pub const ENABLE: Self = Self(0x0fab);
+    pub const Disable: Self = Self(0x0d1e);
+    pub const Enable: Self = Self(0x0fab);
 }
 impl Enable {
     pub const fn from_bits(val: u16) -> Enable {
@@ -114,8 +114,8 @@ impl Enable {
 impl core::fmt::Debug for Enable {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         match self.0 {
-            0x0d1e => f.write_str("DISABLE"),
-            0x0fab => f.write_str("ENABLE"),
+            0x0d1e => f.write_str("Disable"),
+            0x0fab => f.write_str("Enable"),
             other => core::write!(f, "0x{:02X}", other),
         }
     }
@@ -124,8 +124,8 @@ impl core::fmt::Debug for Enable {
 impl defmt::Format for Enable {
     fn format(&self, f: defmt::Formatter) {
         match self.0 {
-            0x0d1e => defmt::write!(f, "DISABLE"),
-            0x0fab => defmt::write!(f, "ENABLE"),
+            0x0d1e => defmt::write!(f, "Disable"),
+            0x0fab => defmt::write!(f, "Enable"),
             other => defmt::write!(f, "0x{:02X}", other),
         }
     }
@@ -146,10 +146,10 @@ impl From<Enable> for u16 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum StatusFreqRange {
-    _1_15MHZ = 0x0,
-    _10_30MHZ = 0x01,
-    _25_60MHZ = 0x02,
-    _40_100MHZ = 0x03,
+    _115mhz = 0x0,
+    _1030mhz = 0x01,
+    _2560mhz = 0x02,
+    _40100mhz = 0x03,
 }
 impl StatusFreqRange {
     #[inline(always)]

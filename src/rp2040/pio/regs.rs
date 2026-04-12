@@ -1,4 +1,4 @@
-#[doc = "PIO control register"]
+#[doc = "PIO control register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Ctrl(pub u32);
@@ -96,14 +96,14 @@ impl DbgCfginfo {
     pub const fn set_sm_count(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
     }
-    #[doc = "The size of the instruction memory, measured in units of one instruction"]
+    #[doc = "The size of the instruction memory, measured in units of one instruction."]
     #[must_use]
     #[inline(always)]
     pub const fn imem_size(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x3f;
         val as u8
     }
-    #[doc = "The size of the instruction memory, measured in units of one instruction"]
+    #[doc = "The size of the instruction memory, measured in units of one instruction."]
     #[inline(always)]
     pub const fn set_imem_size(&mut self, val: u8) {
         self.0 = (self.0 & !(0x3f << 16usize)) | (((val as u32) & 0x3f) << 16usize);
@@ -136,7 +136,7 @@ impl defmt::Format for DbgCfginfo {
         )
     }
 }
-#[doc = "FIFO debug register"]
+#[doc = "FIFO debug register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Fdebug(pub u32);
@@ -219,7 +219,7 @@ impl defmt::Format for Fdebug {
         )
     }
 }
-#[doc = "FIFO levels"]
+#[doc = "FIFO levels."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Flevel(pub u32);
@@ -331,55 +331,55 @@ impl defmt::Format for Flevel {
         defmt :: write ! (f , "Flevel {{ tx0: {=u8:?}, rx0: {=u8:?}, tx1: {=u8:?}, rx1: {=u8:?}, tx2: {=u8:?}, rx2: {=u8:?}, tx3: {=u8:?}, rx3: {=u8:?} }}" , self . tx0 () , self . rx0 () , self . tx1 () , self . rx1 () , self . tx2 () , self . rx2 () , self . tx3 () , self . rx3 ())
     }
 }
-#[doc = "FIFO status register"]
+#[doc = "FIFO status register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Fstat(pub u32);
 impl Fstat {
-    #[doc = "State machine RX FIFO is full"]
+    #[doc = "State machine RX FIFO is full."]
     #[must_use]
     #[inline(always)]
     pub const fn rxfull(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x0f;
         val as u8
     }
-    #[doc = "State machine RX FIFO is full"]
+    #[doc = "State machine RX FIFO is full."]
     #[inline(always)]
     pub const fn set_rxfull(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
     }
-    #[doc = "State machine RX FIFO is empty"]
+    #[doc = "State machine RX FIFO is empty."]
     #[must_use]
     #[inline(always)]
     pub const fn rxempty(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0x0f;
         val as u8
     }
-    #[doc = "State machine RX FIFO is empty"]
+    #[doc = "State machine RX FIFO is empty."]
     #[inline(always)]
     pub const fn set_rxempty(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 8usize)) | (((val as u32) & 0x0f) << 8usize);
     }
-    #[doc = "State machine TX FIFO is full"]
+    #[doc = "State machine TX FIFO is full."]
     #[must_use]
     #[inline(always)]
     pub const fn txfull(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x0f;
         val as u8
     }
-    #[doc = "State machine TX FIFO is full"]
+    #[doc = "State machine TX FIFO is full."]
     #[inline(always)]
     pub const fn set_txfull(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
     }
-    #[doc = "State machine TX FIFO is empty"]
+    #[doc = "State machine TX FIFO is empty."]
     #[must_use]
     #[inline(always)]
     pub const fn txempty(&self) -> u8 {
         let val = (self.0 >> 24usize) & 0x0f;
         val as u8
     }
-    #[doc = "State machine TX FIFO is empty"]
+    #[doc = "State machine TX FIFO is empty."]
     #[inline(always)]
     pub const fn set_txempty(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 24usize)) | (((val as u32) & 0x0f) << 24usize);
@@ -414,7 +414,7 @@ impl defmt::Format for Fstat {
         )
     }
 }
-#[doc = "Write-only access to instruction memory location 0"]
+#[doc = "Write-only access to instruction memory location 0."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct InstrMem(pub u32);
@@ -449,7 +449,7 @@ impl defmt::Format for InstrMem {
         defmt::write!(f, "InstrMem {{ instr_mem: {=u16:?} }}", self.instr_mem())
     }
 }
-#[doc = "Raw Interrupts"]
+#[doc = "Raw Interrupts."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Intr(pub u32);
@@ -673,7 +673,7 @@ impl defmt::Format for IrqForce {
         defmt::write!(f, "IrqForce {{ irq_force: {=u8:?} }}", self.irq_force())
     }
 }
-#[doc = "Current instruction address of state machine 0"]
+#[doc = "Current instruction address of state machine 0."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmAddr(pub u32);
@@ -708,19 +708,19 @@ impl defmt::Format for SmAddr {
         defmt::write!(f, "SmAddr {{ addr: {=u8:?} }}", self.addr())
     }
 }
-#[doc = "Clock divisor register for state machine 0 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)"]
+#[doc = "Clock divisor register for state machine 0 Frequency = clock freq / (CLKDIV_INT + CLKDIV_FRAC / 256)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmClkdiv(pub u32);
 impl SmClkdiv {
-    #[doc = "Fractional part of clock divisor"]
+    #[doc = "Fractional part of clock divisor."]
     #[must_use]
     #[inline(always)]
     pub const fn frac(&self) -> u8 {
         let val = (self.0 >> 8usize) & 0xff;
         val as u8
     }
-    #[doc = "Fractional part of clock divisor"]
+    #[doc = "Fractional part of clock divisor."]
     #[inline(always)]
     pub const fn set_frac(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 8usize)) | (((val as u32) & 0xff) << 8usize);
@@ -763,19 +763,19 @@ impl defmt::Format for SmClkdiv {
         )
     }
 }
-#[doc = "Execution/behavioural settings for state machine 0"]
+#[doc = "Execution/behavioural settings for state machine 0."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmExecctrl(pub u32);
 impl SmExecctrl {
-    #[doc = "Comparison level for the MOV x, STATUS instruction"]
+    #[doc = "Comparison level for the MOV x, STATUS instruction."]
     #[must_use]
     #[inline(always)]
     pub const fn status_n(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0x0f;
         val as u8
     }
-    #[doc = "Comparison level for the MOV x, STATUS instruction"]
+    #[doc = "Comparison level for the MOV x, STATUS instruction."]
     #[inline(always)]
     pub const fn set_status_n(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
@@ -816,38 +816,38 @@ impl SmExecctrl {
     pub const fn set_wrap_top(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 12usize)) | (((val as u32) & 0x1f) << 12usize);
     }
-    #[doc = "Continuously assert the most recent OUT/SET to the pins"]
+    #[doc = "Continuously assert the most recent OUT/SET to the pins."]
     #[must_use]
     #[inline(always)]
     pub const fn out_sticky(&self) -> bool {
         let val = (self.0 >> 17usize) & 0x01;
         val != 0
     }
-    #[doc = "Continuously assert the most recent OUT/SET to the pins"]
+    #[doc = "Continuously assert the most recent OUT/SET to the pins."]
     #[inline(always)]
     pub const fn set_out_sticky(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 17usize)) | (((val as u32) & 0x01) << 17usize);
     }
-    #[doc = "If 1, use a bit of OUT data as an auxiliary write enable When used in conjunction with OUT_STICKY, writes with an enable of 0 will deassert the latest pin write. This can create useful masking/override behaviour due to the priority ordering of state machine pin writes (SM0 < SM1 < ...)"]
+    #[doc = "If 1, use a bit of OUT data as an auxiliary write enable When used in conjunction with OUT_STICKY, writes with an enable of 0 will deassert the latest pin write. This can create useful masking/override behaviour due to the priority ordering of state machine pin writes (SM0 < SM1 < ...)."]
     #[must_use]
     #[inline(always)]
     pub const fn inline_out_en(&self) -> bool {
         let val = (self.0 >> 18usize) & 0x01;
         val != 0
     }
-    #[doc = "If 1, use a bit of OUT data as an auxiliary write enable When used in conjunction with OUT_STICKY, writes with an enable of 0 will deassert the latest pin write. This can create useful masking/override behaviour due to the priority ordering of state machine pin writes (SM0 < SM1 < ...)"]
+    #[doc = "If 1, use a bit of OUT data as an auxiliary write enable When used in conjunction with OUT_STICKY, writes with an enable of 0 will deassert the latest pin write. This can create useful masking/override behaviour due to the priority ordering of state machine pin writes (SM0 < SM1 < ...)."]
     #[inline(always)]
     pub const fn set_inline_out_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 18usize)) | (((val as u32) & 0x01) << 18usize);
     }
-    #[doc = "Which data bit to use for inline OUT enable"]
+    #[doc = "Which data bit to use for inline OUT enable."]
     #[must_use]
     #[inline(always)]
     pub const fn out_en_sel(&self) -> u8 {
         let val = (self.0 >> 19usize) & 0x1f;
         val as u8
     }
-    #[doc = "Which data bit to use for inline OUT enable"]
+    #[doc = "Which data bit to use for inline OUT enable."]
     #[inline(always)]
     pub const fn set_out_en_sel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 19usize)) | (((val as u32) & 0x1f) << 19usize);
@@ -864,14 +864,14 @@ impl SmExecctrl {
     pub const fn set_jmp_pin(&mut self, val: u8) {
         self.0 = (self.0 & !(0x1f << 24usize)) | (((val as u32) & 0x1f) << 24usize);
     }
-    #[doc = "If 1, side-set data is asserted to pin directions, instead of pin values"]
+    #[doc = "If 1, side-set data is asserted to pin directions, instead of pin values."]
     #[must_use]
     #[inline(always)]
     pub const fn side_pindir(&self) -> bool {
         let val = (self.0 >> 29usize) & 0x01;
         val != 0
     }
-    #[doc = "If 1, side-set data is asserted to pin directions, instead of pin values"]
+    #[doc = "If 1, side-set data is asserted to pin directions, instead of pin values."]
     #[inline(always)]
     pub const fn set_side_pindir(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 29usize)) | (((val as u32) & 0x01) << 29usize);
@@ -965,7 +965,7 @@ impl defmt::Format for SmInstr {
         defmt::write!(f, "SmInstr {{ instr: {=u16:?} }}", self.instr())
     }
 }
-#[doc = "State machine pin control"]
+#[doc = "State machine pin control."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmPinctrl(pub u32);
@@ -1080,7 +1080,7 @@ impl defmt::Format for SmPinctrl {
         defmt :: write ! (f , "SmPinctrl {{ out_base: {=u8:?}, set_base: {=u8:?}, sideset_base: {=u8:?}, in_base: {=u8:?}, out_count: {=u8:?}, set_count: {=u8:?}, sideset_count: {=u8:?} }}" , self . out_base () , self . set_base () , self . sideset_base () , self . in_base () , self . out_count () , self . set_count () , self . sideset_count ())
     }
 }
-#[doc = "Control behaviour of the input/output shift registers for state machine 0"]
+#[doc = "Control behaviour of the input/output shift registers for state machine 0."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SmShiftctrl(pub u32);

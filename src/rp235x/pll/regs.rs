@@ -1,4 +1,4 @@
-#[doc = "Control and Status GENERAL CONSTRAINTS: Reference clock frequency min=5MHz, max=800MHz Feedback divider min=16, max=320 VCO frequency min=750MHz, max=1600MHz"]
+#[doc = "Control and Status GENERAL CONSTRAINTS: Reference clock frequency min=5MHz, max=800MHz Feedback divider min=16, max=320 VCO frequency min=750MHz, max=1600MHz."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Cs(pub u32);
@@ -27,26 +27,26 @@ impl Cs {
     pub const fn set_bypass(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "PLL is not locked Ideally this is cleared when PLL lock is seen and this should never normally be set"]
+    #[doc = "PLL is not locked Ideally this is cleared when PLL lock is seen and this should never normally be set."]
     #[must_use]
     #[inline(always)]
     pub const fn lock_n(&self) -> bool {
         let val = (self.0 >> 30usize) & 0x01;
         val != 0
     }
-    #[doc = "PLL is not locked Ideally this is cleared when PLL lock is seen and this should never normally be set"]
+    #[doc = "PLL is not locked Ideally this is cleared when PLL lock is seen and this should never normally be set."]
     #[inline(always)]
     pub const fn set_lock_n(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 30usize)) | (((val as u32) & 0x01) << 30usize);
     }
-    #[doc = "PLL is locked"]
+    #[doc = "PLL is locked."]
     #[must_use]
     #[inline(always)]
     pub const fn lock(&self) -> bool {
         let val = (self.0 >> 31usize) & 0x01;
         val != 0
     }
-    #[doc = "PLL is locked"]
+    #[doc = "PLL is locked."]
     #[inline(always)]
     pub const fn set_lock(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 31usize)) | (((val as u32) & 0x01) << 31usize);
@@ -81,19 +81,19 @@ impl defmt::Format for Cs {
         )
     }
 }
-#[doc = "Feedback divisor (note: this PLL does not support fractional division)"]
+#[doc = "Feedback divisor (note: this PLL does not support fractional division)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct FbdivInt(pub u32);
 impl FbdivInt {
-    #[doc = "see ctrl reg description for constraints"]
+    #[doc = "see ctrl reg description for constraints."]
     #[must_use]
     #[inline(always)]
     pub const fn fbdiv_int(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0x0fff;
         val as u16
     }
-    #[doc = "see ctrl reg description for constraints"]
+    #[doc = "see ctrl reg description for constraints."]
     #[inline(always)]
     pub const fn set_fbdiv_int(&mut self, val: u16) {
         self.0 = (self.0 & !(0x0fff << 0usize)) | (((val as u32) & 0x0fff) << 0usize);
@@ -118,7 +118,7 @@ impl defmt::Format for FbdivInt {
         defmt::write!(f, "FbdivInt {{ fbdiv_int: {=u16:?} }}", self.fbdiv_int())
     }
 }
-#[doc = "Interrupt Enable"]
+#[doc = "Interrupt Enable."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Inte(pub u32);
@@ -157,7 +157,7 @@ impl defmt::Format for Inte {
         )
     }
 }
-#[doc = "Interrupt Force"]
+#[doc = "Interrupt Force."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Intf(pub u32);
@@ -196,7 +196,7 @@ impl defmt::Format for Intf {
         )
     }
 }
-#[doc = "Raw Interrupts"]
+#[doc = "Raw Interrupts."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Intr(pub u32);
@@ -235,7 +235,7 @@ impl defmt::Format for Intr {
         )
     }
 }
-#[doc = "Interrupt status after masking & forcing"]
+#[doc = "Interrupt status after masking & forcing."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Ints(pub u32);
@@ -274,31 +274,31 @@ impl defmt::Format for Ints {
         )
     }
 }
-#[doc = "Controls the PLL post dividers for the primary output (note: this PLL does not have a secondary output) the primary output is driven from VCO divided by postdiv1*postdiv2"]
+#[doc = "Controls the PLL post dividers for the primary output (note: this PLL does not have a secondary output) the primary output is driven from VCO divided by postdiv1*postdiv2."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Prim(pub u32);
 impl Prim {
-    #[doc = "divide by 1-7"]
+    #[doc = "divide by 1-7."]
     #[must_use]
     #[inline(always)]
     pub const fn postdiv2(&self) -> u8 {
         let val = (self.0 >> 12usize) & 0x07;
         val as u8
     }
-    #[doc = "divide by 1-7"]
+    #[doc = "divide by 1-7."]
     #[inline(always)]
     pub const fn set_postdiv2(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 12usize)) | (((val as u32) & 0x07) << 12usize);
     }
-    #[doc = "divide by 1-7"]
+    #[doc = "divide by 1-7."]
     #[must_use]
     #[inline(always)]
     pub const fn postdiv1(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x07;
         val as u8
     }
-    #[doc = "divide by 1-7"]
+    #[doc = "divide by 1-7."]
     #[inline(always)]
     pub const fn set_postdiv1(&mut self, val: u8) {
         self.0 = (self.0 & !(0x07 << 16usize)) | (((val as u32) & 0x07) << 16usize);

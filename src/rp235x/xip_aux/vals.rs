@@ -2,11 +2,11 @@
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Iwidth {
-    #[doc = "Single width"]
+    #[doc = "Single width."]
     S = 0x0,
-    #[doc = "Dual width"]
+    #[doc = "Dual width."]
     D = 0x01,
-    #[doc = "Quad width"]
+    #[doc = "Quad width."]
     Q = 0x02,
     _RESERVED_3 = 0x03,
 }

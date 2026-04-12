@@ -27,14 +27,14 @@ impl AutocorrStatistic {
     pub const fn set_autocorr_fails(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 14usize)) | (((val as u32) & 0xff) << 14usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u16 {
         let val = (self.0 >> 22usize) & 0x03ff;
         val as u16
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u16) {
         self.0 = (self.0 & !(0x03ff << 22usize)) | (((val as u32) & 0x03ff) << 22usize);
@@ -66,26 +66,26 @@ impl defmt::Format for AutocorrStatistic {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct RndSourceEnable(pub u32);
 impl RndSourceEnable {
-    #[doc = "* 1'b1 - entropy source is enabled. *1'b0 - entropy source is disabled"]
+    #[doc = "* 1'b1 - entropy source is enabled. *1'b0 - entropy source is disabled."]
     #[must_use]
     #[inline(always)]
     pub const fn rnd_src_en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "* 1'b1 - entropy source is enabled. *1'b0 - entropy source is disabled"]
+    #[doc = "* 1'b1 - entropy source is enabled. *1'b0 - entropy source is disabled."]
     #[inline(always)]
     pub const fn set_rnd_src_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 1usize) & 0x7fff_ffff;
         val as u32
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x7fff_ffff << 1usize)) | (((val as u32) & 0x7fff_ffff) << 1usize);
@@ -133,14 +133,14 @@ impl RngBistCntr0 {
     pub const fn set_rosc_cntr_val(&mut self, val: u32) {
         self.0 = (self.0 & !(0x003f_ffff << 0usize)) | (((val as u32) & 0x003f_ffff) << 0usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u16 {
         let val = (self.0 >> 22usize) & 0x03ff;
         val as u16
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u16) {
         self.0 = (self.0 & !(0x03ff << 22usize)) | (((val as u32) & 0x03ff) << 22usize);
@@ -188,14 +188,14 @@ impl RngBistCntr1 {
     pub const fn set_rosc_cntr_val(&mut self, val: u32) {
         self.0 = (self.0 & !(0x003f_ffff << 0usize)) | (((val as u32) & 0x003f_ffff) << 0usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u16 {
         let val = (self.0 >> 22usize) & 0x03ff;
         val as u16
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u16) {
         self.0 = (self.0 & !(0x03ff << 22usize)) | (((val as u32) & 0x03ff) << 22usize);
@@ -243,14 +243,14 @@ impl RngBistCntr2 {
     pub const fn set_rosc_cntr_val(&mut self, val: u32) {
         self.0 = (self.0 & !(0x003f_ffff << 0usize)) | (((val as u32) & 0x003f_ffff) << 0usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u16 {
         let val = (self.0 >> 22usize) & 0x03ff;
         val as u16
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u16) {
         self.0 = (self.0 & !(0x03ff << 22usize)) | (((val as u32) & 0x03ff) << 22usize);
@@ -281,31 +281,31 @@ impl defmt::Format for RngBistCntr2 {
         )
     }
 }
-#[doc = "Enable the RNG debug mode"]
+#[doc = "Enable the RNG debug mode."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct RngDebugEnInput(pub u32);
 impl RngDebugEnInput {
-    #[doc = "* 1'b1 - debug mode is enabled. *1'b0 - debug mode is disabled"]
+    #[doc = "* 1'b1 - debug mode is enabled. *1'b0 - debug mode is disabled."]
     #[must_use]
     #[inline(always)]
     pub const fn rng_debug_en(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "* 1'b1 - debug mode is enabled. *1'b0 - debug mode is disabled"]
+    #[doc = "* 1'b1 - debug mode is enabled. *1'b0 - debug mode is disabled."]
     #[inline(always)]
     pub const fn set_rng_debug_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 1usize) & 0x7fff_ffff;
         val as u32
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x7fff_ffff << 1usize)) | (((val as u32) & 0x7fff_ffff) << 1usize);
@@ -389,14 +389,14 @@ impl RngIcr {
     pub const fn set_vn_err(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 4usize) & 0x0fff_ffff;
         val as u32
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x0fff_ffff << 4usize)) | (((val as u32) & 0x0fff_ffff) << 4usize);
@@ -478,14 +478,14 @@ impl RngImr {
     pub const fn set_vn_err_int_mask(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 4usize) & 0x0fff_ffff;
         val as u32
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x0fff_ffff << 4usize)) | (((val as u32) & 0x0fff_ffff) << 4usize);
@@ -567,14 +567,14 @@ impl RngIsr {
     pub const fn set_vn_err(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 4usize) & 0x0fff_ffff;
         val as u32
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x0fff_ffff << 4usize)) | (((val as u32) & 0x0fff_ffff) << 4usize);
@@ -608,110 +608,110 @@ impl defmt::Format for RngIsr {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct RngVersion(pub u32);
 impl RngVersion {
-    #[doc = "* 1'b1 - 192-bit EHR. *1'b0 - 128-bit EHR"]
+    #[doc = "* 1'b1 - 192-bit EHR. *1'b0 - 128-bit EHR."]
     #[must_use]
     #[inline(always)]
     pub const fn ehr_width_192(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "* 1'b1 - 192-bit EHR. *1'b0 - 128-bit EHR"]
+    #[doc = "* 1'b1 - 192-bit EHR. *1'b0 - 128-bit EHR."]
     #[inline(always)]
     pub const fn set_ehr_width_192(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist."]
     #[must_use]
     #[inline(always)]
     pub const fn crngt_exists(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist."]
     #[inline(always)]
     pub const fn set_crngt_exists(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist."]
     #[must_use]
     #[inline(always)]
     pub const fn autocorr_exists(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist."]
     #[inline(always)]
     pub const fn set_autocorr_exists(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist."]
     #[must_use]
     #[inline(always)]
     pub const fn trng_tests_bypass_en(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
-    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist."]
     #[inline(always)]
     pub const fn set_trng_tests_bypass_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
     }
-    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist."]
     #[must_use]
     #[inline(always)]
     pub const fn prng_exists(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist."]
     #[inline(always)]
     pub const fn set_prng_exists(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist."]
     #[must_use]
     #[inline(always)]
     pub const fn kat_exists(&self) -> bool {
         let val = (self.0 >> 5usize) & 0x01;
         val != 0
     }
-    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist."]
     #[inline(always)]
     pub const fn set_kat_exists(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u32) & 0x01) << 5usize);
     }
-    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist."]
     #[must_use]
     #[inline(always)]
     pub const fn reseeding_exists(&self) -> bool {
         let val = (self.0 >> 6usize) & 0x01;
         val != 0
     }
-    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist"]
+    #[doc = "* 1'b1 - Exists. *1'b0 - Does not exist."]
     #[inline(always)]
     pub const fn set_reseeding_exists(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
-    #[doc = "* 1'b1 - 5 SBOX AES. *1'b0 - 20 SBOX AES"]
+    #[doc = "* 1'b1 - 5 SBOX AES. *1'b0 - 20 SBOX AES."]
     #[must_use]
     #[inline(always)]
     pub const fn rng_use_5_sboxes(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
-    #[doc = "* 1'b1 - 5 SBOX AES. *1'b0 - 20 SBOX AES"]
+    #[doc = "* 1'b1 - 5 SBOX AES. *1'b0 - 20 SBOX AES."]
     #[inline(always)]
     pub const fn set_rng_use_5_sboxes(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 8usize) & 0x00ff_ffff;
         val as u32
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x00ff_ffff << 8usize)) | (((val as u32) & 0x00ff_ffff) << 8usize);
@@ -761,14 +761,14 @@ impl RstBitsCounter {
     pub const fn set_rst_bits_counter(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 1usize) & 0x7fff_ffff;
         val as u32
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x7fff_ffff << 1usize)) | (((val as u32) & 0x7fff_ffff) << 1usize);
@@ -816,14 +816,14 @@ impl TrngBusy {
     pub const fn set_trng_busy(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 1usize) & 0x7fff_ffff;
         val as u32
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x7fff_ffff << 1usize)) | (((val as u32) & 0x7fff_ffff) << 1usize);
@@ -871,14 +871,14 @@ impl TrngConfig {
     pub const fn set_rnd_src_sel(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 0usize)) | (((val as u32) & 0x03) << 0usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 2usize) & 0x3fff_ffff;
         val as u32
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x3fff_ffff << 2usize)) | (((val as u32) & 0x3fff_ffff) << 2usize);
@@ -914,14 +914,14 @@ impl defmt::Format for TrngConfig {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct TrngDebugControl(pub u32);
 impl TrngDebugControl {
-    #[doc = "N/A"]
+    #[doc = "N/A."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "N/A"]
+    #[doc = "N/A."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -1002,14 +1002,14 @@ impl TrngSwReset {
     pub const fn set_trng_sw_reset(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 1usize) & 0x7fff_ffff;
         val as u32
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x7fff_ffff << 1usize)) | (((val as u32) & 0x7fff_ffff) << 1usize);
@@ -1057,14 +1057,14 @@ impl TrngValid {
     pub const fn set_ehr_valid(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[must_use]
     #[inline(always)]
     pub const fn reserved(&self) -> u32 {
         let val = (self.0 >> 1usize) & 0x7fff_ffff;
         val as u32
     }
-    #[doc = "RESERVED"]
+    #[doc = "RESERVED."]
     #[inline(always)]
     pub const fn set_reserved(&mut self, val: u32) {
         self.0 = (self.0 & !(0x7fff_ffff << 1usize)) | (((val as u32) & 0x7fff_ffff) << 1usize);

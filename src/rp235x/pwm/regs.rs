@@ -1,4 +1,4 @@
-#[doc = "Counter compare values"]
+#[doc = "Counter compare values."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChCc(pub u32);
@@ -44,7 +44,7 @@ impl defmt::Format for ChCc {
         defmt::write!(f, "ChCc {{ a: {=u16:?}, b: {=u16:?} }}", self.a(), self.b())
     }
 }
-#[doc = "Control and status register"]
+#[doc = "Control and status register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChCsr(pub u32);
@@ -61,38 +61,38 @@ impl ChCsr {
     pub const fn set_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "1: Enable phase-correct modulation. 0: Trailing-edge"]
+    #[doc = "1: Enable phase-correct modulation. 0: Trailing-edge."]
     #[must_use]
     #[inline(always)]
     pub const fn ph_correct(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "1: Enable phase-correct modulation. 0: Trailing-edge"]
+    #[doc = "1: Enable phase-correct modulation. 0: Trailing-edge."]
     #[inline(always)]
     pub const fn set_ph_correct(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Invert output A"]
+    #[doc = "Invert output A."]
     #[must_use]
     #[inline(always)]
     pub const fn a_inv(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "Invert output A"]
+    #[doc = "Invert output A."]
     #[inline(always)]
     pub const fn set_a_inv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "Invert output B"]
+    #[doc = "Invert output B."]
     #[must_use]
     #[inline(always)]
     pub const fn b_inv(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
-    #[doc = "Invert output B"]
+    #[doc = "Invert output B."]
     #[inline(always)]
     pub const fn set_b_inv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
@@ -119,14 +119,14 @@ impl ChCsr {
     pub const fn set_ph_ret(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
-    #[doc = "Advance the phase of the counter by 1 count, while it is running. Self-clearing. Write a 1, and poll until low. Counter must be running at less than full speed (div_int + div_frac / 16 > 1)"]
+    #[doc = "Advance the phase of the counter by 1 count, while it is running. Self-clearing. Write a 1, and poll until low. Counter must be running at less than full speed (div_int + div_frac / 16 > 1)."]
     #[must_use]
     #[inline(always)]
     pub const fn ph_adv(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
-    #[doc = "Advance the phase of the counter by 1 count, while it is running. Self-clearing. Write a 1, and poll until low. Counter must be running at less than full speed (div_int + div_frac / 16 > 1)"]
+    #[doc = "Advance the phase of the counter by 1 count, while it is running. Self-clearing. Write a 1, and poll until low. Counter must be running at less than full speed (div_int + div_frac / 16 > 1)."]
     #[inline(always)]
     pub const fn set_ph_adv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
@@ -157,7 +157,7 @@ impl defmt::Format for ChCsr {
         defmt :: write ! (f , "ChCsr {{ en: {=bool:?}, ph_correct: {=bool:?}, a_inv: {=bool:?}, b_inv: {=bool:?}, divmode: {:?}, ph_ret: {=bool:?}, ph_adv: {=bool:?} }}" , self . en () , self . ph_correct () , self . a_inv () , self . b_inv () , self . divmode () , self . ph_ret () , self . ph_adv ())
     }
 }
-#[doc = "Direct access to the PWM counter"]
+#[doc = "Direct access to the PWM counter."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChCtr(pub u32);
@@ -241,7 +241,7 @@ impl defmt::Format for ChDiv {
         )
     }
 }
-#[doc = "Counter wrap value"]
+#[doc = "Counter wrap value."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChTop(pub u32);
@@ -430,7 +430,7 @@ impl defmt::Format for En {
         defmt :: write ! (f , "En {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
-#[doc = "Raw Interrupts"]
+#[doc = "Raw Interrupts."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Intr(pub u32);
@@ -586,11 +586,11 @@ impl defmt::Format for Intr {
         defmt :: write ! (f , "Intr {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
-#[doc = "Interrupt Enable for irq0"]
+#[doc = "Interrupt Enable for irq0."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Irq0inte(pub u32);
-impl Irq0inte {
+pub struct Irq0Inte(pub u32);
+impl Irq0Inte {
     #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
@@ -712,15 +712,15 @@ impl Irq0inte {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
-impl Default for Irq0inte {
+impl Default for Irq0Inte {
     #[inline(always)]
-    fn default() -> Irq0inte {
-        Irq0inte(0)
+    fn default() -> Irq0Inte {
+        Irq0Inte(0)
     }
 }
-impl core::fmt::Debug for Irq0inte {
+impl core::fmt::Debug for Irq0Inte {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Irq0inte")
+        f.debug_struct("Irq0Inte")
             .field("ch0", &self.ch0())
             .field("ch1", &self.ch1())
             .field("ch2", &self.ch2())
@@ -737,16 +737,16 @@ impl core::fmt::Debug for Irq0inte {
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Irq0inte {
+impl defmt::Format for Irq0Inte {
     fn format(&self, f: defmt::Formatter) {
-        defmt :: write ! (f , "Irq0inte {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
+        defmt :: write ! (f , "Irq0Inte {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
-#[doc = "Interrupt Force for irq0"]
+#[doc = "Interrupt Force for irq0."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Irq0intf(pub u32);
-impl Irq0intf {
+pub struct Irq0Intf(pub u32);
+impl Irq0Intf {
     #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
@@ -868,15 +868,15 @@ impl Irq0intf {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
-impl Default for Irq0intf {
+impl Default for Irq0Intf {
     #[inline(always)]
-    fn default() -> Irq0intf {
-        Irq0intf(0)
+    fn default() -> Irq0Intf {
+        Irq0Intf(0)
     }
 }
-impl core::fmt::Debug for Irq0intf {
+impl core::fmt::Debug for Irq0Intf {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Irq0intf")
+        f.debug_struct("Irq0Intf")
             .field("ch0", &self.ch0())
             .field("ch1", &self.ch1())
             .field("ch2", &self.ch2())
@@ -893,16 +893,16 @@ impl core::fmt::Debug for Irq0intf {
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Irq0intf {
+impl defmt::Format for Irq0Intf {
     fn format(&self, f: defmt::Formatter) {
-        defmt :: write ! (f , "Irq0intf {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
+        defmt :: write ! (f , "Irq0Intf {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
-#[doc = "Interrupt status after masking & forcing for irq0"]
+#[doc = "Interrupt status after masking & forcing for irq0."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Irq0ints(pub u32);
-impl Irq0ints {
+pub struct Irq0Ints(pub u32);
+impl Irq0Ints {
     #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
@@ -1024,15 +1024,15 @@ impl Irq0ints {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
-impl Default for Irq0ints {
+impl Default for Irq0Ints {
     #[inline(always)]
-    fn default() -> Irq0ints {
-        Irq0ints(0)
+    fn default() -> Irq0Ints {
+        Irq0Ints(0)
     }
 }
-impl core::fmt::Debug for Irq0ints {
+impl core::fmt::Debug for Irq0Ints {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Irq0ints")
+        f.debug_struct("Irq0Ints")
             .field("ch0", &self.ch0())
             .field("ch1", &self.ch1())
             .field("ch2", &self.ch2())
@@ -1049,16 +1049,16 @@ impl core::fmt::Debug for Irq0ints {
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Irq0ints {
+impl defmt::Format for Irq0Ints {
     fn format(&self, f: defmt::Formatter) {
-        defmt :: write ! (f , "Irq0ints {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
+        defmt :: write ! (f , "Irq0Ints {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
-#[doc = "Interrupt Enable for irq1"]
+#[doc = "Interrupt Enable for irq1."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Irq1inte(pub u32);
-impl Irq1inte {
+pub struct Irq1Inte(pub u32);
+impl Irq1Inte {
     #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
@@ -1180,15 +1180,15 @@ impl Irq1inte {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
-impl Default for Irq1inte {
+impl Default for Irq1Inte {
     #[inline(always)]
-    fn default() -> Irq1inte {
-        Irq1inte(0)
+    fn default() -> Irq1Inte {
+        Irq1Inte(0)
     }
 }
-impl core::fmt::Debug for Irq1inte {
+impl core::fmt::Debug for Irq1Inte {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Irq1inte")
+        f.debug_struct("Irq1Inte")
             .field("ch0", &self.ch0())
             .field("ch1", &self.ch1())
             .field("ch2", &self.ch2())
@@ -1205,16 +1205,16 @@ impl core::fmt::Debug for Irq1inte {
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Irq1inte {
+impl defmt::Format for Irq1Inte {
     fn format(&self, f: defmt::Formatter) {
-        defmt :: write ! (f , "Irq1inte {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
+        defmt :: write ! (f , "Irq1Inte {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
-#[doc = "Interrupt Force for irq1"]
+#[doc = "Interrupt Force for irq1."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Irq1intf(pub u32);
-impl Irq1intf {
+pub struct Irq1Intf(pub u32);
+impl Irq1Intf {
     #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
@@ -1336,15 +1336,15 @@ impl Irq1intf {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
-impl Default for Irq1intf {
+impl Default for Irq1Intf {
     #[inline(always)]
-    fn default() -> Irq1intf {
-        Irq1intf(0)
+    fn default() -> Irq1Intf {
+        Irq1Intf(0)
     }
 }
-impl core::fmt::Debug for Irq1intf {
+impl core::fmt::Debug for Irq1Intf {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Irq1intf")
+        f.debug_struct("Irq1Intf")
             .field("ch0", &self.ch0())
             .field("ch1", &self.ch1())
             .field("ch2", &self.ch2())
@@ -1361,16 +1361,16 @@ impl core::fmt::Debug for Irq1intf {
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Irq1intf {
+impl defmt::Format for Irq1Intf {
     fn format(&self, f: defmt::Formatter) {
-        defmt :: write ! (f , "Irq1intf {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
+        defmt :: write ! (f , "Irq1Intf {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }
-#[doc = "Interrupt status after masking & forcing for irq1"]
+#[doc = "Interrupt status after masking & forcing for irq1."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Irq1ints(pub u32);
-impl Irq1ints {
+pub struct Irq1Ints(pub u32);
+impl Irq1Ints {
     #[must_use]
     #[inline(always)]
     pub const fn ch0(&self) -> bool {
@@ -1492,15 +1492,15 @@ impl Irq1ints {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
 }
-impl Default for Irq1ints {
+impl Default for Irq1Ints {
     #[inline(always)]
-    fn default() -> Irq1ints {
-        Irq1ints(0)
+    fn default() -> Irq1Ints {
+        Irq1Ints(0)
     }
 }
-impl core::fmt::Debug for Irq1ints {
+impl core::fmt::Debug for Irq1Ints {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Irq1ints")
+        f.debug_struct("Irq1Ints")
             .field("ch0", &self.ch0())
             .field("ch1", &self.ch1())
             .field("ch2", &self.ch2())
@@ -1517,8 +1517,8 @@ impl core::fmt::Debug for Irq1ints {
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Irq1ints {
+impl defmt::Format for Irq1Ints {
     fn format(&self, f: defmt::Formatter) {
-        defmt :: write ! (f , "Irq1ints {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
+        defmt :: write ! (f , "Irq1Ints {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?}, ch8: {=bool:?}, ch9: {=bool:?}, ch10: {=bool:?}, ch11: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 () , self . ch8 () , self . ch9 () , self . ch10 () , self . ch11 ())
     }
 }

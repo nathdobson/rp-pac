@@ -2,8 +2,8 @@
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum ExecctrlStatusN {
-    #[doc = "Index 0-7 of an IRQ flag in this PIO block"]
-    IRQ = 0x0,
+    #[doc = "Index 0-7 of an IRQ flag in this PIO block."]
+    Irq = 0x0,
     _RESERVED_1 = 0x01,
     _RESERVED_2 = 0x02,
     _RESERVED_3 = 0x03,
@@ -11,8 +11,8 @@ pub enum ExecctrlStatusN {
     _RESERVED_5 = 0x05,
     _RESERVED_6 = 0x06,
     _RESERVED_7 = 0x07,
-    #[doc = "Index 0-7 of an IRQ flag in the next lower-numbered PIO block"]
-    IRQ_PREVPIO = 0x08,
+    #[doc = "Index 0-7 of an IRQ flag in the next lower-numbered PIO block."]
+    IrqPrevpio = 0x08,
     _RESERVED_9 = 0x09,
     _RESERVED_a = 0x0a,
     _RESERVED_b = 0x0b,
@@ -20,8 +20,8 @@ pub enum ExecctrlStatusN {
     _RESERVED_d = 0x0d,
     _RESERVED_e = 0x0e,
     _RESERVED_f = 0x0f,
-    #[doc = "Index 0-7 of an IRQ flag in the next higher-numbered PIO block"]
-    IRQ_NEXTPIO = 0x10,
+    #[doc = "Index 0-7 of an IRQ flag in the next higher-numbered PIO block."]
+    IrqNextpio = 0x10,
     _RESERVED_11 = 0x11,
     _RESERVED_12 = 0x12,
     _RESERVED_13 = 0x13,
@@ -64,12 +64,12 @@ impl From<ExecctrlStatusN> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum ExecctrlStatusSel {
-    #[doc = "All-ones if TX FIFO level < N, otherwise all-zeroes"]
-    TXLEVEL = 0x0,
-    #[doc = "All-ones if RX FIFO level < N, otherwise all-zeroes"]
-    RXLEVEL = 0x01,
-    #[doc = "All-ones if the indexed IRQ flag is raised, otherwise all-zeroes"]
-    IRQ = 0x02,
+    #[doc = "All-ones if TX FIFO level < N, otherwise all-zeroes."]
+    Txlevel = 0x0,
+    #[doc = "All-ones if RX FIFO level < N, otherwise all-zeroes."]
+    Rxlevel = 0x01,
+    #[doc = "All-ones if the indexed IRQ flag is raised, otherwise all-zeroes."]
+    Irq = 0x02,
     _RESERVED_3 = 0x03,
 }
 impl ExecctrlStatusSel {
@@ -98,9 +98,9 @@ impl From<ExecctrlStatusSel> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Version {
-    #[doc = "Version 0 (RP2040)"]
+    #[doc = "Version 0 (RP2040)."]
     V0 = 0x0,
-    #[doc = "Version 1 (RP2350)"]
+    #[doc = "Version 1 (RP2350)."]
     V1 = 0x01,
     _RESERVED_2 = 0x02,
     _RESERVED_3 = 0x03,

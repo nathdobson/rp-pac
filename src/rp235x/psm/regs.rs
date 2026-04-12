@@ -1,4 +1,4 @@
-#[doc = "Is the subsystem ready?"]
+#[doc = "Is the subsystem ready?."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Done(pub u32);
@@ -297,7 +297,7 @@ impl defmt::Format for Done {
         defmt :: write ! (f , "Done {{ proc_cold: {=bool:?}, otp: {=bool:?}, rosc: {=bool:?}, xosc: {=bool:?}, resets: {=bool:?}, clocks: {=bool:?}, psm_ready: {=bool:?}, busfabric: {=bool:?}, rom: {=bool:?}, bootram: {=bool:?}, sram0: {=bool:?}, sram1: {=bool:?}, sram2: {=bool:?}, sram3: {=bool:?}, sram4: {=bool:?}, sram5: {=bool:?}, sram6: {=bool:?}, sram7: {=bool:?}, sram8: {=bool:?}, sram9: {=bool:?}, xip: {=bool:?}, sio: {=bool:?}, accessctrl: {=bool:?}, proc0: {=bool:?}, proc1: {=bool:?} }}" , self . proc_cold () , self . otp () , self . rosc () , self . xosc () , self . resets () , self . clocks () , self . psm_ready () , self . busfabric () , self . rom () , self . bootram () , self . sram0 () , self . sram1 () , self . sram2 () , self . sram3 () , self . sram4 () , self . sram5 () , self . sram6 () , self . sram7 () , self . sram8 () , self . sram9 () , self . xip () , self . sio () , self . accessctrl () , self . proc0 () , self . proc1 ())
     }
 }
-#[doc = "Force into reset (i.e. power it off)"]
+#[doc = "Force into reset (i.e. power it off)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct FrceOff(pub u32);
@@ -596,7 +596,7 @@ impl defmt::Format for FrceOff {
         defmt :: write ! (f , "FrceOff {{ proc_cold: {=bool:?}, otp: {=bool:?}, rosc: {=bool:?}, xosc: {=bool:?}, resets: {=bool:?}, clocks: {=bool:?}, psm_ready: {=bool:?}, busfabric: {=bool:?}, rom: {=bool:?}, bootram: {=bool:?}, sram0: {=bool:?}, sram1: {=bool:?}, sram2: {=bool:?}, sram3: {=bool:?}, sram4: {=bool:?}, sram5: {=bool:?}, sram6: {=bool:?}, sram7: {=bool:?}, sram8: {=bool:?}, sram9: {=bool:?}, xip: {=bool:?}, sio: {=bool:?}, accessctrl: {=bool:?}, proc0: {=bool:?}, proc1: {=bool:?} }}" , self . proc_cold () , self . otp () , self . rosc () , self . xosc () , self . resets () , self . clocks () , self . psm_ready () , self . busfabric () , self . rom () , self . bootram () , self . sram0 () , self . sram1 () , self . sram2 () , self . sram3 () , self . sram4 () , self . sram5 () , self . sram6 () , self . sram7 () , self . sram8 () , self . sram9 () , self . xip () , self . sio () , self . accessctrl () , self . proc0 () , self . proc1 ())
     }
 }
-#[doc = "Force block out of reset (i.e. power it on)"]
+#[doc = "Force block out of reset (i.e. power it on)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct FrceOn(pub u32);
@@ -895,7 +895,7 @@ impl defmt::Format for FrceOn {
         defmt :: write ! (f , "FrceOn {{ proc_cold: {=bool:?}, otp: {=bool:?}, rosc: {=bool:?}, xosc: {=bool:?}, resets: {=bool:?}, clocks: {=bool:?}, psm_ready: {=bool:?}, busfabric: {=bool:?}, rom: {=bool:?}, bootram: {=bool:?}, sram0: {=bool:?}, sram1: {=bool:?}, sram2: {=bool:?}, sram3: {=bool:?}, sram4: {=bool:?}, sram5: {=bool:?}, sram6: {=bool:?}, sram7: {=bool:?}, sram8: {=bool:?}, sram9: {=bool:?}, xip: {=bool:?}, sio: {=bool:?}, accessctrl: {=bool:?}, proc0: {=bool:?}, proc1: {=bool:?} }}" , self . proc_cold () , self . otp () , self . rosc () , self . xosc () , self . resets () , self . clocks () , self . psm_ready () , self . busfabric () , self . rom () , self . bootram () , self . sram0 () , self . sram1 () , self . sram2 () , self . sram3 () , self . sram4 () , self . sram5 () , self . sram6 () , self . sram7 () , self . sram8 () , self . sram9 () , self . xip () , self . sio () , self . accessctrl () , self . proc0 () , self . proc1 ())
     }
 }
-#[doc = "Set to 1 if the watchdog should reset this"]
+#[doc = "Set to 1 if the watchdog should reset this."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Wdsel(pub u32);

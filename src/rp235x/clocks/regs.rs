@@ -1,76 +1,76 @@
-#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
+#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkAdcCtrl(pub u32);
 impl ClkAdcCtrl {
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[must_use]
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkAdcCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x07;
         super::vals::ClkAdcCtrlAuxsrc::from_bits(val as u8)
     }
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[inline(always)]
     pub const fn set_auxsrc(&mut self, val: super::vals::ClkAdcCtrlAuxsrc) {
         self.0 = (self.0 & !(0x07 << 5usize)) | (((val.to_bits() as u32) & 0x07) << 5usize);
     }
-    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill"]
+    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill."]
     #[must_use]
     #[inline(always)]
     pub const fn kill(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill"]
+    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill."]
     #[inline(always)]
     pub const fn set_kill(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
-    #[doc = "Starts and stops the clock generator cleanly"]
+    #[doc = "Starts and stops the clock generator cleanly."]
     #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
-    #[doc = "Starts and stops the clock generator cleanly"]
+    #[doc = "Starts and stops the clock generator cleanly."]
     #[inline(always)]
     pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
+    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect."]
     #[must_use]
     #[inline(always)]
     pub const fn phase(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x03;
         val as u8
     }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
+    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect."]
     #[inline(always)]
     pub const fn set_phase(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 16usize)) | (((val as u32) & 0x03) << 16usize);
     }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
+    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time."]
     #[must_use]
     #[inline(always)]
     pub const fn nudge(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
         val != 0
     }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
+    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time."]
     #[inline(always)]
     pub const fn set_nudge(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
-    #[doc = "clock generator is enabled"]
+    #[doc = "clock generator is enabled."]
     #[must_use]
     #[inline(always)]
     pub const fn enabled(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
         val != 0
     }
-    #[doc = "clock generator is enabled"]
+    #[doc = "clock generator is enabled."]
     #[inline(always)]
     pub const fn set_enabled(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
@@ -104,14 +104,14 @@ impl defmt::Format for ClkAdcCtrl {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkAdcDiv(pub u32);
 impl ClkAdcDiv {
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[must_use]
     #[inline(always)]
     pub const fn int(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x0f;
         val as u8
     }
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[inline(always)]
     pub const fn set_int(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
@@ -136,7 +136,7 @@ impl defmt::Format for ClkAdcDiv {
         defmt::write!(f, "ClkAdcDiv {{ int: {=u8:?} }}", self.int())
     }
 }
-#[doc = "Indicates which src is currently selected (one-hot)"]
+#[doc = "Indicates which src is currently selected (one-hot)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkAdcSelected(pub u32);
@@ -177,255 +177,91 @@ impl defmt::Format for ClkAdcSelected {
         )
     }
 }
-#[doc = "Indicates which src is currently selected (one-hot)"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ClkGpout0selected(pub u32);
-impl ClkGpout0selected {
-    #[doc = "This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
-    #[must_use]
-    #[inline(always)]
-    pub const fn clk_gpout0_selected(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
-    #[inline(always)]
-    pub const fn set_clk_gpout0_selected(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-}
-impl Default for ClkGpout0selected {
-    #[inline(always)]
-    fn default() -> ClkGpout0selected {
-        ClkGpout0selected(0)
-    }
-}
-impl core::fmt::Debug for ClkGpout0selected {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("ClkGpout0selected")
-            .field("clk_gpout0_selected", &self.clk_gpout0_selected())
-            .finish()
-    }
-}
-#[cfg(feature = "defmt")]
-impl defmt::Format for ClkGpout0selected {
-    fn format(&self, f: defmt::Formatter) {
-        defmt::write!(
-            f,
-            "ClkGpout0selected {{ clk_gpout0_selected: {=bool:?} }}",
-            self.clk_gpout0_selected()
-        )
-    }
-}
-#[doc = "Indicates which src is currently selected (one-hot)"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ClkGpout1selected(pub u32);
-impl ClkGpout1selected {
-    #[doc = "This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
-    #[must_use]
-    #[inline(always)]
-    pub const fn clk_gpout1_selected(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
-    #[inline(always)]
-    pub const fn set_clk_gpout1_selected(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-}
-impl Default for ClkGpout1selected {
-    #[inline(always)]
-    fn default() -> ClkGpout1selected {
-        ClkGpout1selected(0)
-    }
-}
-impl core::fmt::Debug for ClkGpout1selected {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("ClkGpout1selected")
-            .field("clk_gpout1_selected", &self.clk_gpout1_selected())
-            .finish()
-    }
-}
-#[cfg(feature = "defmt")]
-impl defmt::Format for ClkGpout1selected {
-    fn format(&self, f: defmt::Formatter) {
-        defmt::write!(
-            f,
-            "ClkGpout1selected {{ clk_gpout1_selected: {=bool:?} }}",
-            self.clk_gpout1_selected()
-        )
-    }
-}
-#[doc = "Indicates which src is currently selected (one-hot)"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ClkGpout2selected(pub u32);
-impl ClkGpout2selected {
-    #[doc = "This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
-    #[must_use]
-    #[inline(always)]
-    pub const fn clk_gpout2_selected(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
-    #[inline(always)]
-    pub const fn set_clk_gpout2_selected(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-}
-impl Default for ClkGpout2selected {
-    #[inline(always)]
-    fn default() -> ClkGpout2selected {
-        ClkGpout2selected(0)
-    }
-}
-impl core::fmt::Debug for ClkGpout2selected {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("ClkGpout2selected")
-            .field("clk_gpout2_selected", &self.clk_gpout2_selected())
-            .finish()
-    }
-}
-#[cfg(feature = "defmt")]
-impl defmt::Format for ClkGpout2selected {
-    fn format(&self, f: defmt::Formatter) {
-        defmt::write!(
-            f,
-            "ClkGpout2selected {{ clk_gpout2_selected: {=bool:?} }}",
-            self.clk_gpout2_selected()
-        )
-    }
-}
-#[doc = "Indicates which src is currently selected (one-hot)"]
-#[repr(transparent)]
-#[derive(Copy, Clone, Eq, PartialEq)]
-pub struct ClkGpout3selected(pub u32);
-impl ClkGpout3selected {
-    #[doc = "This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
-    #[must_use]
-    #[inline(always)]
-    pub const fn clk_gpout3_selected(&self) -> bool {
-        let val = (self.0 >> 0usize) & 0x01;
-        val != 0
-    }
-    #[doc = "This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
-    #[inline(always)]
-    pub const fn set_clk_gpout3_selected(&mut self, val: bool) {
-        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
-    }
-}
-impl Default for ClkGpout3selected {
-    #[inline(always)]
-    fn default() -> ClkGpout3selected {
-        ClkGpout3selected(0)
-    }
-}
-impl core::fmt::Debug for ClkGpout3selected {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("ClkGpout3selected")
-            .field("clk_gpout3_selected", &self.clk_gpout3_selected())
-            .finish()
-    }
-}
-#[cfg(feature = "defmt")]
-impl defmt::Format for ClkGpout3selected {
-    fn format(&self, f: defmt::Formatter) {
-        defmt::write!(
-            f,
-            "ClkGpout3selected {{ clk_gpout3_selected: {=bool:?} }}",
-            self.clk_gpout3_selected()
-        )
-    }
-}
-#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
+#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkGpoutCtrl(pub u32);
 impl ClkGpoutCtrl {
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[must_use]
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkGpoutCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x0f;
         super::vals::ClkGpoutCtrlAuxsrc::from_bits(val as u8)
     }
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[inline(always)]
     pub const fn set_auxsrc(&mut self, val: super::vals::ClkGpoutCtrlAuxsrc) {
         self.0 = (self.0 & !(0x0f << 5usize)) | (((val.to_bits() as u32) & 0x0f) << 5usize);
     }
-    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill"]
+    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill."]
     #[must_use]
     #[inline(always)]
     pub const fn kill(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill"]
+    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill."]
     #[inline(always)]
     pub const fn set_kill(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
-    #[doc = "Starts and stops the clock generator cleanly"]
+    #[doc = "Starts and stops the clock generator cleanly."]
     #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
-    #[doc = "Starts and stops the clock generator cleanly"]
+    #[doc = "Starts and stops the clock generator cleanly."]
     #[inline(always)]
     pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
-    #[doc = "Enables duty cycle correction for odd divisors, can be changed on-the-fly"]
+    #[doc = "Enables duty cycle correction for odd divisors, can be changed on-the-fly."]
     #[must_use]
     #[inline(always)]
     pub const fn dc50(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "Enables duty cycle correction for odd divisors, can be changed on-the-fly"]
+    #[doc = "Enables duty cycle correction for odd divisors, can be changed on-the-fly."]
     #[inline(always)]
     pub const fn set_dc50(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
+    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect."]
     #[must_use]
     #[inline(always)]
     pub const fn phase(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x03;
         val as u8
     }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
+    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect."]
     #[inline(always)]
     pub const fn set_phase(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 16usize)) | (((val as u32) & 0x03) << 16usize);
     }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
+    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time."]
     #[must_use]
     #[inline(always)]
     pub const fn nudge(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
         val != 0
     }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
+    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time."]
     #[inline(always)]
     pub const fn set_nudge(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
-    #[doc = "clock generator is enabled"]
+    #[doc = "clock generator is enabled."]
     #[must_use]
     #[inline(always)]
     pub const fn enabled(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
         val != 0
     }
-    #[doc = "clock generator is enabled"]
+    #[doc = "clock generator is enabled."]
     #[inline(always)]
     pub const fn set_enabled(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
@@ -460,26 +296,26 @@ impl defmt::Format for ClkGpoutCtrl {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkGpoutDiv(pub u32);
 impl ClkGpoutDiv {
-    #[doc = "Fractional component of the divisor, can be changed on-the-fly"]
+    #[doc = "Fractional component of the divisor, can be changed on-the-fly."]
     #[must_use]
     #[inline(always)]
     pub const fn frac(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "Fractional component of the divisor, can be changed on-the-fly"]
+    #[doc = "Fractional component of the divisor, can be changed on-the-fly."]
     #[inline(always)]
     pub const fn set_frac(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[must_use]
     #[inline(always)]
     pub const fn int(&self) -> u16 {
         let val = (self.0 >> 16usize) & 0xffff;
         val as u16
     }
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[inline(always)]
     pub const fn set_int(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
@@ -510,79 +346,120 @@ impl defmt::Format for ClkGpoutDiv {
         )
     }
 }
-#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
+#[doc = "Indicates which src is currently selected (one-hot)."]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct ClkGpoutSelected(pub u32);
+impl ClkGpoutSelected {
+    #[doc = "This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
+    #[must_use]
+    #[inline(always)]
+    pub const fn clk_gpout0_selected(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "This slice does not have a glitchless mux (only the AUX_SRC field is present, not SRC) so this register is hardwired to 0x1."]
+    #[inline(always)]
+    pub const fn set_clk_gpout0_selected(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
+    }
+}
+impl Default for ClkGpoutSelected {
+    #[inline(always)]
+    fn default() -> ClkGpoutSelected {
+        ClkGpoutSelected(0)
+    }
+}
+impl core::fmt::Debug for ClkGpoutSelected {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("ClkGpoutSelected")
+            .field("clk_gpout0_selected", &self.clk_gpout0_selected())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for ClkGpoutSelected {
+    fn format(&self, f: defmt::Formatter) {
+        defmt::write!(
+            f,
+            "ClkGpoutSelected {{ clk_gpout0_selected: {=bool:?} }}",
+            self.clk_gpout0_selected()
+        )
+    }
+}
+#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkHstxCtrl(pub u32);
 impl ClkHstxCtrl {
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[must_use]
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkHstxCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x07;
         super::vals::ClkHstxCtrlAuxsrc::from_bits(val as u8)
     }
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[inline(always)]
     pub const fn set_auxsrc(&mut self, val: super::vals::ClkHstxCtrlAuxsrc) {
         self.0 = (self.0 & !(0x07 << 5usize)) | (((val.to_bits() as u32) & 0x07) << 5usize);
     }
-    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill"]
+    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill."]
     #[must_use]
     #[inline(always)]
     pub const fn kill(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill"]
+    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill."]
     #[inline(always)]
     pub const fn set_kill(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
-    #[doc = "Starts and stops the clock generator cleanly"]
+    #[doc = "Starts and stops the clock generator cleanly."]
     #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
-    #[doc = "Starts and stops the clock generator cleanly"]
+    #[doc = "Starts and stops the clock generator cleanly."]
     #[inline(always)]
     pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
+    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect."]
     #[must_use]
     #[inline(always)]
     pub const fn phase(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x03;
         val as u8
     }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
+    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect."]
     #[inline(always)]
     pub const fn set_phase(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 16usize)) | (((val as u32) & 0x03) << 16usize);
     }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
+    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time."]
     #[must_use]
     #[inline(always)]
     pub const fn nudge(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
         val != 0
     }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
+    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time."]
     #[inline(always)]
     pub const fn set_nudge(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
-    #[doc = "clock generator is enabled"]
+    #[doc = "clock generator is enabled."]
     #[must_use]
     #[inline(always)]
     pub const fn enabled(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
         val != 0
     }
-    #[doc = "clock generator is enabled"]
+    #[doc = "clock generator is enabled."]
     #[inline(always)]
     pub const fn set_enabled(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
@@ -616,14 +493,14 @@ impl defmt::Format for ClkHstxCtrl {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkHstxDiv(pub u32);
 impl ClkHstxDiv {
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[must_use]
     #[inline(always)]
     pub const fn int(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x03;
         val as u8
     }
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[inline(always)]
     pub const fn set_int(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 16usize)) | (((val as u32) & 0x03) << 16usize);
@@ -648,7 +525,7 @@ impl defmt::Format for ClkHstxDiv {
         defmt::write!(f, "ClkHstxDiv {{ int: {=u8:?} }}", self.int())
     }
 }
-#[doc = "Indicates which src is currently selected (one-hot)"]
+#[doc = "Indicates which src is currently selected (one-hot)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkHstxSelected(pub u32);
@@ -689,55 +566,55 @@ impl defmt::Format for ClkHstxSelected {
         )
     }
 }
-#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
+#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkPeriCtrl(pub u32);
 impl ClkPeriCtrl {
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[must_use]
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkPeriCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x07;
         super::vals::ClkPeriCtrlAuxsrc::from_bits(val as u8)
     }
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[inline(always)]
     pub const fn set_auxsrc(&mut self, val: super::vals::ClkPeriCtrlAuxsrc) {
         self.0 = (self.0 & !(0x07 << 5usize)) | (((val.to_bits() as u32) & 0x07) << 5usize);
     }
-    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill"]
+    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill."]
     #[must_use]
     #[inline(always)]
     pub const fn kill(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill"]
+    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill."]
     #[inline(always)]
     pub const fn set_kill(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
-    #[doc = "Starts and stops the clock generator cleanly"]
+    #[doc = "Starts and stops the clock generator cleanly."]
     #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
-    #[doc = "Starts and stops the clock generator cleanly"]
+    #[doc = "Starts and stops the clock generator cleanly."]
     #[inline(always)]
     pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
-    #[doc = "clock generator is enabled"]
+    #[doc = "clock generator is enabled."]
     #[must_use]
     #[inline(always)]
     pub const fn enabled(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
         val != 0
     }
-    #[doc = "clock generator is enabled"]
+    #[doc = "clock generator is enabled."]
     #[inline(always)]
     pub const fn set_enabled(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
@@ -769,14 +646,14 @@ impl defmt::Format for ClkPeriCtrl {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkPeriDiv(pub u32);
 impl ClkPeriDiv {
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[must_use]
     #[inline(always)]
     pub const fn int(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x03;
         val as u8
     }
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[inline(always)]
     pub const fn set_int(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 16usize)) | (((val as u32) & 0x03) << 16usize);
@@ -801,7 +678,7 @@ impl defmt::Format for ClkPeriDiv {
         defmt::write!(f, "ClkPeriDiv {{ int: {=u8:?} }}", self.int())
     }
 }
-#[doc = "Indicates which src is currently selected (one-hot)"]
+#[doc = "Indicates which src is currently selected (one-hot)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkPeriSelected(pub u32);
@@ -842,31 +719,31 @@ impl defmt::Format for ClkPeriSelected {
         )
     }
 }
-#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
+#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkRefCtrl(pub u32);
 impl ClkRefCtrl {
-    #[doc = "Selects the clock source glitchlessly, can be changed on-the-fly"]
+    #[doc = "Selects the clock source glitchlessly, can be changed on-the-fly."]
     #[must_use]
     #[inline(always)]
     pub const fn src(&self) -> super::vals::ClkRefCtrlSrc {
         let val = (self.0 >> 0usize) & 0x03;
         super::vals::ClkRefCtrlSrc::from_bits(val as u8)
     }
-    #[doc = "Selects the clock source glitchlessly, can be changed on-the-fly"]
+    #[doc = "Selects the clock source glitchlessly, can be changed on-the-fly."]
     #[inline(always)]
     pub const fn set_src(&mut self, val: super::vals::ClkRefCtrlSrc) {
         self.0 = (self.0 & !(0x03 << 0usize)) | (((val.to_bits() as u32) & 0x03) << 0usize);
     }
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[must_use]
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkRefCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x03;
         super::vals::ClkRefCtrlAuxsrc::from_bits(val as u8)
     }
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[inline(always)]
     pub const fn set_auxsrc(&mut self, val: super::vals::ClkRefCtrlAuxsrc) {
         self.0 = (self.0 & !(0x03 << 5usize)) | (((val.to_bits() as u32) & 0x03) << 5usize);
@@ -901,14 +778,14 @@ impl defmt::Format for ClkRefCtrl {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkRefDiv(pub u32);
 impl ClkRefDiv {
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[must_use]
     #[inline(always)]
     pub const fn int(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0xff;
         val as u8
     }
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[inline(always)]
     pub const fn set_int(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 16usize)) | (((val as u32) & 0xff) << 16usize);
@@ -933,7 +810,7 @@ impl defmt::Format for ClkRefDiv {
         defmt::write!(f, "ClkRefDiv {{ int: {=u8:?} }}", self.int())
     }
 }
-#[doc = "Indicates which src is currently selected (one-hot)"]
+#[doc = "Indicates which src is currently selected (one-hot)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkRefSelected(pub u32);
@@ -974,31 +851,31 @@ impl defmt::Format for ClkRefSelected {
         )
     }
 }
-#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
+#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkSysCtrl(pub u32);
 impl ClkSysCtrl {
-    #[doc = "Selects the clock source glitchlessly, can be changed on-the-fly"]
+    #[doc = "Selects the clock source glitchlessly, can be changed on-the-fly."]
     #[must_use]
     #[inline(always)]
     pub const fn src(&self) -> super::vals::ClkSysCtrlSrc {
         let val = (self.0 >> 0usize) & 0x01;
         super::vals::ClkSysCtrlSrc::from_bits(val as u8)
     }
-    #[doc = "Selects the clock source glitchlessly, can be changed on-the-fly"]
+    #[doc = "Selects the clock source glitchlessly, can be changed on-the-fly."]
     #[inline(always)]
     pub const fn set_src(&mut self, val: super::vals::ClkSysCtrlSrc) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val.to_bits() as u32) & 0x01) << 0usize);
     }
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[must_use]
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkSysCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x07;
         super::vals::ClkSysCtrlAuxsrc::from_bits(val as u8)
     }
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[inline(always)]
     pub const fn set_auxsrc(&mut self, val: super::vals::ClkSysCtrlAuxsrc) {
         self.0 = (self.0 & !(0x07 << 5usize)) | (((val.to_bits() as u32) & 0x07) << 5usize);
@@ -1033,26 +910,26 @@ impl defmt::Format for ClkSysCtrl {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkSysDiv(pub u32);
 impl ClkSysDiv {
-    #[doc = "Fractional component of the divisor, can be changed on-the-fly"]
+    #[doc = "Fractional component of the divisor, can be changed on-the-fly."]
     #[must_use]
     #[inline(always)]
     pub const fn frac(&self) -> u16 {
         let val = (self.0 >> 0usize) & 0xffff;
         val as u16
     }
-    #[doc = "Fractional component of the divisor, can be changed on-the-fly"]
+    #[doc = "Fractional component of the divisor, can be changed on-the-fly."]
     #[inline(always)]
     pub const fn set_frac(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 0usize)) | (((val as u32) & 0xffff) << 0usize);
     }
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[must_use]
     #[inline(always)]
     pub const fn int(&self) -> u16 {
         let val = (self.0 >> 16usize) & 0xffff;
         val as u16
     }
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[inline(always)]
     pub const fn set_int(&mut self, val: u16) {
         self.0 = (self.0 & !(0xffff << 16usize)) | (((val as u32) & 0xffff) << 16usize);
@@ -1087,50 +964,50 @@ impl defmt::Format for ClkSysDiv {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkSysResusCtrl(pub u32);
 impl ClkSysResusCtrl {
-    #[doc = "This is expressed as a number of clk_ref cycles and must be >= 2x clk_ref_freq/min_clk_tst_freq"]
+    #[doc = "This is expressed as a number of clk_ref cycles and must be >= 2x clk_ref_freq/min_clk_tst_freq."]
     #[must_use]
     #[inline(always)]
     pub const fn timeout(&self) -> u8 {
         let val = (self.0 >> 0usize) & 0xff;
         val as u8
     }
-    #[doc = "This is expressed as a number of clk_ref cycles and must be >= 2x clk_ref_freq/min_clk_tst_freq"]
+    #[doc = "This is expressed as a number of clk_ref cycles and must be >= 2x clk_ref_freq/min_clk_tst_freq."]
     #[inline(always)]
     pub const fn set_timeout(&mut self, val: u8) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val as u32) & 0xff) << 0usize);
     }
-    #[doc = "Enable resus"]
+    #[doc = "Enable resus."]
     #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "Enable resus"]
+    #[doc = "Enable resus."]
     #[inline(always)]
     pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "Force a resus, for test purposes only"]
+    #[doc = "Force a resus, for test purposes only."]
     #[must_use]
     #[inline(always)]
     pub const fn frce(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "Force a resus, for test purposes only"]
+    #[doc = "Force a resus, for test purposes only."]
     #[inline(always)]
     pub const fn set_frce(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
-    #[doc = "For clearing the resus after the fault that triggered it has been corrected"]
+    #[doc = "For clearing the resus after the fault that triggered it has been corrected."]
     #[must_use]
     #[inline(always)]
     pub const fn clear(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "For clearing the resus after the fault that triggered it has been corrected"]
+    #[doc = "For clearing the resus after the fault that triggered it has been corrected."]
     #[inline(always)]
     pub const fn set_clear(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
@@ -1162,14 +1039,14 @@ impl defmt::Format for ClkSysResusCtrl {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkSysResusStatus(pub u32);
 impl ClkSysResusStatus {
-    #[doc = "Clock has been resuscitated, correct the error then send ctrl_clear=1"]
+    #[doc = "Clock has been resuscitated, correct the error then send ctrl_clear=1."]
     #[must_use]
     #[inline(always)]
     pub const fn resussed(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Clock has been resuscitated, correct the error then send ctrl_clear=1"]
+    #[doc = "Clock has been resuscitated, correct the error then send ctrl_clear=1."]
     #[inline(always)]
     pub const fn set_resussed(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
@@ -1198,7 +1075,7 @@ impl defmt::Format for ClkSysResusStatus {
         )
     }
 }
-#[doc = "Indicates which src is currently selected (one-hot)"]
+#[doc = "Indicates which src is currently selected (one-hot)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkSysSelected(pub u32);
@@ -1239,79 +1116,79 @@ impl defmt::Format for ClkSysSelected {
         )
     }
 }
-#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)"]
+#[doc = "Clock control, can be changed on-the-fly (except for auxsrc)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkUsbCtrl(pub u32);
 impl ClkUsbCtrl {
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[must_use]
     #[inline(always)]
     pub const fn auxsrc(&self) -> super::vals::ClkUsbCtrlAuxsrc {
         let val = (self.0 >> 5usize) & 0x07;
         super::vals::ClkUsbCtrlAuxsrc::from_bits(val as u8)
     }
-    #[doc = "Selects the auxiliary clock source, will glitch when switching"]
+    #[doc = "Selects the auxiliary clock source, will glitch when switching."]
     #[inline(always)]
     pub const fn set_auxsrc(&mut self, val: super::vals::ClkUsbCtrlAuxsrc) {
         self.0 = (self.0 & !(0x07 << 5usize)) | (((val.to_bits() as u32) & 0x07) << 5usize);
     }
-    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill"]
+    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill."]
     #[must_use]
     #[inline(always)]
     pub const fn kill(&self) -> bool {
         let val = (self.0 >> 10usize) & 0x01;
         val != 0
     }
-    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill"]
+    #[doc = "Asynchronously kills the clock generator, enable must be set low before deasserting kill."]
     #[inline(always)]
     pub const fn set_kill(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u32) & 0x01) << 10usize);
     }
-    #[doc = "Starts and stops the clock generator cleanly"]
+    #[doc = "Starts and stops the clock generator cleanly."]
     #[must_use]
     #[inline(always)]
     pub const fn enable(&self) -> bool {
         let val = (self.0 >> 11usize) & 0x01;
         val != 0
     }
-    #[doc = "Starts and stops the clock generator cleanly"]
+    #[doc = "Starts and stops the clock generator cleanly."]
     #[inline(always)]
     pub const fn set_enable(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u32) & 0x01) << 11usize);
     }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
+    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect."]
     #[must_use]
     #[inline(always)]
     pub const fn phase(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x03;
         val as u8
     }
-    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect"]
+    #[doc = "This delays the enable signal by up to 3 cycles of the input clock This must be set before the clock is enabled to have any effect."]
     #[inline(always)]
     pub const fn set_phase(&mut self, val: u8) {
         self.0 = (self.0 & !(0x03 << 16usize)) | (((val as u32) & 0x03) << 16usize);
     }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
+    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time."]
     #[must_use]
     #[inline(always)]
     pub const fn nudge(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
         val != 0
     }
-    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time"]
+    #[doc = "An edge on this signal shifts the phase of the output by 1 cycle of the input clock This can be done at any time."]
     #[inline(always)]
     pub const fn set_nudge(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
-    #[doc = "clock generator is enabled"]
+    #[doc = "clock generator is enabled."]
     #[must_use]
     #[inline(always)]
     pub const fn enabled(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
         val != 0
     }
-    #[doc = "clock generator is enabled"]
+    #[doc = "clock generator is enabled."]
     #[inline(always)]
     pub const fn set_enabled(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
@@ -1345,14 +1222,14 @@ impl defmt::Format for ClkUsbCtrl {
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkUsbDiv(pub u32);
 impl ClkUsbDiv {
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[must_use]
     #[inline(always)]
     pub const fn int(&self) -> u8 {
         let val = (self.0 >> 16usize) & 0x0f;
         val as u8
     }
-    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly"]
+    #[doc = "Integer part of clock divisor, 0 -> max+1, can be changed on-the-fly."]
     #[inline(always)]
     pub const fn set_int(&mut self, val: u8) {
         self.0 = (self.0 & !(0x0f << 16usize)) | (((val as u32) & 0x0f) << 16usize);
@@ -1377,7 +1254,7 @@ impl defmt::Format for ClkUsbDiv {
         defmt::write!(f, "ClkUsbDiv {{ int: {=u8:?} }}", self.int())
     }
 }
-#[doc = "Indicates which src is currently selected (one-hot)"]
+#[doc = "Indicates which src is currently selected (one-hot)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ClkUsbSelected(pub u32);
@@ -1520,7 +1397,7 @@ impl defmt::Format for DftclkXoscCtrl {
         defmt::write!(f, "DftclkXoscCtrl {{ src: {:?} }}", self.src())
     }
 }
-#[doc = "indicates the state of the clock enable"]
+#[doc = "indicates the state of the clock enable."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Enabled0(pub u32);
@@ -1896,7 +1773,7 @@ impl defmt::Format for Enabled0 {
         defmt :: write ! (f , "Enabled0 {{ clk_sys_clocks: {=bool:?}, clk_sys_accessctrl: {=bool:?}, clk_adc: {=bool:?}, clk_sys_adc: {=bool:?}, clk_sys_bootram: {=bool:?}, clk_sys_busctrl: {=bool:?}, clk_sys_busfabric: {=bool:?}, clk_sys_dma: {=bool:?}, clk_sys_glitch_detector: {=bool:?}, clk_hstx: {=bool:?}, clk_sys_hstx: {=bool:?}, clk_sys_i2c0: {=bool:?}, clk_sys_i2c1: {=bool:?}, clk_sys_io: {=bool:?}, clk_sys_jtag: {=bool:?}, clk_ref_otp: {=bool:?}, clk_sys_otp: {=bool:?}, clk_sys_pads: {=bool:?}, clk_sys_pio0: {=bool:?}, clk_sys_pio1: {=bool:?}, clk_sys_pio2: {=bool:?}, clk_sys_pll_sys: {=bool:?}, clk_sys_pll_usb: {=bool:?}, clk_ref_powman: {=bool:?}, clk_sys_powman: {=bool:?}, clk_sys_pwm: {=bool:?}, clk_sys_resets: {=bool:?}, clk_sys_rom: {=bool:?}, clk_sys_rosc: {=bool:?}, clk_sys_psm: {=bool:?}, clk_sys_sha256: {=bool:?}, clk_sys_sio: {=bool:?} }}" , self . clk_sys_clocks () , self . clk_sys_accessctrl () , self . clk_adc () , self . clk_sys_adc () , self . clk_sys_bootram () , self . clk_sys_busctrl () , self . clk_sys_busfabric () , self . clk_sys_dma () , self . clk_sys_glitch_detector () , self . clk_hstx () , self . clk_sys_hstx () , self . clk_sys_i2c0 () , self . clk_sys_i2c1 () , self . clk_sys_io () , self . clk_sys_jtag () , self . clk_ref_otp () , self . clk_sys_otp () , self . clk_sys_pads () , self . clk_sys_pio0 () , self . clk_sys_pio1 () , self . clk_sys_pio2 () , self . clk_sys_pll_sys () , self . clk_sys_pll_usb () , self . clk_ref_powman () , self . clk_sys_powman () , self . clk_sys_pwm () , self . clk_sys_resets () , self . clk_sys_rom () , self . clk_sys_rosc () , self . clk_sys_psm () , self . clk_sys_sha256 () , self . clk_sys_sio ())
     }
 }
-#[doc = "indicates the state of the clock enable"]
+#[doc = "indicates the state of the clock enable."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Enabled1(pub u32);
@@ -2261,11 +2138,11 @@ impl defmt::Format for Enabled1 {
         defmt :: write ! (f , "Enabled1 {{ clk_peri_spi0: {=bool:?}, clk_sys_spi0: {=bool:?}, clk_peri_spi1: {=bool:?}, clk_sys_spi1: {=bool:?}, clk_sys_sram0: {=bool:?}, clk_sys_sram1: {=bool:?}, clk_sys_sram2: {=bool:?}, clk_sys_sram3: {=bool:?}, clk_sys_sram4: {=bool:?}, clk_sys_sram5: {=bool:?}, clk_sys_sram6: {=bool:?}, clk_sys_sram7: {=bool:?}, clk_sys_sram8: {=bool:?}, clk_sys_sram9: {=bool:?}, clk_sys_syscfg: {=bool:?}, clk_sys_sysinfo: {=bool:?}, clk_sys_tbman: {=bool:?}, clk_ref_ticks: {=bool:?}, clk_sys_ticks: {=bool:?}, clk_sys_timer0: {=bool:?}, clk_sys_timer1: {=bool:?}, clk_sys_trng: {=bool:?}, clk_peri_uart0: {=bool:?}, clk_sys_uart0: {=bool:?}, clk_peri_uart1: {=bool:?}, clk_sys_uart1: {=bool:?}, clk_sys_usbctrl: {=bool:?}, clk_usb: {=bool:?}, clk_sys_watchdog: {=bool:?}, clk_sys_xip: {=bool:?}, clk_sys_xosc: {=bool:?} }}" , self . clk_peri_spi0 () , self . clk_sys_spi0 () , self . clk_peri_spi1 () , self . clk_sys_spi1 () , self . clk_sys_sram0 () , self . clk_sys_sram1 () , self . clk_sys_sram2 () , self . clk_sys_sram3 () , self . clk_sys_sram4 () , self . clk_sys_sram5 () , self . clk_sys_sram6 () , self . clk_sys_sram7 () , self . clk_sys_sram8 () , self . clk_sys_sram9 () , self . clk_sys_syscfg () , self . clk_sys_sysinfo () , self . clk_sys_tbman () , self . clk_ref_ticks () , self . clk_sys_ticks () , self . clk_sys_timer0 () , self . clk_sys_timer1 () , self . clk_sys_trng () , self . clk_peri_uart0 () , self . clk_sys_uart0 () , self . clk_peri_uart1 () , self . clk_sys_uart1 () , self . clk_sys_usbctrl () , self . clk_usb () , self . clk_sys_watchdog () , self . clk_sys_xip () , self . clk_sys_xosc ())
     }
 }
-#[doc = "Delays the start of frequency counting to allow the mux to settle Delay is measured in multiples of the reference clock period"]
+#[doc = "Delays the start of frequency counting to allow the mux to settle Delay is measured in multiples of the reference clock period."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Fc0delay(pub u32);
-impl Fc0delay {
+pub struct Fc0Delay(pub u32);
+impl Fc0Delay {
     #[must_use]
     #[inline(always)]
     pub const fn fc0_delay(&self) -> u8 {
@@ -2277,30 +2154,30 @@ impl Fc0delay {
         self.0 = (self.0 & !(0x07 << 0usize)) | (((val as u32) & 0x07) << 0usize);
     }
 }
-impl Default for Fc0delay {
+impl Default for Fc0Delay {
     #[inline(always)]
-    fn default() -> Fc0delay {
-        Fc0delay(0)
+    fn default() -> Fc0Delay {
+        Fc0Delay(0)
     }
 }
-impl core::fmt::Debug for Fc0delay {
+impl core::fmt::Debug for Fc0Delay {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Fc0delay")
+        f.debug_struct("Fc0Delay")
             .field("fc0_delay", &self.fc0_delay())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Fc0delay {
+impl defmt::Format for Fc0Delay {
     fn format(&self, f: defmt::Formatter) {
-        defmt::write!(f, "Fc0delay {{ fc0_delay: {=u8:?} }}", self.fc0_delay())
+        defmt::write!(f, "Fc0Delay {{ fc0_delay: {=u8:?} }}", self.fc0_delay())
     }
 }
-#[doc = "The test interval is 0.98us * 2**interval, but let's call it 1us * 2**interval The default gives a test interval of 250us"]
+#[doc = "The test interval is 0.98us * 2**interval, but let's call it 1us * 2**interval The default gives a test interval of 250us."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Fc0interval(pub u32);
-impl Fc0interval {
+pub struct Fc0Interval(pub u32);
+impl Fc0Interval {
     #[must_use]
     #[inline(always)]
     pub const fn fc0_interval(&self) -> u8 {
@@ -2312,34 +2189,34 @@ impl Fc0interval {
         self.0 = (self.0 & !(0x0f << 0usize)) | (((val as u32) & 0x0f) << 0usize);
     }
 }
-impl Default for Fc0interval {
+impl Default for Fc0Interval {
     #[inline(always)]
-    fn default() -> Fc0interval {
-        Fc0interval(0)
+    fn default() -> Fc0Interval {
+        Fc0Interval(0)
     }
 }
-impl core::fmt::Debug for Fc0interval {
+impl core::fmt::Debug for Fc0Interval {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Fc0interval")
+        f.debug_struct("Fc0Interval")
             .field("fc0_interval", &self.fc0_interval())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Fc0interval {
+impl defmt::Format for Fc0Interval {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Fc0interval {{ fc0_interval: {=u8:?} }}",
+            "Fc0Interval {{ fc0_interval: {=u8:?} }}",
             self.fc0_interval()
         )
     }
 }
-#[doc = "Maximum pass frequency in kHz. This is optional. Set to 0x1ffffff if you are not using the pass/fail flags"]
+#[doc = "Maximum pass frequency in kHz. This is optional. Set to 0x1ffffff if you are not using the pass/fail flags."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Fc0maxKhz(pub u32);
-impl Fc0maxKhz {
+pub struct Fc0MaxKhz(pub u32);
+impl Fc0MaxKhz {
     #[must_use]
     #[inline(always)]
     pub const fn fc0_max_khz(&self) -> u32 {
@@ -2351,34 +2228,34 @@ impl Fc0maxKhz {
         self.0 = (self.0 & !(0x01ff_ffff << 0usize)) | (((val as u32) & 0x01ff_ffff) << 0usize);
     }
 }
-impl Default for Fc0maxKhz {
+impl Default for Fc0MaxKhz {
     #[inline(always)]
-    fn default() -> Fc0maxKhz {
-        Fc0maxKhz(0)
+    fn default() -> Fc0MaxKhz {
+        Fc0MaxKhz(0)
     }
 }
-impl core::fmt::Debug for Fc0maxKhz {
+impl core::fmt::Debug for Fc0MaxKhz {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Fc0maxKhz")
+        f.debug_struct("Fc0MaxKhz")
             .field("fc0_max_khz", &self.fc0_max_khz())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Fc0maxKhz {
+impl defmt::Format for Fc0MaxKhz {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Fc0maxKhz {{ fc0_max_khz: {=u32:?} }}",
+            "Fc0MaxKhz {{ fc0_max_khz: {=u32:?} }}",
             self.fc0_max_khz()
         )
     }
 }
-#[doc = "Minimum pass frequency in kHz. This is optional. Set to 0 if you are not using the pass/fail flags"]
+#[doc = "Minimum pass frequency in kHz. This is optional. Set to 0 if you are not using the pass/fail flags."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Fc0minKhz(pub u32);
-impl Fc0minKhz {
+pub struct Fc0MinKhz(pub u32);
+impl Fc0MinKhz {
     #[must_use]
     #[inline(always)]
     pub const fn fc0_min_khz(&self) -> u32 {
@@ -2390,34 +2267,34 @@ impl Fc0minKhz {
         self.0 = (self.0 & !(0x01ff_ffff << 0usize)) | (((val as u32) & 0x01ff_ffff) << 0usize);
     }
 }
-impl Default for Fc0minKhz {
+impl Default for Fc0MinKhz {
     #[inline(always)]
-    fn default() -> Fc0minKhz {
-        Fc0minKhz(0)
+    fn default() -> Fc0MinKhz {
+        Fc0MinKhz(0)
     }
 }
-impl core::fmt::Debug for Fc0minKhz {
+impl core::fmt::Debug for Fc0MinKhz {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Fc0minKhz")
+        f.debug_struct("Fc0MinKhz")
             .field("fc0_min_khz", &self.fc0_min_khz())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Fc0minKhz {
+impl defmt::Format for Fc0MinKhz {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Fc0minKhz {{ fc0_min_khz: {=u32:?} }}",
+            "Fc0MinKhz {{ fc0_min_khz: {=u32:?} }}",
             self.fc0_min_khz()
         )
     }
 }
-#[doc = "Reference clock frequency in kHz"]
+#[doc = "Reference clock frequency in kHz."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Fc0refKhz(pub u32);
-impl Fc0refKhz {
+pub struct Fc0RefKhz(pub u32);
+impl Fc0RefKhz {
     #[must_use]
     #[inline(always)]
     pub const fn fc0_ref_khz(&self) -> u32 {
@@ -2429,34 +2306,34 @@ impl Fc0refKhz {
         self.0 = (self.0 & !(0x000f_ffff << 0usize)) | (((val as u32) & 0x000f_ffff) << 0usize);
     }
 }
-impl Default for Fc0refKhz {
+impl Default for Fc0RefKhz {
     #[inline(always)]
-    fn default() -> Fc0refKhz {
-        Fc0refKhz(0)
+    fn default() -> Fc0RefKhz {
+        Fc0RefKhz(0)
     }
 }
-impl core::fmt::Debug for Fc0refKhz {
+impl core::fmt::Debug for Fc0RefKhz {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Fc0refKhz")
+        f.debug_struct("Fc0RefKhz")
             .field("fc0_ref_khz", &self.fc0_ref_khz())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Fc0refKhz {
+impl defmt::Format for Fc0RefKhz {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Fc0refKhz {{ fc0_ref_khz: {=u32:?} }}",
+            "Fc0RefKhz {{ fc0_ref_khz: {=u32:?} }}",
             self.fc0_ref_khz()
         )
     }
 }
-#[doc = "Result of frequency measurement, only valid when status_done=1"]
+#[doc = "Result of frequency measurement, only valid when status_done=1."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Fc0result(pub u32);
-impl Fc0result {
+pub struct Fc0Result(pub u32);
+impl Fc0Result {
     #[must_use]
     #[inline(always)]
     pub const fn frac(&self) -> u8 {
@@ -2478,177 +2355,177 @@ impl Fc0result {
         self.0 = (self.0 & !(0x01ff_ffff << 5usize)) | (((val as u32) & 0x01ff_ffff) << 5usize);
     }
 }
-impl Default for Fc0result {
+impl Default for Fc0Result {
     #[inline(always)]
-    fn default() -> Fc0result {
-        Fc0result(0)
+    fn default() -> Fc0Result {
+        Fc0Result(0)
     }
 }
-impl core::fmt::Debug for Fc0result {
+impl core::fmt::Debug for Fc0Result {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Fc0result")
+        f.debug_struct("Fc0Result")
             .field("frac", &self.frac())
             .field("khz", &self.khz())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Fc0result {
+impl defmt::Format for Fc0Result {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "Fc0result {{ frac: {=u8:?}, khz: {=u32:?} }}",
+            "Fc0Result {{ frac: {=u8:?}, khz: {=u32:?} }}",
             self.frac(),
             self.khz()
         )
     }
 }
-#[doc = "Clock sent to frequency counter, set to 0 when not required Writing to this register initiates the frequency count"]
+#[doc = "Clock sent to frequency counter, set to 0 when not required Writing to this register initiates the frequency count."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Fc0src(pub u32);
-impl Fc0src {
+pub struct Fc0Src(pub u32);
+impl Fc0Src {
     #[must_use]
     #[inline(always)]
-    pub const fn fc0_src(&self) -> super::vals::Fc0src {
+    pub const fn fc0_src(&self) -> super::vals::Fc0Src {
         let val = (self.0 >> 0usize) & 0xff;
-        super::vals::Fc0src::from_bits(val as u8)
+        super::vals::Fc0Src::from_bits(val as u8)
     }
     #[inline(always)]
-    pub const fn set_fc0_src(&mut self, val: super::vals::Fc0src) {
+    pub const fn set_fc0_src(&mut self, val: super::vals::Fc0Src) {
         self.0 = (self.0 & !(0xff << 0usize)) | (((val.to_bits() as u32) & 0xff) << 0usize);
     }
 }
-impl Default for Fc0src {
+impl Default for Fc0Src {
     #[inline(always)]
-    fn default() -> Fc0src {
-        Fc0src(0)
+    fn default() -> Fc0Src {
+        Fc0Src(0)
     }
 }
-impl core::fmt::Debug for Fc0src {
+impl core::fmt::Debug for Fc0Src {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Fc0src")
+        f.debug_struct("Fc0Src")
             .field("fc0_src", &self.fc0_src())
             .finish()
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Fc0src {
+impl defmt::Format for Fc0Src {
     fn format(&self, f: defmt::Formatter) {
-        defmt::write!(f, "Fc0src {{ fc0_src: {:?} }}", self.fc0_src())
+        defmt::write!(f, "Fc0Src {{ fc0_src: {:?} }}", self.fc0_src())
     }
 }
-#[doc = "Frequency counter status"]
+#[doc = "Frequency counter status."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct Fc0status(pub u32);
-impl Fc0status {
-    #[doc = "Test passed"]
+pub struct Fc0Status(pub u32);
+impl Fc0Status {
+    #[doc = "Test passed."]
     #[must_use]
     #[inline(always)]
     pub const fn pass(&self) -> bool {
         let val = (self.0 >> 0usize) & 0x01;
         val != 0
     }
-    #[doc = "Test passed"]
+    #[doc = "Test passed."]
     #[inline(always)]
     pub const fn set_pass(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "Test complete"]
+    #[doc = "Test complete."]
     #[must_use]
     #[inline(always)]
     pub const fn done(&self) -> bool {
         let val = (self.0 >> 4usize) & 0x01;
         val != 0
     }
-    #[doc = "Test complete"]
+    #[doc = "Test complete."]
     #[inline(always)]
     pub const fn set_done(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u32) & 0x01) << 4usize);
     }
-    #[doc = "Test running"]
+    #[doc = "Test running."]
     #[must_use]
     #[inline(always)]
     pub const fn running(&self) -> bool {
         let val = (self.0 >> 8usize) & 0x01;
         val != 0
     }
-    #[doc = "Test running"]
+    #[doc = "Test running."]
     #[inline(always)]
     pub const fn set_running(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u32) & 0x01) << 8usize);
     }
-    #[doc = "Waiting for test clock to start"]
+    #[doc = "Waiting for test clock to start."]
     #[must_use]
     #[inline(always)]
     pub const fn waiting(&self) -> bool {
         let val = (self.0 >> 12usize) & 0x01;
         val != 0
     }
-    #[doc = "Waiting for test clock to start"]
+    #[doc = "Waiting for test clock to start."]
     #[inline(always)]
     pub const fn set_waiting(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u32) & 0x01) << 12usize);
     }
-    #[doc = "Test failed"]
+    #[doc = "Test failed."]
     #[must_use]
     #[inline(always)]
     pub const fn fail(&self) -> bool {
         let val = (self.0 >> 16usize) & 0x01;
         val != 0
     }
-    #[doc = "Test failed"]
+    #[doc = "Test failed."]
     #[inline(always)]
     pub const fn set_fail(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 16usize)) | (((val as u32) & 0x01) << 16usize);
     }
-    #[doc = "Test clock slower than expected, only valid when status_done=1"]
+    #[doc = "Test clock slower than expected, only valid when status_done=1."]
     #[must_use]
     #[inline(always)]
     pub const fn slow(&self) -> bool {
         let val = (self.0 >> 20usize) & 0x01;
         val != 0
     }
-    #[doc = "Test clock slower than expected, only valid when status_done=1"]
+    #[doc = "Test clock slower than expected, only valid when status_done=1."]
     #[inline(always)]
     pub const fn set_slow(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 20usize)) | (((val as u32) & 0x01) << 20usize);
     }
-    #[doc = "Test clock faster than expected, only valid when status_done=1"]
+    #[doc = "Test clock faster than expected, only valid when status_done=1."]
     #[must_use]
     #[inline(always)]
     pub const fn fast(&self) -> bool {
         let val = (self.0 >> 24usize) & 0x01;
         val != 0
     }
-    #[doc = "Test clock faster than expected, only valid when status_done=1"]
+    #[doc = "Test clock faster than expected, only valid when status_done=1."]
     #[inline(always)]
     pub const fn set_fast(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 24usize)) | (((val as u32) & 0x01) << 24usize);
     }
-    #[doc = "Test clock stopped during test"]
+    #[doc = "Test clock stopped during test."]
     #[must_use]
     #[inline(always)]
     pub const fn died(&self) -> bool {
         let val = (self.0 >> 28usize) & 0x01;
         val != 0
     }
-    #[doc = "Test clock stopped during test"]
+    #[doc = "Test clock stopped during test."]
     #[inline(always)]
     pub const fn set_died(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 28usize)) | (((val as u32) & 0x01) << 28usize);
     }
 }
-impl Default for Fc0status {
+impl Default for Fc0Status {
     #[inline(always)]
-    fn default() -> Fc0status {
-        Fc0status(0)
+    fn default() -> Fc0Status {
+        Fc0Status(0)
     }
 }
-impl core::fmt::Debug for Fc0status {
+impl core::fmt::Debug for Fc0Status {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("Fc0status")
+        f.debug_struct("Fc0Status")
             .field("pass", &self.pass())
             .field("done", &self.done())
             .field("running", &self.running())
@@ -2661,12 +2538,12 @@ impl core::fmt::Debug for Fc0status {
     }
 }
 #[cfg(feature = "defmt")]
-impl defmt::Format for Fc0status {
+impl defmt::Format for Fc0Status {
     fn format(&self, f: defmt::Formatter) {
-        defmt :: write ! (f , "Fc0status {{ pass: {=bool:?}, done: {=bool:?}, running: {=bool:?}, waiting: {=bool:?}, fail: {=bool:?}, slow: {=bool:?}, fast: {=bool:?}, died: {=bool:?} }}" , self . pass () , self . done () , self . running () , self . waiting () , self . fail () , self . slow () , self . fast () , self . died ())
+        defmt :: write ! (f , "Fc0Status {{ pass: {=bool:?}, done: {=bool:?}, running: {=bool:?}, waiting: {=bool:?}, fail: {=bool:?}, slow: {=bool:?}, fast: {=bool:?}, died: {=bool:?} }}" , self . pass () , self . done () , self . running () , self . waiting () , self . fail () , self . slow () , self . fast () , self . died ())
     }
 }
-#[doc = "Interrupt Enable"]
+#[doc = "Interrupt Enable."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Int(pub u32);
@@ -2705,7 +2582,7 @@ impl defmt::Format for Int {
         )
     }
 }
-#[doc = "enable clock in sleep mode"]
+#[doc = "enable clock in sleep mode."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SleepEn0(pub u32);
@@ -3081,7 +2958,7 @@ impl defmt::Format for SleepEn0 {
         defmt :: write ! (f , "SleepEn0 {{ clk_sys_clocks: {=bool:?}, clk_sys_accessctrl: {=bool:?}, clk_adc: {=bool:?}, clk_sys_adc: {=bool:?}, clk_sys_bootram: {=bool:?}, clk_sys_busctrl: {=bool:?}, clk_sys_busfabric: {=bool:?}, clk_sys_dma: {=bool:?}, clk_sys_glitch_detector: {=bool:?}, clk_hstx: {=bool:?}, clk_sys_hstx: {=bool:?}, clk_sys_i2c0: {=bool:?}, clk_sys_i2c1: {=bool:?}, clk_sys_io: {=bool:?}, clk_sys_jtag: {=bool:?}, clk_ref_otp: {=bool:?}, clk_sys_otp: {=bool:?}, clk_sys_pads: {=bool:?}, clk_sys_pio0: {=bool:?}, clk_sys_pio1: {=bool:?}, clk_sys_pio2: {=bool:?}, clk_sys_pll_sys: {=bool:?}, clk_sys_pll_usb: {=bool:?}, clk_ref_powman: {=bool:?}, clk_sys_powman: {=bool:?}, clk_sys_pwm: {=bool:?}, clk_sys_resets: {=bool:?}, clk_sys_rom: {=bool:?}, clk_sys_rosc: {=bool:?}, clk_sys_psm: {=bool:?}, clk_sys_sha256: {=bool:?}, clk_sys_sio: {=bool:?} }}" , self . clk_sys_clocks () , self . clk_sys_accessctrl () , self . clk_adc () , self . clk_sys_adc () , self . clk_sys_bootram () , self . clk_sys_busctrl () , self . clk_sys_busfabric () , self . clk_sys_dma () , self . clk_sys_glitch_detector () , self . clk_hstx () , self . clk_sys_hstx () , self . clk_sys_i2c0 () , self . clk_sys_i2c1 () , self . clk_sys_io () , self . clk_sys_jtag () , self . clk_ref_otp () , self . clk_sys_otp () , self . clk_sys_pads () , self . clk_sys_pio0 () , self . clk_sys_pio1 () , self . clk_sys_pio2 () , self . clk_sys_pll_sys () , self . clk_sys_pll_usb () , self . clk_ref_powman () , self . clk_sys_powman () , self . clk_sys_pwm () , self . clk_sys_resets () , self . clk_sys_rom () , self . clk_sys_rosc () , self . clk_sys_psm () , self . clk_sys_sha256 () , self . clk_sys_sio ())
     }
 }
-#[doc = "enable clock in sleep mode"]
+#[doc = "enable clock in sleep mode."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct SleepEn1(pub u32);
@@ -3446,7 +3323,7 @@ impl defmt::Format for SleepEn1 {
         defmt :: write ! (f , "SleepEn1 {{ clk_peri_spi0: {=bool:?}, clk_sys_spi0: {=bool:?}, clk_peri_spi1: {=bool:?}, clk_sys_spi1: {=bool:?}, clk_sys_sram0: {=bool:?}, clk_sys_sram1: {=bool:?}, clk_sys_sram2: {=bool:?}, clk_sys_sram3: {=bool:?}, clk_sys_sram4: {=bool:?}, clk_sys_sram5: {=bool:?}, clk_sys_sram6: {=bool:?}, clk_sys_sram7: {=bool:?}, clk_sys_sram8: {=bool:?}, clk_sys_sram9: {=bool:?}, clk_sys_syscfg: {=bool:?}, clk_sys_sysinfo: {=bool:?}, clk_sys_tbman: {=bool:?}, clk_ref_ticks: {=bool:?}, clk_sys_ticks: {=bool:?}, clk_sys_timer0: {=bool:?}, clk_sys_timer1: {=bool:?}, clk_sys_trng: {=bool:?}, clk_peri_uart0: {=bool:?}, clk_sys_uart0: {=bool:?}, clk_peri_uart1: {=bool:?}, clk_sys_uart1: {=bool:?}, clk_sys_usbctrl: {=bool:?}, clk_usb: {=bool:?}, clk_sys_watchdog: {=bool:?}, clk_sys_xip: {=bool:?}, clk_sys_xosc: {=bool:?} }}" , self . clk_peri_spi0 () , self . clk_sys_spi0 () , self . clk_peri_spi1 () , self . clk_sys_spi1 () , self . clk_sys_sram0 () , self . clk_sys_sram1 () , self . clk_sys_sram2 () , self . clk_sys_sram3 () , self . clk_sys_sram4 () , self . clk_sys_sram5 () , self . clk_sys_sram6 () , self . clk_sys_sram7 () , self . clk_sys_sram8 () , self . clk_sys_sram9 () , self . clk_sys_syscfg () , self . clk_sys_sysinfo () , self . clk_sys_tbman () , self . clk_ref_ticks () , self . clk_sys_ticks () , self . clk_sys_timer0 () , self . clk_sys_timer1 () , self . clk_sys_trng () , self . clk_peri_uart0 () , self . clk_sys_uart0 () , self . clk_peri_uart1 () , self . clk_sys_uart1 () , self . clk_sys_usbctrl () , self . clk_usb () , self . clk_sys_watchdog () , self . clk_sys_xip () , self . clk_sys_xosc ())
     }
 }
-#[doc = "enable clock in wake mode"]
+#[doc = "enable clock in wake mode."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct WakeEn0(pub u32);
@@ -3822,7 +3699,7 @@ impl defmt::Format for WakeEn0 {
         defmt :: write ! (f , "WakeEn0 {{ clk_sys_clocks: {=bool:?}, clk_sys_accessctrl: {=bool:?}, clk_adc: {=bool:?}, clk_sys_adc: {=bool:?}, clk_sys_bootram: {=bool:?}, clk_sys_busctrl: {=bool:?}, clk_sys_busfabric: {=bool:?}, clk_sys_dma: {=bool:?}, clk_sys_glitch_detector: {=bool:?}, clk_hstx: {=bool:?}, clk_sys_hstx: {=bool:?}, clk_sys_i2c0: {=bool:?}, clk_sys_i2c1: {=bool:?}, clk_sys_io: {=bool:?}, clk_sys_jtag: {=bool:?}, clk_ref_otp: {=bool:?}, clk_sys_otp: {=bool:?}, clk_sys_pads: {=bool:?}, clk_sys_pio0: {=bool:?}, clk_sys_pio1: {=bool:?}, clk_sys_pio2: {=bool:?}, clk_sys_pll_sys: {=bool:?}, clk_sys_pll_usb: {=bool:?}, clk_ref_powman: {=bool:?}, clk_sys_powman: {=bool:?}, clk_sys_pwm: {=bool:?}, clk_sys_resets: {=bool:?}, clk_sys_rom: {=bool:?}, clk_sys_rosc: {=bool:?}, clk_sys_psm: {=bool:?}, clk_sys_sha256: {=bool:?}, clk_sys_sio: {=bool:?} }}" , self . clk_sys_clocks () , self . clk_sys_accessctrl () , self . clk_adc () , self . clk_sys_adc () , self . clk_sys_bootram () , self . clk_sys_busctrl () , self . clk_sys_busfabric () , self . clk_sys_dma () , self . clk_sys_glitch_detector () , self . clk_hstx () , self . clk_sys_hstx () , self . clk_sys_i2c0 () , self . clk_sys_i2c1 () , self . clk_sys_io () , self . clk_sys_jtag () , self . clk_ref_otp () , self . clk_sys_otp () , self . clk_sys_pads () , self . clk_sys_pio0 () , self . clk_sys_pio1 () , self . clk_sys_pio2 () , self . clk_sys_pll_sys () , self . clk_sys_pll_usb () , self . clk_ref_powman () , self . clk_sys_powman () , self . clk_sys_pwm () , self . clk_sys_resets () , self . clk_sys_rom () , self . clk_sys_rosc () , self . clk_sys_psm () , self . clk_sys_sha256 () , self . clk_sys_sio ())
     }
 }
-#[doc = "enable clock in wake mode"]
+#[doc = "enable clock in wake mode."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct WakeEn1(pub u32);

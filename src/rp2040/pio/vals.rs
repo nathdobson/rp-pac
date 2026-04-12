@@ -2,10 +2,10 @@
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum SmExecctrlStatusSel {
-    #[doc = "All-ones if TX FIFO level < N, otherwise all-zeroes"]
-    TXLEVEL = 0x0,
-    #[doc = "All-ones if RX FIFO level < N, otherwise all-zeroes"]
-    RXLEVEL = 0x01,
+    #[doc = "All-ones if TX FIFO level < N, otherwise all-zeroes."]
+    Txlevel = 0x0,
+    #[doc = "All-ones if RX FIFO level < N, otherwise all-zeroes."]
+    Rxlevel = 0x01,
 }
 impl SmExecctrlStatusSel {
     #[inline(always)]

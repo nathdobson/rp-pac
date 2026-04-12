@@ -1,19 +1,19 @@
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Ch10csrDivmode {
-    #[doc = "Free-running counting at rate dictated by fractional divider"]
-    DIV = 0x0,
+pub enum Ch10CsrDivmode {
+    #[doc = "Free-running counting at rate dictated by fractional divider."]
+    Div = 0x0,
     #[doc = "Fractional divider operation is gated by the PWM B pin."]
-    LEVEL = 0x01,
+    Level = 0x01,
     #[doc = "Counter advances with each rising edge of the PWM B pin."]
-    RISE = 0x02,
+    Rise = 0x02,
     #[doc = "Counter advances with each falling edge of the PWM B pin."]
-    FALL = 0x03,
+    Fall = 0x03,
 }
-impl Ch10csrDivmode {
+impl Ch10CsrDivmode {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Ch10csrDivmode {
+    pub const fn from_bits(val: u8) -> Ch10CsrDivmode {
         unsafe { core::mem::transmute(val & 0x03) }
     }
     #[inline(always)]
@@ -21,34 +21,34 @@ impl Ch10csrDivmode {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Ch10csrDivmode {
+impl From<u8> for Ch10CsrDivmode {
     #[inline(always)]
-    fn from(val: u8) -> Ch10csrDivmode {
-        Ch10csrDivmode::from_bits(val)
+    fn from(val: u8) -> Ch10CsrDivmode {
+        Ch10CsrDivmode::from_bits(val)
     }
 }
-impl From<Ch10csrDivmode> for u8 {
+impl From<Ch10CsrDivmode> for u8 {
     #[inline(always)]
-    fn from(val: Ch10csrDivmode) -> u8 {
-        Ch10csrDivmode::to_bits(val)
+    fn from(val: Ch10CsrDivmode) -> u8 {
+        Ch10CsrDivmode::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-pub enum Ch11csrDivmode {
-    #[doc = "Free-running counting at rate dictated by fractional divider"]
-    DIV = 0x0,
+pub enum Ch11CsrDivmode {
+    #[doc = "Free-running counting at rate dictated by fractional divider."]
+    Div = 0x0,
     #[doc = "Fractional divider operation is gated by the PWM B pin."]
-    LEVEL = 0x01,
+    Level = 0x01,
     #[doc = "Counter advances with each rising edge of the PWM B pin."]
-    RISE = 0x02,
+    Rise = 0x02,
     #[doc = "Counter advances with each falling edge of the PWM B pin."]
-    FALL = 0x03,
+    Fall = 0x03,
 }
-impl Ch11csrDivmode {
+impl Ch11CsrDivmode {
     #[inline(always)]
-    pub const fn from_bits(val: u8) -> Ch11csrDivmode {
+    pub const fn from_bits(val: u8) -> Ch11CsrDivmode {
         unsafe { core::mem::transmute(val & 0x03) }
     }
     #[inline(always)]
@@ -56,30 +56,30 @@ impl Ch11csrDivmode {
         unsafe { core::mem::transmute(self) }
     }
 }
-impl From<u8> for Ch11csrDivmode {
+impl From<u8> for Ch11CsrDivmode {
     #[inline(always)]
-    fn from(val: u8) -> Ch11csrDivmode {
-        Ch11csrDivmode::from_bits(val)
+    fn from(val: u8) -> Ch11CsrDivmode {
+        Ch11CsrDivmode::from_bits(val)
     }
 }
-impl From<Ch11csrDivmode> for u8 {
+impl From<Ch11CsrDivmode> for u8 {
     #[inline(always)]
-    fn from(val: Ch11csrDivmode) -> u8 {
-        Ch11csrDivmode::to_bits(val)
+    fn from(val: Ch11CsrDivmode) -> u8 {
+        Ch11CsrDivmode::to_bits(val)
     }
 }
 #[repr(u8)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Divmode {
-    #[doc = "Free-running counting at rate dictated by fractional divider"]
-    DIV = 0x0,
+    #[doc = "Free-running counting at rate dictated by fractional divider."]
+    Div = 0x0,
     #[doc = "Fractional divider operation is gated by the PWM B pin."]
-    LEVEL = 0x01,
+    Level = 0x01,
     #[doc = "Counter advances with each rising edge of the PWM B pin."]
-    RISE = 0x02,
+    Rise = 0x02,
     #[doc = "Counter advances with each falling edge of the PWM B pin."]
-    FALL = 0x03,
+    Fall = 0x03,
 }
 impl Divmode {
     #[inline(always)]

@@ -209,7 +209,7 @@ impl defmt::Format for Done {
         defmt :: write ! (f , "Done {{ rosc: {=bool:?}, xosc: {=bool:?}, clocks: {=bool:?}, resets: {=bool:?}, busfabric: {=bool:?}, rom: {=bool:?}, sram0: {=bool:?}, sram1: {=bool:?}, sram2: {=bool:?}, sram3: {=bool:?}, sram4: {=bool:?}, sram5: {=bool:?}, xip: {=bool:?}, vreg_and_chip_reset: {=bool:?}, sio: {=bool:?}, proc0: {=bool:?}, proc1: {=bool:?} }}" , self . rosc () , self . xosc () , self . clocks () , self . resets () , self . busfabric () , self . rom () , self . sram0 () , self . sram1 () , self . sram2 () , self . sram3 () , self . sram4 () , self . sram5 () , self . xip () , self . vreg_and_chip_reset () , self . sio () , self . proc0 () , self . proc1 ())
     }
 }
-#[doc = "Force into reset (i.e. power it off)"]
+#[doc = "Force into reset (i.e. power it off)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct FrceOff(pub u32);
@@ -420,7 +420,7 @@ impl defmt::Format for FrceOff {
         defmt :: write ! (f , "FrceOff {{ rosc: {=bool:?}, xosc: {=bool:?}, clocks: {=bool:?}, resets: {=bool:?}, busfabric: {=bool:?}, rom: {=bool:?}, sram0: {=bool:?}, sram1: {=bool:?}, sram2: {=bool:?}, sram3: {=bool:?}, sram4: {=bool:?}, sram5: {=bool:?}, xip: {=bool:?}, vreg_and_chip_reset: {=bool:?}, sio: {=bool:?}, proc0: {=bool:?}, proc1: {=bool:?} }}" , self . rosc () , self . xosc () , self . clocks () , self . resets () , self . busfabric () , self . rom () , self . sram0 () , self . sram1 () , self . sram2 () , self . sram3 () , self . sram4 () , self . sram5 () , self . xip () , self . vreg_and_chip_reset () , self . sio () , self . proc0 () , self . proc1 ())
     }
 }
-#[doc = "Force block out of reset (i.e. power it on)"]
+#[doc = "Force block out of reset (i.e. power it on)."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct FrceOn(pub u32);

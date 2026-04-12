@@ -1,4 +1,4 @@
-#[doc = "FIFO status"]
+#[doc = "FIFO status."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Stat(pub u32);

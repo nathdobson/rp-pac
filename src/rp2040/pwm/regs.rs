@@ -1,4 +1,4 @@
-#[doc = "Counter compare values"]
+#[doc = "Counter compare values."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChCc(pub u32);
@@ -44,7 +44,7 @@ impl defmt::Format for ChCc {
         defmt::write!(f, "ChCc {{ a: {=u16:?}, b: {=u16:?} }}", self.a(), self.b())
     }
 }
-#[doc = "Control and status register"]
+#[doc = "Control and status register."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChCsr(pub u32);
@@ -61,38 +61,38 @@ impl ChCsr {
     pub const fn set_en(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u32) & 0x01) << 0usize);
     }
-    #[doc = "1: Enable phase-correct modulation. 0: Trailing-edge"]
+    #[doc = "1: Enable phase-correct modulation. 0: Trailing-edge."]
     #[must_use]
     #[inline(always)]
     pub const fn ph_correct(&self) -> bool {
         let val = (self.0 >> 1usize) & 0x01;
         val != 0
     }
-    #[doc = "1: Enable phase-correct modulation. 0: Trailing-edge"]
+    #[doc = "1: Enable phase-correct modulation. 0: Trailing-edge."]
     #[inline(always)]
     pub const fn set_ph_correct(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u32) & 0x01) << 1usize);
     }
-    #[doc = "Invert output A"]
+    #[doc = "Invert output A."]
     #[must_use]
     #[inline(always)]
     pub const fn a_inv(&self) -> bool {
         let val = (self.0 >> 2usize) & 0x01;
         val != 0
     }
-    #[doc = "Invert output A"]
+    #[doc = "Invert output A."]
     #[inline(always)]
     pub const fn set_a_inv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u32) & 0x01) << 2usize);
     }
-    #[doc = "Invert output B"]
+    #[doc = "Invert output B."]
     #[must_use]
     #[inline(always)]
     pub const fn b_inv(&self) -> bool {
         let val = (self.0 >> 3usize) & 0x01;
         val != 0
     }
-    #[doc = "Invert output B"]
+    #[doc = "Invert output B."]
     #[inline(always)]
     pub const fn set_b_inv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u32) & 0x01) << 3usize);
@@ -119,14 +119,14 @@ impl ChCsr {
     pub const fn set_ph_ret(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u32) & 0x01) << 6usize);
     }
-    #[doc = "Advance the phase of the counter by 1 count, while it is running. Self-clearing. Write a 1, and poll until low. Counter must be running at less than full speed (div_int + div_frac / 16 > 1)"]
+    #[doc = "Advance the phase of the counter by 1 count, while it is running. Self-clearing. Write a 1, and poll until low. Counter must be running at less than full speed (div_int + div_frac / 16 > 1)."]
     #[must_use]
     #[inline(always)]
     pub const fn ph_adv(&self) -> bool {
         let val = (self.0 >> 7usize) & 0x01;
         val != 0
     }
-    #[doc = "Advance the phase of the counter by 1 count, while it is running. Self-clearing. Write a 1, and poll until low. Counter must be running at less than full speed (div_int + div_frac / 16 > 1)"]
+    #[doc = "Advance the phase of the counter by 1 count, while it is running. Self-clearing. Write a 1, and poll until low. Counter must be running at less than full speed (div_int + div_frac / 16 > 1)."]
     #[inline(always)]
     pub const fn set_ph_adv(&mut self, val: bool) {
         self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u32) & 0x01) << 7usize);
@@ -157,7 +157,7 @@ impl defmt::Format for ChCsr {
         defmt :: write ! (f , "ChCsr {{ en: {=bool:?}, ph_correct: {=bool:?}, a_inv: {=bool:?}, b_inv: {=bool:?}, divmode: {:?}, ph_ret: {=bool:?}, ph_adv: {=bool:?} }}" , self . en () , self . ph_correct () , self . a_inv () , self . b_inv () , self . divmode () , self . ph_ret () , self . ph_adv ())
     }
 }
-#[doc = "Direct access to the PWM counter"]
+#[doc = "Direct access to the PWM counter."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChCtr(pub u32);
@@ -241,7 +241,7 @@ impl defmt::Format for ChDiv {
         )
     }
 }
-#[doc = "Counter wrap value"]
+#[doc = "Counter wrap value."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct ChTop(pub u32);
@@ -386,7 +386,7 @@ impl defmt::Format for En {
         defmt :: write ! (f , "En {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 ())
     }
 }
-#[doc = "Interrupt Enable"]
+#[doc = "Interrupt Enable."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Inte(pub u32);
@@ -498,7 +498,7 @@ impl defmt::Format for Inte {
         defmt :: write ! (f , "Inte {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 ())
     }
 }
-#[doc = "Interrupt Force"]
+#[doc = "Interrupt Force."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Intf(pub u32);
@@ -610,7 +610,7 @@ impl defmt::Format for Intf {
         defmt :: write ! (f , "Intf {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 ())
     }
 }
-#[doc = "Raw Interrupts"]
+#[doc = "Raw Interrupts."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Intr(pub u32);
@@ -722,7 +722,7 @@ impl defmt::Format for Intr {
         defmt :: write ! (f , "Intr {{ ch0: {=bool:?}, ch1: {=bool:?}, ch2: {=bool:?}, ch3: {=bool:?}, ch4: {=bool:?}, ch5: {=bool:?}, ch6: {=bool:?}, ch7: {=bool:?} }}" , self . ch0 () , self . ch1 () , self . ch2 () , self . ch3 () , self . ch4 () , self . ch5 () , self . ch6 () , self . ch7 ())
     }
 }
-#[doc = "Interrupt status after masking & forcing"]
+#[doc = "Interrupt status after masking & forcing."]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Ints(pub u32);

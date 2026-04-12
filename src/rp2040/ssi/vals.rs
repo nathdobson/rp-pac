@@ -2,14 +2,14 @@
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum InstL {
-    #[doc = "No instruction"]
-    NONE = 0x0,
-    #[doc = "4-bit instruction"]
-    _4B = 0x01,
-    #[doc = "8-bit instruction"]
-    _8B = 0x02,
-    #[doc = "16-bit instruction"]
-    _16B = 0x03,
+    #[doc = "No instruction."]
+    None = 0x0,
+    #[doc = "4-bit instruction."]
+    _4b = 0x01,
+    #[doc = "8-bit instruction."]
+    _8b = 0x02,
+    #[doc = "16-bit instruction."]
+    _16b = 0x03,
 }
 impl InstL {
     #[inline(always)]
@@ -37,12 +37,12 @@ impl From<InstL> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum SpiFrf {
-    #[doc = "Standard 1-bit SPI frame format; 1 bit per SCK, full-duplex"]
-    STD = 0x0,
-    #[doc = "Dual-SPI frame format; two bits per SCK, half-duplex"]
-    DUAL = 0x01,
-    #[doc = "Quad-SPI frame format; four bits per SCK, half-duplex"]
-    QUAD = 0x02,
+    #[doc = "Standard 1-bit SPI frame format; 1 bit per SCK, full-duplex."]
+    Std = 0x0,
+    #[doc = "Dual-SPI frame format; two bits per SCK, half-duplex."]
+    Dual = 0x01,
+    #[doc = "Quad-SPI frame format; four bits per SCK, half-duplex."]
+    Quad = 0x02,
     _RESERVED_3 = 0x03,
 }
 impl SpiFrf {
@@ -71,14 +71,14 @@ impl From<SpiFrf> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Tmod {
-    #[doc = "Both transmit and receive"]
-    TX_AND_RX = 0x0,
-    #[doc = "Transmit only (not for FRF == 0, standard SPI mode)"]
-    TX_ONLY = 0x01,
-    #[doc = "Receive only (not for FRF == 0, standard SPI mode)"]
-    RX_ONLY = 0x02,
-    #[doc = "EEPROM read mode (TX then RX; RX starts after control data TX'd)"]
-    EEPROM_READ = 0x03,
+    #[doc = "Both transmit and receive."]
+    TxAndRx = 0x0,
+    #[doc = "Transmit only (not for FRF == 0, standard SPI mode)."]
+    TxOnly = 0x01,
+    #[doc = "Receive only (not for FRF == 0, standard SPI mode)."]
+    RxOnly = 0x02,
+    #[doc = "EEPROM read mode (TX then RX; RX starts after control data TX'd)."]
+    EepromRead = 0x03,
 }
 impl Tmod {
     #[inline(always)]
@@ -106,12 +106,12 @@ impl From<Tmod> for u8 {
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum TransType {
-    #[doc = "Command and address both in standard SPI frame format"]
-    _1C1A = 0x0,
-    #[doc = "Command in standard SPI format, address in format specified by FRF"]
-    _1C2A = 0x01,
-    #[doc = "Command and address both in format specified by FRF (e.g. Dual-SPI)"]
-    _2C2A = 0x02,
+    #[doc = "Command and address both in standard SPI frame format."]
+    _1c1a = 0x0,
+    #[doc = "Command in standard SPI format, address in format specified by FRF."]
+    _1c2a = 0x01,
+    #[doc = "Command and address both in format specified by FRF (e.g. Dual-SPI)."]
+    _2c2a = 0x02,
     _RESERVED_3 = 0x03,
 }
 impl TransType {

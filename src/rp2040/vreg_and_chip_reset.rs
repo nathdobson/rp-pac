@@ -1,4 +1,4 @@
-#[doc = "control and status for on-chip voltage regulator and chip level reset subsystem"]
+#[doc = "control and status for on-chip voltage regulator and chip level reset subsystem."]
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct VregAndChipReset {
     ptr: *mut u8,
@@ -14,20 +14,20 @@ impl VregAndChipReset {
     pub const fn as_ptr(&self) -> *mut () {
         self.ptr as _
     }
-    #[doc = "Voltage regulator control and status"]
+    #[doc = "Voltage regulator control and status."]
     #[inline(always)]
     pub const fn vreg(self) -> crate::common::Reg<regs::Vreg, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x0usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
     }
-    #[doc = "brown-out detection control"]
+    #[doc = "brown-out detection control."]
     #[inline(always)]
     pub const fn bod(self) -> crate::common::Reg<regs::Bod, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x04usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
     }
-    #[doc = "Chip reset control and status"]
+    #[doc = "Chip reset control and status."]
     #[inline(always)]
     pub const fn chip_reset(self) -> crate::common::Reg<regs::ChipReset, crate::common::RW> {
-        unsafe { crate::common::Reg::from_ptr(self.ptr.add(0x08usize) as _) }
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
     }
 }
 pub mod regs;

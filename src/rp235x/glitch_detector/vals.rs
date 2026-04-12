@@ -2,10 +2,10 @@
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Arm(u16);
 impl Arm {
-    #[doc = "Force the glitch detectors to be armed. (Any value other than ARM_NO counts as YES)"]
-    pub const YES: Self = Self(0x0);
-    #[doc = "Do not force the glitch detectors to be armed"]
-    pub const NO: Self = Self(0x5bad);
+    #[doc = "Force the glitch detectors to be armed. (Any value other than ARM_NO counts as YES)."]
+    pub const Yes: Self = Self(0x0);
+    #[doc = "Do not force the glitch detectors to be armed."]
+    pub const No: Self = Self(0x5bad);
 }
 impl Arm {
     pub const fn from_bits(val: u16) -> Arm {
@@ -18,8 +18,8 @@ impl Arm {
 impl core::fmt::Debug for Arm {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         match self.0 {
-            0x0 => f.write_str("YES"),
-            0x5bad => f.write_str("NO"),
+            0x0 => f.write_str("Yes"),
+            0x5bad => f.write_str("No"),
             other => core::write!(f, "0x{:02X}", other),
         }
     }
@@ -28,8 +28,8 @@ impl core::fmt::Debug for Arm {
 impl defmt::Format for Arm {
     fn format(&self, f: defmt::Formatter) {
         match self.0 {
-            0x0 => defmt::write!(f, "YES"),
-            0x5bad => defmt::write!(f, "NO"),
+            0x0 => defmt::write!(f, "Yes"),
+            0x5bad => defmt::write!(f, "No"),
             other => defmt::write!(f, "0x{:02X}", other),
         }
     }
@@ -50,10 +50,10 @@ impl From<Arm> for u16 {
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Default(u8);
 impl Default {
-    #[doc = "Use the default sensitivity configured in OTP for all detectors. (Any value other than DEFAULT_NO counts as YES)"]
-    pub const YES: Self = Self(0x0);
+    #[doc = "Use the default sensitivity configured in OTP for all detectors. (Any value other than DEFAULT_NO counts as YES)."]
+    pub const Yes: Self = Self(0x0);
     #[doc = "Do not use the default sensitivity configured in OTP. Instead use the value from this register."]
-    pub const NO: Self = Self(0xde);
+    pub const No: Self = Self(0xde);
 }
 impl Default {
     pub const fn from_bits(val: u8) -> Default {
@@ -66,8 +66,8 @@ impl Default {
 impl core::fmt::Debug for Default {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         match self.0 {
-            0x0 => f.write_str("YES"),
-            0xde => f.write_str("NO"),
+            0x0 => f.write_str("Yes"),
+            0xde => f.write_str("No"),
             other => core::write!(f, "0x{:02X}", other),
         }
     }
@@ -76,8 +76,8 @@ impl core::fmt::Debug for Default {
 impl defmt::Format for Default {
     fn format(&self, f: defmt::Formatter) {
         match self.0 {
-            0x0 => defmt::write!(f, "YES"),
-            0xde => defmt::write!(f, "NO"),
+            0x0 => defmt::write!(f, "Yes"),
+            0xde => defmt::write!(f, "No"),
             other => defmt::write!(f, "0x{:02X}", other),
         }
     }
@@ -98,10 +98,10 @@ impl From<Default> for u8 {
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Disarm(u16);
 impl Disarm {
-    #[doc = "Do not disarm the glitch detectors. (Any value other than DISARM_YES counts as NO)"]
-    pub const NO: Self = Self(0x0);
-    #[doc = "Disarm the glitch detectors"]
-    pub const YES: Self = Self(0xdcaf);
+    #[doc = "Do not disarm the glitch detectors. (Any value other than DISARM_YES counts as NO)."]
+    pub const No: Self = Self(0x0);
+    #[doc = "Disarm the glitch detectors."]
+    pub const Yes: Self = Self(0xdcaf);
 }
 impl Disarm {
     pub const fn from_bits(val: u16) -> Disarm {
@@ -114,8 +114,8 @@ impl Disarm {
 impl core::fmt::Debug for Disarm {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
         match self.0 {
-            0x0 => f.write_str("NO"),
-            0xdcaf => f.write_str("YES"),
+            0x0 => f.write_str("No"),
+            0xdcaf => f.write_str("Yes"),
             other => core::write!(f, "0x{:02X}", other),
         }
     }
@@ -124,8 +124,8 @@ impl core::fmt::Debug for Disarm {
 impl defmt::Format for Disarm {
     fn format(&self, f: defmt::Formatter) {
         match self.0 {
-            0x0 => defmt::write!(f, "NO"),
-            0xdcaf => defmt::write!(f, "YES"),
+            0x0 => defmt::write!(f, "No"),
+            0xdcaf => defmt::write!(f, "Yes"),
             other => defmt::write!(f, "0x{:02X}", other),
         }
     }
