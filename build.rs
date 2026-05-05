@@ -18,7 +18,6 @@ fn main() {
                 .unwrap();
         }
         println!("cargo:rustc-link-search={}", out.display());
-        println!("cargo:rerun-if-changed=device.x");
     }
     println!("cargo:rerun-if-changed=build.rs");
 }
